@@ -5,7 +5,7 @@ const overrides = {
     global: {
       // add styles here
       '.app': {
-        fontSize: '200px'
+        fontSize: '100px'
       }
     },
   },
