@@ -175,3 +175,62 @@ BEGIN
 	RETURN (result);
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+--Purchases a ship by userID and name of ship (IF AFFORDABLE) and adds it to user_ship db and updates user's currency amount to decrease, then returns:
+-- Object with player prop whos properties are prevBal (balance before buying) and newBalance (balance after buying)
+-- Insufficient balance message stating how many dollars they are short from purchasing
+CREATE OR REPLACE FUNCTION buyShip("userID" int4, "shipname" text)
+  RETURNS json AS $func$
+DECLARE
+RESULT JSON;
+currentBalance int;
+shipCost int;
+BEGIN
+		-- Select player's currency and insert it into currentBalance variable
+		SELECT currency FROM users WHERE ID = $1 INTO currentBalance;
+		-- Select ship's cost and insert it into shipCost variable
+		SELECT cost FROM SHIPS WHERE NAME = $2 INTO shipCost;
+	-- IF ship cost is less than or equal to players balance
+	IF shipCost <= currentBalance
+	THEN
+		UPDATE users
+		  SET currency = ( currency - shipCost )
+	  WHERE ID = $1;
+		WITH shipinfo AS ( SELECT * FROM SHIPS WHERE NAME = $2 )
+    INSERT INTO ships_user ( user_id, user_ship_id, user_ship_name, user_ship_health, user_ship_rangeCapacity, user_ship_powerLevel, user_ship_planet_id, user_ship_galaxy_id )
+    VALUES (
+        $1,
+        ( SELECT ID FROM shipinfo ),
+        ( SELECT NAME FROM shipinfo ),
+        ( SELECT healthLevel FROM shipinfo ),
+        ( SELECT rangeCapacity FROM shipinfo ),
+        ( SELECT powerLevel FROM shipinfo ),
+        1,
+        ( SELECT currentGalaxy FROM users WHERE ID = $1 )
+    )
+        -- Return an object with player and ship key containing player's previous balance and new balance, along with ship's data
+    RETURNING
+    json_build_object (
+      'player', json_build_object (
+        'prevBalance', currentBalance,
+        'newBalance', ( SELECT currency FROM users WHERE ID = $1 )
+      ),
+      'ship', json_build_object (
+        'id', ID,
+        'galaxyId', user_ship_galaxy_id,
+        'planetId', user_ship_planet_id,
+        'name', user_ship_name,
+        'health', user_ship_health,
+        'rangeCapacity', user_ship_rangeCapacity,
+        'powerLevel', user_ship_powerLevel
+      )
+    )
+		--place the built obj into the declared result variable
+		INTO RESULT;
+		--return it
+	RETURN RESULT;
+	END IF;
+	-- Player didnt have enough balance so return an object with a prop called Insufficient balance with a message value that says how much they are short
+	RETURN json_build_object('Insufficient Balance', CONCAT('Oops! You are ', abs(currentBalance - shipCost), ' Dollars short!'));
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
