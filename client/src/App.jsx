@@ -1,8 +1,14 @@
 import React from 'react';
+import Counter from './components/actionsToolbar/attackModal/Counter';
 
 const App = () => {
   return (
-    <div className='app'>test</div>
+    <div>
+      <div className='app'>
+        test
+      </div>
+      <Counter />
+    </div>
   );
 };
 
