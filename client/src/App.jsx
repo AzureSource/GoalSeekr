@@ -4,7 +4,7 @@ import Playerlist from './components/PlayerList.jsx';
 
 const App = () => {
   return (
-    <div>
+    <div className='appBackground'>
       <div className='app'>
         test
       </div>
