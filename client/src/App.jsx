@@ -11,8 +11,8 @@ const App = () => {
           test
         </div>
         <Counter />
-        <TaskTracker />
       </div>
+      <TaskTracker />
     </ChakraProvider>
   );
 };

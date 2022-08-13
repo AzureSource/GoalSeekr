@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env'});
+require('dotenv').config();
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -23,5 +23,3 @@ module.exports = (text, values) => (
     ))
     .catch(err => console.error(err))
 );
-
-console.log(process.env.PGUSER);
