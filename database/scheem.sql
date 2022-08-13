@@ -163,3 +163,15 @@ BEGIN
 	);
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+
+--Gets all a user's ships by their ID and returns an object with ship
+CREATE OR REPLACE FUNCTION getUsersShips("userID" int)
+  RETURNS json AS $func$
+	DECLARE result json;
+BEGIN
+	WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_json ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
+	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped into result;
+	RETURN (result);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
