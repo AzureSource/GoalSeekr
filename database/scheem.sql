@@ -288,7 +288,7 @@ END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 --Gets all chat messages in decending order by galaxyID
-CREATE OR REPLACE FUNCTION getChatMessagesByGalaxyAndAlliance("galaxyID" int)
+CREATE OR REPLACE FUNCTION getChatMessagesByGalaxy("galaxyID" int)
   RETURNS json AS $func$
 DECLARE
 BEGIN
