@@ -7,9 +7,7 @@ import ShipModal from './UI/modal.js';
 const App = () => {
 
   return (
-    <div>
-      App
-    </div>
+    <div className='app'>test</div>
   );
 };
 

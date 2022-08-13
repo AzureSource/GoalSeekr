@@ -1,5 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { ChakraProvider } from '@chakra-ui/react';
+import theme from '../assets/styles.js';
 import App from './App.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
 
@@ -12,7 +14,7 @@ const root = createRoot(container);
 
 
 root.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <App />
   </ChakraProvider>
 );
