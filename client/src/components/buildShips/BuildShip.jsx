@@ -11,7 +11,6 @@ export const BuildShipContext = createContext(null);
 const BuildShip = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userCurrency, setUserCurrency] = useState(100000);
-  const originUserCurrency = userCurrency;
   const [ships, setShips] = useState([]);
   const [user, setUser] = useState({});
 
@@ -22,37 +21,20 @@ const BuildShip = () => {
       let shipsDB = shipResponse.data;
       let shipsWithImg = shipsDB.map(shipDB => ({...shipDB, imageUrl: shipImg}));
       setShips(shipsWithImg);
-      let userDB = userResponse.data;
-      setUser(userDB);
-      // console.log('11111111111', userResponse.data);
-      // console.log('11111111111', user);
-      console.log('22222222222', shipsWithImg);
+      setUser(userResponse.data[0]);
     };
     fetchData();
-  }, []);
-
-  useEffect(async () => {
-    const userResponse = await axios.get('/api/users/1');
-    setUser(userResponse.data);
-    console.log('11111111111', user);
   }, []);
 
   const shipsComponents = ships.map(ship => (
     <Ship key={ship.id} shipFromBackend={ship} />
   ));
 
-  // TODO: restore origin currency from server
-  const restoreCurrency = () => {
-    console.log('originUserCurrency is ', originUserCurrency);
-    setUserCurrency(originUserCurrency);
-    onClose();
-  };
-
   return (
     <>
-      <BuildShipContext.Provider value={{userCurrency, setUserCurrency}}>
+      <BuildShipContext.Provider value={{userCurrency, setUserCurrency, user}}>
         <Button onClick={onOpen}>Open Modal</Button>
-        <Modal onClose={restoreCurrency} size='full' isOpen={isOpen}>
+        <Modal onClose={onClose} size='full' isOpen={isOpen}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Available Ship</ModalHeader>
