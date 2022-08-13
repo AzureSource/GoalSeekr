@@ -350,6 +350,53 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+-- Gets all players's ships on a planet within a galaxy and returns their ships by type with their stats
+CREATE OR REPLACE FUNCTION "public"."getusershipsonplanet"("galaxyID" INT, "planetID" INT)
+  RETURNS "pg_catalog"."json" AS $func$
+  DECLARE RESPONSE JSON;
+BEGIN
+		WITH grouped AS (
+		SELECT
+			user_id AS userid,
+			user_ship_name AS TYPE,
+			json_agg (
+				json_build_object (
+					'id', ID,
+					'health', user_ship_health,
+					'range', user_ship_rangecapacity,
+					'power', user_ship_powerlevel
+				)
+			) AS Ships
+		FROM
+			ships_user
+		WHERE
+			user_ship_galaxy_id = $1
+			AND user_ship_planet_id = $2
+		GROUP BY
+			1,
+			2
+		),
+		results AS (
+		SELECT
+			json_build_object (
+				'userid', userid,
+				'Ships', JSON_OBJECT_AGG ( TYPE, ships )
+			) AS Ships
+		FROM grouped
+		GROUP BY grouped.userid
+		)
+		SELECT
+		  json_build_object (
+				'galaxy', json_build_object ( 'id', $1, 'name', ( SELECT NAME FROM galaxies WHERE ID = $1 ) ),
+				'planet', json_build_object ( 'id', $2, 'name', ( SELECT NAME FROM planets WHERE ID = $2 ) ),
+				'players', json_agg ( ships )
+			)
+		FROM results INTO RESPONSE;
+	RETURN ( RESPONSE );
+
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
 -- ================================================================= --
 -- ================================================================= --
 --                        DB FUNCTION TO POPULATE DB                 --
