@@ -12,9 +12,9 @@ container.setAttribute('id', 'root');
 document.body.appendChild(container);
 const root = createRoot(container);
 root.render(
-  <Provider store={store}>
-    <ChakraProvider theme={theme}>
+  <ChakraProvider theme={theme}>
+    <Provider store={store}>
       <App />
-    </ChakraProvider>
-  </Provider>
+    </Provider>
+  </ChakraProvider>
 );
