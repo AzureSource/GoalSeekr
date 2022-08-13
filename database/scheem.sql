@@ -139,3 +139,27 @@ CREATE INDEX ships_user_ship_planet_id_index
 
 CREATE INDEX ships_user_galaxy_id_index
   ON ships_user(user_ship_galaxy_id);
+
+  -- ================================================================= --
+-- ================================================================= --
+--                        DB FUNCTIONS                               --
+--                                                                   --
+-- ================================================================= --
+-- ================================================================= --
+
+CREATE OR REPLACE FUNCTION getShipStatistics("shipName" text)
+  RETURNS json AS $func$
+BEGIN
+	RETURN (
+		SELECT json_build_object (
+			'name', name,
+			'price', cost,
+			'health', healthLevel,
+			'range', rangeCapacity,
+			'power', powerLevel
+		)
+		FROM ships
+		WHERE name = $1
+	);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
