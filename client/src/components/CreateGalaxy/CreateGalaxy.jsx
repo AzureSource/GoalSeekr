@@ -13,10 +13,10 @@ import {
 
 const CreateGalaxy = () => {
   return (
-      <div>
-
-      </div>
-  )
+    <div>
+      create a galaxy component
+    </div>
+  );
 };
 
 export default CreateGalaxy;
