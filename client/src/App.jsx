@@ -8,7 +8,7 @@ const App = () => {
       <div className='app'>
         test
       </div>
-      <Playerlist />
+
       <Counter />
     </div>
   );
