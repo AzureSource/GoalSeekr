@@ -1,8 +1,12 @@
 import React from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
 const App = () => {
   return (
-    <div>App</div>
+    <ChakraProvider>
+      <TaskTracker />
+    </ChakraProvider>
   );
 };
 
