@@ -6,16 +6,19 @@ const DifficultyCol = ({ difficulty }) => {
   return (
     <Flex className="singleColumnContainer"
       flexDirection="column" justifyContent="flex-start" alignItems="center" flexGrow="1"
-      w="20%" border="1px solid"
+      w="20%" border="1px solid" m="0.1rem"
     >
       <Flex className="titleContainer"
-        h="8%" w="92%"
+        h="8%" w="92%" m="0.1rem" mb="1rem"
         border="thick double" borderWidth="medium"
         justifyContent="center" alignItems="center"
       >
         <Heading fontSize="2rem">{difficulty}</Heading>
       </Flex>
-      <Flex className="tasksContainer">
+      <Flex className="tasksContainer"
+        border="1px solid"
+        h="8%" w="92%"
+      >
         <div>somethinggg</div>
       </Flex>
     </Flex>

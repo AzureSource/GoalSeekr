@@ -13,9 +13,10 @@ const CurrencyBar = () => {
 
     <Flex className="currBarContainer" m=".5rem"
       h="55%" w="50%" size="lg"
-      border="1px solid"
     >
-      <Tag className="currBar" colorScheme="teal" w="100%" fontSize="2xl" justifyContent="center">
+      <Tag className="currBar" colorScheme="teal" w="100%" fontSize="2xl" justifyContent="center"
+        border="1px solid" borderRadius="10px"
+      >
         Currency earned: $XX
       </Tag>
     </Flex>
