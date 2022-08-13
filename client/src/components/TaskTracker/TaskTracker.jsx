@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/react';
-import Container from './Columns/Container.jsx';
+import ColsContainer from './Columns/ColsContainer.jsx';
+import CurrencyBar from './CurrencyBar.jsx';
 
 const TaskTracker = () => {
   return (
@@ -9,10 +10,10 @@ const TaskTracker = () => {
         Nav bar, etc will go here
       </Flex>
       <Flex className="taskTrackerContainer" h="85%">
-        <Container />
+        <ColsContainer />
       </Flex>
-      <Flex className="footer" h="10%" justifyContent="center">
-        Footer
+      <Flex className="footer" h="10%" justifyContent="flex-end">
+        <CurrencyBar />
       </Flex>
     </Flex>
   );

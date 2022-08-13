@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import DifficultyCol from './DifficultyCol.jsx';
 
-const Container = () => {
+const ColsContainer = () => {
   const [difficulties ] = useState(['EASY', 'MEDIUM', 'HARD', 'INSANE']);
 
   return (
@@ -16,4 +16,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default ColsContainer;
