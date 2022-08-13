@@ -48,7 +48,11 @@ const Ship = ({ shipFromBackend }) => {
               textTransform='uppercase'
               ml='2'
             >
-              cost: {shipFromBackend.cost}  &bull; Range: {shipFromBackend.rangeCapacity} &bull; Power: {shipFromBackend.powerLevel}
+              cost: {shipFromBackend.cost}
+              &bull; Range: {shipFromBackend.rangecapacity}
+              <br/>
+              Power: {shipFromBackend.powerlevel}
+              &bull; Health: {shipFromBackend.healthlevel}
             </Box>
           </Box>
         </Box>
