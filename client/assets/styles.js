@@ -8,17 +8,11 @@ const overrides = {
       '.app': {
         fontSize: '100px'
       },
-      '.appBackground': {
-        backgroundImage: background,
+      'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
+        backgroundImage: background,
         backgroundSize: 'contain'
       },
-      'body.chakra-ui-light, html': {
-        height: '100%'
-      },
-      '#root': {
-        height: '100%'
-      }
     },
   },
 };
