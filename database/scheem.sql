@@ -351,8 +351,8 @@ END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- Gets all players's ships on a planet within a galaxy and returns their ships by type with their stats
-CREATE OR REPLACE FUNCTION "public"."getusershipsonplanet"("galaxyID" INT, "planetID" INT)
-  RETURNS "pg_catalog"."json" AS $func$
+CREATE OR REPLACE FUNCTION getusershipsonplanet("galaxyID" INT, "planetID" INT)
+  RETURNS JSON AS $func$
   DECLARE RESPONSE JSON;
 BEGIN
 		WITH grouped AS (
