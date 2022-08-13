@@ -3,86 +3,86 @@ DROP INDEX IF EXISTS users_id_index, users_galaxy_id_index, tasks_user_task_id_i
 DROP TABLE IF EXISTS galaxies, users, planets, ships, alliances, tasks, chat, planets_galaxy, ships_user, tasks_user CASCADE;
 
 CREATE TABLE galaxies (
-  id serial primary key,
-  name text not null,
-  yearsPerTurn int not null,
-  currentYear int not null,
-  maxPlayers int not null,
-  currentPlayers int not null default 1
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  yearsPerTurn INT NOT NULL,
+  currentYear INT NOT NULL,
+  maxPlayers INT NOT NULL,
+  currentPlayers INT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE users (
-  id serial primary key,
-  username text unique,
-  password text,
-  motto text,
-  about text,
-  profile_picture_url text,
-  currency int not null default 1000,
-  currentGalaxy int references galaxies(id) default null,
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE,
+  password TEXT,
+  motto TEXT,
+  about TEXT,
+  profile_picture_url TEXT,
+  currency INT NOT NULL DEFAULT 1000,
+  currentGalaxy INT REFERENCES galaxies(id) DEFAULT NULL,
   currentAlliance int
 );
 
 CREATE TABLE planets (
-  id serial primary key,
-  name text not null unique
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE ships (
-  id serial primary key,
-  name text not null unique,
-  cost integer not null,
-  rangeCapacity int not null,
-  healthLevel float not null,
-  powerLevel int not null
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  cost INT NOT NULL,
+  rangeCapacity INT NOT NULL,
+  healthLevel FLOAT NOT NULL,
+  powerLevel INT NOT NULL
 );
 
 CREATE TABLE alliances (
-  id serial primary key,
-  name text unique,
-  memberCount int not null default 1
+  id SERIAL PRIMARY KEY,
+  name TEXT UNIQUE,
+  memberCount INT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE tasks (
-  id serial primary key,
-  description text not null unique,
-  reward integer not null,
-  difficulty text
+  id SERIAL PRIMARY KEY,
+  description TEXT NOT NULL UNIQUE,
+  reward INT NOT NULL,
+  difficulty TEXT
 );
 
 CREATE TABLE tasks_user (
-  id serial primary key,
-  user_id int references users(id),
-  task_id int references tasks(id)
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  task_id INT REFERENCES tasks(id)
 );
 
 CREATE TABLE chat (
-  id serial primary key,
-  message text,
-  user_id int references users(id),
-  galaxy_id int references galaxies(id),
-  alliance_id int references alliances(id),
-  alliance_Only boolean default false not null
+  id SERIAL PRIMARY KEY,
+  message TEXT,
+  user_id INT REFERENCES users(id),
+  galaxy_id INT REFERENCES galaxies(id),
+  alliance_id INT REFERENCES alliances(id),
+  alliance_Only BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE planets_galaxy (
-  id serial primary key,
-  planet_id int references planets(id),
-  galaxy_id int references galaxies(id),
-  colonizedBy int references users(id) default null,
-  discoverd bool default false
+  id SERIAL PRIMARY KEY,
+  planet_id INT REFERENCES planets(id),
+  galaxy_id INT REFERENCES galaxies(id),
+  colonizedBy INT REFERENCES users(id) DEFAULT NULL,
+  discoverd BOOLEAN DEFAULT false
 );
 
 CREATE TABLE ships_user (
-  id serial primary key,
-  user_id int references users(id),
-  user_ship_id int references ships(id),
-  user_ship_name text,
-  user_ship_health float,
-  user_ship_rangeCapacity int not null,
-  user_ship_powerLevel int not null,
-  user_ship_planet_id int references planets(id),
-  user_ship_galaxy_id int references galaxies(id)
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  user_ship_id INT REFERENCES ships(id),
+  user_ship_name TEXT,
+  user_ship_health FLOAT,
+  user_ship_rangeCapacity INT NOT NULL,
+  user_ship_powerLevel INT NOT NULL,
+  user_ship_planet_id INT REFERENCES planets(id),
+  user_ship_galaxy_id INT REFERENCES galaxies(id)
 );
 
 -- ================================================================= --
@@ -140,15 +140,16 @@ CREATE INDEX ships_user_ship_planet_id_index
 CREATE INDEX ships_user_galaxy_id_index
   ON ships_user(user_ship_galaxy_id);
 
-  -- ================================================================= --
+-- ================================================================= --
 -- ================================================================= --
 --                        DB FUNCTIONS                               --
 --                                                                   --
 -- ================================================================= --
 -- ================================================================= --
 
-CREATE OR REPLACE FUNCTION getShipStatistics("shipName" text)
-  RETURNS json AS $func$
+-- gets ship stats by the name of the ship
+CREATE OR REPLACE FUNCTION getShipStatistics("shipName" TEXT)
+  RETURNS JSON AS $func$
 BEGIN
 	RETURN (
 		SELECT json_build_object (
@@ -166,25 +167,26 @@ $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 
 --Gets all a user's ships by their ID and returns an object with ship
-CREATE OR REPLACE FUNCTION getUsersShips("userID" int)
-  RETURNS json AS $func$
+CREATE OR REPLACE FUNCTION getUsersShips("userID" INT)
+  RETURNS JSON AS $func$
 	DECLARE result json;
 BEGIN
-	WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_json ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
-	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped into result;
+	WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
+	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped INTO result;
 	RETURN (result);
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+
 --Purchases a ship by userID and name of ship (IF AFFORDABLE) and adds it to user_ship db and updates user's currency amount to decrease, then returns:
 -- Object with player prop whos properties are prevBal (balance before buying) and newBalance (balance after buying)
 -- Insufficient balance message stating how many dollars they are short from purchasing
-CREATE OR REPLACE FUNCTION buyShip("userID" int4, "shipname" text)
-  RETURNS json AS $func$
+CREATE OR REPLACE FUNCTION buyShip("userID" INT, "shipname" TEXT)
+  RETURNS JSON AS $func$
 DECLARE
 RESULT JSON;
-currentBalance int;
-shipCost int;
+currentBalance INT;
+shipCost INT;
 BEGIN
 		-- Select player's currency and insert it into currentBalance variable
 		SELECT currency FROM users WHERE ID = $1 INTO currentBalance;
@@ -235,27 +237,29 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+
 --Assigns a task to a user by ID from the task's name and returns an object containing userID, TaskName, Reward, and Difficulty
-CREATE OR REPLACE FUNCTION assignTaskToUser("taskname" text, "userid" int)
-  RETURNS json AS $func$
+CREATE OR REPLACE FUNCTION assignTaskToUser("taskname" TEXT, "userid" INT)
+  RETURNS JSON AS $func$
 	DECLARE result JSON;
 BEGIN
 	WITH task AS (SELECT * FROM tasks WHERE description ILIKE $1)
 	INSERT INTO tasks_user (task_id, user_id) VALUES ((SELECT id FROM task), $2)
-	RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) into result;
+	RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) INTO result;
 	RETURN result;
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+
 --Assigns a task to all users if they are not currently assigned said task (by task's name)
-CREATE OR REPLACE FUNCTION assignTaskToAllUsers("taskName" text)
-  RETURNS text AS $func$
+CREATE OR REPLACE FUNCTION assignTaskToAllUsers("taskName" TEXT)
+  RETURNS TEXT AS $func$
 	DECLARE
-	  ids int;
-		taskID int;
-		userCount int := 0;
+	  ids INT;
+		taskID INT;
+		userCount INT := 0;
 BEGIN
-	SELECT id FROM tasks WHERE description ILIKE $1 into taskID;
+	SELECT id FROM tasks WHERE description ILIKE $1 INTO taskID;
   FOR ids in SELECT id from users loop
     raise notice 'userID: %', ids;
 	  IF NOT EXISTS (SELECT task_id FROM tasks_user WHERE task_id = taskID AND user_id = ids )
@@ -271,25 +275,27 @@ BEGIN
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+
 -- Gets All players ship data by galaxy
-CREATE OR REPLACE FUNCTION getPlayerDataByGalaxyID(int4)
-  RETURNS json AS $func$
+CREATE OR REPLACE FUNCTION getPlayerDataByGalaxyID(INT)
+  RETURNS JSON AS $func$
 DECLARE
 BEGIN
 	RETURN (
 	SELECT
 	json_build_object(
 		'Players', JSON_AGG( (SELECT "getusersships"(id)) )
-		) as results
+		) AS results
 	FROM users
 	WHERE currentgalaxy = $1
 );
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+
 --Gets all chat messages in decending order by galaxyID
-CREATE OR REPLACE FUNCTION getChatMessagesByGalaxy("galaxyID" int)
-  RETURNS json AS $func$
+CREATE OR REPLACE FUNCTION getChatMessagesByGalaxy("galaxyID" INT)
+  RETURNS JSON AS $func$
 DECLARE
 BEGIN
 	RETURN (
@@ -307,24 +313,25 @@ BEGIN
 				'allianceName', (SELECT name FROM alliances WHERE id = alliance_id)
 			) ORDER BY chat.id DESC
 		)
-	) as results
+	) AS results
 	FROM chat
 	WHERE
-	galaxy_id = $1 AND alliance_only = false;
+	galaxy_id = $1 AND alliance_only = false
 );
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+
 --Gets all Alliance-Only chat messages in a specific galaxy/alliance
-CREATE OR REPLACE FUNCTION getChatMessagesByGalaxyAndAlliance("galaxyID" int, "allianceID" int)
-  RETURNS json AS $func$
+CREATE OR REPLACE FUNCTION getChatMessagesByGalaxyAndAlliance("galaxyID" INT, "allianceID" INT)
+  RETURNS JSON AS $func$
 DECLARE
 BEGIN
 	RETURN (
 	SELECT
 	json_build_object(
 		'Messages',
-		JSON_AGG(
+		json_agg(
 			json_build_object(
 				'id', id,
 				'userID', user_id,
@@ -335,15 +342,13 @@ BEGIN
 				'allianceName', (SELECT name FROM alliances WHERE id = alliance_id)
 			) ORDER BY chat.id DESC
 		)
-	) as results
+	) AS results
 	FROM chat
 	WHERE
 	galaxy_id = $1 AND alliance_only = true AND alliance_id = $2
 );
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
-
-
 
 -- ================================================================= --
 -- ================================================================= --
