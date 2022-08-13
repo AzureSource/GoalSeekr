@@ -1,5 +1,6 @@
 import React from 'react';
 import Counter from './components/actionsToolbar/attackModal/Counter';
+import Playerlist from './components/PlayerList.jsx';
 
 const App = () => {
   return (
@@ -7,6 +8,7 @@ const App = () => {
       <div className='app'>
         test
       </div>
+      <Playerlist />
       <Counter />
     </div>
   );
