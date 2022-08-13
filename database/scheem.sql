@@ -286,3 +286,31 @@ BEGIN
 );
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+--Gets all chat messages in decending order by galaxyID
+CREATE OR REPLACE FUNCTION getChatMessagesByGalaxyAndAlliance("galaxyID" int)
+  RETURNS json AS $func$
+DECLARE
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'Messages',
+		JSON_AGG(
+			json_build_object(
+				'id', id,
+				'userID', user_id,
+				'Username', (SELECT username FROM users WHERE id = user_id),
+				'message', message,
+				'galaxyID', galaxy_id,
+				'allianceID', alliance_id,
+				'allianceName', (SELECT name FROM alliances WHERE id = alliance_id)
+			) ORDER BY chat.id DESC
+		)
+	) as results
+	FROM chat
+	WHERE
+	galaxy_id = $1
+);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
