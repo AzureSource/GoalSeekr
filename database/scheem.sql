@@ -234,3 +234,16 @@ BEGIN
 	RETURN json_build_object('Insufficient Balance', CONCAT('Oops! You are ', abs(currentBalance - shipCost), ' Dollars short!'));
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+--Assigns a task to a user by ID from the task's name and returns an object containing userID, TaskName, Reward, and Difficulty
+CREATE OR REPLACE FUNCTION assignTaskToUser("taskname" text, "userid" int)
+  RETURNS json AS $func$
+	DECLARE result JSON;
+BEGIN
+	WITH task AS (SELECT * FROM tasks WHERE description ILIKE $1)
+	INSERT INTO tasks_user (task_id, user_id) VALUES ((SELECT id FROM task), $2)
+	RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) into result;
+	RETURN result;
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
