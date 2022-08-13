@@ -247,3 +247,26 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+--Assigns a task to all users if they are not currently assigned said task (by task's name)
+CREATE OR REPLACE FUNCTION assignTaskToAllUsers("taskName" text)
+  RETURNS text AS $func$
+	DECLARE
+	  ids int;
+		taskID int;
+		userCount int := 0;
+BEGIN
+	SELECT id FROM tasks WHERE description ILIKE $1 into taskID;
+  FOR ids in SELECT id from users loop
+    raise notice 'userID: %', ids;
+	  IF NOT EXISTS (SELECT task_id FROM tasks_user WHERE task_id = taskID AND user_id = ids )
+	    THEN
+        raise notice 'userID: % does not have this task', ids;
+        INSERT INTO tasks_user(user_id, task_id)
+        VALUES (ids, (SELECT id FROM tasks WHERE description ILIKE $1));
+        userCount = userCount + 1;
+        raise notice 'userCount is now: %', userCount;
+	  END IF;
+  END loop;
+	RETURN CONCAT('Assigned task to ', userCount, ' Users');
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
