@@ -11,9 +11,9 @@ const App = () => {
       <div className='appBackground'>
         <div className='app'>
           test
+          <Counter />
+          <BuildShip/>
         </div>
-        <Counter />
-        <BuildShip/>
       </div>
     </ChakraProvider>
 
