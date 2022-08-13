@@ -1,5 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { ChakraProvider } from '@chakra-ui/react';
+import theme from '../assets/styles.js';
 import App from './App.jsx';
 import store from './app/store';
 import { Provider } from 'react-redux';
@@ -11,6 +13,8 @@ document.body.appendChild(container);
 const root = createRoot(container);
 root.render(
   <Provider store={store}>
-    <App />
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
   </Provider>
 );

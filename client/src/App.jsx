@@ -3,10 +3,10 @@ import Counter from './components/actionsToolbar/attackModal/Counter';
 
 const App = () => {
   return (
-    <div>
-      App
+    <div className='app'>
+      test
       <Counter />
-    </div>
+      </div>
   );
 };
 
