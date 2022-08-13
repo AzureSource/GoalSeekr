@@ -270,3 +270,19 @@ BEGIN
 	RETURN CONCAT('Assigned task to ', userCount, ' Users');
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- Gets All players ship data by galaxy
+CREATE OR REPLACE FUNCTION getPlayerDataByGalaxyID(int4)
+  RETURNS json AS $func$
+DECLARE
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'Players', JSON_AGG( (SELECT "getusersships"(id)) )
+		) as results
+	FROM users
+	WHERE currentgalaxy = $1
+);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
