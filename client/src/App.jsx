@@ -1,6 +1,7 @@
 import React from 'react';
 import Counter from './components/actionsToolbar/attackModal/Counter';
 import BuildShip from './components/buildShips/BuildShip.jsx';
+import Playerlist from './components/PlayerList.jsx';
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
       <div className='app'>
         test
       </div>
+
       <Counter />
       <BuildShip/>
     </div>
