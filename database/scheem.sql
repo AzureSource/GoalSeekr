@@ -310,7 +310,7 @@ BEGIN
 	) as results
 	FROM chat
 	WHERE
-	galaxy_id = $1
+	galaxy_id = $1 AND alliance_only = false;
 );
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
