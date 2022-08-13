@@ -11,9 +11,16 @@ const overrides = {
       },
       '.appBackground': {
         backgroundImage: background,
-        height: '100%'
+        height: '100%',
+        backgroundSize: 'contain'
+      },
+      'body': {
+        overflow: 'hidden'
       },
       'body.chakra-ui-light, html': {
+        height: '100%'
+      },
+      '#root': {
         height: '100%'
       }
     },
