@@ -10,18 +10,13 @@ const DifficultyCol = ({ difficulty }) => {
       w="20%" border="1px solid" m="0.1rem"
     >
       <Flex className="titleContainer"
-        h="8%" w="92%" m="0.1rem" mb="1rem"
+        h="8%" minH="8%" w="92%" minW="92%" m="0.1rem" mb="1rem"
         border="thick double" borderWidth="medium"
         justifyContent="center" alignItems="center"
       >
         <Heading fontSize="2rem">{difficulty}</Heading>
       </Flex>
-      <Flex className="tasksContainer"
-        border="1px solid"
-        h="8%" w="92%"
-      >
-        <TasksContainer difficulty={difficulty}/>
-      </Flex>
+      <TasksContainer difficulty={difficulty}/>
     </Flex>
   );
 };

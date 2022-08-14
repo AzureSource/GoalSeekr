@@ -18,7 +18,7 @@ function getAllTasks(req, res) {
 function getTasksByDifficulty(req, res) {
   const queryString = `
     SELECT * FROM tasks
-    WHERE LOWER(difficulty) = $1;
+    WHERE UPPER(difficulty) = $1;
   `;
   const values = [req.params.difficulty];
 
