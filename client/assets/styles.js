@@ -5,14 +5,24 @@ const overrides = {
   styles: {
     global: {
       // add styles here
-      '.app': {
-        fontSize: '100px'
-      },
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
         backgroundSize: 'contain'
       },
+      '.galaxy-window': {
+        width: '100%'
+      },
+      '.galaxy-window-top': {
+        width: '100%',
+        height: '80%'
+      },
+      '.window-side': {
+        width: '20%'
+      },
+      '.temp-div': {
+        width: '80%'
+      }
     },
   },
 };
