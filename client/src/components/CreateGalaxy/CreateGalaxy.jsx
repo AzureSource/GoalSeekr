@@ -1,5 +1,7 @@
 import React from 'react';
 import { Flex, Input, Image, Button } from '@chakra-ui/react';
+import SelectGalaxySize from './SelectGalaxySize.jsx';
+import GalaxyOptions from './GalaxyOptions.jsx';
 import smallGalaxy from '../../../assets/images/smallGalaxy.jpeg';
 import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
 
@@ -31,52 +33,8 @@ const CreateGalaxy = () => {
           className='create-galaxy-content'
           justify='space-evenly'
         >
-          <Flex
-            className='galaxy-size-container'
-            flexDir='column'
-          >
-            <div
-              className='galaxy-size-heading'
-            >
-              Select Galaxy Size
-            </div>
-            <Flex
-              className='galaxy-size-images-container'
-              justify='space-between'
-            >
-              <Image
-                className='galaxy-size-images'
-                boxSize='155px'
-                objectFit='cover'
-                src={smallGalaxy}
-              />
-              <Image
-                className='galaxy-size-images'
-                boxSize='155px'
-                objectFit='cover'
-                src={bigGalaxy}
-              />
-            </Flex>
-          </Flex>
-          <Flex
-            className='galaxy-option-container'
-            justify='space-between'
-            flexDir='column'
-          >
-            <div className='galaxy-side-headings'>
-              <div>Max Players</div>
-              <div>count default 2</div>
-            </div>
-            <div className='galaxy-side-headings'>
-              <div>Years Per Turn</div>
-              <div>count default 2</div>
-
-            </div>
-            <div className='galaxy-side-headings'>
-              <div>Alliances</div>
-              <div>switch to turn on</div>
-            </div>
-          </Flex>
+          <SelectGalaxySize />
+          <GalaxyOptions />
         </Flex>
         <Flex
           className='create-galaxy-btn-container'
