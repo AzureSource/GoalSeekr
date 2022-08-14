@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Input, Image } from '@chakra-ui/react';
+import { Flex, Input, Image, Button } from '@chakra-ui/react';
 import smallGalaxy from '../../../assets/images/smallGalaxy.jpeg';
 import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
 
@@ -12,6 +12,7 @@ const CreateGalaxy = () => {
       <Flex
         className='create-galaxy'
         flexDir='column'
+        justify='center'
       >
         <Flex
           className='galaxy-input-row'
@@ -33,9 +34,9 @@ const CreateGalaxy = () => {
             className='galaxy-size-container'
             flexDir='column'
           >
-            <div className='galaxy-size-heading'>
+            <Flex className='galaxy-size-heading'>
                   Select Galaxy Size
-            </div>
+            </Flex>
             <Flex
               className='galaxy-size-images-container'
               justify='space-between'
@@ -65,12 +66,19 @@ const CreateGalaxy = () => {
         </Flex>
         <Flex
           className='create-galaxy-btn-container'
+          justify='space-evenly'
         >
-          <Button>
-
+          <Button
+            backgroundColor='#2e2f47'
+            className='create-galaxy-btn'
+          >
+            Cancel
           </Button>
-          <Button>
-
+          <Button
+            backgroundColor='#2e2f47'
+            className='create-galaxy-btn'
+          >
+            Create Galaxy
           </Button>
         </Flex>
       </Flex>

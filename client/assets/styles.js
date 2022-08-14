@@ -83,9 +83,10 @@ const overrides = {
       },
       '.create-galaxy-content': {
         width: '100%',
-        margin: '20px 0px 20px'
+        margin: '40px 0px 40px'
       },
       '.create-galaxy': {
+        fontFamily: 'Abril Fatface',
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         // background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.3756793478260869) 85%)',
         minHeight: '500px',
@@ -93,6 +94,11 @@ const overrides = {
       },
       '.galaxy-size-container, .galaxy-option-container': {
         width: '40%'
+      },
+      '.galaxy-size-heading': {
+        width: '100%',
+        justify: 'center',
+        margin: '10px 0px 10px',
       },
       '.login-with-google-btn': {
         size: '20px',
@@ -115,6 +121,14 @@ const overrides = {
       },
       '.galaxy-size-images': {
         borderRadius: '5px',
+      },
+      '.create-galaxy-btn': {
+        color: '#50b6ab',
+        padding: '15px 30px 15px 30px',
+        borderRadius: '5px',
+        width: '40%',
+        backgroundColor: '#2e2f47',
+        // margin: '0px 60px 0px 60px'
       }
     },
   },
