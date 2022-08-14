@@ -9,7 +9,7 @@ const MenuSide = () => {
       justify='center'
       alignItems='center'
       margin='2rem'
-      width='20%'
+      width='min-content'
       display='block'
     >
       <Playerlist />
