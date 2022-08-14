@@ -40,14 +40,14 @@ const overrides = {
       '.menu-bottom-container': {
         width: '95%',
         height: '80%',
-        border: '2px solid #75DDDD',
+        border: '2px solid #50b6ab',
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
       '.menu-side-container': {
         width: '70%',
         height: '85%',
-        border: '2px solid #75DDDD',
+        border: '2px solid #50b6ab',
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
@@ -67,7 +67,10 @@ const overrides = {
         fontFamily: 'Abril Fatface',
         fontSize: '40px',
         fontWeight: 'bolder',
-        color: '#508991'
+        color: '#50b6ab'
+      },
+      '.lobby-menu-container': {
+        height: '67%'
       }
     },
   },
