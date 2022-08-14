@@ -25,30 +25,33 @@ const CreateGalaxy = () => {
             placeholder='Enter Galaxy Name'
           />
         </Flex>
-        <Flex>
+        <Flex
+          className='create-galaxy-content'
+          justify='space-evenly'
+        >
           <Flex
-            className='create-galaxy-content'
-            flexDir='row'
+            className='galaxy-size-container'
+            flexDir='column'
           >
-            <Flex
-              className='galaxy-size-container'
-              flexDir='column'
-            >
-              <div className='galaxy-size-heading'>
+            <div className='galaxy-size-heading'>
                   Select Galaxy Size
-              </div>
-              <Flex>
-                <Image
-                  boxSize='150px'
-                  objectFit='cover'
-                  src={smallGalaxy}
-                />
-                <Image
-                  boxSize='150px'
-                  objectFit='cover'
-                  src={bigGalaxy}
-                />
-              </Flex>
+            </div>
+            <Flex
+              className='galaxy-size-images-container'
+              justify='space-between'
+            >
+              <Image
+                className='galaxy-size-images'
+                boxSize='155px'
+                objectFit='cover'
+                src={smallGalaxy}
+              />
+              <Image
+                className='galaxy-size-images'
+                boxSize='155px'
+                objectFit='cover'
+                src={bigGalaxy}
+              />
             </Flex>
           </Flex>
           <Flex
@@ -60,10 +63,18 @@ const CreateGalaxy = () => {
             <div>Alliances Switch </div>
           </Flex>
         </Flex>
-        <Flex>
+        <Flex
+          className='create-galaxy-btn-container'
+        >
+          <Button>
 
+          </Button>
+          <Button>
 
+          </Button>
         </Flex>
+      </Flex>
+      <Flex>
       </Flex>
     </Flex>
   );

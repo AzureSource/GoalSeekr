@@ -79,13 +79,20 @@ const overrides = {
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
       },
       '.create-galaxy-container': {
-        height: '100%'
+        height: '100%',
+      },
+      '.create-galaxy-content': {
+        width: '100%',
+        margin: '20px 0px 20px'
       },
       '.create-galaxy': {
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         // background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.3756793478260869) 85%)',
         minHeight: '500px',
         minWidth: '900px'
+      },
+      '.galaxy-size-container, .galaxy-option-container': {
+        width: '40%'
       },
       '.login-with-google-btn': {
         size: '20px',
@@ -97,7 +104,7 @@ const overrides = {
         textAlign: 'center',
       },
       '.galaxy-input-row': {
-        height: '25%'
+        height: '40%'
       },
       '.galaxy-name-input': {
         padding: '20px',
@@ -105,6 +112,9 @@ const overrides = {
         alignSelf: 'center',
         height: '50px',
         borderRadius: '8px'
+      },
+      '.galaxy-size-images': {
+        borderRadius: '5px',
       }
     },
   },
