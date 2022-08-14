@@ -24,7 +24,7 @@ const overrides = {
         width: '1100px'
       },
       '.zero, .zero2, .pinktopia, .pinktopia2, .pokitaru, .pokitaru2, .steins, .steins2, .lava, .lava2, .haku, .haku2, .chihiro, .chihiro2, .calcifer, .athea, .athea2, .calcifer2, .polaris, .polaris2': {
-        height: '70px',
+        height: '50px',
         position: 'absolute'
       },
       '.zero': {
@@ -92,12 +92,12 @@ const overrides = {
         marginLeft: '660px'
       },
       '.athea': {
-        height: '110px',
+        height: '90px',
         marginTop: '350px',
         marginLeft: '300px'
       },
       '.athea2': {
-        height: '110px',
+        height: '90px',
         marginTop: '10px',
         marginLeft: '580px'
       },
