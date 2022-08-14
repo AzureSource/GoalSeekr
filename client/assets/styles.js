@@ -26,7 +26,21 @@ const overrides = {
       },
       '.menu-bottom': {
         height: '30%'
-      }
+      },
+      '.menu-bottom-container': {
+        width: '95%',
+        height: '80%',
+        border: '2px solid #75DDDD',
+        backgroundColor: '#2D3047',
+        borderRadius: '15px'
+      },
+      '.menu-side-container': {
+        width: '70%',
+        height: '93%',
+        border: '2px solid #75DDDD',
+        backgroundColor: '#2D3047',
+        borderRadius: '15px'
+      },
     },
   },
 };

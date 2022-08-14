@@ -1,8 +1,20 @@
 import React from 'react';
+import { Flex, Spacer } from '@chakra-ui/react';
 
 const MenuSide = () => {
   return (
-    <div className='menu-side'>MenuSide</div>
+    <Flex className='menu-side'
+      justify='center'
+    >
+      <Flex
+        className='menu-side-container'
+        justify='center'
+        alignItems='center'
+      >
+        all side menu components
+      </Flex>
+
+    </Flex>
   );
 };
 
