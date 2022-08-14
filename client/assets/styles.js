@@ -14,6 +14,16 @@ const overrides = {
         width: '100%',
         height: '100%'
       },
+      '#root': {
+        height: '100%'
+      },
+      '.p-list-icon': {
+        fontSize: '250%',
+        margin: '2px'
+      },
+      'p-list-smIcon': {
+        fontSize: '50%'
+      },
       '.galaxy-window-top': {
         width: '100%',
         height: '70%'
