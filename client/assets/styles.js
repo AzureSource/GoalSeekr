@@ -95,10 +95,31 @@ const overrides = {
       '.galaxy-size-container, .galaxy-option-container': {
         width: '40%'
       },
+      '.galaxy-option-container': {
+        marginTop: '20px'
+      },
       '.galaxy-size-heading': {
+        fontSize: '20px',
+        fontWeight: '900',
         width: '100%',
-        justify: 'center',
-        margin: '10px 0px 10px',
+        textAlign: 'center',
+        padding: '17px 0px',
+        margin: '20px 0px',
+        marginBottom: '25px',
+        backgroundColor: '#2e2f47',
+        color: '#50b6ab',
+        borderRadius: '5px'
+      },
+      '.galaxy-side-headings': {
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontSize: '20px',
+        fontWeight: '900',
+        width: '100%',
+        padding: '17px 15px',
+        backgroundColor: '#2e2f47',
+        color: '#50b6ab',
+        borderRadius: '5px'
       },
       '.login-with-google-btn': {
         size: '20px',

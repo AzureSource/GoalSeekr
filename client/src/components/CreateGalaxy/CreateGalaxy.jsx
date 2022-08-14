@@ -34,9 +34,11 @@ const CreateGalaxy = () => {
             className='galaxy-size-container'
             flexDir='column'
           >
-            <Flex className='galaxy-size-heading'>
-                  Select Galaxy Size
-            </Flex>
+            <div
+              className='galaxy-size-heading'
+            >
+              Select Galaxy Size
+            </div>
             <Flex
               className='galaxy-size-images-container'
               justify='space-between'
@@ -57,11 +59,22 @@ const CreateGalaxy = () => {
           </Flex>
           <Flex
             className='galaxy-option-container'
+            justify='space-between'
             flexDir='column'
           >
-            <div>Max Players </div>
-            <div>Years Per Turn </div>
-            <div>Alliances Switch </div>
+            <div className='galaxy-side-headings'>
+              <div>Max Players</div>
+              <div>count default 2</div>
+            </div>
+            <div className='galaxy-side-headings'>
+              <div>Years Per Turn</div>
+              <div>count default 2</div>
+
+            </div>
+            <div className='galaxy-side-headings'>
+              <div>Alliances</div>
+              <div>switch to turn on</div>
+            </div>
           </Flex>
         </Flex>
         <Flex
