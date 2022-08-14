@@ -15,6 +15,7 @@ const Ship = ({ shipFromBackend }) => {
     else array.push(element);
   };
 
+  // handle plus/minus button click
   const handleShipAmountChange = (event) => {
     if (event.target.id === 'plus') {
       if (userCurrency - shipFromBackend.cost < 0) {
@@ -23,8 +24,10 @@ const Ship = ({ shipFromBackend }) => {
       } else {
         setUserCurrency(userCurrency - shipFromBackend.cost);
         setShipCount(shipCount + 1);
+        // update ship purchased during this execution
         let shipPurchased = {name: shipFromBackend.name, count: shipCount + 1};
         let updatedPurchasedShips = purchasedShips;
+        // create new if not exist, or update if exist
         upsert(updatedPurchasedShips, shipPurchased);
         setPurchasedShips(updatedPurchasedShips);
       }
