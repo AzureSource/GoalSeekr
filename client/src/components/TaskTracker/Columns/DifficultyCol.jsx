@@ -20,7 +20,7 @@ const DifficultyCol = ({ difficulty }) => {
         border="1px solid"
         h="8%" w="92%"
       >
-        <TasksContainer />
+        <TasksContainer difficulty={difficulty}/>
       </Flex>
     </Flex>
   );
