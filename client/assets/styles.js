@@ -40,17 +40,118 @@ const overrides = {
       '.menu-bottom-container': {
         width: '95%',
         height: '80%',
-        border: '2px solid #75DDDD',
-        backgroundColor: '#2D3047',
+        border: '2px solid #50b6ab',
+        backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
       '.menu-side-container': {
         width: '70%',
-        height: '93%',
-        border: '2px solid #75DDDD',
-        backgroundColor: '#2D3047',
+        height: '85%',
+        border: '2px solid #50b6ab',
+        backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      '.title-bar': {
+        width: '100%',
+        height: '27%',
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.39399509803921573) 100%)',
+        backgroundOpacity: 0.7
+      },
+      '.title-name': {
+        position: 'relative',
+        top: '35px',
+        width: '80%',
+        height: '50%',
+        backgroundColor: '#2e2f47',
+        borderRadius: '15px',
+        fontFamily: 'Abril Fatface',
+        fontSize: '40px',
+        fontWeight: 'bolder',
+        color: '#50b6ab'
+      },
+      '.lobby-menu-container': {
+        height: '67%',
+        width: '100%'
+      },
+      '.lobby-menu': {
+        height: '80%',
+        width: '35%',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
+      },
+      '.create-galaxy-container': {
+        height: '100%',
+      },
+      '.create-galaxy-content': {
+        width: '100%',
+        margin: '10px 0px 40px'
+      },
+      '.create-galaxy': {
+        fontFamily: 'Abril Fatface',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
+        // background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.3756793478260869) 85%)',
+        minHeight: '500px',
+        minWidth: '900px'
+      },
+      '.galaxy-size-container, .galaxy-option-container': {
+        width: '40%'
+      },
+      '.galaxy-option-container': {
+        marginTop: '20px'
+      },
+      '.galaxy-size-heading': {
+        fontSize: '20px',
+        fontWeight: '900',
+        width: '100%',
+        textAlign: 'center',
+        padding: '17px 0px',
+        margin: '20px 0px',
+        marginBottom: '25px',
+        backgroundColor: '#2e2f47',
+        color: '#50b6ab',
+        borderRadius: '5px'
+      },
+      '.galaxy-side-headings': {
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontSize: '20px',
+        fontWeight: '900',
+        width: '100%',
+        padding: '17px 15px',
+        backgroundColor: '#2e2f47',
+        color: '#50b6ab',
+        borderRadius: '5px'
+      },
+      '.login-with-google-btn': {
+        size: '20px',
+        backgroundColor: '#2e2f47',
+        width: '200px',
+        height: '50px'
+      },
+      '.galaxy-name-input::placeholder': {
+        textAlign: 'center',
+      },
+      '.galaxy-input-row': {
+        padding: '5px 0px',
+      },
+      '.galaxy-name-input': {
+        padding: '20px',
+        textAlign: 'center',
+        alignSelf: 'center',
+        height: '50px',
+        borderRadius: '6px',
+        border: '7px solid #2e2f47'
+      },
+      '.galaxy-size-images': {
+        borderRadius: '5px',
+      },
+      '.create-galaxy-btn': {
+        color: '#50b6ab',
+        padding: '15px 30px 15px 30px',
+        borderRadius: '5px',
+        width: '40%',
+        backgroundColor: '#2e2f47',
+        // margin: '0px 60px 0px 60px'
+      }
     },
   },
 };
