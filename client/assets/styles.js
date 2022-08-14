@@ -83,7 +83,7 @@ const overrides = {
         height: '100%'
       },
       '.create-galaxy': {
-        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(211,254,78,0.5228365384615384) 100%)',
+        background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.3756793478260869) 85%)',
         minHeight: '500px',
         minWidth: '900px'
       },

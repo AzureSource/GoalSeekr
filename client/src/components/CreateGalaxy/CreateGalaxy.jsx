@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  Flex
+  Flex,
+  Input
 } from '@chakra-ui/react';
 
 const CreateGalaxy = () => {
@@ -9,8 +10,35 @@ const CreateGalaxy = () => {
       justify='center'
       align='center'
     >
-      <Flex className='create-galaxy'>
-      create a galaxy component
+      <Flex
+        className='create-galaxy'
+        flexDir='column'
+      >
+        <Input />
+        <Flex>
+          <Flex
+            className='create-galaxy-content'
+            flexDir='row'
+          >
+            <div className='galaxy-size-container'>
+              <div className='galaxy-size-heading'>
+                  Select Galaxy Size
+              </div>
+              <div>
+                <span>Image 1</span>
+                <span>Image 2</span>
+              </div>
+            </div>
+          </Flex>
+          <Flex
+            className='galaxy-option-container'
+            flexDir='column'
+          >
+            <div>Max Players </div>
+            <div>Years Per Turn </div>
+            <div>Alliances Switch </div>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );
