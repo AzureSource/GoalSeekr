@@ -7,12 +7,13 @@ import Playerlist from './components/PlayerList.jsx';
 const App = () => {
   return (
     <ChakraProvider>
-      <div className='appBackground'>
+      {/* <div className='appBackground'>
         <div className='app'>
           test
         </div>
         <Counter />
-      </div>
+      </div> */}
+      <TaskTracker />
     </ChakraProvider>
   );
 };

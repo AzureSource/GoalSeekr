@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
+import TasksContainer from '../Tasks/TasksContainer.jsx';
 
 const DifficultyCol = ({ difficulty }) => {
 
@@ -19,7 +20,7 @@ const DifficultyCol = ({ difficulty }) => {
         border="1px solid"
         h="8%" w="92%"
       >
-        <div>somethinggg</div>
+        <TasksContainer />
       </Flex>
     </Flex>
   );
