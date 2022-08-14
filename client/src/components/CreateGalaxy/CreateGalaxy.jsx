@@ -14,7 +14,18 @@ const CreateGalaxy = () => {
         className='create-galaxy'
         flexDir='column'
       >
-        <Input />
+        <Flex
+          className='galaxy-input-row'
+          justify='center'
+        >
+          <Input
+            width='300px'
+            background='white'
+            variant='outline'
+            className='galaxy-name-input'
+            placeholder='Enter Galaxy Name'
+          />
+        </Flex>
         <Flex>
           <Flex
             className='create-galaxy-content'
@@ -25,8 +36,7 @@ const CreateGalaxy = () => {
                   Select Galaxy Size
               </div>
               <div>
-                <span>Image 1</span>
-                <span>Image 2</span>
+                <img></img>
               </div>
             </div>
           </Flex>
@@ -38,6 +48,10 @@ const CreateGalaxy = () => {
             <div>Years Per Turn </div>
             <div>Alliances Switch </div>
           </Flex>
+        </Flex>
+        <Flex>
+
+
         </Flex>
       </Flex>
     </Flex>

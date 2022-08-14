@@ -76,14 +76,14 @@ const overrides = {
       '.lobby-menu': {
         height: '80%',
         width: '35%',
-        // background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
-        background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.4659803511705686) 85%)'
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
       },
       '.create-galaxy-container': {
         height: '100%'
       },
       '.create-galaxy': {
-        background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.3756793478260869) 85%)',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
+        // background: 'linear-gradient(180deg, rgba(45,48,71,1) 2%, rgba(80,182,171,0.24190008361204018) 45%, rgba(199,238,78,0.3756793478260869) 85%)',
         minHeight: '500px',
         minWidth: '900px'
       },
@@ -92,6 +92,19 @@ const overrides = {
         backgroundColor: '#2e2f47',
         width: '200px',
         height: '50px'
+      },
+      '.galaxy-name-input::placeholder': {
+        textAlign: 'center',
+      },
+      '.galaxy-input-row': {
+        height: '25%'
+      },
+      '.galaxy-name-input': {
+        padding: '20px',
+        textAlign: 'center',
+        alignSelf: 'center',
+        height: '50px',
+        borderRadius: '8px'
       }
     },
   },
