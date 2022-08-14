@@ -62,6 +62,11 @@ function Playerlist () {
     'align-items': 'center',
   };
 
+  const accButton = {
+    display: 'flex',
+    'justify-content': 'space-between',
+  };
+
   return (
     <div id='player-list' style={{width:'200px', margin: '1rem'}}>
       <Accordion  allowToggle>
@@ -69,9 +74,10 @@ function Playerlist () {
         {playerlist.map((player, index) => (
           <AccordionItem key={player.id}>
             <h2>
-              <AccordionButton  w='100%'_expanded={{ bg: 'tomato', color: 'white' }}>
+              <AccordionButton sx={accButton} w='100%'_expanded={{ bg: 'tomato', color: 'white' }}>
                 <Avatar size='xs' src='https://bit.ly/broken-link' />
-                <span>{index === 0 && <GiTrophy className='p-list-smIcon'/> } {player.username} </span>
+                {index === 0 && <GiTrophy className='p-list-smIcon'/> }
+                <span> {player.username} </span>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
