@@ -397,6 +397,26 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+--Create a new user or update a current user's username(display name) by user ID (will be changed upon Google UID implementation)
+CREATE OR REPLACE FUNCTION createorupdateuser("userID" int4, "displayName" text, "motto" text, "about" text, "avatarURL" text)
+  RETURNS json AS $func$
+  DECLARE result JSON;
+	userExists BOOLEAN;
+BEGIN
+	SELECT EXISTS(SELECT id FROM users WHERE id = $1) INTO userExists;
+	IF userExists THEN
+		UPDATE users SET username = $2 WHERE ID = $1;
+		SELECT row_to_json(users) FROM users WHERE id = $1 INTO result;
+		RETURN result;
+	ELSE
+	  INSERT INTO users (username, password, motto, about, profile_picture_url, currency, currentgalaxy)
+		VALUES ($2, 'test', $3, $4, $5, 10000, 1)
+		RETURNING * INTO result;
+  END IF;
+	RETURN result;
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
 -- ================================================================= --
 -- ================================================================= --
 --                        DB FUNCTION TO POPULATE DB                 --
