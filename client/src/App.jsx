@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Flex } from '@chakra-ui/react';
+import Title from './components/Lobby/TitleBar.jsx';
 import { signInWithGoogle } from './firebase.js';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
@@ -12,11 +13,11 @@ import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 const App = () => {
 
   return (
-
-    <div className='appBackground'>
+    <Flex className='appBackground'>
+      <Title />
       {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-      <GalaxyWindow />
-    </div>
+      {/* <GalaxyWindow /> */}
+    </Flex>
   );
 
 };

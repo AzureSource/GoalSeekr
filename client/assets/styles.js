@@ -41,16 +41,34 @@ const overrides = {
         width: '95%',
         height: '80%',
         border: '2px solid #75DDDD',
-        backgroundColor: '#2D3047',
+        backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
       '.menu-side-container': {
         width: '70%',
-        height: '93%',
+        height: '85%',
         border: '2px solid #75DDDD',
-        backgroundColor: '#2D3047',
+        backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      '.title-bar': {
+        width: '100%',
+        height: '27%',
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.39399509803921573) 100%)',
+        backgroundOpacity: 0.7
+      },
+      '.title-name': {
+        position: 'relative',
+        top: '25px',
+        width: '80%',
+        height: '50%',
+        backgroundColor: '#2e2f47',
+        borderRadius: '15px',
+        fontFamily: 'Abril Fatface',
+        fontSize: '40px',
+        fontWeight: 'bolder',
+        color: '#09bc8a'
+      }
     },
   },
 };
