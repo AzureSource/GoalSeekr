@@ -18,7 +18,7 @@ const BuildShip = () => {
   useEffect(() => {
     const fetchData = async () => {
       const shipResponse = await axios.get('/api/ships/');
-      const userResponse = await axios.get('/api/users/1');
+      const userResponse = await axios.get('/api/users/3');
       let shipsDB = shipResponse.data;
       let shipsWithImg = shipsDB.map(shipDB => ({...shipDB, imageUrl: shipImg}));
       setShips(shipsWithImg);
@@ -46,7 +46,7 @@ const BuildShip = () => {
         'ships': purchasedShips
       }
     };
-    axios.post('api/users/1/ships', config)
+    axios.post('api/users/3/ships', config)
       .then(() => {
         console.log('update user info');
         location.reload();
@@ -57,7 +57,7 @@ const BuildShip = () => {
   return (
     <>
       <BuildShipContext.Provider value={{userCurrency, setUserCurrency, user, purchasedShips, setPurchasedShips}}>
-        <Button onClick={onOpen}>Open Modal</Button>
+        <Button onClick={onOpen}>Build ship</Button>
         <Modal onClose={restoreData} size='full' isOpen={isOpen}>
           <ModalOverlay />
           <ModalContent>
