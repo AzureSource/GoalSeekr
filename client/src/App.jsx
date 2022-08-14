@@ -1,5 +1,5 @@
 import React from 'react';
-import Counter from './components/actionsToolbar/attackModal/Counter';
+import MissionModule from './components/actionsToolbar/missionModule/MissionModule.jsx';
 
 const App = () => {
   return (
@@ -8,7 +8,7 @@ const App = () => {
       <div className='app'>
         test
       </div>
-      <Counter />
+      <MissionModule />
     </div>
   );
 };
