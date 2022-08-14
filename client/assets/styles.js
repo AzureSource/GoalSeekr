@@ -83,7 +83,7 @@ const overrides = {
       },
       '.create-galaxy-content': {
         width: '100%',
-        margin: '40px 0px 40px'
+        margin: '10px 0px 40px'
       },
       '.create-galaxy': {
         fontFamily: 'Abril Fatface',
@@ -131,14 +131,15 @@ const overrides = {
         textAlign: 'center',
       },
       '.galaxy-input-row': {
-        height: '40%'
+        padding: '5px 0px',
       },
       '.galaxy-name-input': {
         padding: '20px',
         textAlign: 'center',
         alignSelf: 'center',
         height: '50px',
-        borderRadius: '8px'
+        borderRadius: '6px',
+        border: '7px solid #2e2f47'
       },
       '.galaxy-size-images': {
         borderRadius: '5px',

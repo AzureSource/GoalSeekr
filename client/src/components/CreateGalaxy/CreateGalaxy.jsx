@@ -22,6 +22,7 @@ const CreateGalaxy = () => {
             width='300px'
             background='white'
             variant='outline'
+            outline='3px solid #2e2f47'
             className='galaxy-name-input'
             placeholder='Enter Galaxy Name'
           />
