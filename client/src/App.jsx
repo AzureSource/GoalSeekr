@@ -14,11 +14,11 @@ import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 const App = () => {
 
   return (
-          {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
     <div className='appBackground'>
+      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
       <GalaxyWindow />
     </div>
   );
-  
+
 };
 export default App;
