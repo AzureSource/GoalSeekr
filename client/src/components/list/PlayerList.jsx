@@ -6,10 +6,8 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Box,
   Grid,
   GridItem,
-  Icon,
   Text
 } from '@chakra-ui/react';
 import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
