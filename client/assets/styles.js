@@ -59,7 +59,7 @@ const overrides = {
       },
       '.title-name': {
         position: 'relative',
-        top: '25px',
+        top: '35px',
         width: '80%',
         height: '50%',
         backgroundColor: '#2e2f47',
@@ -67,7 +67,7 @@ const overrides = {
         fontFamily: 'Abril Fatface',
         fontSize: '40px',
         fontWeight: 'bolder',
-        color: '#09bc8a'
+        color: '#508991'
       }
     },
   },
