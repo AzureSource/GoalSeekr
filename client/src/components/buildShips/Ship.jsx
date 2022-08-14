@@ -7,7 +7,13 @@ import { BuildShipContext } from './BuildShip.jsx';
 const Ship = ({ shipFromBackend }) => {
   const [shipCount, setShipCount] = useState(0);
 
-  const {userCurrency, setUserCurrency} = useContext(BuildShipContext);
+  const {userCurrency, setUserCurrency, purchasedShips, setPurchasedShips} = useContext(BuildShipContext);
+
+  const upsert = (array, element) => {
+    const i = array.findIndex(_element => _element.name === element.name);
+    if (i > -1) array[i] = element;
+    else array.push(element);
+  };
 
   const handleShipAmountChange = (event) => {
     if (event.target.id === 'plus') {
@@ -17,6 +23,10 @@ const Ship = ({ shipFromBackend }) => {
       } else {
         setUserCurrency(userCurrency - shipFromBackend.cost);
         setShipCount(shipCount + 1);
+        let shipPurchased = {name: shipFromBackend.name, count: shipCount + 1};
+        let updatedPurchasedShips = purchasedShips;
+        upsert(updatedPurchasedShips, shipPurchased);
+        setPurchasedShips(updatedPurchasedShips);
       }
     } else if (event.target.id === 'minus') {
       if (shipCount <= 0) {
@@ -25,9 +35,12 @@ const Ship = ({ shipFromBackend }) => {
       } else {
         setUserCurrency(userCurrency + shipFromBackend.cost);
         setShipCount(shipCount - 1);
+        let shipPurchased = {name: shipFromBackend.name, count: shipCount + 1};
+        let updatedPurchasedShips = purchasedShips;
+        upsert(updatedPurchasedShips, shipPurchased);
+        setPurchasedShips(updatedPurchasedShips);
       }
     }
-
   };
 
   return (

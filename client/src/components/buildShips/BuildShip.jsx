@@ -10,7 +10,8 @@ export const BuildShipContext = createContext(null);
 
 const BuildShip = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userCurrency, setUserCurrency] = useState(100000);
+  const [userCurrency, setUserCurrency] = useState(0);
+  const [purchasedShips, setPurchasedShips] = useState([]);
   const [ships, setShips] = useState([]);
   const [user, setUser] = useState({});
 
@@ -22,6 +23,7 @@ const BuildShip = () => {
       let shipsWithImg = shipsDB.map(shipDB => ({...shipDB, imageUrl: shipImg}));
       setShips(shipsWithImg);
       setUser(userResponse.data[0]);
+      setUserCurrency(userResponse.data[0].currency);
     };
     fetchData();
   }, []);
@@ -30,11 +32,33 @@ const BuildShip = () => {
     <Ship key={ship.id} shipFromBackend={ship} />
   ));
 
+  const restoreData = () => {
+    setUserCurrency(user.currency);
+    setPurchasedShips([]);
+    onClose();
+  };
+
+  const confirmPurchaseShip = () => {
+    console.log('purchased ships ', purchasedShips);
+    console.log('userCurrency ', userCurrency);
+    let config = {
+      data: {
+        'ships': purchasedShips
+      }
+    };
+    axios.post('api/users/1/ships', config)
+      .then(() => {
+        console.log('update user info');
+        location.reload();
+      });
+    onClose();
+  };
+
   return (
     <>
-      <BuildShipContext.Provider value={{userCurrency, setUserCurrency, user}}>
+      <BuildShipContext.Provider value={{userCurrency, setUserCurrency, user, purchasedShips, setPurchasedShips}}>
         <Button onClick={onOpen}>Open Modal</Button>
-        <Modal onClose={onClose} size='full' isOpen={isOpen}>
+        <Modal onClose={restoreData} size='full' isOpen={isOpen}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Available Ship</ModalHeader>
@@ -46,11 +70,11 @@ const BuildShip = () => {
               <br/>
               <br/>
               <Box bg='tomato' w='100%' p={4} color='white'>
-              Your available currency is : $ {user.currency}
+              Your available currency is : $ {userCurrency}
               </Box>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={onClose} colorScheme='red'>Confirm</Button>
+              <Button onClick={confirmPurchaseShip} colorScheme='red'>Confirm</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
