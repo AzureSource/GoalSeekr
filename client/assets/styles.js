@@ -6,23 +6,13 @@ const overrides = {
     global: {
       // add styles here
       '.app': {
-        height: '100%',
         fontSize: '100px'
       },
-      '.appBackground': {
-        backgroundImage: background,
+      'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
+        backgroundImage: background,
         backgroundSize: 'contain'
       },
-      'body': {
-        overflow: 'hidden'
-      },
-      'body.chakra-ui-light, html': {
-        height: '100%'
-      },
-      '#root': {
-        height: '100%'
-      }
     },
   },
 };
