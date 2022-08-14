@@ -2,7 +2,7 @@ import React from 'react';
 
 const MenuSide = () => {
   return (
-    <div className='window-side'>MenuSide</div>
+    <div className='menu-side'>MenuSide</div>
   );
 };
 

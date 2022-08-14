@@ -11,17 +11,21 @@ const overrides = {
         backgroundSize: 'contain'
       },
       '.galaxy-window': {
-        width: '100%'
+        width: '100%',
+        height: '100%'
       },
       '.galaxy-window-top': {
         width: '100%',
-        height: '80%'
+        height: '70%'
       },
-      '.window-side': {
+      '.menu-side': {
         width: '20%'
       },
       '.temp-div': {
         width: '80%'
+      },
+      '.menu-bottom': {
+        height: '30%'
       }
     },
   },
