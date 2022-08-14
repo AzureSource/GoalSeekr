@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, Tooltip, IconButton } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons'
 import TasksContainer from '../Tasks/TasksContainer.jsx';
 
 const DifficultyCol = ({ difficulty }) => {
@@ -15,6 +16,19 @@ const DifficultyCol = ({ difficulty }) => {
         justifyContent="center" alignItems="center"
       >
         <Heading fontSize="2rem">{difficulty}</Heading>
+        {/* future feature ability to add tasks */}
+        {/* <Flex className="taskStatus" onClick={() => null}>
+          <Tooltip className="tooltip" label='Add a task'>
+            <div className="iconContainer">
+              <IconButton
+                className="icon"
+                aria-label='Complete task'
+                icon={<AddIcon />}
+                colorScheme='gray'
+              />
+            </div>
+          </Tooltip>
+        </Flex> */}
       </Flex>
       <TasksContainer difficulty={difficulty}/>
     </Flex>

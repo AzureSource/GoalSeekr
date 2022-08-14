@@ -23,7 +23,7 @@ const Task = ({ task }) => {
           ${task.reward}
         </Flex>
         <Flex className="taskStatus" onClick={() => setTaskComplete(!taskComplete)}>
-          <Tooltip className="tooltip" label="Click to mark task complete!">
+          <Tooltip className="tooltip" label={taskComplete? '' : 'Click to mark task complete!'}>
             <div className="iconContainer">
               <IconButton
                 className="icon"
