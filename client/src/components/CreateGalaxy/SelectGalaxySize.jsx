@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Input, Image, Button } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 import smallGalaxy from '../../../assets/images/smallGalaxy.jpeg';
 import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
 
@@ -12,7 +12,7 @@ const SelectGalaxySize = () => {
       <div
         className='galaxy-size-heading'
       >
-              Select Galaxy Size
+        Select Galaxy Size
       </div>
       <Flex
         className='galaxy-size-images-container'

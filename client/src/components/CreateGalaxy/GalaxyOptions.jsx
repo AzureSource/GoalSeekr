@@ -1,7 +1,5 @@
 import React from 'react';
-import { Flex, Input, Image, Button } from '@chakra-ui/react';
-import smallGalaxy from '../../../assets/images/smallGalaxy.jpeg';
-import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
+import { Flex } from '@chakra-ui/react';
 
 const GalaxyOptions = () => {
   return (
