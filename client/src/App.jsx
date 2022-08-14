@@ -13,9 +13,9 @@ const App = () => {
 
   return (
     <div className='appBackground'>
-      {/* <CreateGalaxy /> */}
-      <Title />
-      <Menu />
+      <CreateGalaxy />
+      {/* <Title />
+      <Menu /> */}
       {/* <GalaxyWindow /> */}
     </div>
   );
