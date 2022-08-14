@@ -22,7 +22,14 @@ const overrides = {
       },
       '#root': {
         height: '100%'
-      }
+      },
+      '.p-list-icon': {
+        fontSize: '250%',
+        margin: '2px'
+      },
+      'p-list-smIcon': {
+        fontSize: '50%'
+      },
     },
   },
 };
