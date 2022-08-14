@@ -1,21 +1,19 @@
 import React from 'react';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
+  Flex
 } from '@chakra-ui/react';
 
 const CreateGalaxy = () => {
   return (
-    <div>
+    <Flex className='create-galaxy-container'
+      justify='center'
+      align='center'
+    >
+      <Flex className='create-galaxy'>
+
+      </Flex>
       create a galaxy component
-    </div>
+    </Flex>
   );
 };
 

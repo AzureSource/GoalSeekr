@@ -71,6 +71,9 @@ const overrides = {
       },
       '.lobby-menu-container': {
         height: '67%'
+      },
+      '.create-galaxy-container': {
+        height: '100%'
       }
     },
   },
