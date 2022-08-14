@@ -10,9 +10,8 @@ const CreateGalaxy = () => {
       align='center'
     >
       <Flex className='create-galaxy'>
-
-      </Flex>
       create a galaxy component
+      </Flex>
     </Flex>
   );
 };

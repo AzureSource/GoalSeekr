@@ -70,10 +70,26 @@ const overrides = {
         color: '#50b6ab'
       },
       '.lobby-menu-container': {
-        height: '67%'
+        height: '67%',
+        width: '100%'
+      },
+      '.lobby-menu': {
+        height: '80%',
+        width: '35%',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
       },
       '.create-galaxy-container': {
         height: '100%'
+      },
+      '.create-galaxy': {
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(211,254,78,0.5228365384615384) 100%)',
+        minHeight: '500px',
+        minWidth: '900px'
+      },
+      '.login-with-google-btn': {
+        backgroundColor: '#2e2f47',
+        width: '200px',
+        height: '50px'
       }
     },
   },
