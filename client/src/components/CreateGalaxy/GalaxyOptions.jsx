@@ -4,19 +4,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { allianceToggle } from './galaxyOptionsSlice';
 import { Flex, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 
-const GalaxyOptions = () => {
+const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
   // const dispatch = useDispatch();
 
   // const toggleAlliance = () => {
   //   dispatch(allianceToggle());
   // };
-
-  const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
 
   const incrementPlayer = () => {
-    if (maxPlayerCount === 10) {
+    if (maxPlayerCount === 5 && galaxySize) {
+      alert ('Max Players');
+      return;
+    }
+    if (maxPlayerCount === 10 && !galaxySize) {
       alert ('Max Players');
       return;
     }

@@ -322,6 +322,20 @@ const overrides = {
       },
       '.galaxy-size-images': {
         borderRadius: '5px',
+        border: '3px solid #2e2f47',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        boxSize: '250px',
+        color: 'white',
+        textShadow: '0 0 20px black',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        px: 4,
+      },
+      '.galaxy-size-unselected': {
+        filter: 'blur(1px)'
       },
       '.create-galaxy-btn': {
         color: '#50b6ab',
@@ -338,7 +352,7 @@ const overrides = {
         background: 'white',
         borderRadius: '4px'
       },
-      '.create-galaxy-icons:hover': {
+      '.create-galaxy-icons:hover, .galaxy-size-images': {
         cursor: 'pointer'
       },
       '.alliance-switch': {

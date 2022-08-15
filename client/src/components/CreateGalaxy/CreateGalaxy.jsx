@@ -6,6 +6,8 @@ import GalaxyOptions from './GalaxyOptions.jsx';
 
 const CreateGalaxy = () => {
   const [galaxyName, setGalaxyName] = useState('');
+  const [galaxySize, setGalaxySize] = useState(true);
+  const [maxPlayerCount, setMaxPlayerCount] = useState(2);
 
   const submitGalaxy = (data) => {
     return axios.get('endpoint', data);
@@ -40,8 +42,16 @@ const CreateGalaxy = () => {
           className='create-galaxy-content'
           justify='space-evenly'
         >
-          <SelectGalaxySize />
-          <GalaxyOptions />
+          <SelectGalaxySize
+            galaxySize={galaxySize}
+            setGalaxySize={setGalaxySize}
+            setMaxPlayerCount={setMaxPlayerCount}
+          />
+          <GalaxyOptions
+            galaxySize={galaxySize}
+            maxPlayerCount={maxPlayerCount}
+            setMaxPlayerCount={setMaxPlayerCount}
+          />
         </Flex>
         <Flex
           className='create-galaxy-btn-container'
