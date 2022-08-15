@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS galaxies, users, planets, ships, alliances, tasks, chat, pl
 
 CREATE TABLE galaxies (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL UNIQUE,
   yearsPerTurn INT NOT NULL,
   currentYear INT NOT NULL,
   maxPlayers INT NOT NULL,
@@ -14,13 +14,14 @@ CREATE TABLE galaxies (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username TEXT UNIQUE,
-  password TEXT,
+  googleuid TEXT,
+	email TEXT,
   motto TEXT,
   about TEXT,
   profile_picture_url TEXT,
   currency INT NOT NULL DEFAULT 1000,
   currentGalaxy INT REFERENCES galaxies(id) DEFAULT NULL,
-  currentAlliance int
+  currentAlliance INT
 );
 
 CREATE TABLE planets (
@@ -398,19 +399,19 @@ END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 --Create a new user or update a current user's username(display name) by user ID (will be changed upon Google UID implementation)
-CREATE OR REPLACE FUNCTION createorupdateuser("userID" int4, "displayName" text, "motto" text, "about" text, "avatarURL" text)
+CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" INT, "displayName" TEXT, "email" TEXT, "motto" TEXT, "about" TEXT, "avatarURL" TEXT)
   RETURNS json AS $func$
   DECLARE result JSON;
 	userExists BOOLEAN;
 BEGIN
-	SELECT EXISTS(SELECT id FROM users WHERE id = $1) INTO userExists;
+	SELECT EXISTS(SELECT id FROM users WHERE googleuid = $1) INTO userExists;
 	IF userExists THEN
-		UPDATE users SET username = $2 WHERE ID = $1;
-		SELECT row_to_json(users) FROM users WHERE id = $1 INTO result;
+		UPDATE users SET username = $2 WHERE googleuid = $1;
+		SELECT row_to_json(users) FROM users WHERE googleuid = $1 INTO result;
 		RETURN result;
 	ELSE
-	  INSERT INTO users (username, password, motto, about, profile_picture_url, currency, currentgalaxy)
-		VALUES ($2, 'test', $3, $4, $5, 10000, 1)
+	  INSERT INTO users (username, googleuid, email,  motto, about, profile_picture_url, currency, currentgalaxy)
+		VALUES ($2, $1, $3, $4, $5, $6, 10000, 1)
 		RETURNING * INTO result;
   END IF;
 	RETURN result;
@@ -454,9 +455,20 @@ INSERT INTO ships ( name, cost, rangecapacity, healthlevel, powerlevel) VALUES (
 
 --users (generate 100 in random galaxies from 1-5)
 do $$
+declare isInAlliance boolean := false;
+declare allianceID int := null;
 begin
    for num in 1..100 loop
-		INSERT INTO users (username, password, motto, about, profile_picture_url, currency, currentgalaxy) VALUES (CONCAT('User', num), 'password', 'hi', 'yolo', 'imgur.com/image', 20000, (SELECT floor(random() * 5 + 1)));
+	 	SELECT floor(random() * 2) = 1 INTO isInAlliance;
+		raise notice 'Alliance %', isInAlliance;
+		IF isInAlliance THEN
+			SELECT floor(random() * 8 + 1) INTO allianceID;
+			raise notice 'AllianceID is %', allianceID;
+		ELSE
+			allianceID := null;
+			raise notice 'AllianceID is %', allianceID;
+		END IF;
+		INSERT INTO users (username, googleuid, email, motto, about, profile_picture_url, currency, currentgalaxy, currentAlliance) VALUES (CONCAT('User', num), CONCAT('googleuid', num), CONCAT('user', num, '@gmail.com'), 'hi', 'yolo', 'imgur.com/image', 20000, (SELECT floor(random() * 10 + 1)), allianceID);
     raise notice 'User% Inserted', num;
    end loop;
 end; $$;
@@ -681,5 +693,10 @@ INSERT INTO chat (id, message, user_id, galaxy_id, alliance_id, alliance_only) V
 INSERT INTO chat (id, message, user_id, galaxy_id, alliance_id, alliance_only) VALUES (199, 'Navicat Monitor can be installed on any local computer or virtual machine and does not require any software installation on the servers               ', 7, 5, 6, 'f');
 INSERT INTO chat (id, message, user_id, galaxy_id, alliance_id, alliance_only) VALUES (200, 'In other words, Navicat provides the ability for data in different databases and/or schemas to be kept up-to-date so that each repository             ', 96, 3, 4, 't');
 
+--fix correct Ids for alliances
+		UPDATE chat
+			SET alliance_id = users.currentAlliance
+		FROM users
+		WHERE chat.user_id = users.id;
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
