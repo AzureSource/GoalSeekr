@@ -4,6 +4,7 @@ import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
 import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';
+import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
 import background from '../assets/images/sparse sky.png';
 import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';
 import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
@@ -34,7 +35,9 @@ const App = () => {
         <TitleBar />
         <Routes>
           <Route exact path="/" element={<LoginAuth />} />
-          <Route exact path="/galaxy/uid/:id" element={<CreateGalaxy />} />
+          <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy/>} />
+          <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy />} />
+          <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow />} />
         </Routes>
       </div>
     </HashRouter>

@@ -9,6 +9,6 @@ routes.get('/api/users/:user_id', user.findOne);
 routes.post('/api/users/:user_id/ships', user.updateShips);
 routes.put('/api/users/:user_id',user.updateUserName);
 routes.post('/api/users/:user_id',user.createUserName);
-
+routes.get('/api/galaxy',user.checkGalaxyName);
 
 module.exports = routes;

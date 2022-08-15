@@ -1,13 +1,15 @@
 import React,{useState} from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 export default function EnterUserName ({authData}) {
-  console.log('show authData: ', authData);
+
+  let params = useParams();
   const [text,setText] = useState('');
 
-  const redirectToGalaxyPage = function() {
-    window.location.href = `http://localhost:7777/galaxy/uid/${authData.uid}`;
+  const redirectToEnterGalaxyPage = function() {
+    window.location.href = `http://localhost:7777/entergalaxy/uid/${params.authData.uid}`;
   };
 
   const handleJoin = function(){
@@ -20,7 +22,7 @@ export default function EnterUserName ({authData}) {
           // user exists
           // if new name is the same with existing name, return
           if (response.data.username === text) {
-            return;
+            redirectToEnterGalaxyPage();
           }
           // update the user with new name
           axios({
@@ -30,10 +32,10 @@ export default function EnterUserName ({authData}) {
               username: text
             }
           })
-            .then((response) => {
+            .then(() => {
               // Redirect
               console.log('Update user complete');
-              redirectToGalaxyPage();
+              redirectToEnterGalaxyPage();
             })
             .catch((err) => {
               alert('Can not update user name');
@@ -49,9 +51,9 @@ export default function EnterUserName ({authData}) {
               method: 'post',
               data: {...authData, username:text}
             })
-              .then((response) => {
+              .then(() => {
                 console.log('Create user complete');
-                redirectToGalaxyPage();
+                redirectToEnterGalaxyPage();
               })
               .catch((err) => {
                 alert('Can not create user');
