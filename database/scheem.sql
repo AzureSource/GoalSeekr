@@ -13,8 +13,9 @@ CREATE TABLE galaxies (
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
+	uid TEXT,
   username TEXT UNIQUE,
-  password TEXT,
+  email TEXT,
   motto TEXT,
   about TEXT,
   profile_picture_url TEXT,
