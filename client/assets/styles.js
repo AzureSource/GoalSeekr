@@ -352,7 +352,7 @@ const overrides = {
         background: 'white',
         borderRadius: '4px'
       },
-      '.create-galaxy-icons:hover, .galaxy-size-images': {
+      '.create-galaxy-icons:hover, .galaxy-size-unselected': {
         cursor: 'pointer'
       },
       '.alliance-switch': {
