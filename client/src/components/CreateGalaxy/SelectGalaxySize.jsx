@@ -6,7 +6,8 @@ import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
 const SelectGalaxySize = ({ galaxySize, setGalaxySize, setMaxPlayerCount }) => {
 
   const changeGalaxySize = () => {
-
+    setGalaxySize(prevState => !prevState);
+    setMaxPlayerCount(2);
   };
 
   return (
@@ -28,13 +29,13 @@ const SelectGalaxySize = ({ galaxySize, setGalaxySize, setMaxPlayerCount }) => {
           boxSize='155px'
           objectFit='contain'
           backgroundImage={smallGalaxy}
-          onClick={() => setGalaxySize(true)}
+          onClick={() => changeGalaxySize()}
         >Sparse (sm)</Box>
         <Box
           className={galaxySize ? 'galaxy-size-unselected galaxy-size-images' : 'galaxy-size-images'}
           boxSize='155px'
           objectFit='cover'
-          onClick={() => setGalaxySize(false)}
+          onClick={() => changeGalaxySize()}
           backgroundImage={bigGalaxy}
         >Dense (big)</Box>
       </Flex>

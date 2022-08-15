@@ -335,7 +335,7 @@ const overrides = {
         px: 4,
       },
       '.galaxy-size-unselected': {
-        filter: 'blur(1px)'
+        filter: 'blur(1.5px)'
       },
       '.create-galaxy-btn': {
         color: '#50b6ab',
