@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ShipListEntry from './ShipListEntry.jsx';
-import {
-  Divider, Select, List, ListItem, ListIcon
-} from '@chakra-ui/react';
+import {Divider, Select, List, ListItem} from '@chakra-ui/react';
+import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
 
   const [shipSelection, setShipSelection] = useState({});
   const [missionQueue, setMissionQueue] = useState([]);
+  const [missionType, setMissionType] = useState('');
 
   // set up state hook, to keep track of mission set up.
   // need onClick listener for planet selection and ship selection.
@@ -45,7 +45,7 @@ export default function MissionModule() {
         {planetSelected}
       </div>
       <div>
-        <Select variant='filled' placeholder='Mission Type' size='md'>
+        <Select variant='filled' placeholder='Mission Type' size='md' icon={<TriangleDownIcon />}>
           <option value='attack'>Attack</option>
           <option value='colonize'>Colonize</option>
         </Select>
