@@ -17,6 +17,185 @@ const overrides = {
       '#root': {
         height: '100%'
       },
+      '.planetsWindow': {
+        border: '2px solid black',
+        height: '550px',
+        width: '1100px'
+      },
+      '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
+        // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
+        // filter: 'drop-shadow(5px 5px 5px #222)',
+        height: '50px',
+        position: 'absolute'
+      },
+      '.zero': {
+        marginTop: '90px',
+        marginLeft: '440px'
+      },
+      '.zero2': {
+        marginTop: '460px',
+        marginLeft: '850px'
+      },
+      '.zero3': {
+        marginTop: '290px',
+        marginLeft: '430px'
+      },
+      '.zero4': {
+        marginTop: '100px',
+        marginLeft: '650px'
+      },
+      '.pinktopia': {
+        marginTop: '50px',
+        marginLeft: '50px'
+      },
+      '.pinktopia2': {
+        marginTop: '20px',
+        marginLeft: '900px'
+      },
+      '.pinktopia3': {
+        marginTop: '380px',
+        marginLeft: '200px'
+      },
+      '.pinktopia4': {
+        marginTop: '380px',
+        marginLeft: '780px'
+      },
+      '.pokitaru': {
+        marginTop: '12px',
+        marginLeft: '200px'
+      },
+      '.pokitaru2': {
+        marginTop: '170px',
+        marginLeft: '910px'
+      },
+      '.pokitaru3': {
+        marginTop: '20px',
+        marginLeft: '450px'
+      },
+      '.pokitaru4': {
+        marginTop: '450px',
+        marginLeft: '380px'
+      },
+      '.steins': {
+        marginTop: '250px',
+        marginLeft: '50px'
+      },
+      '.steins2': {
+        marginTop: '280px',
+        marginLeft: '850px'
+      },
+      '.steins3': {
+        marginTop: '20px',
+        marginLeft: '750px'
+      },
+      '.steins4': {
+        marginTop: '120px',
+        marginLeft: '550px'
+      },
+      '.lava': {
+        height: '65px',
+        marginTop: '350px',
+        marginLeft: '930px'
+      },
+      '.lava2': {
+        height: '65px',
+        marginTop: '140px',
+        marginLeft: '240px'
+      },
+      '.lava3': {
+        height: '65px',
+        marginTop: '330px',
+        marginLeft: '550px'
+      },
+      '.lava4': {
+        height: '65px',
+        marginTop: '330px',
+        marginLeft: '60px'
+      },
+      '.haku': {
+        marginTop: '418px',
+        marginLeft: '100px'
+      },
+      '.haku2': {
+        marginTop: '350px',
+        marginLeft: '675px'
+      },
+      '.haku3': {
+        marginTop: '50px',
+        marginLeft: '300px'
+      },
+      '.haku4': {
+        marginTop: '290px',
+        marginLeft: '280px'
+      },
+      '.chihiro': {
+        marginTop: '100px',
+        marginLeft: '775px'
+      },
+      '.chihiro2': {
+        marginTop: '220px',
+        marginLeft: '350px'
+      },
+      '.chihiro3': {
+        marginTop: '120px',
+        marginLeft: '120px'
+      },
+      '.chihiro4': {
+        marginTop: '450px',
+        marginLeft: '580px'
+      },
+      '.calcifer': {
+        marginTop: '420px',
+        marginLeft: '490px'
+      },
+      '.calcifer2': {
+        marginTop: '200px',
+        marginLeft: '660px'
+      },
+      '.calcifer3': {
+        marginTop: '460px',
+        marginLeft: '220px'
+      },
+      '.calcifer4': {
+        marginTop: '180px',
+        marginLeft: '440px'
+      },
+      '.athea': {
+        height: '90px',
+        marginTop: '350px',
+        marginLeft: '300px'
+      },
+      '.athea2': {
+        height: '90px',
+        marginTop: '10px',
+        marginLeft: '580px'
+      },
+      '.athea3': {
+        height: '90px',
+        marginTop: '450px',
+        marginLeft: '680px'
+      },
+      '.athea4': {
+        height: '90px',
+        marginTop: '250px',
+        marginLeft: '720px'
+      },
+      '.polaris': {
+        marginTop: '280px',
+        marginLeft: '180px'
+      },
+      '.polaris2': {
+        marginTop: '230px',
+        marginLeft: '515px'
+      },
+      '.polaris3': {
+        marginTop: '200px',
+        marginLeft: '780px'
+      },
+      '.polaris4': {
+        marginTop: '190px',
+        marginLeft: '150px'
+      },
       '.p-list-icon': {
         fontSize: '250%',
         margin: '2px'

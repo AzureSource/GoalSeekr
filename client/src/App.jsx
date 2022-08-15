@@ -12,10 +12,13 @@ const App = () => {
 
   return (
     <div className='appBackground'>
+      <div className='app'>
+        <GalaxyWindow className='galaxyWindow' />
+      </div>
+      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
       {/* <CreateGalaxy /> */}
-      <Title />
-      <Menu />
-      <GalaxyWindow />
+      {/* <Title /> */}
+      {/* <Menu /> */}
     </div>
   );
 
