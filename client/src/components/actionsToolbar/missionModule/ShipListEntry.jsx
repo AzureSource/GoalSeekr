@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer,
 } from '@chakra-ui/react';
 
-export default function ShipListEntry({ shipList }) {
-  console.log('ship', shipList);
+export default function ShipListEntry({ shipList, handleShipSelection }) {
+  // console.log('ship', shipList);
   return (
     <TableContainer>
       <Table variant="simple">
@@ -20,7 +21,7 @@ export default function ShipListEntry({ shipList }) {
         <Tbody>
           {shipList.map((ship, index) => {
             return (
-              <Tr key={index}>
+              <Tr key={index} onClick={() => {handleShipSelection(ship);}}>
                 <Td>{ship.count}</Td>
                 <Td>{ship.name}</Td>
                 <Td>{ship.type}</Td>
