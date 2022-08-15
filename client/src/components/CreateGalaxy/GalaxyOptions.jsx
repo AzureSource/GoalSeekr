@@ -43,10 +43,10 @@ const GalaxyOptions = () => {
     }
     return setYearsPerTurn(prevState => --prevState);
   };
-  const toggleAlliance = () => {
 
-  };
-
+  useEffect(() => {
+    console.log(yearsPerTurn, alliance, maxPlayerCount);
+  },[yearsPerTurn, alliance, maxPlayerCount]);
 
   return (
     <Flex
@@ -57,17 +57,17 @@ const GalaxyOptions = () => {
       <div className='galaxy-side-headings'>
         <div>Max Players</div>
         <Flex>
-          <FiMinus />
+          <FiMinus onClick={decrementPlayer}/>
           {maxPlayerCount}
-          <FiPlus />
+          <FiPlus onClick={incrementPlayer}/>
         </Flex>
       </div>
       <div className='galaxy-side-headings'>
         <div>Years Per Turn</div>
         <Flex>
-          <FiMinus />
+          <FiMinus onClick={decrementYears}/>
           {yearsPerTurn}
-          <FiPlus />
+          <FiPlus onClick={incrementYears}/>
         </Flex>
 
       </div>
@@ -77,7 +77,7 @@ const GalaxyOptions = () => {
         justifyContent='space-between'
       >
         <div>Alliances</div>
-        <Switch onChange={(e) => toggleAlliance(e)} size='md' />
+        <Switch onChange={() => setAlliance(prevState => !prevState)} size='md' />
       </FormControl>
     </Flex>
   );

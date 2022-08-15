@@ -295,7 +295,7 @@ const overrides = {
         fontSize: '20px',
         fontWeight: '900',
         width: '100%',
-        padding: '17px 15px',
+        padding: '17px 50px',
         backgroundColor: '#2e2f47',
         color: '#50b6ab',
         borderRadius: '5px'
