@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ShipListEntry from './ShipListEntry.jsx';
-import {Divider, Select, List, ListItem} from '@chakra-ui/react';
+import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
@@ -29,12 +29,12 @@ export default function MissionModule() {
 
   const handleShipSelection = (shipData) => {
     setShipSelection(shipData);
-    console.log('ship', shipSelection);
+    // console.log('ship', shipSelection);
   };
 
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
-    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planetSelected, type: 'Attack', ship: shipData, target: targetPlanetSelected }]));
+    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planetSelected, type: missionType, ship: shipData, target: targetPlanetSelected }]));
     console.log('queued', missionQueue);
   };
 
@@ -45,7 +45,13 @@ export default function MissionModule() {
         {planetSelected}
       </div>
       <div>
-        <Select variant='filled' placeholder='Mission Type' size='md' icon={<TriangleDownIcon />}>
+        <Select
+          variant='filled'
+          value={missionType}
+          placeholder='Mission Type'
+          size='md'
+          icon={<TriangleDownIcon />}
+          onChange={(e) => setMissionType(e.target.value)}>
           <option value='attack'>Attack</option>
           <option value='colonize'>Colonize</option>
         </Select>
