@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Title from './components/Lobby/TitleBar.jsx';
 import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
@@ -13,9 +13,9 @@ const App = () => {
 
   return (
     <div className='appBackground'>
-      {/* <CreateGalaxy /> */}
-      <Title />
-      <Menu />
+      {/* <Title />
+      <Menu /> */}
+      <CreateGalaxy />
       {/* <GalaxyWindow /> */}
     </div>
   );

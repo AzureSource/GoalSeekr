@@ -1,9 +1,15 @@
 import React from 'react';
+import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 
 const CreateGalaxy = () => {
+
+  const submitGalaxy = (data) => {
+    return axios.get('endpoint', data);
+  }
+
   return (
     <Flex className='create-galaxy-container'
       justify='center'

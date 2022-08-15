@@ -1,7 +1,15 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { allianceToggle } from './galaxyOptionsSlice';
+import { Flex, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 
 const GalaxyOptions = () => {
+  const dispatch = useDispatch();
+
+  const toggleAlliance = () => {
+    dispatch(allianceToggle());
+  };
+
   return (
     <Flex
       className='galaxy-option-container'
@@ -17,10 +25,14 @@ const GalaxyOptions = () => {
         <div>count default 2</div>
 
       </div>
-      <div className='galaxy-side-headings'>
+      <FormControl
+        className='galaxy-side-headings'
+        display='flex' alignItems='center'
+        justifyContent='space-between'
+      >
         <div>Alliances</div>
-        <div>switch to turn on</div>
-      </div>
+        <Switch onChange={(e) => toggleAlliance(e)} size='md' />
+      </FormControl>
     </Flex>
   );
 };
