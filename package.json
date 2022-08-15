@@ -22,12 +22,7 @@
   },
   "homepage": "https://github.com/AzureSource/GoalSeekr#readme",
   "dependencies": {
-<<<<<<< HEAD
     "@chakra-ui/icons": "^2.0.8",
-||||||| be1b121
-    "@reduxjs/toolkit": "^1.8.4",
-=======
->>>>>>> main
     "@chakra-ui/react": "^2.2.6",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -39,12 +34,8 @@
     "framer-motion": "^7.1.0",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
-<<<<<<< HEAD
     "prop-types": "^15.8.1",
-||||||| be1b121
-=======
     "pg-promise": "^10.11.1",
->>>>>>> main
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
