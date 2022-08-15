@@ -9,14 +9,11 @@ import MenuBottom from './MenuBottom.jsx';
 export default function GalaxyWindow () {
   return (
     <div className='galaxy-window' color='white'>
-      <div className='planetsWindow'>
-        {/* <SparseGalaxy/> */}
-        <DenseGalaxy/>
-      </div>
       <Flex className='galaxy-window-top'>
         <MenuSide />
-        <div className='temp-div'>
-          planets
+        <div className='planetsWindow'>
+          {/* <SparseGalaxy/> */}
+          <DenseGalaxy/>
         </div>
       </Flex>
       <MenuBottom />
