@@ -26,5 +26,21 @@ module.exports = {
     } catch (error) {
       res.end().status(500);
     }
+  },
+
+  updateUserName:function(req,res){
+    client.query(`UPDATE users SET username = ${req.body.username} WHERE uid=${req.params.uid}`)
+      .then(()=>res.sendStatus(204))
+      .catch((err)=>res.status(400).send(console.log('err during put request for update username : ',err)));
+  },
+
+  createUserName: function(req,res){
+    const queryString = 'INSERT INTO users (uid,username,email,profile_picture_url) VALUES ($1,$2,$3,$4)';
+    const values = [req.body.uid,req.body.username,req.body.email,req.body.profile_picture_url];
+    client.query(queryString,values)
+      .then(()=>res.sendStatus(201))
+      .catch((err)=>res.status(500).send(console.log('Error in post request for create user: ',err)));
   }
+
+
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // eslint-disable-next-line react/prop-types
 export default function EnterUserName ({authData}) {
-
+  console.log('show authData: ', authData);
   const [text,setText] = useState('');
 
   const redirectToGalaxyPage = function() {
