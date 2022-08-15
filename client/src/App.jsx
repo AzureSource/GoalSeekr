@@ -1,5 +1,4 @@
 import React from 'react';
-import MissionModule from './components/actionsToolbar/missionModule/MissionModule.jsx';
 import Title from './components/Lobby/TitleBar.jsx';
 import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
@@ -15,9 +14,8 @@ const App = () => {
     <div className='appBackground'>
       {/* <CreateGalaxy /> */}
       <Title />
-      <Menu />
-      {/* <GalaxyWindow /> */}
-      <MissionModule />
+      {/* <Menu /> */}
+      <GalaxyWindow />
     </div>
   );
 

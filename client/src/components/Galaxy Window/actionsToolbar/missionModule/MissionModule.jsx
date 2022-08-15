@@ -42,7 +42,7 @@ export default function MissionModule() {
   };
 
   return (
-    <div className='mm_body'>
+    <div font='white'>
       <div>
         {/* On First click of galaxy map, home planet is selected  */}
         {planetSelected}
