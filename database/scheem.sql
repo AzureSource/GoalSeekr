@@ -399,7 +399,7 @@ END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 --Create a new user or update a current user's username(display name) by user ID (will be changed upon Google UID implementation)
-CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" INT, "displayName" TEXT, "email" TEXT, "motto" TEXT, "about" TEXT, "avatarURL" TEXT)
+CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" TEXT, "displayName" TEXT, "email" TEXT, "motto" TEXT, "about" TEXT, "avatarURL" TEXT)
   RETURNS json AS $func$
   DECLARE result JSON;
 	userExists BOOLEAN;
@@ -415,8 +415,33 @@ BEGIN
 		RETURNING * INTO result;
   END IF;
 	RETURN result;
-END
+END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- gets all user's data including their ships arranged by type
+CREATE OR REPLACE FUNCTION getUserData("userID" INT)
+  RETURNS JSON AS $BODY$
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'userid', $1,
+		'username', username,
+		'googleuid', googleuid,
+		'email', email,
+		'motto', motto,
+		'about', about,
+		'currency', currency,
+		'avatarURL', profile_picture_url,
+		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
+		'galaxy', json_build_object('id', currentgalaxy, 'name', (SELECT name FROM galaxies WHERE id = currentgalaxy)),
+		'ships', (SELECT getusersships($1))
+		) AS results
+	FROM users
+	WHERE id = $1
+);
+END;
+$BODY$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- ================================================================= --
 -- ================================================================= --
