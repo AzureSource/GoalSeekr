@@ -14,7 +14,7 @@ const App = () => {
     <div className='appBackground'>
       {/* <CreateGalaxy /> */}
       <Title />
-      {/* <Menu /> */}
+      <Menu />
       <GalaxyWindow />
     </div>
   );
