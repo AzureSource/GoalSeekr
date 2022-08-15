@@ -19,7 +19,7 @@ const App = () => {
         <GalaxyWindow className='galaxyWindow' />
       </div> */}
       {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-      <Counter />
+      {/* <Counter /> */}
       <CreateGalaxy />
       {/* <Title />
       <Menu /> */}
