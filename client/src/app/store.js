@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../components/actionsToolbar/attackModal/counterSlice';
 import galaxyOptionsReducer from '../components/CreateGalaxy/galaxyOptionsSlice';
+import counterReducer from '../components/Galaxy Window/actionsToolbar/missionModule/counterSlice';
 
 export default configureStore({
   reducer: {
