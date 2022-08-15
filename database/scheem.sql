@@ -13,7 +13,6 @@ CREATE TABLE galaxies (
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-	uid TEXT,
   username TEXT UNIQUE,
   googleuid TEXT,
 	email TEXT,
