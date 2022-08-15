@@ -46,10 +46,6 @@ const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
     return setYearsPerTurn(prevState => --prevState);
   };
 
-  useEffect(() => {
-    console.log(yearsPerTurn, alliance, maxPlayerCount);
-  },[yearsPerTurn, alliance, maxPlayerCount]);
-
   return (
     <Flex
       className='galaxy-option-container'
