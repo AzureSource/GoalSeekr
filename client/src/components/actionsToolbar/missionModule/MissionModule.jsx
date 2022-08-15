@@ -9,10 +9,6 @@ export default function MissionModule() {
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
 
-  // set up state hook, to keep track of mission set up.
-  // need onClick listener for planet selection and ship selection.
-  // onSubmit to add the mission to the queue list.
-
   let planetSelected = 'Earth';
   let targetPlanetSelected = 'Mars';
   // let shipList = [];
@@ -29,13 +25,20 @@ export default function MissionModule() {
 
   const handleShipSelection = (shipData) => {
     setShipSelection(shipData);
-    // console.log('ship', shipSelection);
   };
 
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
     setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planetSelected, type: missionType, ship: shipData, target: targetPlanetSelected }]));
-    console.log('queued', missionQueue);
+    console.log('mission Queue', missionQueue);
+  };
+
+  const editMission = (missionIndex) => {
+    console.log(missionIndex);
+    setMissionQueue([
+      ...missionQueue.slice(0, missionIndex),
+      ...missionQueue.slice(missionIndex + 1)
+    ]);
   };
 
   return (
@@ -74,6 +77,9 @@ export default function MissionModule() {
             return (
               <div key={index}>
                 Home Planet : {mission.start} | Type : {mission.type} | Ships : {mission.ship} | Target Planet : {mission.target}
+                <div>
+                  <button onClick={() => editMission(index)}>Remove</button>
+                </div>
               </div>
             );
           })}
