@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 
 const CreateGalaxy = () => {
+  const [galaxyName, setGalaxyName] = useState('');
 
   const submitGalaxy = (data) => {
     return axios.get('endpoint', data);
@@ -31,6 +32,8 @@ const CreateGalaxy = () => {
             outline='3px solid #2e2f47'
             className='galaxy-name-input'
             placeholder='Enter Galaxy Name'
+            value={galaxyName}
+            onChange={(e) => setGalaxyName(e.target.value)}
           />
         </Flex>
         <Flex
