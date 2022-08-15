@@ -1,14 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { FiPlus, FiMinus } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { allianceToggle } from './galaxyOptionsSlice';
 import { Flex, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 
 const GalaxyOptions = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const toggleAlliance = () => {
-    dispatch(allianceToggle());
+  // const toggleAlliance = () => {
+  //   dispatch(allianceToggle());
+  // };
+
+  const [maxPlayerCount, setMaxPlayerCount] = useState(2);
+  const [yearsPerTurn, setYearsPerTurn] = useState(1);
+  const [alliance, setAlliance] = useState(false);
+
+  const incrementPlayer = () => {
+    if (maxPlayerCount === 10) {
+      alert ('Max Players');
+      return;
+    }
+    return setMaxPlayerCount(prevState => ++prevState);
   };
+  const decrementPlayer = () => {
+    if (maxPlayerCount === 2) {
+      alert ('Minimum Players');
+      return;
+    }
+    return setMaxPlayerCount(prevState => --prevState);
+  };
+  const incrementYears = () => {
+    if (yearsPerTurn === 10) {
+      alert ('Max Years per Turn');
+      return;
+    }
+    return setMaxPlayerCount(prevState => ++prevState);
+  };
+  const decrementYears = () => {
+    if (yearsPerTurn === 1) {
+      alert ('Minimum Years per Turn');
+      return;
+    }
+    return setYearsPerTurn(prevState => --prevState);
+  };
+  const toggleAlliance = () => {
+
+  };
+
 
   return (
     <Flex
@@ -18,11 +56,19 @@ const GalaxyOptions = () => {
     >
       <div className='galaxy-side-headings'>
         <div>Max Players</div>
-        <div>count default 2</div>
+        <Flex>
+          <FiMinus />
+          {maxPlayerCount}
+          <FiPlus />
+        </Flex>
       </div>
       <div className='galaxy-side-headings'>
         <div>Years Per Turn</div>
-        <div>count default 2</div>
+        <Flex>
+          <FiMinus />
+          {yearsPerTurn}
+          <FiPlus />
+        </Flex>
 
       </div>
       <FormControl

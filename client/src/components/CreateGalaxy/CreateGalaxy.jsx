@@ -8,7 +8,7 @@ const CreateGalaxy = () => {
 
   const submitGalaxy = (data) => {
     return axios.get('endpoint', data);
-  }
+  };
 
   return (
     <Flex className='create-galaxy-container'

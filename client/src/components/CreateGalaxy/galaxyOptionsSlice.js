@@ -1,17 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
+
 export const galaxyOptionsSlice = createSlice({
   name: 'galaxyOptions',
   initialState: {
-    maxPlayersCount: 2,
-    yearsPerTurn: 1,
-    allianceToggle: false,
+    galaxyOptionsState: {
+      maxPlayersCount: 2,
+      yearsPerTurn: 1,
+      allianceToggle: false,
+    }
   },
   reducers: {
-    increment(state) {
-      state.value ++;
-    },
+    // increment(state) {
+    //   state.maxPlayersCount++;
+    // },
     allianceToggle(state) {
+      state.galaxyOptionsState = {...state.galaxyOptionsState, allianceToggle: !state.galaxyOptionsState.allianceToggle};
     }
   }
 });
