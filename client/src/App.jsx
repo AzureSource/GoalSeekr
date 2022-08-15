@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { signInWithGoogle } from './firebase.js';
-import '../assets/login.css';
+import LoginAuth from './components/login/LoginAuth.jsx';
 import { AspectRatio } from '@chakra-ui/react';
 import background from '../assets/images/sparse sky.png';
 import BuildShip from './components/buildShips/BuildShip.jsx';
@@ -14,7 +13,7 @@ const App = () => {
   return (
 
     <div className='appBackground'>
-      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
+      <LoginAuth />
       <GalaxyWindow />
     </div>
   );
