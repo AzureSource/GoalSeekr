@@ -9,9 +9,9 @@ export default function MissionModule() {
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
 
+  // Dummy Data
   let planetSelected = 'Earth';
   let targetPlanetSelected = 'Mars';
-  // let shipList = [];
   let shipList = [
     { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
   ];
