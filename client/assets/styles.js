@@ -330,6 +330,22 @@ const overrides = {
         width: '40%',
         backgroundColor: '#2e2f47',
         // margin: '0px 60px 0px 60px'
+      },
+      '.max-player-val, .years-per-turn-val': {
+        paddingRight: 'clamp(10px, 5%, 10px);',
+        paddingLeft: 'clamp(10px, 5%, 10px);',
+        margin: '0px 5px',
+        background: 'white',
+        borderRadius: '4px'
+      },
+      '.create-galaxy-icons:hover': {
+        cursor: 'pointer'
+      },
+      '.alliance-switch': {
+        display: 'flex',
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: '85px'
       }
     },
   },
