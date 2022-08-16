@@ -575,6 +575,26 @@ const overrides = {
         textAlign: 'center',
         justifyContent: 'center',
         width: '85px'
+      },
+      '.username-input': {
+        width: '200px',
+        size: '20px',
+        textAlign: 'center',
+        borderRadius: '4px',
+        border:'2px solid #2e2f47',
+        height: '37px',
+        margin: '15px 0px'
+      },
+      '.username-input-btn': {
+        fontSize: '25px',
+        fontWeight: 800,
+        fontFamily: 'Abril Fatface',
+        color: '#50b6ab',
+        borderRadius: '4px',
+        size: '20px',
+        backgroundColor: '#2e2f47',
+        width: '200px',
+        height: '50px'
       }
     },
   },
