@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 
-const CreateGalaxy = () => {
+const CreateGalaxy = ({ setTitle }) => {
   const [galaxyName, setGalaxyName] = useState('');
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
@@ -12,6 +12,10 @@ const CreateGalaxy = () => {
   const submitGalaxy = (data) => {
     return axios.get('endpoint', data);
   };
+
+  useEffect(() => {
+    setTitle(false);
+  }, []);
 
   return (
     <Flex className='create-galaxy-container'

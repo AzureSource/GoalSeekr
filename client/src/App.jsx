@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TitleBar from './components/Lobby/TitleBar.jsx';
 import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
@@ -32,16 +32,17 @@ import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Cou
 // };
 
 const App = () => {
+  const [title, setTitle] = useState(true);
 
   return (
     <HashRouter>
       <div className='appBackground'>
-        <TitleBar />
+        {title ? <TitleBar/> : null}
         <Routes>
-          <Route exact path="/" element={<LoginAuth />} />
-          <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy/>} />
-          <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy />} />
-          <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow />} />
+          <Route exact path="/" element={<LoginAuth setTitle={setTitle}/>} />
+          <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
+          <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
+          <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
         </Routes>
       </div>
     </HashRouter>
