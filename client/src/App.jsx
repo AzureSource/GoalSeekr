@@ -3,6 +3,8 @@ import TitleBar from './components/Lobby/TitleBar.jsx';
 import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import ChooseHat from './components/ChooseHat.jsx';
 import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';
 import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
 import background from '../assets/images/sparse sky.png';
