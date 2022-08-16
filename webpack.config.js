@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, './client/src/index.jsx'),
@@ -36,6 +37,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'GoalSeekr',
       lang: 'en'
-    })
+    }),
+    new FaviconsWebpackPlugin('./public/favicon.ico')
   ]
 };
