@@ -419,14 +419,14 @@ CREATE OR REPLACE FUNCTION getusersshipssorted("userID" INT, "byPlanet" boolean)
 BEGIN
  IF $2 THEN
 	WITH shipAggregation AS (
-		(SELECT (SELECT name FROM planets WHERE id = ships_user.user_ship_planet_id) AS Planet, user_ship_name AS TYPE, json_agg(row_to_json(ships_user)) Ships FROM ships_user WHERE user_id = 1 GROUP BY planet, TYPE) ORDER BY Planet ASC
+		(SELECT (SELECT name FROM planets WHERE id = ships_user.user_ship_planet_id) AS Planet, user_ship_name AS TYPE, json_agg(row_to_json(ships_user)) Ships FROM ships_user WHERE user_id = $1 GROUP BY planet, TYPE) ORDER BY Planet ASC
 		),
 		planetAggregation AS (
 		(SELECT planet, json_object_agg(type, ships) ships FROM shipAggregation GROUP BY planet)
 		)
 		SELECT json_object_agg (planet,ships) ships FROM planetAggregation INTO result;
 	ELSE
-		WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = 1 GROUP BY 1 )
+		WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
 		SELECT JSON_OBJECT_AGG ( TYPE, ships ) Ships FROM grouped INTO result;
 	END IF;
 	RETURN(result);
