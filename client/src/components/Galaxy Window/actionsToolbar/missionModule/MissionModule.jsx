@@ -70,7 +70,7 @@ export default function MissionModule() {
         <ShipListEntry shipList={shipList} handleShipSelection={handleShipSelection} />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
-      {/* On endTurn reset the queue  */}
+      {/* On endTurn reset the queue & queue is sent to local store for holding. */}
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
@@ -88,3 +88,10 @@ export default function MissionModule() {
     </div>
   );
 }
+
+
+// Sending a mission
+// remove existing ships from home planet (may be attacked while away)
+// Mission has a turn count that is decremented until ships reach target planet.
+// grab information of target planet ships for battle.
+// once battle is complete send new data on planet ownership to database.

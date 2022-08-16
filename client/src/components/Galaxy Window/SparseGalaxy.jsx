@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setPlanetSelection } from './sparseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
 import haku from '../../../assets/images/hakuUnexplored.png';
@@ -11,6 +13,20 @@ import polaris from '../../../assets/images/polarisUnexplored.png';
 import steins from '../../../assets/images/steinsUnexplored.png';
 
 export default function SparseGalaxy() {
+  const dispatch = useDispatch();
+
+  const [firstPlanet, setFirstPlanet] = useState(true);
+
+  const homePlanet = (event) => {
+    const planetSelection = event.target.value;
+    dispatch(setPlanetSelection(planetSelection));
+    setFirstPlanet(true);
+  };
+
+  const targetPlanet = (event) =>  {
+
+  };
+
   return (
     <div>
       <div className='allPlanets'>
@@ -38,3 +54,13 @@ export default function SparseGalaxy() {
     </div>
   );
 }
+
+// first click is home planet
+  // update redux store with first click
+// on second click target planet (Only if first click is set to true) (can continually click)
+  // update redux store with second click
+  // render a line between the planets
+// reset button - resets selected planets
+// figure out turn count on mission module
+
+
