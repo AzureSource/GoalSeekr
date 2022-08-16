@@ -89,7 +89,6 @@ export default function EnterUserName ({authData}) {
       <br />
       <button onClick = {handleJoin}>Join</button>
     </div>
-
   );
 
 }
