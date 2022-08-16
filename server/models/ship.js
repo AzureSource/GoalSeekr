@@ -10,7 +10,17 @@ module.exports = {
     } catch (error) {
       res.end().status(500);
     }
-  }
+  },
+  getShipsByPlanet: async function(req, res) {
+    try {
+      let planet = req.params.planet_name;
+      // const query = 'SELECT * FROM getusershipsonplanet()';
+      // const results = await client(query, [planet]);
+      // res.json(results.rows);
+    } catch (err) {
+      res.end().status(500);
+    }
+  },
 };
 
 
