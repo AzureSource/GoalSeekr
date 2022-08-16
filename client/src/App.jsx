@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import TitleBar from './components/Lobby/TitleBar.jsx';
-import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
