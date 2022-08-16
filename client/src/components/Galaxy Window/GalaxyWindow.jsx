@@ -27,6 +27,7 @@ export default function GalaxyWindow ({ setTitle }) {
 
   useEffect(() => {
     setTitle(false);
+
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 import axios from 'axios';
+import { Flex } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 
 export default function EnterGalaxy({ setTitle }){
@@ -49,12 +50,38 @@ export default function EnterGalaxy({ setTitle }){
   }, []);
 
   return (
-    <div>
-      <button type="button" onClick={(event)=>handleCreateGalaxy(event)}>CreateGalaxy</button><br />
-      <p>OR</p><br />
-      <input onChange={(event)=>setExistingGalaxy(event.target.value)} placeholder=" Enter An Existing Galaxy "/><br />
-      <button type="button" onClick={(event)=>handleJoinGalaxy(event)}>Join Galaxy</button>
-    </div>
+    <Flex
+      className='lobby-menu-container'
+      justify='center'
+      align='center'
+    >
+      <Flex
+        className='lobby-menu'
+        justify='center'
+        align='center'
+      >
+        <Flex
+          className='enter-galaxy-container'
+          flexDir='column'
+          align='center'
+          justify='center'
+        >
+          <button
+            type="button"
+            onClick={(event)=>handleCreateGalaxy(event)}
+          >
+            CreateGalaxy
+          </button>
+          <p>OR</p>
+          <input onChange={(event)=>setExistingGalaxy(event.target.value)} placeholder=" Enter An Existing Galaxy "/>
+          <button
+            type="button" onClick={(event)=>handleJoinGalaxy(event)}
+          >
+            Join Galaxy
+          </button>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 
 }
