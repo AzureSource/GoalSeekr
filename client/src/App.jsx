@@ -16,40 +16,40 @@ import MenuBottom from './components/Galaxy Window/MenuBottom.jsx';
 import LoginAuth from './components/Login/LoginAuth.jsx';
 import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Counter';
 
-const App = () => {
-  const [title, setTitle] = useState(true);
-  return (
-    <div className='appBackground'>
-      <div className='app'>
-        <GalaxyWindow setTitle={setTitle} className='galaxyWindow' />
-      </div>
-      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-      {/* <CreateGalaxy /> */}
-      {/* <Title /> */}
-      {/* <Menu /> */}
-    </div>
-  );
-
-};
-
 // const App = () => {
-// const [title, setTitle] = useState(true);
-
+//   const [title, setTitle] = useState(true);
 //   return (
-//     <HashRouter>
-//       <div className='appBackground'>
-//         {title ? <TitleBar/> : null}
-//         <Routes>
-//           <Route exact path="/" element={<LoginAuth setTitle={setTitle}/>} />
-//           <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
-//           <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
-//           <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
-//         </Routes>
+//     <div className='appBackground'>
+//       <div className='app'>
+//         <GalaxyWindow setTitle={setTitle} className='galaxyWindow' />
 //       </div>
-//     </HashRouter>
+//       {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
+//       {/* <CreateGalaxy /> */}
+//       {/* <Title /> */}
+//       {/* <Menu /> */}
+//     </div>
 //   );
 
 // };
+
+const App = () => {
+const [title, setTitle] = useState(true);
+
+  return (
+    <HashRouter>
+      <div className='appBackground'>
+        {title ? <TitleBar/> : null}
+        <Routes>
+          <Route exact path="/" element={<LoginAuth setTitle={setTitle}/>} />
+          <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
+          <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
+          <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
+        </Routes>
+      </div>
+    </HashRouter>
+  );
+
+};
 
 export default App;
 
