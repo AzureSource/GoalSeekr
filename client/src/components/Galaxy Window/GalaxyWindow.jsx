@@ -15,7 +15,7 @@ import {getUserShipsFromDB} from '../buildShips/UserShipSlice';
 
 export const UserContext = createContext(null);
 
-export default function GalaxyWindow ({ setTitle }) {A
+export default function GalaxyWindow ({ setTitle }) {
 
   const {id} = useParams();
 
