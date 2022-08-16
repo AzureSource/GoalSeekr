@@ -10,6 +10,7 @@ module.exports = {
       res.end().status(500);
     }
   },
+
   updateShips: async function (req, res) {
     try {
       let userId = req.params.user_id;

@@ -216,6 +216,33 @@ const overrides = {
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      //-------------------------------HAT MODAL
+      '#hat-div': {
+        display: 'grid',
+        gridTemplateRows: '1fr 5fr 1fr',
+        position: 'absolute',
+        width: '60%',
+        height: '40%',
+        top: '30%',
+        right: '18%',
+        color: '#c7e4e9',
+        backgroundColor: 'cadetblue',
+        borderRadius: '12px'
+      },
+      '#confirm-hat': {
+        height: '70%',
+        width: '25%',
+        textAlign: 'center',
+        backgroundColor: '#2626a3',
+        borderRadius: '10px',
+        border: '1px solid white',
+        gridRow: 3,
+        justifySelf: 'center'
+      },
+      '.hat-list-icon': {
+        height: '20px',
+        width: '20px'
+      },
       //-------------------------------SIDE MENU
       '.menu-side-container': {
         width: '70%',
