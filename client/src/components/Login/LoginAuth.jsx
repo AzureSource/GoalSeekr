@@ -19,8 +19,7 @@ export default function LoginAuth() {
         setIsAuth(true);
         const obj = {
           email: result.user.email,
-          profile_picture_url:result.user.photoURL,
-          uid:result.user.uid
+          googleuid:result.user.uid
         };
         setAuthdata(obj);
       })
