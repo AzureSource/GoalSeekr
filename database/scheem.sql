@@ -551,7 +551,18 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
-
+-- Creates a galaxy and returns the newly created galaxy as JSON
+CREATE OR REPLACE FUNCTION creategalaxy("name" TEXT, "yearsPerTurn" INT, "currentYear" INT, "maxPlayers" INT)
+  RETURNS JSON AS $func$
+	DECLARE result galaxies%rowtype;
+BEGIN
+	INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers)
+	VALUES($1, $2, $3, $4, 1)
+	RETURNING * INTO result;
+	RETURN row_to_json(result);
+END;
+$func$
+LANGUAGE plpgsql VOLATILE COST 100;
 
 -- ================================================================= --
 -- ================================================================= --
