@@ -1,28 +1,23 @@
 import React,{useState} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 export default function EnterUserName ({authData}) {
-
-  let params = useParams();
   const [text,setText] = useState('');
 
-  const redirectToEnterGalaxyPage = function() {
-    window.location.href = `http://localhost:7777/entergalaxy/uid/${params.authData.googleuid}`;
+  const redirectToEnterGalaxyPage = function(id) {
+    window.location.href = `http://localhost:7777/#/entergalaxy/uid/${id}`;
   };
 
   const handleJoin = function(){
-    debugger;
     if(text){
       axios({
         url:'/api/users',
         method:'post',
         data:{...authData,displayname:text}
       })
-        .then(()=>redirectToEnterGalaxyPage())
+        .then((result)=>redirectToEnterGalaxyPage(result.data))
         .catch(()=>console.log('Err from enter user name'));
-
     }
     else{
       alert('Please Enter your Username!');

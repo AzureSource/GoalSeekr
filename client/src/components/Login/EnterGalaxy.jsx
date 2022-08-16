@@ -6,11 +6,11 @@ export default function EnterGalaxy(){
   let params = useParams();
 
   const redirectToCreateGalaxyPage = function(){
-    window.location.href = `http://localhost:7777/creategalaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/creategalaxy/uid/${params.id}`;
   };
 
   const redirectToGalaxyWindow = function(){
-    window.location.href = `http://localhost:7777/galaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
   };
 
   const[existingGalaxy,setExistingGalaxy]=useState('');
@@ -28,7 +28,8 @@ export default function EnterGalaxy(){
         url:'/api/galaxy',
         method:'get',
         params:{
-          name:existingGalaxy
+          name:existingGalaxy,
+          id: params.id
         }
       })
         .then((response)=>{
