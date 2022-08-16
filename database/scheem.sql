@@ -86,6 +86,19 @@ CREATE TABLE ships_user (
   user_ship_galaxy_id INT REFERENCES galaxies(id)
 );
 
+CREATE TABLE hats (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  url TEXT,
+);
+
+CREATE TABLE hats_user (
+  id SERIAL PRIMARY KEY,
+  galaxy_id INT REFERENCES galaxies(id),
+  user_id INT REFERENCES users(id),
+);
+
+
 -- ================================================================= --
 -- ================================================================= --
 --                          DB INDEXES                               --
@@ -372,6 +385,57 @@ BEGIN
 		  json_build_object (
 				'galaxy', json_build_object ( 'id', $1, 'name', ( SELECT NAME FROM galaxies WHERE ID = $1 ) ),
 				'planet', json_build_object ( 'id', $2, 'name', ( SELECT NAME FROM planets WHERE ID = $2 ) ),
+				'players', json_agg ( ships )
+			)
+		FROM results INTO RESPONSE;
+	RETURN ( RESPONSE );
+
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+--Same as above except the args are by name instead of id
+CREATE OR REPLACE FUNCTION getusershipsonplanetbynames("galaxyName" text, "planetName" text)
+  RETURNS JSON AS $func$
+  DECLARE RESPONSE JSON;
+	DECLARE galaxyID INT;
+	DECLARE planetID INT;
+BEGIN
+		SELECT id FROM galaxies WHERE name = $1 INTO galaxyID;
+		SELECT id FROM planets WHERE name = $2 INTO planetID;
+		WITH grouped AS (
+		SELECT
+			user_id AS userid,
+			user_ship_name AS TYPE,
+			json_agg (
+				json_build_object (
+					'id', ID,
+					'health', user_ship_health,
+					'range', user_ship_rangecapacity,
+					'power', user_ship_powerlevel
+				)
+			) AS Ships
+		FROM
+			ships_user
+		WHERE
+			user_ship_galaxy_id = galaxyID
+			AND user_ship_planet_id = planetID
+		GROUP BY
+			1,
+			2
+		),
+		results AS (
+		SELECT
+			json_build_object (
+				'userid', userid,
+				'Ships', JSON_OBJECT_AGG ( TYPE, ships )
+			) AS Ships
+		FROM grouped
+		GROUP BY grouped.userid
+		)
+		SELECT
+		  json_build_object (
+				'galaxy', json_build_object ( 'id', galaxyID, 'name', $1 ),
+				'planet', json_build_object ( 'id', planetID, 'name', $2 ),
 				'players', json_agg ( ships )
 			)
 		FROM results INTO RESPONSE;
