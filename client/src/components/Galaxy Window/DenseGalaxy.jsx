@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPlanetSelection } from './denseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
@@ -221,14 +221,14 @@ export default function DenseGalaxy() {
 
   const dispatch = useDispatch();
 
-  const [firstPlanet, setFirstPlanet] = useState(false);
+  // const [firstPlanet, setFirstPlanet] = useState(false);
+  const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
 
   const handlePlanetSelection = (name) => {
     const planetSelection = name;
-    // console.log('planet', planetSelection);
     if (!firstPlanet) {
       dispatch(setPlanetSelection({homePlanet: planetSelection}));
-      setFirstPlanet(true);
+      // setFirstPlanet(true);
     } else {
       dispatch(setPlanetSelection({targetPlanet: planetSelection}));
     }

@@ -5,7 +5,6 @@ import {Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer,
 } from '@chakra-ui/react';
 
 export default function ShipListEntry({ shipList, handleShipSelection }) {
-  // console.log('ship', shipList);
   return (
     <TableContainer>
       <Table variant="simple">

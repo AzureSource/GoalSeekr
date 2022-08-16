@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ShipListEntry from './ShipListEntry.jsx';
-import { useSelector } from 'react-redux';
+import { setPlanetSelection } from '../../denseGalaxySlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
@@ -9,6 +10,7 @@ export default function MissionModule() {
   const [shipSelection, setShipSelection] = useState({});
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
+  const dispatch = useDispatch();
 
   // Dummy Data
   let shipList = [
@@ -29,11 +31,9 @@ export default function MissionModule() {
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
     setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
-    console.log('mission Queue', missionQueue);
   };
 
   const editMission = (missionIndex) => {
-    console.log(missionIndex);
     setMissionQueue([
       ...missionQueue.slice(0, missionIndex),
       ...missionQueue.slice(missionIndex + 1)
@@ -45,6 +45,7 @@ export default function MissionModule() {
   return (
     <div font='white'>
       <div>
+        Home Planet
         {planets.homePlanet}
       </div>
       <div>
@@ -55,12 +56,15 @@ export default function MissionModule() {
           size='md'
           icon={<TriangleDownIcon />}
           onChange={(e) => setMissionType(e.target.value)}>
+          <option value='scout'>Scout</option>
           <option value='attack'>Attack</option>
           <option value='colonize'>Colonize</option>
         </Select>
       </div>
       <div>
+        Target Planet
         {planets.targetPlanet}
+        <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
       <Divider orientation='horizontal' />
       {shipList.length === 0 ? (
