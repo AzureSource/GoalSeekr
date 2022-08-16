@@ -3,8 +3,19 @@ import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
+import { useParams } from 'react-router-dom';
 
 const CreateGalaxy = ({ setTitle }) => {
+  let params = useParams();
+
+  const redirectToEnterGalaxyPage = function() {
+    window.location.href = `http://localhost:7777/#/entergalaxy/uid/${params.id}`;
+  };
+
+  const redirectToGalaxyWindow = function(){
+    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
+  };
+
   const [galaxyName, setGalaxyName] = useState('');
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
@@ -16,6 +27,15 @@ const CreateGalaxy = ({ setTitle }) => {
   useEffect(() => {
     setTitle(false);
   }, []);
+
+  const handleCandle = function(event){
+    event.preventDefault();
+    redirectToEnterGalaxyPage();
+  };
+  const handleGoToGalaxyWindow = function(event){
+    event.preventDefault();
+    redirectToGalaxyWindow();
+  }
 
   return (
     <Flex className='create-galaxy-container'
@@ -64,12 +84,14 @@ const CreateGalaxy = ({ setTitle }) => {
           <Button
             backgroundColor='#2e2f47'
             className='create-galaxy-btn'
+            onClick={(e)=>handleCandle(e)}
           >
             Cancel
           </Button>
           <Button
             backgroundColor='#2e2f47'
             className='create-galaxy-btn'
+            onClick = {(e)=>handleGoToGalaxyWindow(e)}
           >
             Create Galaxy
           </Button>
