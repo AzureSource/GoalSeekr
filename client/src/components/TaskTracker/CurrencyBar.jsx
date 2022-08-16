@@ -1,16 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Flex } from '@chakra-ui/react';
 import {
   Tag,
-  TagLabel,
-  TagLeftIcon,
-  TagRightIcon,
-  TagCloseButton,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 const CurrencyBar = () => {
-  return (
+  const [currency, setCurrency] = useState(25);
 
+  return (
     <Flex className="currBarContainer" m=".5rem"
       h="55%" w="50%" size="lg"
     >
