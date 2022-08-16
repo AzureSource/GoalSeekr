@@ -14,9 +14,9 @@ module.exports = {
   getShipsByPlanet: async function(req, res) {
     try {
       let planet = req.params.planet_name;
-      // const query = 'SELECT * FROM getusershipsonplanet()';
-      // const results = await client(query, [planet]);
-      // res.json(results.rows);
+      const query = 'SELECT * FROM getusershipsonplanetbynames()';
+      const results = await client(query, [planet]);
+      res.json(results.rows);
     } catch (err) {
       res.end().status(500);
     }
