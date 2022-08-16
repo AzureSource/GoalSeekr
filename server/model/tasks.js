@@ -3,7 +3,7 @@ const db = require('../../database');
 //
 function getAllTasks(req, res) {
   const queryString = `
-    SELECT * FROM tasks;
+    SELECT * FROM tasks limit 1;
   `;
 
   db(queryString)
@@ -72,3 +72,5 @@ module.exports.getAllTasks = getAllTasks;
 module.exports.getTasksByDifficulty = getTasksByDifficulty;
 module.exports.addTask = addTask;
 module.exports.getCurrencyByUser = getCurrencyByUser;
+
+console.log(process.env.IBBY);
