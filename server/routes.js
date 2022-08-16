@@ -1,14 +1,9 @@
 const { Router } = require('express');
-<<<<<<< HEAD
-const ship = require('./model/ship.js');
-const user = require('./model/user.js');
 const hats = require('./model/hats.js');
-=======
 const ship = require('./models/ship.js');
 const user = require('./models/user.js');
 const users = require('./models/login.js');
 
->>>>>>> 043535efa1629212dbd76b0c171211028eb1d941
 
 const routes = Router();
 
