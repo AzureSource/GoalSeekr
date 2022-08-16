@@ -9,6 +9,7 @@ const routes = Router();
 
 routes.get('/api/ships/', ship.getAll);
 routes.get('/api/users/:user_id', user.findOne);
+routes.get('/api/users/:user_id/ships', user.getShips);
 routes.post('/api/users/:user_id/ships', user.updateShips);
 
 // task tracker
