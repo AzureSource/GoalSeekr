@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/', routes);
+app.use('/galaxy', routes);
 
 const PORT = process.env.PORT || 7777;
 app.listen(PORT);
