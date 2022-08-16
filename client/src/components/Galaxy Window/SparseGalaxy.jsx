@@ -27,6 +27,108 @@ export default function SparseGalaxy() {
 
   };
 
+  var planets = [
+    {
+      name: 'ZERO',
+      image: zero,
+      classname: 'zero'
+    },
+    {
+      name: 'PISCES',
+      image: zero,
+      classname: 'zero2'
+    },
+    {
+      name: 'PINKTOPIA',
+      image: pinktopia,
+      classname: 'pinktopia'
+    },
+    {
+      name: 'TAURUS',
+      image: pinktopia,
+      classname: 'pinktopia2'
+    },
+    {
+      name: 'POKITARU',
+      image: pokitaru,
+      classname: 'pokitaru'
+    },
+    {
+      name: 'CAPRICORN',
+      image: pokitaru,
+      classname: 'pokitaru2'
+    },
+    {
+      name: 'STEINS',
+      image: steins,
+      classname: 'steins'
+    },
+    {
+      name: 'VIRGO',
+      image: steins,
+      classname: 'steins2'
+    },
+    {
+      name: 'LAVA',
+      image: lava,
+      classname: 'lava'
+    },
+    {
+      name: 'LEO',
+      image: lava,
+      classname: 'lava2'
+    },
+    {
+      name: 'HAKU',
+      image: haku,
+      classname: 'haku'
+    },
+    {
+      name: 'SCORPIO',
+      image: haku,
+      classname: 'haku2'
+    },
+    {
+      name: 'CHIHIRO',
+      image: chihiro,
+      classname: 'chihiro'
+    },
+    {
+      name: 'REDUX',
+      image: chihiro,
+      classname: 'chihiro2'
+    },
+    {
+      name: 'CALCIFER',
+      image: calcifer,
+      classname: 'calcifer'
+    },
+    {
+      name: 'FINN',
+      image: calcifer,
+      classname: 'calcifer2'
+    },
+    {
+      name: 'ATHEA',
+      image: athea,
+      classname: 'athea'
+    },
+    {
+      name: 'LOLLIPOP',
+      image: athea,
+      classname: 'athea2'
+    },
+    {
+      name: 'POLARIS',
+      image: polaris,
+      classname: 'polaris'
+    },
+    {
+      name: 'PETER',
+      image: polaris,
+      classname: 'polaris2'
+    }
+  ];
   return (
     <div>
       <div className='allPlanets'>
