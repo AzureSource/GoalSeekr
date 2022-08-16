@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import TitleBar from './components/Lobby/TitleBar.jsx';
-import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
@@ -16,10 +15,7 @@ import LoginAuth from './components/Login/LoginAuth.jsx';
 import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Counter';
 
 // const App = () => {
-
 //   const [title, setTitle] = useState(true);
-
-
 //   return (
 //     <div className='appBackground'>
 //       <div className='app'>
