@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const hats = require('./model/hats.js');
+const hats = require('./models/hats.js');
 const ship = require('./models/ship.js');
 const user = require('./models/user.js');
 const users = require('./models/login.js');
