@@ -546,7 +546,7 @@ const overrides = {
         height: '37px',
         margin: '15px 0px'
       },
-      '.username-input-btn': {
+      '.username-input-btn, .join-galaxy-btn, .create-new-galaxy-btn': {
         fontSize: '25px',
         fontWeight: 800,
         fontFamily: 'Abril Fatface',
