@@ -63,7 +63,7 @@ const BuildShip = () => {
         <Modal onClose={restoreData} size='full' isOpen={isOpen}>
           <ModalOverlay />
           <ModalContent backgroundColor='rgba(46,47,71,255)' >
-            <ModalHeader >Available Ship</ModalHeader>
+            <ModalHeader color='gray.500'>Available Ship</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Wrap justify='center'>
@@ -71,12 +71,12 @@ const BuildShip = () => {
               </Wrap>
               <br/>
               <br/>
-              <Box bg='tomato' w='100%' p={4} color='white'>
+              <Box bg='teal' w='100%' p={4} color='white'>
               Your available currency is : $ {userCurrency}
               </Box>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={confirmPurchaseShip} colorScheme='red'>Confirm</Button>
+              <Button onClick={confirmPurchaseShip} colorScheme='teal'>Confirm</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
