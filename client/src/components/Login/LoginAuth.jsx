@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState, useEffect } from 'react';
 import EnterUserName from './EnterUserName.jsx';
 import { Flex } from '@chakra-ui/react';
 
@@ -7,7 +7,7 @@ import {signInWithPopup} from 'firebase/auth';
 
 // import '../../../assets/login.css';
 
-export default function LoginAuth() {
+export default function LoginAuth({ setTitle }) {
 
   const [isAuth,setIsAuth] = useState(false);
   const [authData,setAuthdata]=useState({});
@@ -27,6 +27,11 @@ export default function LoginAuth() {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    setTitle(true);
+  }, []);
+
   return (
     <Flex
       className='lobby-menu-container'

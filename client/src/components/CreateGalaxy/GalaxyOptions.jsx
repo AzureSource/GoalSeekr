@@ -1,7 +1,51 @@
-import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { FiPlus, FiMinus } from 'react-icons/fi';
+import { useSelector, useDispatch } from 'react-redux';
+import { allianceToggle } from './galaxyOptionsSlice';
+import { Flex, Switch, FormControl, FormLabel } from '@chakra-ui/react';
 
-const GalaxyOptions = () => {
+const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
+  // const dispatch = useDispatch();
+
+  // const toggleAlliance = () => {
+  //   dispatch(allianceToggle());
+  // };
+  const [yearsPerTurn, setYearsPerTurn] = useState(1);
+  const [alliance, setAlliance] = useState(false);
+
+  const incrementPlayer = () => {
+    if (maxPlayerCount === 5 && galaxySize) {
+      alert ('Max Players');
+      return;
+    }
+    if (maxPlayerCount === 10 && !galaxySize) {
+      alert ('Max Players');
+      return;
+    }
+    return setMaxPlayerCount(prevState => ++prevState);
+  };
+  const decrementPlayer = () => {
+    if (maxPlayerCount === 2) {
+      alert ('Minimum Players');
+      return;
+    }
+    return setMaxPlayerCount(prevState => --prevState);
+  };
+  const incrementYears = () => {
+    if (yearsPerTurn === 15) {
+      alert ('Max Years per Turn');
+      return;
+    }
+    return setYearsPerTurn(prevState => ++prevState);
+  };
+  const decrementYears = () => {
+    if (yearsPerTurn === 1) {
+      alert ('Minimum Years per Turn');
+      return;
+    }
+    return setYearsPerTurn(prevState => --prevState);
+  };
+
   return (
     <Flex
       className='galaxy-option-container'
@@ -10,17 +54,49 @@ const GalaxyOptions = () => {
     >
       <div className='galaxy-side-headings'>
         <div>Max Players</div>
-        <div>count default 2</div>
+        <Flex
+          alignItems='center'
+        >
+          <FiMinus
+            className='create-galaxy-icons'
+            onClick={decrementPlayer}
+          />
+          <div className='max-player-val'>{maxPlayerCount}</div>
+          <FiPlus
+            className='create-galaxy-icons'
+            onClick={incrementPlayer}
+          />
+        </Flex>
       </div>
       <div className='galaxy-side-headings'>
         <div>Years Per Turn</div>
-        <div>count default 2</div>
+        <Flex alignItems='center'
+
+        >
+          <FiMinus
+            className='create-galaxy-icons'
+            onClick={decrementYears}
+          />
+          <div className='years-per-turn-val'>{yearsPerTurn}</div>
+          <FiPlus
+            className='create-galaxy-icons'
+            onClick={incrementYears}
+          />
+        </Flex>
 
       </div>
-      <div className='galaxy-side-headings'>
+      <FormControl
+        className='galaxy-side-headings'
+        display='flex' alignItems='center'
+        justifyContent='space-between'
+      >
         <div>Alliances</div>
-        <div>switch to turn on</div>
-      </div>
+        <Switch
+          className='alliance-switch'
+          onChange={() => setAlliance(prevState => !prevState)}
+          size='md'
+        />
+      </FormControl>
     </Flex>
   );
 };
