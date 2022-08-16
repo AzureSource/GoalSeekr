@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS galaxies, users, planets, ships, alliances, tasks, chat, pl
 
 CREATE TABLE galaxies (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL UNIQUE,
   yearsPerTurn INT NOT NULL,
   currentYear INT NOT NULL,
   maxPlayers INT NOT NULL,
@@ -14,13 +14,14 @@ CREATE TABLE galaxies (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username TEXT UNIQUE,
-  password TEXT,
+  googleuid TEXT,
+	email TEXT,
   motto TEXT,
   about TEXT,
   profile_picture_url TEXT,
   currency INT NOT NULL DEFAULT 1000,
   currentGalaxy INT REFERENCES galaxies(id) DEFAULT NULL,
-  currentAlliance int
+  currentAlliance INT
 );
 
 CREATE TABLE planets (
@@ -70,7 +71,7 @@ CREATE TABLE planets_galaxy (
   planet_id INT REFERENCES planets(id),
   galaxy_id INT REFERENCES galaxies(id),
   colonizedBy INT REFERENCES users(id) DEFAULT NULL,
-  discoverd BOOLEAN DEFAULT false
+  discovered BOOLEAN DEFAULT false
 );
 
 CREATE TABLE ships_user (
@@ -275,24 +276,6 @@ BEGIN
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
-
--- Gets All players ship data by galaxy
-CREATE OR REPLACE FUNCTION getPlayerDataByGalaxyID(INT)
-  RETURNS JSON AS $func$
-DECLARE
-BEGIN
-	RETURN (
-	SELECT
-	json_build_object(
-		'Players', JSON_AGG( (SELECT "getusersships"(id)) )
-		) AS results
-	FROM users
-	WHERE currentgalaxy = $1
-);
-END;
-$func$ LANGUAGE plpgsql VOLATILE COST 100;
-
-
 --Gets all chat messages in decending order by galaxyID
 CREATE OR REPLACE FUNCTION getChatMessagesByGalaxy("galaxyID" INT)
   RETURNS JSON AS $func$
@@ -397,6 +380,115 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+--Create a new user or update a current user's username(display name) by user ID (will be changed upon Google UID implementation)
+CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" TEXT, "displayName" TEXT, "email" TEXT, "motto" TEXT, "about" TEXT, "avatarURL" TEXT)
+  RETURNS json AS $func$
+  DECLARE result JSON;
+	userExists BOOLEAN;
+BEGIN
+	SELECT EXISTS(SELECT id FROM users WHERE googleuid = $1) INTO userExists;
+	IF userExists THEN
+		UPDATE users SET username = $2 WHERE googleuid = $1;
+		SELECT row_to_json(users) FROM users WHERE googleuid = $1 INTO result;
+		RETURN result;
+	ELSE
+	  INSERT INTO users (username, googleuid, email,  motto, about, profile_picture_url, currency, currentgalaxy)
+		VALUES ($2, $1, $3, $4, $5, $6, 10000, 1)
+		RETURNING * INTO result;
+  END IF;
+	RETURN result;
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- gets a user's ships and returns an object with their user id and a ships property with ship type properties and an array of their data
+CREATE OR REPLACE FUNCTION getusersships("userID" INT)
+  RETURNS JSON AS $func$
+	DECLARE result json;
+BEGIN
+	WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
+	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped INTO result;
+	RETURN(result);
+END;
+$func$
+LANGUAGE plpgsql VOLATILE COST 100;
+
+-- same as above, except Ships are divided into a "byPlanet" division that has types of ships on each planet and their stats (used for gettingplayerData)
+CREATE OR REPLACE FUNCTION getusersshipssorted("userID" INT, "byPlanet" boolean)
+  RETURNS JSON AS $func$
+	DECLARE result json;
+BEGIN
+ IF $2 THEN
+	WITH shipAggregation AS (
+		(SELECT (SELECT name FROM planets WHERE id = ships_user.user_ship_planet_id) AS Planet, user_ship_name AS TYPE, json_agg(row_to_json(ships_user)) Ships FROM ships_user WHERE user_id = $1 GROUP BY planet, TYPE) ORDER BY Planet ASC
+		),
+		planetAggregation AS (
+		(SELECT planet, json_object_agg(type, ships) ships FROM shipAggregation GROUP BY planet)
+		)
+		SELECT json_object_agg (planet,ships) ships FROM planetAggregation INTO result;
+	ELSE
+		WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
+		SELECT JSON_OBJECT_AGG ( TYPE, ships ) Ships FROM grouped INTO result;
+	END IF;
+	RETURN(result);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- gets all a user's data including their ships arranged by type or planet
+CREATE OR REPLACE FUNCTION getUserData("userID" INT, "shipsByPlanet?" boolean)
+  RETURNS JSON AS $func$
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'userid', $1,
+		'username', username,
+		'googleuid', googleuid,
+		'email', email,
+		'motto', motto,
+		'about', about,
+		'currency', currency,
+		'avatarURL', profile_picture_url,
+		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
+		'galaxy', json_build_object('id', currentgalaxy, 'name', (SELECT name FROM galaxies WHERE id = currentgalaxy)),
+		'ships', (SELECT getusersshipssorted($1, $2))
+		) AS results
+	FROM users
+	WHERE id = $1
+);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+
+-- returns all data of players with ships divided by planet name, divided by ship name/type
+CREATE OR REPLACE FUNCTION getplayerdatabygalaxyid("galaxyID" INT, "byPlanet?" boolean)
+  RETURNS JSON AS $func$
+DECLARE
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'id', $1,
+		'galaxy', (SELECT name FROM galaxies WHERE id = $1),
+		'Players', json_agg(
+		json_build_object(
+		'userid', id,
+		'username', username,
+		'googleuid', googleuid,
+		'email', email,
+		'motto', motto,
+		'about', about,
+		'currency', currency,
+		'avatarURL', profile_picture_url,
+		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
+		'ships', (SELECT getusersshipssorted(id, $2))) ORDER BY id ASC)) AS results
+	FROM users
+	WHERE currentgalaxy = $1
+);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+
+
 -- ================================================================= --
 -- ================================================================= --
 --                        DB FUNCTION TO POPULATE DB                 --
@@ -434,9 +526,20 @@ INSERT INTO ships ( name, cost, rangecapacity, healthlevel, powerlevel) VALUES (
 
 --users (generate 100 in random galaxies from 1-5)
 do $$
+declare isInAlliance boolean := false;
+declare allianceID int := null;
 begin
    for num in 1..100 loop
-		INSERT INTO users (username, password, motto, about, profile_picture_url, currency, currentgalaxy) VALUES (CONCAT('User', num), 'password', 'hi', 'yolo', 'imgur.com/image', 20000, (SELECT floor(random() * 5 + 1)));
+	 	SELECT floor(random() * 2) = 1 INTO isInAlliance;
+		raise notice 'Alliance %', isInAlliance;
+		IF isInAlliance THEN
+			SELECT floor(random() * 8 + 1) INTO allianceID;
+			raise notice 'AllianceID is %', allianceID;
+		ELSE
+			allianceID := null;
+			raise notice 'AllianceID is %', allianceID;
+		END IF;
+		INSERT INTO users (username, googleuid, email, motto, about, profile_picture_url, currency, currentgalaxy, currentAlliance) VALUES (CONCAT('User', num), CONCAT('googleuid', num), CONCAT('user', num, '@gmail.com'), 'hi', 'yolo', 'imgur.com/image', 20000, (SELECT floor(random() * 10 + 1)), allianceID);
     raise notice 'User% Inserted', num;
    end loop;
 end; $$;
@@ -661,5 +764,10 @@ INSERT INTO chat (id, message, user_id, galaxy_id, alliance_id, alliance_only) V
 INSERT INTO chat (id, message, user_id, galaxy_id, alliance_id, alliance_only) VALUES (199, 'Navicat Monitor can be installed on any local computer or virtual machine and does not require any software installation on the servers               ', 7, 5, 6, 'f');
 INSERT INTO chat (id, message, user_id, galaxy_id, alliance_id, alliance_only) VALUES (200, 'In other words, Navicat provides the ability for data in different databases and/or schemas to be kept up-to-date so that each repository             ', 96, 3, 4, 't');
 
+--fix correct Ids for alliances
+		UPDATE chat
+			SET alliance_id = users.currentAlliance
+		FROM users
+		WHERE chat.user_id = users.id;
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;

@@ -6,11 +6,12 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Box,
   Grid,
   GridItem,
   Text
 } from '@chakra-ui/react';
+import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
+
 
 function Playerlist () {
 
@@ -50,41 +51,55 @@ function Playerlist () {
     }
   ];
 
+  const panelProps = {
+    display: 'contents'
+  };
+
+  const gridIprops = {
+    display: 'flex',
+    'flex-flow': 'row nowrap',
+    'justify-content': 'space-evenly',
+    'align-items': 'center',
+  };
+
+  const accButton = {
+    display: 'flex',
+    'justify-content': 'space-between',
+  };
 
   return (
-    <div id='player-list' style={{width:'200px'}}>
+    <div id='player-list' style={{width:'200px', margin: '1rem'}}>
       <Accordion  allowToggle>
         <Text textAlign={'center'}>Current Ranking</Text>
         {playerlist.map((player, index) => (
           <AccordionItem key={player.id}>
             <h2>
-              <AccordionButton  _expanded={{ bg: 'tomato', color: 'white' }}>
-                <Box flex='1' textAlign='left'>
-                  <Avatar size='xs' src='https://bit.ly/broken-link' />
-                  <span> {player.username}</span>
-                </Box>
+              <AccordionButton sx={accButton} w='100%'_expanded={{ bg: 'tomato', color: 'white' }}>
+                <Avatar size='xs' src='https://bit.ly/broken-link' />
+                {index === 0 && <GiTrophy className='p-list-smIcon'/> }
+                <span> {player.username} </span>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4}>
-              <Grid templateColumns='repeat(2, 1fr)' fontSize={'sm'} templateRows='repeat(3, 1fr)' gap={1}>
-                <GridItem w='100%' h='10' width='13' bg={'gray.100'}>
-                  <Box>Rank: </Box>
+            <AccordionPanel sx={panelProps} pb={4}>
+              <Grid  templateColumns='repeat(2, 1fr)' fontSize={'sm'} templateRows='repeat(3, 1fr)' gap={1}>
+                <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
+                  Rank:
                   <Text>{index + 1}</Text>
                   {/* /* MAKE IT SO A STAR OR TROPHY APPEARS IF FIRST */}
                 </GridItem>
-                <GridItem w='100%' h='10' width='13' bg={'gray.100'}>
-                  <Box>Alliance:</Box>
-                  <Text> {player.alliance || 'idependent'} </Text>
+                <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
+                  <GiBlackFlag className='p-list-smIcon'/>
+                  <Text>Alliance: <br /> {player.alliance || 'idependent'} </Text>
                 </GridItem>
-                <GridItem w='100%' h='10' width='13' bg={'gray.100'}>
-                  <Box>Planets: {player.planets.length}</Box>
+                <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
+                  <GiRingedPlanet className='p-list-icon' /> {player.planets.length}
                 </GridItem>
-                <GridItem w='100%' h='10' width='13' bg={'gray.100'}>
-                  <Box>Ships:  {player.ships.length}</Box>
+                <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
+                  <GiJetpack className='p-list-icon' />  {player.ships.length}
                 </GridItem>
-                <GridItem w='100%' h='10' width='13' bg={'gray.100'}>
-                  <Box>Currency: {player.currency}</Box>
+                <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
+                  <GiCash className='p-list-icon' /> {player.currency}
                 </GridItem>
               </Grid>
             </AccordionPanel>
