@@ -221,27 +221,17 @@ export default function DenseGalaxy() {
 
   const dispatch = useDispatch();
 
-  // const [firstPlanet, setFirstPlanet] = useState(false);
   const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
 
   const handlePlanetSelection = (name) => {
     const planetSelection = name;
     if (!firstPlanet) {
       dispatch(setPlanetSelection({homePlanet: planetSelection}));
-      // setFirstPlanet(true);
     } else {
       dispatch(setPlanetSelection({targetPlanet: planetSelection}));
     }
   };
 
-  // function makePlanetDiv(object) {
-  //   return (
-  //     <div role='button' onClick={() => handlePlanetSelection(object.name)}>
-  //       <img src={object.image} className={object.classname} onClick={() => handlePlanetSelection(object.name)} />
-  //       <div className={object.name}>{object.name}</div>
-  //     </div>
-  //   );
-  // }
   return (
     <div>
       {planets.map((planet, index) => {
@@ -257,11 +247,3 @@ export default function DenseGalaxy() {
     </div>
   );
 }
-
-// first click is home planet
-  // update redux store with first click
-// on second click target planet (Only if first click is set to true) (can continually click)
-  // update redux store with second click
-  // render a line between the planets
-// reset button - resets selected planets
-// figure out turn count on mission module

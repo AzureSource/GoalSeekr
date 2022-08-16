@@ -98,3 +98,15 @@ export default function MissionModule() {
 // Mission has a turn count that is decremented until ships reach target planet.
 // grab information of target planet ships for battle.
 // once battle is complete send new data on planet ownership to database.
+
+// render a line between the planets
+// figure out turn count on mission module
+
+
+
+// use getusershipsonplanet
+  // use galaxy name and planet name
+
+
+// need a query for what planets the user owns, if the user owns the planet then they can queue a mission, if not those arent their ships.
+
