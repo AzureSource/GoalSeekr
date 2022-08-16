@@ -471,7 +471,7 @@ const overrides = {
         fontSize: '20px',
         fontWeight: '900',
         width: '100%',
-        padding: '17px 15px',
+        padding: '17px 50px',
         backgroundColor: '#2e2f47',
         color: '#50b6ab',
         borderRadius: '5px'
@@ -498,6 +498,20 @@ const overrides = {
       },
       '.galaxy-size-images': {
         borderRadius: '5px',
+        border: '3px solid #2e2f47',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        boxSize: '250px',
+        color: 'white',
+        textShadow: '0 0 20px black',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        px: 4,
+      },
+      '.galaxy-size-unselected': {
+        filter: 'blur(1.5px)'
       },
       '.create-galaxy-btn': {
         color: '#50b6ab',
@@ -506,6 +520,42 @@ const overrides = {
         width: '40%',
         backgroundColor: '#2e2f47',
         // margin: '0px 60px 0px 60px'
+      },
+      '.max-player-val, .years-per-turn-val': {
+        paddingRight: 'clamp(10px, 5%, 10px);',
+        paddingLeft: 'clamp(10px, 5%, 10px);',
+        margin: '0px 5px',
+        background: 'white',
+        borderRadius: '4px'
+      },
+      '.create-galaxy-icons:hover, .galaxy-size-unselected': {
+        cursor: 'pointer'
+      },
+      '.alliance-switch': {
+        display: 'flex',
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: '85px'
+      },
+      '.username-input': {
+        width: '200px',
+        size: '20px',
+        textAlign: 'center',
+        borderRadius: '4px',
+        border:'2px solid #2e2f47',
+        height: '37px',
+        margin: '15px 0px'
+      },
+      '.username-input-btn': {
+        fontSize: '25px',
+        fontWeight: 800,
+        fontFamily: 'Abril Fatface',
+        color: '#50b6ab',
+        borderRadius: '4px',
+        size: '20px',
+        backgroundColor: '#2e2f47',
+        width: '200px',
+        height: '50px'
       }
     },
   },
