@@ -18,7 +18,6 @@ const overrides = {
         height: '100%'
       },
       '.planetsWindow': {
-        border: '2px solid black',
         height: '550px',
         width: '1100px'
       },
@@ -28,173 +27,350 @@ const overrides = {
         height: '50px',
         position: 'absolute'
       },
+      '.ZERO, .PISCES, .CORBIN, .JADE, .PINKTOPIA, .TARUS, .MARSHALL, .AUSTIN, .POKITARU, .CAPRICORN, .JEROME, .IBRAHEEM, .STEINS, .VIRGO, .IZZI, .ALGO, .LAVA, .LEO, .BOOLEAN, .FLOWER, .HAKU, .SCORPIO, .XUTIS, .PEACH, .CHIHIRO, .REDUX, .APPLE, .VION, .CALCIFER, .FINN, .BLADE, .NEON, .ATHEA, .LOLLIPOP, .MEI, .LUNAR, .POLARIS, .PETER, .ZORIX, .SCAR, .TAURUS': {
+        position: 'absolute',
+        fontSize: '10px',
+        fontColor: 'black',
+      },
+      '.egg, .cowboy, .bearears': {
+        height: '67px',
+        position: 'absolute'
+      },
+      '.egg': {
+        marginTop: '35px',
+        marginLeft: '41px'
+      },
+      '.bearears': {
+        marginTop: '75px',
+        marginLeft: '431px'
+      },
       '.zero': {
         marginTop: '90px',
         marginLeft: '440px'
+      },
+      '.ZERO': {
+        marginTop: '140px',
+        marginLeft: '450px'
       },
       '.zero2': {
         marginTop: '460px',
         marginLeft: '850px'
       },
+      '.PISCES': {
+        marginTop: '510px',
+        marginLeft: '857px'
+      },
       '.zero3': {
         marginTop: '290px',
         marginLeft: '430px'
+      },
+      '.CORBIN': {
+        marginTop: '340px',
+        marginLeft: '435px'
       },
       '.zero4': {
         marginTop: '100px',
         marginLeft: '650px'
       },
+      '.JADE': {
+        marginTop: '150px',
+        marginLeft: '660px'
+      },
       '.pinktopia': {
         marginTop: '50px',
         marginLeft: '50px'
+      },
+      '.PINKTOPIA': {
+        marginTop: '100px',
+        marginLeft: '48px'
       },
       '.pinktopia2': {
         marginTop: '20px',
         marginLeft: '900px'
       },
+      '.TAURUS': {
+        marginTop: '70px',
+        marginLeft: '903px'
+      },
       '.pinktopia3': {
         marginTop: '380px',
         marginLeft: '200px'
+      },
+      '.MARSHALL': {
+        marginTop: '430px',
+        marginLeft: '198px'
       },
       '.pinktopia4': {
         marginTop: '380px',
         marginLeft: '780px'
       },
+      '.AUSTIN': {
+        marginTop: '430px',
+        marginLeft: '785px'
+      },
       '.pokitaru': {
         marginTop: '12px',
+        marginLeft: '200px'
+      },
+      '.POKITARU': {
+        marginTop: '62px',
         marginLeft: '200px'
       },
       '.pokitaru2': {
         marginTop: '170px',
         marginLeft: '910px'
       },
+      '.CAPRICORN': {
+        marginTop: '220px',
+        marginLeft: '906px'
+      },
       '.pokitaru3': {
         marginTop: '20px',
         marginLeft: '450px'
+      },
+      '.JEROME': {
+        marginTop: '69px',
+        marginLeft: '453px'
       },
       '.pokitaru4': {
         marginTop: '450px',
         marginLeft: '380px'
       },
+      '.IBRAHEEM': {
+        marginTop: '500px',
+        marginLeft: '379px'
+      },
       '.steins': {
         marginTop: '250px',
         marginLeft: '50px'
+      },
+      '.STEINS': {
+        marginTop: '300px',
+        marginLeft: '55px'
       },
       '.steins2': {
         marginTop: '280px',
         marginLeft: '850px'
       },
+      '.VIRGO': {
+        marginTop: '330px',
+        marginLeft: '858px'
+      },
       '.steins3': {
         marginTop: '20px',
         marginLeft: '750px'
       },
+      '.IZZI': {
+        marginTop: '70px',
+        marginLeft: '764px'
+      },
       '.steins4': {
         marginTop: '120px',
         marginLeft: '550px'
+      },
+      '.ALGO': {
+        marginTop: '170px',
+        marginLeft: '560px'
       },
       '.lava': {
         height: '65px',
         marginTop: '350px',
         marginLeft: '930px'
       },
+      '.LAVA': {
+        marginTop: '405px',
+        marginLeft: '950px'
+      },
       '.lava2': {
         height: '65px',
         marginTop: '140px',
         marginLeft: '240px'
+      },
+      '.LEO': {
+        marginTop: '195px',
+        marginLeft: '263px'
       },
       '.lava3': {
         height: '65px',
         marginTop: '330px',
         marginLeft: '550px'
       },
+      '.BOOLEAN': {
+        marginTop: '383px',
+        marginLeft: '558px'
+      },
       '.lava4': {
         height: '65px',
         marginTop: '330px',
         marginLeft: '60px'
       },
+      '.FLOWER': {
+        marginTop: '385px',
+        marginLeft: '70px'
+      },
       '.haku': {
         marginTop: '418px',
         marginLeft: '100px'
+      },
+      '.HAKU': {
+        marginTop: '468px',
+        marginLeft: '109px'
       },
       '.haku2': {
         marginTop: '350px',
         marginLeft: '675px'
       },
+      '.SCORPIO': {
+        marginTop: '400px',
+        marginLeft: '678px'
+      },
       '.haku3': {
         marginTop: '50px',
         marginLeft: '300px'
+      },
+      '.XUTIS': {
+        marginTop: '100px',
+        marginLeft: '309px'
       },
       '.haku4': {
         marginTop: '290px',
         marginLeft: '280px'
       },
+      '.PEACH': {
+        marginTop: '340px',
+        marginLeft: '287px'
+      },
       '.chihiro': {
         marginTop: '100px',
         marginLeft: '775px'
+      },
+      '.CHIHIRO': {
+        marginTop: '150px',
+        marginLeft: '777px'
       },
       '.chihiro2': {
         marginTop: '220px',
         marginLeft: '350px'
       },
+      '.REDUX': {
+        marginTop: '270px',
+        marginLeft: '357px'
+      },
       '.chihiro3': {
         marginTop: '120px',
         marginLeft: '120px'
+      },
+      '.APPLE': {
+        marginTop: '170px',
+        marginLeft: '128px'
       },
       '.chihiro4': {
         marginTop: '450px',
         marginLeft: '580px'
       },
+      '.VION': {
+        marginTop: '500px',
+        marginLeft: '592px'
+      },
       '.calcifer': {
         marginTop: '420px',
+        marginLeft: '490px'
+      },
+      '.CALCIFER': {
+        marginTop: '470px',
         marginLeft: '490px'
       },
       '.calcifer2': {
         marginTop: '200px',
         marginLeft: '660px'
       },
+      '.FINN': {
+        marginTop: '250px',
+        marginLeft: '671px'
+      },
       '.calcifer3': {
         marginTop: '460px',
         marginLeft: '220px'
       },
+      '.BLADE': {
+        marginTop: '510px',
+        marginLeft: '227px'
+      },
       '.calcifer4': {
         marginTop: '180px',
         marginLeft: '440px'
+      },
+      '.NEON': {
+        marginTop: '230px',
+        marginLeft: '450px'
       },
       '.athea': {
         height: '90px',
         marginTop: '350px',
         marginLeft: '300px'
       },
+      '.ATHEA': {
+        marginTop: '418px',
+        marginLeft: '325px'
+      },
       '.athea2': {
         height: '90px',
         marginTop: '10px',
         marginLeft: '580px'
+      },
+      '.LOLLIPOP': {
+        marginTop: '78px',
+        marginLeft: '600px'
       },
       '.athea3': {
         height: '90px',
         marginTop: '450px',
         marginLeft: '680px'
       },
+      '.MEI': {
+        marginTop: '520px',
+        marginLeft: '715px'
+      },
       '.athea4': {
         height: '90px',
         marginTop: '250px',
         marginLeft: '720px'
       },
+      '.LUNAR': {
+        marginTop: '320px',
+        marginLeft: '747px'
+      },
       '.polaris': {
         marginTop: '280px',
         marginLeft: '180px'
+      },
+      '.POLARIS': {
+        marginTop: '330px',
+        marginLeft: '183px'
       },
       '.polaris2': {
         marginTop: '230px',
         marginLeft: '515px'
       },
+      '.PETER': {
+        marginTop: '280px',
+        marginLeft: '523px'
+      },
       '.polaris3': {
         marginTop: '200px',
         marginLeft: '780px'
       },
+      '.ZORIX': {
+        marginTop: '250px',
+        marginLeft: '788px'
+      },
       '.polaris4': {
         marginTop: '190px',
         marginLeft: '150px'
+      },
+      '.SCAR': {
+        marginTop: '240px',
+        marginLeft: '160px'
       },
       '.galaxy-window-top': {
         width: '100%',
@@ -334,7 +510,7 @@ const overrides = {
         fontSize: '20px',
         fontWeight: '900',
         width: '100%',
-        padding: '17px 15px',
+        padding: '17px 50px',
         backgroundColor: '#2e2f47',
         color: '#50b6ab',
         borderRadius: '5px'
@@ -361,6 +537,20 @@ const overrides = {
       },
       '.galaxy-size-images': {
         borderRadius: '5px',
+        border: '3px solid #2e2f47',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        boxSize: '250px',
+        color: 'white',
+        textShadow: '0 0 20px black',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        px: 4,
+      },
+      '.galaxy-size-unselected': {
+        filter: 'blur(1.5px)'
       },
       '.create-galaxy-btn': {
         color: '#50b6ab',
@@ -369,6 +559,22 @@ const overrides = {
         width: '40%',
         backgroundColor: '#2e2f47',
         // margin: '0px 60px 0px 60px'
+      },
+      '.max-player-val, .years-per-turn-val': {
+        paddingRight: 'clamp(10px, 5%, 10px);',
+        paddingLeft: 'clamp(10px, 5%, 10px);',
+        margin: '0px 5px',
+        background: 'white',
+        borderRadius: '4px'
+      },
+      '.create-galaxy-icons:hover, .galaxy-size-unselected': {
+        cursor: 'pointer'
+      },
+      '.alliance-switch': {
+        display: 'flex',
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: '85px'
       }
     },
   },

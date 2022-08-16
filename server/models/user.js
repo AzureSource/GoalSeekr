@@ -10,7 +10,16 @@ module.exports = {
       res.end().status(500);
     }
   },
-
+  getShips: async function(req, res) {
+    try {
+      let userId = req.params.user_id;
+      const query = 'SELECT * FROM getusersships($1)';
+      const results = await client(query, [userId]);
+      res.json(results.rows[0]);
+    } catch (err) {
+      res.end().status(500);
+    }
+  },
   updateShips: async function (req, res) {
     try {
       let userId = req.params.user_id;
@@ -28,4 +37,5 @@ module.exports = {
       res.end().status(500);
     }
   }
+
 };

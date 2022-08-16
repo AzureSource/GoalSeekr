@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/react';
-import { signInWithGoogle } from '../../firebase.js';
+// import { signInWithGoogle } from '../../firebase';
 
 const Menu = () => {
 
@@ -15,7 +15,7 @@ const Menu = () => {
         justify='center'
         align='center'
       >
-        <button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>
+        {/* <button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button> */}
       </Flex>
     </Flex>
   );
