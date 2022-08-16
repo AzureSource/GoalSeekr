@@ -1,24 +1,6 @@
-// import { extendTheme } from '@chakra-ui/react';
-// import background from './images/sparse sky.png';
+import { extendTheme } from '@chakra-ui/react';
+import background from './images/sparse sky.png';
 
-<<<<<<< HEAD
-// const overrides = {
-//   styles: {
-//     global: {
-//       // add styles here
-//       '.app': {
-//         fontSize: '100px'
-//       },
-//       'body.chakra-ui-light, html, #root, .appBackground': {
-//         height: '100%',
-//         backgroundImage: background,
-//         backgroundSize: 'contain'
-//       },
-//     },
-//   },
-// };
-// const theme = extendTheme(overrides);
-=======
 const overrides = {
   styles: {
     global: {
@@ -618,6 +600,5 @@ const overrides = {
   },
 };
 const theme = extendTheme(overrides);
->>>>>>> main
 
-// export default theme;
+export default theme;
