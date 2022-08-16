@@ -196,13 +196,6 @@ const overrides = {
         marginTop: '190px',
         marginLeft: '150px'
       },
-      '.p-list-icon': {
-        fontSize: '250%',
-        margin: '2px'
-      },
-      'p-list-smIcon': {
-        fontSize: '50%'
-      },
       '.galaxy-window-top': {
         width: '100%',
         height: '70%'
@@ -223,6 +216,7 @@ const overrides = {
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      //-------------------------------SIDE MENU
       '.menu-side-container': {
         width: '70%',
         height: '85%',
@@ -230,6 +224,24 @@ const overrides = {
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      '.pl-acc': {
+        backgroundColor: '#41437e',
+        borderRadius: '10px',
+
+      },
+      '.player-list': {
+        width:'100%',
+        padding: '5%',
+        backgroundColor: 'white'
+      },
+      '.p-list-icon': {
+        fontSize: '250%',
+        margin: '2px'
+      },
+      'p-list-smIcon': {
+        fontSize: '50%'
+      },
+      //---------------------------------SIDE MENU
       '.title-bar': {
         width: '100%',
         height: '27%',
