@@ -20,7 +20,7 @@ import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Cou
 //   return (
 //     <div className='appBackground'>
 //       <div className='app'>
-//         <GalaxyWindow className='galaxyWindow' />
+//         <GalaxyWindow className='galaxyWindow' setTitle={setTitle}/>
 //       </div>
 //       {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
 //       {/* <CreateGalaxy /> */}
