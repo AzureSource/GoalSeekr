@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { GET_SHIPS } from './actions/types';
 
 export const userShipsSlice = createSlice({
   name: 'userShips',
