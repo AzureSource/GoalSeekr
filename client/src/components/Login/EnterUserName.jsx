@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios';
+import { Button } from '@chakra-ui/react';
 
 // eslint-disable-next-line react/prop-types
 export default function EnterUserName ({authData}) {
@@ -25,10 +26,18 @@ export default function EnterUserName ({authData}) {
   };
 
   return (
-    <div>
-      <input placeholder = "Enter Username Display" onChange ={(event)=>setText(event.target.value)}/>
+    <div className='username-btn-container'>
+      <input
+        className='username-input'
+        placeholder = "Enter Username Display" onChange ={(event)=>setText(event.target.value)}
+      />
       <br />
-      <button onClick = {handleJoin}>Join</button>
+      <button
+        className='username-input-btn'
+        onClick={handleJoin}
+      >
+        Join
+      </button>
     </div>
   );
 

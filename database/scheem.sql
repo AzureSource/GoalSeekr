@@ -86,6 +86,19 @@ CREATE TABLE ships_user (
   user_ship_galaxy_id INT REFERENCES galaxies(id)
 );
 
+CREATE TABLE hats (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  url TEXT,
+);
+
+CREATE TABLE hats_user (
+  id SERIAL PRIMARY KEY,
+  galaxy_id INT REFERENCES galaxies(id),
+  user_id INT REFERENCES users(id),
+);
+
+
 -- ================================================================= --
 -- ================================================================= --
 --                          DB INDEXES                               --
@@ -380,6 +393,57 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+--Same as above except the args are by name instead of id
+CREATE OR REPLACE FUNCTION getusershipsonplanetbynames("galaxyName" text, "planetName" text)
+  RETURNS JSON AS $func$
+  DECLARE RESPONSE JSON;
+	DECLARE galaxyID INT;
+	DECLARE planetID INT;
+BEGIN
+		SELECT id FROM galaxies WHERE name = $1 INTO galaxyID;
+		SELECT id FROM planets WHERE name = $2 INTO planetID;
+		WITH grouped AS (
+		SELECT
+			user_id AS userid,
+			user_ship_name AS TYPE,
+			json_agg (
+				json_build_object (
+					'id', ID,
+					'health', user_ship_health,
+					'range', user_ship_rangecapacity,
+					'power', user_ship_powerlevel
+				)
+			) AS Ships
+		FROM
+			ships_user
+		WHERE
+			user_ship_galaxy_id = galaxyID
+			AND user_ship_planet_id = planetID
+		GROUP BY
+			1,
+			2
+		),
+		results AS (
+		SELECT
+			json_build_object (
+				'userid', userid,
+				'Ships', JSON_OBJECT_AGG ( TYPE, ships )
+			) AS Ships
+		FROM grouped
+		GROUP BY grouped.userid
+		)
+		SELECT
+		  json_build_object (
+				'galaxy', json_build_object ( 'id', galaxyID, 'name', $1 ),
+				'planet', json_build_object ( 'id', planetID, 'name', $2 ),
+				'players', json_agg ( ships )
+			)
+		FROM results INTO RESPONSE;
+	RETURN ( RESPONSE );
+
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
 --Create a new user or update a current user's username(display name) by user ID (will be changed upon Google UID implementation)
 CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" TEXT, "displayName" TEXT, "email" TEXT, "motto" TEXT, "about" TEXT, "avatarURL" TEXT)
   RETURNS json AS $func$
@@ -487,7 +551,18 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
-
+-- Creates a galaxy and returns the newly created galaxy as JSON
+CREATE OR REPLACE FUNCTION creategalaxy("name" TEXT, "yearsPerTurn" INT, "currentYear" INT, "maxPlayers" INT)
+  RETURNS JSON AS $func$
+	DECLARE result galaxies%rowtype;
+BEGIN
+	INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers)
+	VALUES($1, $2, $3, $4, 1)
+	RETURNING * INTO result;
+	RETURN row_to_json(result);
+END;
+$func$
+LANGUAGE plpgsql VOLATILE COST 100;
 
 -- ================================================================= --
 -- ================================================================= --

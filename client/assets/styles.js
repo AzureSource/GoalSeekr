@@ -372,13 +372,6 @@ const overrides = {
         marginTop: '240px',
         marginLeft: '160px'
       },
-      '.p-list-icon': {
-        fontSize: '250%',
-        margin: '2px'
-      },
-      'p-list-smIcon': {
-        fontSize: '50%'
-      },
       '.galaxy-window-top': {
         width: '100%',
         height: '70%'
@@ -399,6 +392,34 @@ const overrides = {
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      //-------------------------------HAT MODAL
+      '#hat-div': {
+        display: 'grid',
+        gridTemplateRows: '1fr 5fr 1fr',
+        position: 'absolute',
+        width: '60%',
+        height: '40%',
+        top: '30%',
+        right: '18%',
+        color: '#c7e4e9',
+        backgroundColor: 'cadetblue',
+        borderRadius: '12px'
+      },
+      '#confirm-hat': {
+        height: '70%',
+        width: '25%',
+        textAlign: 'center',
+        backgroundColor: '#2626a3',
+        borderRadius: '10px',
+        border: '1px solid white',
+        gridRow: 3,
+        justifySelf: 'center'
+      },
+      '.hat-list-icon': {
+        height: '20px',
+        width: '20px'
+      },
+      //-------------------------------SIDE MENU
       '.menu-side-container': {
         width: '70%',
         height: '85%',
@@ -406,6 +427,24 @@ const overrides = {
         backgroundColor: '#2e2f47',
         borderRadius: '15px'
       },
+      '.pl-acc': {
+        backgroundColor: '#41437e',
+        borderRadius: '10px',
+
+      },
+      '.player-list': {
+        width:'100%',
+        padding: '5%',
+        backgroundColor: 'white'
+      },
+      '.p-list-icon': {
+        fontSize: '250%',
+        margin: '2px'
+      },
+      'p-list-smIcon': {
+        fontSize: '50%'
+      },
+      //---------------------------------SIDE MENU
       '.title-bar': {
         width: '100%',
         height: '27%',
@@ -536,6 +575,26 @@ const overrides = {
         textAlign: 'center',
         justifyContent: 'center',
         width: '85px'
+      },
+      '.username-input': {
+        width: '200px',
+        size: '20px',
+        textAlign: 'center',
+        borderRadius: '4px',
+        border:'2px solid #2e2f47',
+        height: '37px',
+        margin: '15px 0px'
+      },
+      '.username-input-btn': {
+        fontSize: '25px',
+        fontWeight: 800,
+        fontFamily: 'Abril Fatface',
+        color: '#50b6ab',
+        borderRadius: '4px',
+        size: '20px',
+        backgroundColor: '#2e2f47',
+        width: '200px',
+        height: '50px'
       }
     },
   },

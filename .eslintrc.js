@@ -9,31 +9,15 @@ module.exports = {
     'plugin:react/recommended'
   ],
   'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true
-    },
+    'ecmaFeatures': { 'jsx': true },
     'ecmaVersion': 'latest',
     'sourceType': 'module'
   },
-  'plugins': [
-    'react'
+  'plugins': ['react'
   ],
-  'rules': {
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always'
-    ]
+  'rules': {'indent': ['error',  2],
+    'linebreak-style': ['error',  'unix'],
+    'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
+    'semi': ['error',  'always']
   }
 };

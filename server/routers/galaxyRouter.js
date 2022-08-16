@@ -4,4 +4,4 @@ const {
   postGalaxy
 } = require('../controllers/galaxyController');
 
-galaxyRouter.post('/createGalaxy', postGalaxy);
+galaxyRouter.post('galaxy/createGalaxy', postGalaxy);
