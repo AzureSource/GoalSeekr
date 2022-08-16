@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TitleBar from './components/Lobby/TitleBar.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
@@ -7,8 +7,12 @@ import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
 import background from '../assets/images/sparse sky.png';
 import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';
 import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import MenuSide from './components/Galaxy Window/MenuSide.jsx';
+import MenuBottom from './components/Galaxy Window/MenuBottom.jsx';
 import LoginAuth from './components/Login/LoginAuth.jsx';
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Counter';
 
 // const App = () => {
 
@@ -27,16 +31,17 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 // };
 
 const App = () => {
+  const [title, setTitle] = useState(true);
 
   return (
     <HashRouter>
       <div className='appBackground'>
-        <TitleBar />
+        {title ? <TitleBar/> : null}
         <Routes>
-          <Route exact path="/" element={<LoginAuth />} />
-          <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy/>} />
-          <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy />} />
-          <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow />} />
+          <Route exact path="/" element={<LoginAuth setTitle={setTitle}/>} />
+          <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
+          <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
+          <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
         </Routes>
       </div>
     </HashRouter>
@@ -45,3 +50,12 @@ const App = () => {
 };
 
 export default App;
+
+
+{/* <TransformWrapper>
+<MenuSide />
+<TransformComponent>
+  <GalaxyWindow className='galaxyWindow' />
+</TransformComponent>
+<MenuBottom />
+</TransformWrapper> */}

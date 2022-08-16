@@ -1,8 +1,8 @@
-import React,{useState} from 'react';
+import React,{ useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-export default function EnterGalaxy(){
+export default function EnterGalaxy({ setTitle }){
   let params = useParams();
 
   const redirectToCreateGalaxyPage = function(){
@@ -49,6 +49,10 @@ export default function EnterGalaxy(){
     }
 
   };
+
+  useEffect(() => {
+    setTitle(true);
+  }, []);
 
   return (
     <div>

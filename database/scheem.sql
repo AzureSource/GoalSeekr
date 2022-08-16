@@ -71,7 +71,7 @@ CREATE TABLE planets_galaxy (
   planet_id INT REFERENCES planets(id),
   galaxy_id INT REFERENCES galaxies(id),
   colonizedBy INT REFERENCES users(id) DEFAULT NULL,
-  discoverd BOOLEAN DEFAULT false
+  discovered BOOLEAN DEFAULT false
 );
 
 CREATE TABLE ships_user (
@@ -276,24 +276,6 @@ BEGIN
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
-
--- Gets All players ship data by galaxy
-CREATE OR REPLACE FUNCTION getPlayerDataByGalaxyID(INT)
-  RETURNS JSON AS $func$
-DECLARE
-BEGIN
-	RETURN (
-	SELECT
-	json_build_object(
-		'Players', JSON_AGG( (SELECT "getusersships"(id)) )
-		) AS results
-	FROM users
-	WHERE currentgalaxy = $1
-);
-END;
-$func$ LANGUAGE plpgsql VOLATILE COST 100;
-
-
 --Gets all chat messages in decending order by galaxyID
 CREATE OR REPLACE FUNCTION getChatMessagesByGalaxy("galaxyID" INT)
   RETURNS JSON AS $func$
@@ -415,8 +397,97 @@ BEGIN
 		RETURNING * INTO result;
   END IF;
 	RETURN result;
-END
+END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- gets a user's ships and returns an object with their user id and a ships property with ship type properties and an array of their data
+CREATE OR REPLACE FUNCTION getusersships("userID" INT)
+  RETURNS JSON AS $func$
+	DECLARE result json;
+BEGIN
+	WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
+	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped INTO result;
+	RETURN(result);
+END;
+$func$
+LANGUAGE plpgsql VOLATILE COST 100;
+
+-- same as above, except Ships are divided into a "byPlanet" division that has types of ships on each planet and their stats (used for gettingplayerData)
+CREATE OR REPLACE FUNCTION getusersshipssorted("userID" INT, "byPlanet" boolean)
+  RETURNS JSON AS $func$
+	DECLARE result json;
+BEGIN
+ IF $2 THEN
+	WITH shipAggregation AS (
+		(SELECT (SELECT name FROM planets WHERE id = ships_user.user_ship_planet_id) AS Planet, user_ship_name AS TYPE, json_agg(row_to_json(ships_user)) Ships FROM ships_user WHERE user_id = $1 GROUP BY planet, TYPE) ORDER BY Planet ASC
+		),
+		planetAggregation AS (
+		(SELECT planet, json_object_agg(type, ships) ships FROM shipAggregation GROUP BY planet)
+		)
+		SELECT json_object_agg (planet,ships) ships FROM planetAggregation INTO result;
+	ELSE
+		WITH grouped AS ( SELECT user_ship_name AS TYPE, json_agg ( row_to_JSON ( ships_user ) ) Ships FROM ships_user WHERE user_id = $1 GROUP BY 1 )
+		SELECT JSON_OBJECT_AGG ( TYPE, ships ) Ships FROM grouped INTO result;
+	END IF;
+	RETURN(result);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- gets all a user's data including their ships arranged by type or planet
+CREATE OR REPLACE FUNCTION getUserData("userID" INT, "shipsByPlanet?" boolean)
+  RETURNS JSON AS $func$
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'userid', $1,
+		'username', username,
+		'googleuid', googleuid,
+		'email', email,
+		'motto', motto,
+		'about', about,
+		'currency', currency,
+		'avatarURL', profile_picture_url,
+		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
+		'galaxy', json_build_object('id', currentgalaxy, 'name', (SELECT name FROM galaxies WHERE id = currentgalaxy)),
+		'ships', (SELECT getusersshipssorted($1, $2))
+		) AS results
+	FROM users
+	WHERE id = $1
+);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+
+-- returns all data of players with ships divided by planet name, divided by ship name/type
+CREATE OR REPLACE FUNCTION getplayerdatabygalaxyid("galaxyID" INT, "byPlanet?" boolean)
+  RETURNS JSON AS $func$
+DECLARE
+BEGIN
+	RETURN (
+	SELECT
+	json_build_object(
+		'id', $1,
+		'galaxy', (SELECT name FROM galaxies WHERE id = $1),
+		'Players', json_agg(
+		json_build_object(
+		'userid', id,
+		'username', username,
+		'googleuid', googleuid,
+		'email', email,
+		'motto', motto,
+		'about', about,
+		'currency', currency,
+		'avatarURL', profile_picture_url,
+		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
+		'ships', (SELECT getusersshipssorted(id, $2))) ORDER BY id ASC)) AS results
+	FROM users
+	WHERE currentgalaxy = $1
+);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+
 
 -- ================================================================= --
 -- ================================================================= --
