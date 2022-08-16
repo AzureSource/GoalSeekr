@@ -1,6 +1,5 @@
 import React from 'react';
 import TitleBar from './components/Lobby/TitleBar.jsx';
-import Menu from './components/Lobby/Menu.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
 import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';

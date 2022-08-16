@@ -32,11 +32,17 @@ export default function EnterGalaxy(){
           id: params.id
         }
       })
-        .then((response)=>{
+        .then(({data})=>{
           //setGalaxyData(response.data),
-          redirectToGalaxyWindow();
+          if(data.length){
+            redirectToGalaxyWindow();
+          }
+          //console.log(data);
+          else{
+            alert('Please Enter Correct Galaxy Name Or Create A New One');
+          }
         })
-        .catch(()=>alert('Please Enter Correct Galaxy Name Or Create A New One'));
+        .catch(()=>console.log('Error'));
     }
     else{
       alert('Please Enter Your Existing Galaxy');
