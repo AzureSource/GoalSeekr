@@ -16,10 +16,7 @@ import LoginAuth from './components/Login/LoginAuth.jsx';
 import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Counter';
 
 const App = () => {
-
   const [title, setTitle] = useState(true);
-
-
   return (
     <div className='appBackground'>
       <div className='app'>
