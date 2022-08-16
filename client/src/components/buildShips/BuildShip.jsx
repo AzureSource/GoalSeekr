@@ -62,8 +62,8 @@ const BuildShip = () => {
         <Button onClick={onOpen}>Build ship</Button>
         <Modal onClose={restoreData} size='full' isOpen={isOpen}>
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Available Ship</ModalHeader>
+          <ModalContent backgroundColor='rgba(46,47,71,255)' >
+            <ModalHeader >Available Ship</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Wrap justify='center'>
