@@ -220,6 +220,7 @@ export default function DenseGalaxy() {
       <div>
         <img src={object.image} className={object.classname}></img>
         <div className={object.name}>{object.name}</div>
+        <img src={egg}></img>
       </div>
     );
   }
