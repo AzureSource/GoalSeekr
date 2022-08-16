@@ -9,7 +9,7 @@ import MenuSide from './MenuSide.jsx';
 import MenuBottom from './MenuBottom.jsx';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
-export default function GalaxyWindow ({ setTitle }) {
+export default function GalaxyWindow ({ setTitle }) {A
 
   useEffect(() => {
     setTitle(false);
