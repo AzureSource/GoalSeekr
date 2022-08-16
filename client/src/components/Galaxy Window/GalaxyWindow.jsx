@@ -9,6 +9,7 @@ import { Flex, Spacer } from '@chakra-ui/react';
 import MenuSide from './MenuSide.jsx';
 import MenuBottom from './MenuBottom.jsx';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import ChooseHat from '../ChooseHat.jsx';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {getUserShipsFromDB} from '../buildShips/UserShipSlice';
