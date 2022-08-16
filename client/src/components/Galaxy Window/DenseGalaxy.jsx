@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setPlanetSelection } from './denseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
 import haku from '../../../assets/images/hakuUnexplored.png';
@@ -11,6 +13,7 @@ import polaris from '../../../assets/images/polarisUnexplored.png';
 import steins from '../../../assets/images/steinsUnexplored.png';
 import egg from '../../../assets/hats/egg.png';
 import bearears from '../../../assets/hats/bearears.png';
+import { Image } from '@chakra-ui/react';
 
 export default function DenseGalaxy() {
   var planets = [
@@ -215,19 +218,50 @@ export default function DenseGalaxy() {
       classname: 'polaris4'
     }
   ];
-  function makePlanetDiv(object) {
-    return (
-      <div>
-        <img src={object.image} className={object.classname}></img>
-        <div className={object.name}>{object.name}</div>
-      </div>
-    );
-  }
+
+  const dispatch = useDispatch();
+
+  const [firstPlanet, setFirstPlanet] = useState(false);
+
+  const handlePlanetSelection = (name) => {
+    const planetSelection = name;
+    // console.log('planet', planetSelection);
+    if (!firstPlanet) {
+      dispatch(setPlanetSelection({homePlanet: planetSelection}));
+      setFirstPlanet(true);
+    } else {
+      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+    }
+  };
+
+  // function makePlanetDiv(object) {
+  //   return (
+  //     <div role='button' onClick={() => handlePlanetSelection(object.name)}>
+  //       <img src={object.image} className={object.classname} onClick={() => handlePlanetSelection(object.name)} />
+  //       <div className={object.name}>{object.name}</div>
+  //     </div>
+  //   );
+  // }
   return (
     <div>
-      {planets.map((planet) => makePlanetDiv(planet))}
+      {planets.map((planet, index) => {
+        return (
+          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
+            <Image src={planet.image} className={planet.classname}/>
+            <div className={planet.name}>{planet.name}</div>
+          </div>
+        );
+      })}
       <img src={egg} className='egg'></img>
       <img src={bearears} className='bearears'></img>
     </div>
   );
 }
+
+// first click is home planet
+  // update redux store with first click
+// on second click target planet (Only if first click is set to true) (can continually click)
+  // update redux store with second click
+  // render a line between the planets
+// reset button - resets selected planets
+// figure out turn count on mission module

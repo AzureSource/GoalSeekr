@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ShipListEntry from './ShipListEntry.jsx';
+import { useSelector } from 'react-redux';
 import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
-
+  const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
   const [shipSelection, setShipSelection] = useState({});
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
 
   // Dummy Data
-  let planetSelected = 'Earth';
-  let targetPlanetSelected = 'Mars';
   let shipList = [
     { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
   ];
@@ -29,7 +28,7 @@ export default function MissionModule() {
 
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
-    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planetSelected, type: missionType, ship: shipData, target: targetPlanetSelected }]));
+    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
     console.log('mission Queue', missionQueue);
   };
 
@@ -41,11 +40,12 @@ export default function MissionModule() {
     ]);
   };
 
+  console.log('planets', planets);
+
   return (
     <div font='white'>
       <div>
-        {/* On First click of galaxy map, home planet is selected  */}
-        {planetSelected}
+        {planets.homePlanet}
       </div>
       <div>
         <Select
@@ -60,8 +60,7 @@ export default function MissionModule() {
         </Select>
       </div>
       <div>
-        {/* On second click of galaxy map, target planet is selected  */}
-        {targetPlanetSelected}
+        {planets.targetPlanet}
       </div>
       <Divider orientation='horizontal' />
       {shipList.length === 0 ? (

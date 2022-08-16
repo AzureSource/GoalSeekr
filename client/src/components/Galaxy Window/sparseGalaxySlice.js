@@ -7,7 +7,7 @@ const initialState = {
   }
 };
 
-export const sGalaxyPlanetSelection = createSlice({
+export const sparseGalaxyPlanetSelection = createSlice({
   name: 'planetSelection',
   initialState,
   reducers: {
@@ -17,5 +17,5 @@ export const sGalaxyPlanetSelection = createSlice({
   },
 });
 
-export const { setPlanetSelection } = sGalaxyPlanetSelection.actions;
-export default sGalaxyPlanetSelection.reducer;
+export const { setPlanetSelection } = sparseGalaxyPlanetSelection.actions;
+export default sparseGalaxyPlanetSelection.reducer;

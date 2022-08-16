@@ -157,12 +157,4 @@ export default function SparseGalaxy() {
   );
 }
 
-// first click is home planet
-  // update redux store with first click
-// on second click target planet (Only if first click is set to true) (can continually click)
-  // update redux store with second click
-  // render a line between the planets
-// reset button - resets selected planets
-// figure out turn count on mission module
-
 
