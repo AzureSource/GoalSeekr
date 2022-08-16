@@ -23,13 +23,14 @@ function Playerlist () {
 
   const playerlist = [
     {
-      id: 1,
+      user_id: 1,
       icon: 'https://findicons.com/icon/53705/hard_hat',
       username: 'This guy',
       alliance: 'Kings',
       planets: ['a', 'b', 'c'],
       ships: [1, 2, 3, 4],
       currency: 1234,
+      metal: 420
     },
     {
       id: 13,
@@ -68,13 +69,13 @@ function Playerlist () {
   };
 
   return (
-    <div id='player-list' style={{width:'200px', margin: '1rem'}}>
-      <Accordion  allowToggle>
+    <div id='player-list' style={{width:'100%', padding: '5%'}}>
+      <Accordion className='pl-acc'  allowToggle>
         <Text textAlign={'center'}>Current Ranking</Text>
         {playerlist.map((player, index) => (
           <AccordionItem key={player.id}>
             <h2>
-              <AccordionButton sx={accButton} w='100%'_expanded={{ bg: 'tomato', color: 'white' }}>
+              <AccordionButton sx={accButton} w='100%'_expanded={{ bg: '#50b6ab', color: 'white' }}>
                 <Avatar size='xs' src='https://bit.ly/broken-link' />
                 {index === 0 && <GiTrophy className='p-list-smIcon'/> }
                 <span> {player.username} </span>
