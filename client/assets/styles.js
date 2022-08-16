@@ -601,8 +601,9 @@ const overrides = {
         justifyContent: 'center',
         width: '85px'
       },
-      '.username-input': {
+      '.username-input, .enter-existing-galaxy-input': {
         width: '200px',
+        fontFamily: 'Abril Fatface',
         size: '20px',
         textAlign: 'center',
         borderRadius: '4px',
@@ -610,7 +611,10 @@ const overrides = {
         height: '37px',
         margin: '15px 0px'
       },
-      '.username-input-btn': {
+      '.enter-existing-galaxy-input': {
+        margin: '5px'
+      },
+      '.username-input-btn, .join-galaxy-btn, .create-new-galaxy-btn': {
         fontSize: '25px',
         fontWeight: 800,
         fontFamily: 'Abril Fatface',
@@ -620,6 +624,14 @@ const overrides = {
         backgroundColor: '#2e2f47',
         width: '200px',
         height: '50px'
+      },
+
+      '.or-seperator': {
+        fontSize: '25px',
+        fontWeight: 800,
+        fontFamily: 'Abril Fatface',
+        paddingTop: '5px'
+
       }
     },
   },
