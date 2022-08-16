@@ -8,6 +8,9 @@ import background from '../assets/images/sparse sky.png';
 import Counter from './components/actionsToolbar/attackModal/Counter';
 import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';
 import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import MenuSide from './components/Galaxy Window/MenuSide.jsx';
+import MenuBottom from './components/Galaxy Window/MenuBottom.jsx';
 
 const App = () => {
 
@@ -26,3 +29,12 @@ const App = () => {
 };
 
 export default App;
+
+
+{/* <TransformWrapper>
+<MenuSide />
+<TransformComponent>
+  <GalaxyWindow className='galaxyWindow' />
+</TransformComponent>
+<MenuBottom />
+</TransformWrapper> */}

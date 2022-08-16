@@ -9,53 +9,225 @@ import pinktopia from '../../../assets/images/pinktopiaUnexplored.png';
 import pokitaru from '../../../assets/images/pokitaruUnexplored.png';
 import polaris from '../../../assets/images/polarisUnexplored.png';
 import steins from '../../../assets/images/steinsUnexplored.png';
-
+import egg from '../../../assets/hats/egg.png';
+import bearears from '../../../assets/hats/bearears.png';
 
 export default function DenseGalaxy() {
+  var planets = [
+    {
+      name: 'ZERO',
+      image: zero,
+      classname: 'zero'
+    },
+    {
+      name: 'PISCES',
+      image: zero,
+      classname: 'zero2'
+    },
+    {
+      name: 'CORBIN',
+      image: zero,
+      classname: 'zero3'
+    },
+    {
+      name: 'JADE',
+      image: zero,
+      classname: 'zero4'
+    },
+    {
+      name: 'PINKTOPIA',
+      image: pinktopia,
+      classname: 'pinktopia'
+    },
+    {
+      name: 'TAURUS',
+      image: pinktopia,
+      classname: 'pinktopia2'
+    },
+    {
+      name: 'MARSHALL',
+      image: pinktopia,
+      classname: 'pinktopia3'
+    },
+    {
+      name: 'AUSTIN',
+      image: pinktopia,
+      classname: 'pinktopia4'
+    },
+    {
+      name: 'POKITARU',
+      image: pokitaru,
+      classname: 'pokitaru'
+    },
+    {
+      name: 'CAPRICORN',
+      image: pokitaru,
+      classname: 'pokitaru2'
+    },
+    {
+      name: 'JEROME',
+      image: pokitaru,
+      classname: 'pokitaru3'
+    },
+    {
+      name: 'IBRAHEEM',
+      image: pokitaru,
+      classname: 'pokitaru4'
+    },
+    {
+      name: 'STEINS',
+      image: steins,
+      classname: 'steins'
+    },
+    {
+      name: 'VIRGO',
+      image: steins,
+      classname: 'steins2'
+    },
+    {
+      name: 'IZZI',
+      image: steins,
+      classname: 'steins3'
+    },
+    {
+      name: 'ALGO',
+      image: steins,
+      classname: 'steins4'
+    },
+    {
+      name: 'LAVA',
+      image: lava,
+      classname: 'lava'
+    },
+    {
+      name: 'LEO',
+      image: lava,
+      classname: 'lava2'
+    },
+    {
+      name: 'BOOLEAN',
+      image: lava,
+      classname: 'lava3'
+    },
+    {
+      name: 'FLOWER',
+      image: lava,
+      classname: 'lava4'
+    },
+    {
+      name: 'HAKU',
+      image: haku,
+      classname: 'haku'
+    },
+    {
+      name: 'SCORPIO',
+      image: haku,
+      classname: 'haku2'
+    },
+    {
+      name: 'XUTIS',
+      image: haku,
+      classname: 'haku3'
+    },
+    {
+      name: 'PEACH',
+      image: haku,
+      classname: 'haku4'
+    },
+    {
+      name: 'CHIHIRO',
+      image: chihiro,
+      classname: 'chihiro'
+    },
+    {
+      name: 'REDUX',
+      image: chihiro,
+      classname: 'chihiro2'
+    },
+    {
+      name: 'APPLE',
+      image: chihiro,
+      classname: 'chihiro3'
+    },
+    {
+      name: 'VION',
+      image: chihiro,
+      classname: 'chihiro4'
+    },
+    {
+      name: 'CALCIFER',
+      image: calcifer,
+      classname: 'calcifer'
+    },
+    {
+      name: 'FINN',
+      image: calcifer,
+      classname: 'calcifer2'
+    },
+    {
+      name: 'BLADE',
+      image: calcifer,
+      classname: 'calcifer3'
+    },
+    {
+      name: 'NEON',
+      image: calcifer,
+      classname: 'calcifer4'
+    },
+    {
+      name: 'ATHEA',
+      image: athea,
+      classname: 'athea'
+    },
+    {
+      name: 'LOLLIPOP',
+      image: athea,
+      classname: 'athea2'
+    },
+    {
+      name: 'MEI',
+      image: athea,
+      classname: 'athea3'
+    },
+    {
+      name: 'LUNAR',
+      image: athea,
+      classname: 'athea4'
+    },
+    {
+      name: 'POLARIS',
+      image: polaris,
+      classname: 'polaris'
+    },
+    {
+      name: 'PETER',
+      image: polaris,
+      classname: 'polaris2'
+    },
+    {
+      name: 'ZORIX',
+      image: polaris,
+      classname: 'polaris3'
+    },
+    {
+      name: 'SCAR',
+      image: polaris,
+      classname: 'polaris4'
+    }
+  ];
+  function makePlanetDiv(object) {
+    return (
+      <div>
+        <img src={object.image} className={object.classname}></img>
+        <div className={object.name}>{object.name}</div>
+      </div>
+    );
+  }
   return (
     <div>
-      <div className='allPlanets'>
-        <img src={zero} className='zero'></img>
-        <img src={zero} className='zero2'></img>
-        <img src={zero} className='zero3'></img>
-        <img src={zero} className='zero4'></img>
-        <img src={pinktopia} className='pinktopia'></img>
-        <img src={pinktopia} className='pinktopia2'></img>
-        <img src={pinktopia} className='pinktopia3'></img>
-        <img src={pinktopia} className='pinktopia4'></img>
-        <img src={pokitaru} className='pokitaru'></img>
-        <img src={pokitaru} className='pokitaru2'></img>
-        <img src={pokitaru} className='pokitaru3'></img>
-        <img src={pokitaru} className='pokitaru4'></img>
-        <img src={steins} className='steins'></img>
-        <img src={steins} className='steins2'></img>
-        <img src={steins} className='steins3'></img>
-        <img src={steins} className='steins4'></img>
-        <img src={lava} className='lava'></img>
-        <img src={lava} className='lava2'></img>
-        <img src={lava} className='lava3'></img>
-        <img src={lava} className='lava4'></img>
-        <img src={haku} className='haku'></img>
-        <img src={haku} className='haku2'></img>
-        <img src={haku} className='haku3'></img>
-        <img src={haku} className='haku4'></img>
-        <img src={chihiro} className='chihiro'></img>
-        <img src={chihiro} className='chihiro2'></img>
-        <img src={chihiro} className='chihiro3'></img>
-        <img src={chihiro} className='chihiro4'></img>
-        <img src={calcifer} className='calcifer'></img>
-        <img src={calcifer} className='calcifer2'></img>
-        <img src={calcifer} className='calcifer3'></img>
-        <img src={calcifer} className='calcifer4'></img>
-        <img src={athea} className='athea'></img>
-        <img src={athea} className='athea2'></img>
-        <img src={athea} className='athea3'></img>
-        <img src={athea} className='athea4'></img>
-        <img src={polaris} className='polaris'></img>
-        <img src={polaris} className='polaris2'></img>
-        <img src={polaris} className='polaris3'></img>
-        <img src={polaris} className='polaris4'></img>
-      </div>
+      {planets.map((planet) => makePlanetDiv(planet))}
+      <img src={egg} className='egg'></img>
+      <img src={bearears} className='bearears'></img>
     </div>
   );
 }
