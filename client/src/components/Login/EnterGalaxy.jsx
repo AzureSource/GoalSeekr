@@ -73,8 +73,12 @@ export default function EnterGalaxy({ setTitle }){
           >
             Create Galaxy
           </button>
-          <p>OR</p>
-          <input onChange={(event)=>setExistingGalaxy(event.target.value)} placeholder=" Join An Existing Galaxy "/>
+          <p className='or-seperator'>OR</p>
+          <input
+            className='enter-existing-galaxy-input'
+            onChange={(event)=>setExistingGalaxy(event.target.value)}
+            placeholder=" Join An Existing Galaxy "
+          />
           <button
             className='join-galaxy-btn'
             type="button" onClick={(event)=>handleJoinGalaxy(event)}
