@@ -45,6 +45,31 @@ module.exports = {
     } catch (error) {
       res.end().status(500);
     }
+  },
+  doMission: async function (req, res) {
+    try {
+      let userId = req.params.user_id;
+      let type = req.body.data.type;
+      if (type === 'scout') {
+        let targetPlanet = req.body.data.targetPlanet;
+        const query = 'SELECT * FROM updateplantsgalaxy($1, $2)';
+        await client(query, [userId, targetPlanet]);
+      }
+      res.sendStatus(201);
+    } catch (err) {
+      res.end().status(500);
+    }
+  },
+  getPlanets: async function (req, res) {
+    try {
+      let userId = req.params.user_id;
+      const query = `SELECT * FROM public.planets_galaxy
+      WHERE colonizedby = $1 OR $1 = ANY (discovered)`;
+      const results = await client(query, [userId]);
+      res.json(results);
+    } catch (err) {
+      res.end().status(500);
+    }
   }
 
 };

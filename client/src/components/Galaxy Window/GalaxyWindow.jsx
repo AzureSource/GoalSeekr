@@ -12,7 +12,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import ChooseHat from '../ChooseHat.jsx';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {getUserShipsFromDB} from '../buildShips/UserShipSlice';
+import {getUserShipsFromDB, getUserPlanetsFromDB} from '../buildShips/UserShipSlice';
 
 export const UserContext = createContext(null);
 
@@ -24,7 +24,11 @@ export default function GalaxyWindow ({ setTitle }) {
 
   const userShips = useSelector(state => state.userShips.ships);
 
-  // console.log('userShips is ', userShips);
+  const userPlanets = useSelector(state => state.userShips.planets);
+
+  console.log('userShips is ', userShips);
+
+  console.log('userPlanets is ', userPlanets);
 
   useEffect(() => {
     setTitle(false);
@@ -33,8 +37,11 @@ export default function GalaxyWindow ({ setTitle }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`/api/users/${id}/ships`);
-      dispatch(getUserShipsFromDB(res.data.getusersships));
+      const ships = await axios.get(`/api/users/${id}/ships`);
+      dispatch(getUserShipsFromDB(ships.data.getusersships));
+      const planets = await axios.get(`/api/users/${id}/planets`);
+      console.log('planets.data is ', planets.data);
+      dispatch(getUserPlanetsFromDB(planets.data.getusersplants));
     };
     fetchData();
   }, []);

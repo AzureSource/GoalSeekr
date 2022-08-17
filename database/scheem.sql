@@ -74,7 +74,7 @@ CREATE TABLE planets_galaxy (
   planet_id INT REFERENCES planets(id),
   galaxy_id INT REFERENCES galaxies(id),
   colonizedBy INT REFERENCES users(id) DEFAULT NULL,
-  discovered BOOLEAN DEFAULT false NOT NULL
+  discovered int[] DEFAULT array[]::int[] NOT NULL
 );
 
 CREATE TABLE ships_user (
