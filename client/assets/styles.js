@@ -9,7 +9,8 @@ const overrides = {
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
-        backgroundSize: 'contain'
+        backgroundSize: 'contain',
+        zIndex: -1,
       },
       '.galaxy-window': {
         width: '100%',
@@ -378,13 +379,15 @@ const overrides = {
         height: '70%'
       },
       '.menu-side': {
-        width: '20%'
+        width: '20%',
+        zIndex: 10,
       },
       '.temp-div': {
         width: '80%'
       },
       '.menu-bottom': {
-        height: '30%'
+        height: '30%',
+        zIndex: 10,
       },
       '.menu-bottom-container': {
         width: '95%',

@@ -28,7 +28,6 @@ export default function GalaxyWindow ({ setTitle }) {
 
   useEffect(() => {
     setTitle(false);
-
   }, []);
 
   useEffect(() => {
@@ -44,14 +43,14 @@ export default function GalaxyWindow ({ setTitle }) {
       <div className='galaxy-window' color='white'>
         <Flex className='galaxy-window-top'>
           <MenuSide/>
-          <TransformWrapper>
-            <TransformComponent>
-              <div className='planetsWindow'>
+          <div className='planetsWindow'>
+            <TransformWrapper>
+              <TransformComponent>
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
-              </div>
-            </TransformComponent>
-          </TransformWrapper>
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
         </Flex>
         <MenuBottom/>
       </div>
