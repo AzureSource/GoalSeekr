@@ -3,6 +3,7 @@ import galaxyOptionsReducer from '../components/CreateGalaxy/galaxyOptionsSlice'
 import denseGalaxyPlanetSelectionReducer from '../components/Galaxy Window/denseGalaxySlice';
 import counterReducer from '../components/Galaxy Window/actionsToolbar/missionModule/counterSlice';
 import userShipsReducer  from '../components/buildShips/UserShipSlice';
+import currentGalaxyNameReducer from '../components/CreateGalaxy/CreateGalaxySlice';
 
 export default configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export default configureStore({
     galaxyOptions: galaxyOptionsReducer,
     denseGalaxyPlanetSelection: denseGalaxyPlanetSelectionReducer,
     galaxyOptions: galaxyOptionsReducer,
-    userShips: userShipsReducer
+    userShips: userShipsReducer,
+    currentGalaxyName: currentGalaxyNameReducer,
   }
 });

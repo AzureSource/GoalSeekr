@@ -12,7 +12,6 @@ export default function MissionModule() {
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
-  const [galaxy, setGalaxy] = useState('');
   const dispatch = useDispatch();
 
   // Dummy Data
