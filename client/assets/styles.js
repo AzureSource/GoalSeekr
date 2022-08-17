@@ -381,17 +381,17 @@ const overrides = {
       '.menu-side': {
         width: '20%',
       },
-      '.temp-div': {
-
-        width: '80%'
-      },
       '.menu-bottom': {
-        height: '30%',
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        alignItems: 'end',
+        justifyContent: 'end',
       },
       '.menu-bottom-container': {
         zIndex: 10,
-        width: '95%',
-        height: '80%',
+        width: '80%',
+        height: '20%',
         border: '2px solid #50b6ab',
         backgroundColor: 'transparent',
         borderRadius: '15px'
