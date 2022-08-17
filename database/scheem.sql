@@ -646,7 +646,7 @@ BEGIN
 do $$
 begin
    for num in 1..10 loop
-   INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers) VALUES (CONCAT('Galaxy', num), 20, 2020, 12, 0);
+   INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers, allianceallowed, smallgalaxy) VALUES (CONCAT('Galaxy', num), 20, 2020, 12, 0, (SELECT num % 2 = 0), (SELECT num % 4 = 0));
    raise notice 'Galaxy% Inserted', num;
    end loop;
 end; $$;
