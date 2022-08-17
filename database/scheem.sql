@@ -259,6 +259,7 @@ $func$ LANGUAGE plpgsql VOLATILE COST 100;
 CREATE OR REPLACE FUNCTION assignTaskToUser("taskname" TEXT, "userid" INT)
   RETURNS JSON AS $func$
 	DECLARE result JSON;
+	DECLARE exists BOOLEAN;
 BEGIN
 	SELECT id FROM tasks_user WHERE user_id = $2 INTO exists;
 	IF NOT exists THEN
