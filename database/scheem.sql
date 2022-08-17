@@ -8,7 +8,9 @@ CREATE TABLE galaxies (
   yearsPerTurn INT NOT NULL,
   currentYear INT NOT NULL,
   maxPlayers INT NOT NULL,
-  currentPlayers INT NOT NULL DEFAULT 1
+  currentPlayers INT NOT NULL DEFAULT 1,
+	allianceAllowed BOOLEAN NOT NULL,
+	smallGalaxy BOOLEAN NOT NULL
 );
 
 CREATE TABLE users (
@@ -40,7 +42,7 @@ CREATE TABLE ships (
 
 CREATE TABLE alliances (
   id SERIAL PRIMARY KEY,
-  name TEXT UNIQUE,
+  name TEXT UNIQUE NOT NULL,
   memberCount INT NOT NULL DEFAULT 1
 );
 
@@ -48,14 +50,14 @@ CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
   description TEXT NOT NULL UNIQUE,
   reward INT NOT NULL,
-  difficulty TEXT
+  difficulty TEXT NOT NULL
 );
 
 CREATE TABLE tasks_user (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
   task_id INT REFERENCES tasks(id),
-	isCompleted BOOLEAN
+	isCompleted BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE chat (
@@ -72,15 +74,15 @@ CREATE TABLE planets_galaxy (
   planet_id INT REFERENCES planets(id),
   galaxy_id INT REFERENCES galaxies(id),
   colonizedBy INT REFERENCES users(id) DEFAULT NULL,
-  discovered BOOLEAN DEFAULT false
+  discovered BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE ships_user (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
   user_ship_id INT REFERENCES ships(id),
-  user_ship_name TEXT,
-  user_ship_health FLOAT,
+  user_ship_name TEXT NOT NULL,
+  user_ship_health FLOAT NOT NULL,
   user_ship_rangeCapacity INT NOT NULL,
   user_ship_powerLevel INT NOT NULL,
   user_ship_planet_id INT REFERENCES planets(id),
