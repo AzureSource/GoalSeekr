@@ -41,8 +41,8 @@ export default function GalaxyWindow ({ setTitle }) {
   return (
     <UserContext.Provider value={id}>
       <div className='galaxy-window' color='white'>
+        <MenuSide/>
         <Flex className='galaxy-window-top'>
-          <MenuSide/>
           <div className='planetsWindow'>
             <TransformWrapper>
               <TransformComponent>
