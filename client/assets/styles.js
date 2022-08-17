@@ -9,7 +9,8 @@ const overrides = {
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
-        backgroundSize: 'contain'
+        backgroundSize: 'contain',
+        zIndex: -1,
       },
       '.galaxy-window': {
         width: '100%',
@@ -19,8 +20,8 @@ const overrides = {
         height: '100%',
       },
       '.planetsWindow': {
-        height: '550px',
-        width: '1100px'
+        height: '720px',
+        width: '1280px'
       },
       '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
         // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
@@ -378,19 +379,21 @@ const overrides = {
         height: '70%'
       },
       '.menu-side': {
-        width: '20%'
+        width: '20%',
       },
       '.temp-div': {
+
         width: '80%'
       },
       '.menu-bottom': {
-        height: '30%'
+        height: '30%',
       },
       '.menu-bottom-container': {
+        zIndex: 10,
         width: '95%',
         height: '80%',
         border: '2px solid #50b6ab',
-        backgroundColor: '#2e2f47',
+        backgroundColor: 'transparent',
         borderRadius: '15px'
       },
       //-------------------------------HAT MODAL
@@ -424,9 +427,11 @@ const overrides = {
       '.menu-side-container': {
         width: '70%',
         height: '85%',
+        position: 'absolute',
         border: '2px solid #50b6ab',
         backgroundColor: '#2e2f47',
-        borderRadius: '15px'
+        borderRadius: '15px',
+        zIndex: 10,
       },
       '.pl-acc': {
         backgroundColor: '#41437e',
