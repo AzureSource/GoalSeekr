@@ -27,15 +27,13 @@ const ChooseHat = ( {gId} ) =>  {
   };
 
   //call fetching function after mount
-  const useEffect = (() => {
-    fetch(gId);
-  }, [gId]);
+  const useEffect = (() => fetch(gId), [gId]);
 
   //confirm the choice, post to DB (need to adjust/fix the body object based on table setup)
   const confirmHat = () => {
     axios.put('/hat', {params: {hat: hatPick, user: 'user_id'}})
-      .then((res) => console.log(`Hat choice confirmed in DB`, res))
-      .catch((err) => console.log(err));
+    .then((res) => console.log(`Hat choice confirmed in DB`, res))
+    .catch((err) => console.log(err));
   };
 
 

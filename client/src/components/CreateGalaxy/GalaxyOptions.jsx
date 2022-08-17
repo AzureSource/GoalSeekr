@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { Flex, Switch, FormControl } from '@chakra-ui/react';
 

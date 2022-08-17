@@ -51,9 +51,7 @@ export default function EnterGalaxy({ setTitle }){
 
   };
 
-  useEffect(() => {
-    setTitle(true);
-  }, []);
+  useEffect(() => setTitle(true), []);
 
   return (
     <Flex

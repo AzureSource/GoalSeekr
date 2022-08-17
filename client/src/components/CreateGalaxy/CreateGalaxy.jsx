@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import doten
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
@@ -34,7 +33,9 @@ const CreateGalaxy = ({ setTitle }) => {
       galaxySize,
     };
     console.log(send);
-    axios.put('', send);
+    axios.post(localhost , send)
+      .then(() => console.log('posted'))
+      .catch(err => console.log(err));
   };
 
   const handleCancel = (event) => {
@@ -43,13 +44,12 @@ const CreateGalaxy = ({ setTitle }) => {
   };
   const handleGoToGalaxyWindow = async (event) => {
     event.preventDefault();
+    if (galaxyName < 1) return alert('Enter Galaxy Name');
     await submitGalaxy();
     redirectToGalaxyWindow();
   };
 
-  useEffect(() => {
-    setTitle(false);
-  }, []);
+  useEffect(() => setTitle(false), []);
 
   return (
     <Flex className='create-galaxy-container'
