@@ -4,6 +4,7 @@ import denseGalaxyPlanetSelectionReducer from '../components/Galaxy Window/dense
 import userShipsReducer  from '../components/buildShips/UserShipSlice';
 import currentGalaxyNameReducer from '../components/CreateGalaxy/CreateGalaxySlice';
 import missionQueueReducer from '../components/Galaxy Window/actionsToolbar/missionModule/missionModuleSlice';
+import toggleEndTurnReducer from '../components/Galaxy Window/lowerToolbar/statsSlice';
 
 export default configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export default configureStore({
     userShips: userShipsReducer,
     currentGalaxyName: currentGalaxyNameReducer,
     missionQueue: missionQueueReducer,
+    toggleEndTurn: toggleEndTurnReducer,
   }
 });

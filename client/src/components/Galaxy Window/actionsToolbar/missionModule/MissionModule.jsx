@@ -12,7 +12,6 @@ export default function MissionModule() {
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
   const [shipSelection, setShipSelection] = useState({});
-  // const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
@@ -53,18 +52,11 @@ export default function MissionModule() {
     dispatch(setMissionQueue({
       add: {start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet}
     }));
-    // setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
   };
 
   const editMission = (missionIndex) => {
     dispatch(setMissionQueue({remove: missionIndex}));
-    // setMissionQueue([
-    //   ...missionQueue.slice(0, missionIndex),
-    //   ...missionQueue.slice(missionIndex + 1)
-    // ]);
   };
-
-  // console.log('planets', planets);
 
   return (
     <div font='white'>
