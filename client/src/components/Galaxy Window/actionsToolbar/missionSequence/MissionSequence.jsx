@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function MissionSequence() {
   // pull mission data from store
   let missionData = useSelector((state) => state.missionQueue.missions);
-  console.log('missionData', missionData);
+  // console.log('missionData', missionData);
 
   return (
     <div></div>
@@ -31,6 +31,7 @@ export default function MissionSequence() {
   //if colonize, check if attack ships are there, or if there are defenders
     // Maybe say 2 attack ships needed to take out mothership.
 // once battle is complete send new data on planet ownership to database.
+// reset endTurnActivation to false.
 // send notification of results to both users.
 
 
