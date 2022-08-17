@@ -24,7 +24,7 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
                 <Td>{ship.count}</Td>
                 <Td>{ship.name}</Td>
                 <Td>{ship.type}</Td>
-                <Td>{ship.powerLevel}</Td>
+                <Td>{ship.power}</Td>
               </Tr>
             );
           })}

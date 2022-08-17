@@ -21,10 +21,13 @@ export default function MissionModule() {
 
   const checkForShips = () => {
     const planetName = planets.homePlanet;
-    axios.get(`/api/ships/${planetName}`)
+    const galaxy = 'dense';
+    axios.get(`/api/ships/${galaxy}/${planetName}`)
       .then((res) => {
-        console.log('res', res);
-        // setShips(res.body);
+        // console.log('res', res.data[0].getusershipsonplanetbynames.players.ships);
+        setShips(
+          res.data[0].getusershipsonplanetbynames.players
+        );
       })
       .catch((err) => {
         console.log('There was an error grabbing the ship data.', err);
@@ -80,10 +83,10 @@ export default function MissionModule() {
         <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
       <Divider orientation='horizontal' />
-      {shipList.length === 0 ? (
+      {ships === null ? (
         <div>There are no fleets at this planet.</div>
       ) : (
-        <ShipListEntry shipList={shipList} handleShipSelection={handleShipSelection} />
+        <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
       {/* On endTurn reset the queue & queue is sent to local store for holding. */}
