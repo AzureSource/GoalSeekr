@@ -22,9 +22,9 @@ routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
 routes.get('/api/tasks/currency/:userID', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
 
-// player list
-routes.get('/api/players', getAllPlayers);
 
+// User Routes
+routes.get('/api/users/:galaxy_id', user.getAllUsersByGalaxy);
 // routes.put('/api/users/:user_id',user.updateUserName);
 routes.post('/api/users',users.checkUser);
 routes.get('/api/galaxy',users.checkGalaxyName);

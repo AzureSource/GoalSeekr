@@ -1,6 +1,19 @@
 const client = require('../../database');
 
 module.exports = {
+
+  getAllUsersByGalaxy: async function(req, res) {
+    const g_id = req.params.galaxy_id;
+
+    try {
+      const query = `SELECT getplayerdatabygalaxyid(${g_id}, false)`;
+      const results = await client(query);
+      res.json(results.rows[0].getplayerdatabygalaxyid.Players);
+    }
+    catch (error) {
+      res.sendStatus(501);
+    }
+  },
   findOne: async function (req, res) {
     try {
       const query = 'SELECT * FROM public.users WHERE id = $1';

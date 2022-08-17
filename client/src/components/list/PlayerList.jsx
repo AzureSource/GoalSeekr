@@ -14,7 +14,7 @@ import {
 import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag, GiZeusSword} from 'react-icons/gi';
 
 
-function Playerlist () {
+function Playerlist ({ g_id }) {
   const [playerlist, setPlayerlist] = useState([]);
 
   //fetch players in the game (icons, usernames, planets, ships, currency, metal)
@@ -24,7 +24,7 @@ function Playerlist () {
   //rank will then be the index of the players in the list
 
   useEffect(() => {
-    axios.get('/api/players')
+    axios.get('/api/users/:galaxy_id', {params: {galaxy_id: g_id}})
       .then((results) => setPlayerlist(results.data))
       .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
   }, []);
