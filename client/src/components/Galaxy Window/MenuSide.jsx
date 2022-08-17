@@ -9,7 +9,6 @@ const MenuSide = () => {
     <Flex
       className='menu-side-container'
       flexDir='column'
-      margin='15px'
     >
       <Playerlist />
       <br/>

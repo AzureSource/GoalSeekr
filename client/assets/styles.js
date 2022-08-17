@@ -424,10 +424,10 @@ const overrides = {
       },
       //-------------------------------SIDE MENU
       '.menu-side-container': {
-        width: '30%',
-        height: '95%',
+        width: '32%',
+        height: '100%',
         position: 'absolute',
-        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         zIndex: 10,
       },
       '.pl-acc': {
