@@ -54,7 +54,8 @@ CREATE TABLE tasks (
 CREATE TABLE tasks_user (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  task_id INT REFERENCES tasks(id)
+  task_id INT REFERENCES tasks(id),
+	isCompleted BOOLEAN
 );
 
 CREATE TABLE chat (
@@ -89,13 +90,13 @@ CREATE TABLE ships_user (
 CREATE TABLE hats (
   id SERIAL PRIMARY KEY,
   name TEXT,
-  url TEXT,
+  url TEXT
 );
 
 CREATE TABLE hats_user (
   id SERIAL PRIMARY KEY,
   galaxy_id INT REFERENCES galaxies(id),
-  user_id INT REFERENCES users(id),
+  user_id INT REFERENCES users(id)
 );
 
 
@@ -561,6 +562,43 @@ BEGIN
 	RETURNING * INTO result;
 	RETURN row_to_json(result);
 END;
+$func$
+LANGUAGE plpgsql VOLATILE COST 100;
+
+--Toggles a users' completed status on their assigned task and updates their currency to reflect the toggle while returning data
+
+CREATE OR REPLACE FUNCTION toggletaskforuser("userID" INT, "taskID" INT)
+  RETURNS JSON AS $func$
+	DECLARE
+	  isTaskComplete BOOLEAN;
+		currentMoney INT;
+		taskreward INT;
+BEGIN
+		SELECT isCompleted FROM tasks_user WHERE user_id = $1 AND task_id = $2 INTO isTaskComplete;
+		SELECT currency FROM users WHERE id = $1 INTO currentMoney;
+		SELECT reward FROM tasks WHERE id = $2 INTO taskreward;
+	  IF isTaskComplete THEN
+			RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
+			UPDATE USERS SET currency = currentMoney - taskreward WHERE id = $1;
+		ELSE
+		 RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
+		 UPDATE USERS SET currency = currentMoney + taskreward WHERE id = $1;
+		END IF;
+		UPDATE tasks_user SET isCompleted = NOT isTaskComplete WHERE user_id = $1 AND task_id = $2;
+		RETURN (
+			SELECT
+				json_build_object(
+				'userid', $1,
+				'previousBalance', currentMoney,
+				'newBalance', (SELECT currency FROM users WHERE id = $1),
+				'totalTaskRewardGain', (SELECT COALESCE(sum(reward), 0) as Sum from tasks where id in (SELECT task_id FROM tasks_user WHERE user_id = $1 AND iscompleted = true)),
+				'taskData', json_build_object(
+					'taskid', $2,
+					'taskname', (SELECT description FROM tasks WHERE id = $2),
+					'reward', taskreward
+				)
+				));
+END
 $func$
 LANGUAGE plpgsql VOLATILE COST 100;
 
