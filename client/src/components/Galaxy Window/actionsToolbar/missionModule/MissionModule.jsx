@@ -20,6 +20,7 @@ export default function MissionModule() {
     { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
   ];
 
+  // Galaxy name disapears on refresh of page.
   const checkForShips = () => {
     const planetName = planets.homePlanet;
     const galaxy = galaxyName;
@@ -36,7 +37,9 @@ export default function MissionModule() {
   };
 
   useEffect(() => {
-    checkForShips();
+    if (planets.homePlanet) {
+      checkForShips();
+    }
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
