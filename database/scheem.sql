@@ -558,17 +558,16 @@ END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- Creates a galaxy and returns the newly created galaxy as JSON
-CREATE OR REPLACE FUNCTION creategalaxy("name" TEXT, "yearsPerTurn" INT, "currentYear" INT, "maxPlayers" INT)
+CREATE OR REPLACE FUNCTION creategalaxy ("name" TEXT, "yearsPerTurn" INT, "maxPlayers" INT, "allianceallowed" BOOLEAN, "smallgalaxy" BOOLEAN)
   RETURNS JSON AS $func$
 	DECLARE result galaxies%rowtype;
 BEGIN
-	INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers)
-	VALUES($1, $2, $3, $4, 1)
+	INSERT INTO galaxies (name, yearsperturn, maxplayers, allianceallowed, smallgalaxy, currentyear, currentplayers)
+	VALUES($1, $2,$3, $4, $5, (SELECT extract(year from current_timestamp)), 1)
 	RETURNING * INTO result;
 	RETURN row_to_json(result);
 END;
-$func$
-LANGUAGE plpgsql VOLATILE COST 100;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 --Toggles a users' completed status on their assigned task and updates their currency to reflect the toggle while returning data
 CREATE OR REPLACE FUNCTION toggletaskforuser("userID" INT, "taskID" INT)
