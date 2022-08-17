@@ -61,11 +61,15 @@ module.exports = {
     }
   },
   getPlanets: async function (req, res) {
+    console.log('hit');
+    debugger;
     try {
       let userId = req.params.user_id;
+      console.log('hit');
       const query = `SELECT * FROM public.planets_galaxy
-      WHERE colonizedby = $1 OR $1 = ANY (discovered)`;
+      WHERE colonizedby = $1 OR $1 = ANY (discoveredby)`;
       const results = await client(query, [userId]);
+      console.log('results is ', results.rows());
       res.json(results);
     } catch (err) {
       res.end().status(500);
