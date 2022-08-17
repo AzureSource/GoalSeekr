@@ -36,6 +36,15 @@ module.exports = {
     } catch (error) {
       res.end().status(500);
     }
+  },
+  getGalaxyName: async function (req, res) {
+    try {
+      const query = 'SELECT name FROM galaxies';
+      const results = await client(query);
+      res.json(results);
+    } catch (error) {
+      res.end().status(500);
+    }
   }
 
 };

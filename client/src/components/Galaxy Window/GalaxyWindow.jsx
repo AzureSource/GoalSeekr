@@ -23,7 +23,7 @@ export default function GalaxyWindow ({ setTitle }) {
 
   const userShips = useSelector(state => state.userShips.ships);
 
-  console.log('userShips is ', userShips);
+  // console.log('userShips is ', userShips);
 
   useEffect(() => {
     setTitle(false);

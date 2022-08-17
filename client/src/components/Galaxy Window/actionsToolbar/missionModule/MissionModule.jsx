@@ -12,6 +12,7 @@ export default function MissionModule() {
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
+  const [galaxy, setGalaxy] = useState('');
   const dispatch = useDispatch();
 
   // Dummy Data
@@ -21,10 +22,10 @@ export default function MissionModule() {
 
   const checkForShips = () => {
     const planetName = planets.homePlanet;
-    const galaxy = 'dense';
+    const galaxy = 'Galaxy1';
     axios.get(`/api/ships/${galaxy}/${planetName}`)
       .then((res) => {
-        // console.log('res', res.data[0].getusershipsonplanetbynames.players);
+        console.log('res', res.data[0].getusershipsonplanetbynames.players);
         setShips(
           res.data[0].getusershipsonplanetbynames.players
         );
@@ -34,11 +35,24 @@ export default function MissionModule() {
       });
   };
 
+  const getGalaxyName = () => {
+    axios.get('/api/galaxyName')
+      .then((res) => {
+        console.log('name', res);
+      })
+      .catch((err) => {
+        console.log('There was an error grabbing the galaxy name.', err);
+      });
+  };
+
   useEffect(() => {
-    if (planets.homePlanet) {
-      checkForShips();
-    }
-  });
+    getGalaxyName();
+  }, []);
+
+
+  useEffect(() => {
+    checkForShips();
+  }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
     setShipSelection(shipData);
@@ -56,7 +70,7 @@ export default function MissionModule() {
     ]);
   };
 
-  console.log('planets', planets);
+  // console.log('planets', planets);
 
   return (
     <div font='white'>
