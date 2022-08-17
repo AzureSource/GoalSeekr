@@ -19,6 +19,8 @@ const CreateGalaxy = ({ setTitle }) => {
   const [galaxyName, setGalaxyName] = useState('');
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
+  const [yearsPerTurn, setYearsPerTurn] = useState(1);
+  const [alliance, setAlliance] = useState(false);
 
   const submitGalaxy = (data) => {
     return axios.get('endpoint', data);
@@ -28,14 +30,15 @@ const CreateGalaxy = ({ setTitle }) => {
     setTitle(false);
   }, []);
 
-  const handleCandle = function(event){
+  const handleCancel = (event) => {
     event.preventDefault();
     redirectToEnterGalaxyPage();
   };
-  const handleGoToGalaxyWindow = function(event){
+  const handleGoToGalaxyWindow = async (event) => {
     event.preventDefault();
+    await submitGalaxy();
     redirectToGalaxyWindow();
-  }
+  };
 
   return (
     <Flex className='create-galaxy-container'
@@ -72,6 +75,10 @@ const CreateGalaxy = ({ setTitle }) => {
             setMaxPlayerCount={setMaxPlayerCount}
           />
           <GalaxyOptions
+            yearsPerTurn={yearsPerTurn}
+            setYearsPerTurn={setYearsPerTurn}
+            alliance={alliance}
+            setAlliance={setAlliance}
             galaxySize={galaxySize}
             maxPlayerCount={maxPlayerCount}
             setMaxPlayerCount={setMaxPlayerCount}
@@ -84,7 +91,7 @@ const CreateGalaxy = ({ setTitle }) => {
           <Button
             backgroundColor='#2e2f47'
             className='create-galaxy-btn'
-            onClick={(e)=>handleCandle(e)}
+            onClick={(e)=>handleCancel(e)}
           >
             Cancel
           </Button>
