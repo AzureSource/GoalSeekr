@@ -8,6 +8,7 @@ import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
+  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const [shipSelection, setShipSelection] = useState({});
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
@@ -21,7 +22,7 @@ export default function MissionModule() {
 
   const checkForShips = () => {
     const planetName = planets.homePlanet;
-    const galaxy = 'Galaxy1';
+    const galaxy = galaxyName;
     axios.get(`/api/ships/${galaxy}/${planetName}`)
       .then((res) => {
         console.log('res', res.data[0].getusershipsonplanetbynames.players);
@@ -33,21 +34,6 @@ export default function MissionModule() {
         console.log('There was an error grabbing the ship data.', err);
       });
   };
-
-  const getGalaxyName = () => {
-    axios.get('/api/galaxyName')
-      .then((res) => {
-        console.log('name', res);
-      })
-      .catch((err) => {
-        console.log('There was an error grabbing the galaxy name.', err);
-      });
-  };
-
-  useEffect(() => {
-    getGalaxyName();
-  }, []);
-
 
   useEffect(() => {
     checkForShips();
