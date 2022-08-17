@@ -1,3 +1,17 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+
+export default function MissionSequence() {
+  // pull mission data from store
+
+  return (
+
+  )
+}
+
+
+
 // Sending a mission
 // end turn is clicked
   // remove existing ships from home planet (may be attacked while away)
