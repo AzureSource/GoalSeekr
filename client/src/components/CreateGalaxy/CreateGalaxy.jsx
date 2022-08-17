@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import doten
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 import { useParams } from 'react-router-dom';
+
+const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
 const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
@@ -27,11 +30,11 @@ const CreateGalaxy = ({ setTitle }) => {
       galaxyName,
       yearsPerTurn,
       maxPlayerCount,
+      alliance,
       galaxySize,
-      alliance
     };
     console.log(send);
-    return axios.put('endpoint', send);
+    axios.put('', send);
   };
 
   const handleCancel = (event) => {

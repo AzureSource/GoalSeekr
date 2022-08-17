@@ -26,7 +26,7 @@ routes.get('/hats/:galaxy_id', hats.getAll);
 routes.put('/hats/:user_id/:galaxy_id', hats.updateHat);
 
 // insert galaxy route
-routes.post('api/galaxy/createGalaxy', galaxy.postGalaxy);
+routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
 
 
 module.exports = routes;
