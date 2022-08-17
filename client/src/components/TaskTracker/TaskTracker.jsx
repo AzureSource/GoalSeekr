@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Flex } from '@chakra-ui/react';
 import ColsContainer from './Columns/ColsContainer.jsx';
 import CurrencyBar from './CurrencyBar.jsx';
 
-const TaskTracker = () => {
+const TaskTracker = ({ setTitle }) => {
+
+  useEffect((()=>setTitle(false)), []);
+
   return (
     <Flex className="mainContainer" flexDirection="column" h="100vh">
       <Flex className="navBar" h="5%" justifyContent="center">

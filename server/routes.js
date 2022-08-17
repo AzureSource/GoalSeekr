@@ -14,7 +14,7 @@ routes.post('/api/users/:user_id/ships', user.updateShips);
 // task tracker
 routes.get('/api/tasks/', tasks.getAllTasks);
 routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
-routes.get('/api/tasks/currency/:userID', tasks.getCurrencyByUser);
+routes.get('/api/currency/', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
 
 // routes.put('/api/users/:user_id',user.updateUserName);

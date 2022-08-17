@@ -43,6 +43,7 @@ const [title, setTitle] = useState(true);
           <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
           <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
           <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
+          <Route exact path = "/tasks/uid/:id" element={<TaskTracker setTitle={setTitle}/>} />
         </Routes>
       </div>
     </HashRouter>

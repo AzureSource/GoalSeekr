@@ -3,7 +3,7 @@ const db = require('../../database');
 //
 function getAllTasks(req, res) {
   const queryString = `
-    SELECT * FROM tasks limit 1;
+    SELECT * FROM tasks;
   `;
 
   db(queryString)
@@ -46,31 +46,26 @@ function addTask(req, res) {
     });
 }
 
-// need to know what users table will look like
-// and how to get current user to implement this
+//
 function getCurrencyByUser(req, res) {
-  res.sendStatus(501);
-  return;
-  // const queryString = `
-  //   SELECT ut.user_id, SUM(t.reward)
-  //   FROM user_tasks ut
-  //   JOIN tasks t
-  //   ON ut.task_id = t.task_id
-  //   WHERE ut.user_id = //someuser//;
-  // `;
+  // console.log('hereeee');
+  // res.sendStatus(501);
+  const queryString = `
+    SELECT currency
+    FROM users
+    WHERE id = 2;
+  `;
   // const values = [req.params.difficulty];
 
-  // db(queryString, values)
-  //   .then((result) => res.send(result.rows))
-  //   .catch((err) => {
-  //     console.log('Error retrieving all tasks line 11:\n', err);
-  //     res.sendStatus(501);
-  //   });
+  db(queryString)
+    .then((result) => res.send(result.rows))
+    .catch((err) => {
+      console.log('Error getCurrencyByUser line 62:\n', err);
+      res.sendStatus(501);
+    });
 }
 
 module.exports.getAllTasks = getAllTasks;
 module.exports.getTasksByDifficulty = getTasksByDifficulty;
 module.exports.addTask = addTask;
 module.exports.getCurrencyByUser = getCurrencyByUser;
-
-console.log(process.env.IBBY);

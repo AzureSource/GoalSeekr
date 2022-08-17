@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
+import axios from 'axios';
 import {
   Tag,
 } from '@chakra-ui/react';
 
 const CurrencyBar = () => {
   const [currency, setCurrency] = useState(25);
+  const {id} = useParams();
+  console.log(id, 'currecncy line 11'); //boooooooooom got it
+
+  axios.get()
 
   return (
     <Flex className="currBarContainer" m=".5rem"
