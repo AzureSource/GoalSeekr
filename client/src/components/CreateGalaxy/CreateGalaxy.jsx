@@ -24,9 +24,14 @@ const CreateGalaxy = ({ setTitle }) => {
 
   const submitGalaxy = () => {
     let send = {
-
-    }
-    return axios.put('endpoint', send);
+      galaxyName,
+      yearsPerTurn,
+      maxPlayerCount,
+      galaxySize,
+      alliance
+    };
+    console.log(send);
+    // return axios.put('endpoint', send);
   };
 
   const handleCancel = (event) => {

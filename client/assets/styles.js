@@ -5,6 +5,7 @@ const overrides = {
   styles: {
     global: {
       // add styles here
+
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
@@ -15,7 +16,7 @@ const overrides = {
         height: '100%'
       },
       '#root': {
-        height: '100%'
+        height: '100%',
       },
       '.planetsWindow': {
         height: '550px',

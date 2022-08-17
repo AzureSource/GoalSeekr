@@ -22,10 +22,6 @@ import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Cou
 //       <div className='app'>
 //         <GalaxyWindow setTitle={setTitle} className='galaxyWindow' />
 //       </div>
-//       {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-//       {/* <CreateGalaxy /> */}
-//       {/* <Title /> */}
-//       {/* <Menu /> */}
 //     </div>
 //   );
 
