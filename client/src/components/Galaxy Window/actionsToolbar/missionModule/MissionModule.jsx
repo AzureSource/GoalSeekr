@@ -111,25 +111,6 @@ export default function MissionModule() {
 }
 
 
-// Sending a mission
-// end turn is clicked
-  // remove existing ships from home planet (may be attacked while away)
-  // Missions are saved on local redux store with userID.
-  // Mission has a turn count that is decremented until ships reach target planet.
-  // Need to decided on distance count
-  // every turn decrements the count.
-// once the count reaches 0, grab current information of target planet, for battle.
-
-//battle
-  // based on type of mission
-  //if scout mission provide run down of planet information
-  //if attack, decide based on number of attack ships.
-  //if colonize, check if attack ships are there, or if there are defenders
-    // Maybe say 2 attack ships needed to take out mothership.
-// once battle is complete send new data on planet ownership to database.
-// send notification of results to both users.
-
-
 // render a line between the planets
 // figure out turn count on mission module
 
