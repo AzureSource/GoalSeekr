@@ -311,7 +311,7 @@ export default function DenseGalaxy() {
           <div>
             <img src={planet.image} className={planet.classname}></img>
             <div className={planet.name}>{planet.name}</div>
-            <Image src={sprout} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
+            <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
           </div>
         );
       })}
