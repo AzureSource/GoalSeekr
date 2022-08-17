@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-
 import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setGalaxyName } from './CreateGalaxySlice';
 
 const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
 const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
+  const dispatch = useDispatch();
 
   const redirectToEnterGalaxyPage = function() {
     window.location.href = `http://localhost:7777/#/entergalaxy/uid/${params.id}`;
@@ -19,7 +21,7 @@ const CreateGalaxy = ({ setTitle }) => {
     window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
   };
 
-  const [galaxyName, setGalaxyName] = useState('');
+  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
@@ -75,7 +77,7 @@ const CreateGalaxy = ({ setTitle }) => {
             className='galaxy-name-input'
             placeholder='Enter Galaxy Name'
             value={galaxyName}
-            onChange={(e) => setGalaxyName(e.target.value)}
+            onChange={(e) => dispatch(setGalaxyName(e.target.value))}
           />
         </Flex>
         <Flex
