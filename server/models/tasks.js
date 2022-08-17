@@ -72,5 +72,3 @@ module.exports.getAllTasks = getAllTasks;
 module.exports.getTasksByDifficulty = getTasksByDifficulty;
 module.exports.addTask = addTask;
 module.exports.getCurrencyByUser = getCurrencyByUser;
-
-console.log(process.env.IBBY);

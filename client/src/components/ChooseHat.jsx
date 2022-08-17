@@ -27,9 +27,7 @@ const ChooseHat = ( {gId} ) =>  {
   };
 
   //call fetching function after mount
-  const useEffect = (() => {
-    fetch(gId);
-  }, [gId]);
+  const useEffect = (() => fetch(gId), [gId]);
 
   //confirm the choice, post to DB (need to adjust/fix the body object based on table setup)
   const confirmHat = () => {

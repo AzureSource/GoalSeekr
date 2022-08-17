@@ -5,6 +5,7 @@ const overrides = {
   styles: {
     global: {
       // add styles here
+
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
@@ -15,7 +16,7 @@ const overrides = {
         height: '100%'
       },
       '#root': {
-        height: '100%'
+        height: '100%',
       },
       '.planetsWindow': {
         height: '550px',
@@ -430,6 +431,8 @@ const overrides = {
       '.pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
+        height: '7rem',
+        overflow: 'auto'
 
       },
       '.player-list': {
@@ -612,7 +615,7 @@ const overrides = {
         margin: '15px 0px'
       },
       '.enter-existing-galaxy-input': {
-        margin: '5px'
+        margin: '10px 0px'
       },
       '.username-input-btn, .join-galaxy-btn, .create-new-galaxy-btn': {
         fontSize: '25px',
