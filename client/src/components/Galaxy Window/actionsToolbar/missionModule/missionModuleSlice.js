@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  missionQueue: [],
+  missions: [],
 };
 
 export const missionQueue = createSlice({
@@ -9,6 +9,13 @@ export const missionQueue = createSlice({
   initialState,
   reducers: {
     setMissionQueue: (state, action) => {
+      console.log('payload', Object.keys(action.payload));
+      if (Object.keys(action.payload)[0] === 'add') {
+        state.missions.push(action.payload.add);
+      }
+      if (Object.keys(action.payload)[0] === 'remove') {
+        state.missions.splice(action.payload.remove, 1);
+      }
     },
   },
 });

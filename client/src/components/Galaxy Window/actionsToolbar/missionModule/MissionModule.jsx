@@ -3,14 +3,16 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { setMissionQueue } from './missionModuleSlice';
 import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
+  const missionQueue = useSelector((state) => state.missionQueue.missions);
   const [shipSelection, setShipSelection] = useState({});
-  const [missionQueue, setMissionQueue] = useState([]);
+  // const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
@@ -48,14 +50,18 @@ export default function MissionModule() {
 
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
-    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
+    dispatch(setMissionQueue({
+      add: {start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet}
+    }));
+    // setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
   };
 
   const editMission = (missionIndex) => {
-    setMissionQueue([
-      ...missionQueue.slice(0, missionIndex),
-      ...missionQueue.slice(missionIndex + 1)
-    ]);
+    dispatch(setMissionQueue({remove: missionIndex}));
+    // setMissionQueue([
+    //   ...missionQueue.slice(0, missionIndex),
+    //   ...missionQueue.slice(missionIndex + 1)
+    // ]);
   };
 
   // console.log('planets', planets);
