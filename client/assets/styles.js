@@ -392,8 +392,9 @@ const overrides = {
         zIndex: 10,
         width: '65%',
         height: '30%',
-        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
-        margin: '15px'
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
+        margin: '0px 15px',
+        justifyContent: 'center',
       },
       //-------------------------------HAT MODAL
       '#hat-div': {
@@ -449,6 +450,15 @@ const overrides = {
       'p-list-smIcon': {
         fontSize: '50%'
       },
+      //--------------------------------- stats and chats
+      '.stats-container, .chats-container': {
+        width: '45%',
+        margin: '15px',
+        borderRadius: '7px',
+        border: '2.5px solid rgba(80,182,171,0.6)',
+        background: '#2e2f47',
+      },
+      //--------------------------------- stats
       //---------------------------------SIDE MENU / LOWER TOOLBAR
       '#total-stat': {
         display: 'grid',

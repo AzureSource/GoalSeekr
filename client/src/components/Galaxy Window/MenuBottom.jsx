@@ -5,9 +5,12 @@ import Stats from './lowerToolbar/Stats.jsx';
 const MenuBottom = () => {
   return (
     <Flex className='menu-bottom'>
-      <div className='menu-bottom-container'>
+      <Flex className='menu-bottom-container'>
         <Stats />
-      </div>
+        <div className='chats-container'>
+          chats
+        </div>
+      </Flex>
     </Flex>
   );
 };

@@ -25,7 +25,8 @@ const Stats = (u_id) => {
 
 
   return (
-    <div id='stats'>
+    <div className='stats-container'>
+      stats
     </div>
   );
 
