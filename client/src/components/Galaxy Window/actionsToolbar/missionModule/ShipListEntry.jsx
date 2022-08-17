@@ -23,7 +23,7 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
               <Tr key={index} onClick={() => {handleShipSelection(ship);}}>
                 <Td>{ship.count}</Td>
                 <Td>{ship.name}</Td>
-                <Td>{ship.type}</Td>
+                {/* <Td>{ship.type}</Td> */}
                 <Td>{ship.power}</Td>
               </Tr>
             );

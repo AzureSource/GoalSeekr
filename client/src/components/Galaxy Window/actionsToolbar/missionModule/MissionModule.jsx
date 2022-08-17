@@ -127,6 +127,8 @@ export default function MissionModule() {
   //if colonize, check if attack ships are there, or if there are defenders
     // Maybe say 2 attack ships needed to take out mothership.
 // once battle is complete send new data on planet ownership to database.
+// send notification of results to both users.
+
 
 // render a line between the planets
 // figure out turn count on mission module

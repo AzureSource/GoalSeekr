@@ -22,7 +22,6 @@ const CreateGalaxy = ({ setTitle }) => {
   };
 
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
-  // const [galaxyName, setGalaxyName] = useState('');
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
