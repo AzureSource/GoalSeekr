@@ -7,11 +7,17 @@ import {
 } from '@chakra-ui/react';
 
 const CurrencyBar = () => {
-  const [currency, setCurrency] = useState(25);
+  const [currency, setCurrency] = useState();
   const {id} = useParams();
-  console.log(id, 'currecncy line 11'); //boooooooooom got it
+  console.log(id, 'currecncy line 11');
 
-  axios.get()
+  useEffect(
+    () => {
+      axios.get(`/api/currency/${id}`)
+        .then((results) => setCurrency(parseInt(results.data)))
+        .catch((err) => console.log('issue getting currency line 18:\n', err));
+    }, [id]
+  );
 
   return (
     <Flex className="currBarContainer" m=".5rem"
@@ -20,7 +26,7 @@ const CurrencyBar = () => {
       <Tag className="currBar" colorScheme="teal" w="100%" fontSize="2xl" justifyContent="center"
         border="1px solid" borderRadius="10px"
       >
-        Currency earned: $XX
+        Currency earned: ${currency}
       </Tag>
     </Flex>
   );

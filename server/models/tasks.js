@@ -48,17 +48,15 @@ function addTask(req, res) {
 
 //
 function getCurrencyByUser(req, res) {
-  // console.log('hereeee');
-  // res.sendStatus(501);
   const queryString = `
     SELECT currency
     FROM users
-    WHERE id = 2;
+    WHERE id = $1;
   `;
-  // const values = [req.params.difficulty];
+  const values = [req.params.userid];
 
-  db(queryString)
-    .then((result) => res.send(result.rows))
+  db(queryString, values)
+    .then((result) => res.send(result.rows[0].currency.toString()))
     .catch((err) => {
       console.log('Error getCurrencyByUser line 62:\n', err);
       res.sendStatus(501);

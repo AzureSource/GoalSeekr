@@ -8,6 +8,10 @@ const Task = ({ task }) => {
   // id to tasks_user. Currency will be the sum of reward for all
   // tasks for a specific user.
 
+  function completeTask () {
+    setTaskComplete(!taskComplete);
+  }
+
   return (
     <Flex className="singleTaskContainer"
       border="1px solid"
@@ -22,7 +26,7 @@ const Task = ({ task }) => {
         <Flex className="reward">
           ${task.reward}
         </Flex>
-        <Flex className="taskStatus" onClick={() => setTaskComplete(!taskComplete)}>
+        <Flex className="taskStatus" onClick={completeTask}>
           <Tooltip className="tooltip" label={taskComplete? '' : 'Click to mark task complete!'}>
             <div className="iconContainer">
               <IconButton
