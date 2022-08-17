@@ -24,7 +24,7 @@ function Playerlist ({ g_id }) {
   //rank will then be the index of the players in the list
 
   useEffect(() => {
-    axios.get('/api/users/:galaxy_id', {params: {galaxy_id: g_id}})
+    axios.get('/api/users/:galaxy_id', {params: {galaxy_id: 1}})
       .then((results) => setPlayerlist(results.data))
       .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
   }, []);

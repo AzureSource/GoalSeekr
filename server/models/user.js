@@ -4,6 +4,7 @@ module.exports = {
 
   getAllUsersByGalaxy: async function(req, res) {
     const g_id = req.params.galaxy_id;
+    console.log(g_id);
 
     try {
       const query = `SELECT getplayerdatabygalaxyid(${g_id}, false)`;
