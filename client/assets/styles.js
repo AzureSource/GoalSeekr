@@ -5,21 +5,23 @@ const overrides = {
   styles: {
     global: {
       // add styles here
+
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
-        backgroundSize: 'contain'
+        backgroundSize: 'contain',
+        zIndex: -1,
       },
       '.galaxy-window': {
         width: '100%',
         height: '100%'
       },
       '#root': {
-        height: '100%'
+        height: '100%',
       },
       '.planetsWindow': {
-        height: '550px',
-        width: '1100px'
+        height: '720px',
+        width: '1280px'
       },
       '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
         // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
@@ -377,19 +379,21 @@ const overrides = {
         height: '70%'
       },
       '.menu-side': {
-        width: '20%'
+        width: '20%',
       },
       '.temp-div': {
+
         width: '80%'
       },
       '.menu-bottom': {
-        height: '30%'
+        height: '30%',
       },
       '.menu-bottom-container': {
+        zIndex: 10,
         width: '95%',
         height: '80%',
         border: '2px solid #50b6ab',
-        backgroundColor: '#2e2f47',
+        backgroundColor: 'transparent',
         borderRadius: '15px'
       },
       //-------------------------------HAT MODAL
@@ -423,13 +427,17 @@ const overrides = {
       '.menu-side-container': {
         width: '70%',
         height: '85%',
+        position: 'absolute',
         border: '2px solid #50b6ab',
         backgroundColor: '#2e2f47',
-        borderRadius: '15px'
+        borderRadius: '15px',
+        zIndex: 10,
       },
       '.pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
+        height: '7rem',
+        overflow: 'auto'
 
       },
       '.player-list': {
@@ -444,7 +452,32 @@ const overrides = {
       'p-list-smIcon': {
         fontSize: '50%'
       },
-      //---------------------------------SIDE MENU
+      //---------------------------------SIDE MENU / LOWER TOOLBAR
+      '#total-stat': {
+        display: 'grid',
+        gridTemplateRows: '1fr 1fr',
+        gridTemplateColumns: '1fr 1fr'
+      },
+      '.stat-icon': {
+        fontSize: '1.6em'
+      },
+      '#t-stat1': {
+        gridColumn: 1,
+        gridRow: 1
+      },
+      '#t-stat2': {
+        gridColumn: 1,
+        gridRow: 2
+      },
+      '#t-stat3': {
+        gridColumn: 2,
+        gridRow: 1
+      },
+      '#t-stat4': {
+        gridColumn: 2,
+        gridRow: 2
+      },
+      //--------------------------------- LOWER TOOLBAR
       '.title-bar': {
         width: '100%',
         height: '27%',
@@ -587,7 +620,7 @@ const overrides = {
         margin: '15px 0px'
       },
       '.enter-existing-galaxy-input': {
-        margin: '5px'
+        margin: '10px 0px'
       },
       '.username-input-btn, .join-galaxy-btn, .create-new-galaxy-btn': {
         fontSize: '25px',

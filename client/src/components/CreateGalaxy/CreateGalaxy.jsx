@@ -4,9 +4,14 @@ import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setGalaxyName } from './CreateGalaxySlice';
+
+const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
 const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
+  const dispatch = useDispatch();
 
   const redirectToEnterGalaxyPage = function() {
     window.location.href = `http://localhost:7777/#/entergalaxy/uid/${params.id}`;
@@ -16,26 +21,39 @@ const CreateGalaxy = ({ setTitle }) => {
     window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
   };
 
-  const [galaxyName, setGalaxyName] = useState('');
+  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
+  const [yearsPerTurn, setYearsPerTurn] = useState(1);
+  const [alliance, setAlliance] = useState(false);
 
-  const submitGalaxy = (data) => {
-    return axios.get('endpoint', data);
+  const submitGalaxy = () => {
+    let send = {
+      galaxyName,
+      yearsPerTurn,
+      maxPlayerCount,
+      alliance,
+      galaxySize,
+    };
+    console.log(send);
+    axios.post(localhost , send)
+      .then(() => console.log('posted'))
+      .catch(err => console.log(err));
   };
 
-  useEffect(() => {
-    setTitle(false);
-  }, []);
-
-  const handleCandle = function(event){
+  const handleCancel = (event) => {
     event.preventDefault();
     redirectToEnterGalaxyPage();
   };
-  const handleGoToGalaxyWindow = function(event){
+
+  const handleGoToGalaxyWindow = async (event) => {
     event.preventDefault();
+    if (galaxyName < 1) return alert('Enter Galaxy Name');
+    await submitGalaxy();
     redirectToGalaxyWindow();
-  }
+  };
+
+  useEffect(() => setTitle(false), []);
 
   return (
     <Flex className='create-galaxy-container'
@@ -59,7 +77,7 @@ const CreateGalaxy = ({ setTitle }) => {
             className='galaxy-name-input'
             placeholder='Enter Galaxy Name'
             value={galaxyName}
-            onChange={(e) => setGalaxyName(e.target.value)}
+            onChange={(e) => dispatch(setGalaxyName(e.target.value))}
           />
         </Flex>
         <Flex
@@ -72,6 +90,10 @@ const CreateGalaxy = ({ setTitle }) => {
             setMaxPlayerCount={setMaxPlayerCount}
           />
           <GalaxyOptions
+            yearsPerTurn={yearsPerTurn}
+            setYearsPerTurn={setYearsPerTurn}
+            alliance={alliance}
+            setAlliance={setAlliance}
             galaxySize={galaxySize}
             maxPlayerCount={maxPlayerCount}
             setMaxPlayerCount={setMaxPlayerCount}
@@ -84,7 +106,7 @@ const CreateGalaxy = ({ setTitle }) => {
           <Button
             backgroundColor='#2e2f47'
             className='create-galaxy-btn'
-            onClick={(e)=>handleCandle(e)}
+            onClick={(e)=>handleCancel(e)}
           >
             Cancel
           </Button>
@@ -102,5 +124,7 @@ const CreateGalaxy = ({ setTitle }) => {
     </Flex>
   );
 };
+
+
 
 export default CreateGalaxy;

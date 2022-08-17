@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlanetSelection } from './denseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
 import haku from '../../../assets/images/hakuUnexplored.png';
@@ -11,6 +13,9 @@ import polaris from '../../../assets/images/polarisUnexplored.png';
 import steins from '../../../assets/images/steinsUnexplored.png';
 import egg from '../../../assets/hats/egg.png';
 import bearears from '../../../assets/hats/bearears.png';
+import { Image } from '@chakra-ui/react';
+import MenuSide from './MenuSide.jsx';
+import MenuBottom from './MenuBottom.jsx';
 
 export default function DenseGalaxy() {
   var planets = [
@@ -215,17 +220,30 @@ export default function DenseGalaxy() {
       classname: 'polaris4'
     }
   ];
-  function makePlanetDiv(object) {
-    return (
-      <div>
-        <img src={object.image} className={object.classname}></img>
-        <div className={object.name}>{object.name}</div>
-      </div>
-    );
-  }
+
+  const dispatch = useDispatch();
+
+  const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
+
+  const handlePlanetSelection = (name) => {
+    const planetSelection = name;
+    if (!firstPlanet) {
+      dispatch(setPlanetSelection({homePlanet: planetSelection}));
+    } else {
+      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+    }
+  };
+
   return (
-    <div>
-      {planets.map((planet) => makePlanetDiv(planet))}
+    <div className='appBackground planetsWindow'>
+      {planets.map((planet, index) => {
+        return (
+          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
+            <Image src={planet.image} className={planet.classname}/>
+            <div className={planet.name}>{planet.name}</div>
+          </div>
+        );
+      })}
       <img src={egg} className='egg'></img>
       <img src={bearears} className='bearears'></img>
     </div>

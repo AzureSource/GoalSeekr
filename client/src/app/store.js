@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import galaxyOptionsReducer from '../components/CreateGalaxy/galaxyOptionsSlice';
-import counterReducer from '../components/Galaxy Window/actionsToolbar/missionModule/counterSlice';
+import denseGalaxyPlanetSelectionReducer from '../components/Galaxy Window/denseGalaxySlice';
 import userShipsReducer  from '../components/buildShips/UserShipSlice';
+import currentGalaxyNameReducer from '../components/CreateGalaxy/CreateGalaxySlice';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
     galaxyOptions: galaxyOptionsReducer,
-    userShips: userShipsReducer
+    denseGalaxyPlanetSelection: denseGalaxyPlanetSelectionReducer,
+    galaxyOptions: galaxyOptionsReducer,
+    userShips: userShipsReducer,
+    currentGalaxyName: currentGalaxyNameReducer,
   }
 });

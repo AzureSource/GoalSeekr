@@ -10,6 +10,10 @@ const Task = ({ task }) => {
 
   function completeTask () {
     setTaskComplete(!taskComplete);
+    // for the current user, add the clicked task to users_tasks
+    // if changed to false remove from users_tasks
+    // sum the values of all tasks for current user
+    // add to the currency in users table
   }
 
   return (

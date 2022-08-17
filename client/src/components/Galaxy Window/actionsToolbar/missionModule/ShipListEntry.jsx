@@ -5,7 +5,6 @@ import {Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer,
 } from '@chakra-ui/react';
 
 export default function ShipListEntry({ shipList, handleShipSelection }) {
-  // console.log('ship', shipList);
   return (
     <TableContainer>
       <Table variant="simple">
@@ -24,8 +23,8 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
               <Tr key={index} onClick={() => {handleShipSelection(ship);}}>
                 <Td>{ship.count}</Td>
                 <Td>{ship.name}</Td>
-                <Td>{ship.type}</Td>
-                <Td>{ship.powerLevel}</Td>
+                {/* <Td>{ship.type}</Td> */}
+                <Td>{ship.power}</Td>
               </Tr>
             );
           })}
