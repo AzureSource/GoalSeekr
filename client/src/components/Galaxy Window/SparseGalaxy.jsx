@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setPlanetSelection } from './sparseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
 import haku from '../../../assets/images/hakuUnexplored.png';
@@ -11,6 +13,20 @@ import polaris from '../../../assets/images/polarisUnexplored.png';
 import steins from '../../../assets/images/steinsUnexplored.png';
 
 export default function SparseGalaxy() {
+  const dispatch = useDispatch();
+
+  const [firstPlanet, setFirstPlanet] = useState(true);
+
+  const homePlanet = (event) => {
+    const planetSelection = event.target.value;
+    dispatch(setPlanetSelection(planetSelection));
+    setFirstPlanet(true);
+  };
+
+  const targetPlanet = (event) =>  {
+
+  };
+
   var planets = [
     {
       name: 'ZERO',
@@ -140,3 +156,5 @@ export default function SparseGalaxy() {
     </div>
   );
 }
+
+

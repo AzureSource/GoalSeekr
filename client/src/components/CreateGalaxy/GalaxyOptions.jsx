@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FiPlus, FiMinus } from 'react-icons/fi';
-import { useSelector, useDispatch } from 'react-redux';
-import { allianceToggle } from './galaxyOptionsSlice';
-import { Flex, Switch, FormControl, FormLabel } from '@chakra-ui/react';
+import { Flex, Switch, FormControl } from '@chakra-ui/react';
 
-const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
-  // const dispatch = useDispatch();
-
-  // const toggleAlliance = () => {
-  //   dispatch(allianceToggle());
-  // };
-  const [yearsPerTurn, setYearsPerTurn] = useState(1);
-  const [alliance, setAlliance] = useState(false);
+const GalaxyOptions = ({
+  galaxySize,setAlliance,
+  maxPlayerCount, setMaxPlayerCount,
+  yearsPerTurn, setYearsPerTurn,
+}) => {
 
   const incrementPlayer = () => {
     if (maxPlayerCount === 5 && galaxySize) {
@@ -24,6 +19,7 @@ const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
     }
     return setMaxPlayerCount(prevState => ++prevState);
   };
+
   const decrementPlayer = () => {
     if (maxPlayerCount === 2) {
       alert ('Minimum Players');
@@ -31,6 +27,7 @@ const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
     }
     return setMaxPlayerCount(prevState => --prevState);
   };
+
   const incrementYears = () => {
     if (yearsPerTurn === 15) {
       alert ('Max Years per Turn');
@@ -38,6 +35,7 @@ const GalaxyOptions = ({ galaxySize, maxPlayerCount, setMaxPlayerCount }) => {
     }
     return setYearsPerTurn(prevState => ++prevState);
   };
+
   const decrementYears = () => {
     if (yearsPerTurn === 1) {
       alert ('Minimum Years per Turn');

@@ -27,9 +27,7 @@ export default function LoginAuth({ setTitle }) {
       });
   };
 
-  useEffect(() => {
-    setTitle(true);
-  }, []);
+  useEffect(() => setTitle(true), []);
 
   return (
     <Flex
