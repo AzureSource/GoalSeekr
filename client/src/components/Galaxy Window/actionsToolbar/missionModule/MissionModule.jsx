@@ -24,7 +24,7 @@ export default function MissionModule() {
     const galaxy = 'dense';
     axios.get(`/api/ships/${galaxy}/${planetName}`)
       .then((res) => {
-        // console.log('res', res.data[0].getusershipsonplanetbynames.players.ships);
+        // console.log('res', res.data[0].getusershipsonplanetbynames.players);
         setShips(
           res.data[0].getusershipsonplanetbynames.players
         );
