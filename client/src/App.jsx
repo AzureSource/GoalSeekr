@@ -3,7 +3,6 @@ import TitleBar from './components/Lobby/TitleBar.jsx';
 import '../assets/login.css';
 import { AspectRatio } from '@chakra-ui/react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import ChooseHat from './components/ChooseHat.jsx';
 import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';
 import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
 import background from '../assets/images/sparse sky.png';
@@ -16,6 +15,7 @@ import LoginAuth from './components/Login/LoginAuth.jsx';
 import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Counter';
 
 // const App = () => {
+
 //   const [title, setTitle] = useState(true);
 //   return (
 //     <div className='appBackground'>
@@ -28,11 +28,10 @@ import Counter from './components/Galaxy Window/actionsToolbar/missionModule/Cou
 //       {/* <Menu /> */}
 //     </div>
 //   );
-
 // };
 
 const App = () => {
-const [title, setTitle] = useState(true);
+  const [title, setTitle] = useState(true);
 
   return (
     <HashRouter>
@@ -47,8 +46,8 @@ const [title, setTitle] = useState(true);
       </div>
     </HashRouter>
   );
-
 };
+
 
 export default App;
 
