@@ -445,7 +445,32 @@ const overrides = {
       'p-list-smIcon': {
         fontSize: '50%'
       },
-      //---------------------------------SIDE MENU
+      //---------------------------------SIDE MENU / LOWER TOOLBAR
+      '#total-stat': {
+        display: 'grid',
+        gridTemplateRows: '1fr 1fr',
+        gridTemplateColumns: '1fr 1fr'
+      },
+      '.stat-icon': {
+        fontSize: '1.6em'
+      },
+      '#t-stat1': {
+        gridColumn: 1,
+        gridRow: 1
+      },
+      '#t-stat2': {
+        gridColumn: 1,
+        gridRow: 2
+      },
+      '#t-stat3': {
+        gridColumn: 2,
+        gridRow: 1
+      },
+      '#t-stat4': {
+        gridColumn: 2,
+        gridRow: 2
+      },
+      //--------------------------------- LOWER TOOLBAR
       '.title-bar': {
         width: '100%',
         height: '27%',
