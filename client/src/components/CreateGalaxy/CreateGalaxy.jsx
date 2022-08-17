@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
@@ -42,6 +43,7 @@ const CreateGalaxy = ({ setTitle }) => {
     event.preventDefault();
     redirectToEnterGalaxyPage();
   };
+
   const handleGoToGalaxyWindow = async (event) => {
     event.preventDefault();
     if (galaxyName < 1) return alert('Enter Galaxy Name');
@@ -120,5 +122,7 @@ const CreateGalaxy = ({ setTitle }) => {
     </Flex>
   );
 };
+
+
 
 export default CreateGalaxy;
