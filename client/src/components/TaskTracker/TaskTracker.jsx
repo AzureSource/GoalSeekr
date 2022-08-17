@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import ColsContainer from './Columns/ColsContainer.jsx';
 import CurrencyBar from './CurrencyBar.jsx';
 
 const TaskTracker = ({ setTitle }) => {
+  const [taskUpdated, setTaskUpdated] = useState(false);
 
   useEffect((()=>setTitle(false)), []);
 
@@ -13,10 +14,10 @@ const TaskTracker = ({ setTitle }) => {
         Nav bar, etc will go here
       </Flex>
       <Flex className="taskTrackerContainer" h="85%">
-        <ColsContainer />
+        <ColsContainer setTaskUpdated={setTaskUpdated}/>
       </Flex>
       <Flex className="footer" h="10%" justifyContent="flex-end">
-        <CurrencyBar />
+        <CurrencyBar taskUpdated={taskUpdated}/>
       </Flex>
     </Flex>
   );

@@ -63,7 +63,42 @@ function getCurrencyByUser(req, res) {
     });
 }
 
+function getTaskStatusByUser(req, res) {
+  const queryString = `
+    SELECT iscompleted
+    FROM tasks_user
+    WHERE user_id = $1
+    AND task_id = $2;
+  `;
+  const values = [req.params.userid, req.params.taskid];
+
+  db(queryString, values)
+    .then((result) => res.send(result.rows[0].iscompleted))
+    .catch((err) => {
+      console.log('Error getTaskStatusByUser line 78:\n', err);
+      res.sendStatus(501);
+    });
+}
+
+function updateTaskStatusByUser(req, res) {
+  console.log('update task status by user');
+  const queryString = `
+    SELECT toggletaskforuser($1, $2);
+  `;
+  const values = [req.params.userid, req.params.taskid];
+  console.log(values);
+
+  db(queryString, values)
+    .then((result) => res.send([result.command, result.rowCount]))
+    .catch((err) => {
+      console.log('Error updateTaskStatusByUser line 78:\n', err);
+      res.sendStatus(501);
+    });
+}
+
 module.exports.getAllTasks = getAllTasks;
 module.exports.getTasksByDifficulty = getTasksByDifficulty;
 module.exports.addTask = addTask;
 module.exports.getCurrencyByUser = getCurrencyByUser;
+module.exports.getTaskStatusByUser = getTaskStatusByUser;
+module.exports.updateTaskStatusByUser = updateTaskStatusByUser;

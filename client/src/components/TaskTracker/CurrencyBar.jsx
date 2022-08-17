@@ -6,7 +6,7 @@ import {
   Tag,
 } from '@chakra-ui/react';
 
-const CurrencyBar = () => {
+const CurrencyBar = ({taskUpdated}) => {
   const [currency, setCurrency] = useState();
   const {id} = useParams();
   console.log(id, 'currecncy line 11');
@@ -16,7 +16,7 @@ const CurrencyBar = () => {
       axios.get(`/api/currency/${id}`)
         .then((results) => setCurrency(parseInt(results.data)))
         .catch((err) => console.log('issue getting currency line 18:\n', err));
-    }, [id]
+    }, [id, taskUpdated]
   );
 
   return (

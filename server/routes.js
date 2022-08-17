@@ -18,9 +18,13 @@ routes.get('/api/galaxyName', user.getGalaxyName);
 
 // task tracker
 routes.get('/api/tasks/', tasks.getAllTasks);
-routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
-routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
+routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
+routes.get('/api/tasks/:userid/:taskid', tasks.getTaskStatusByUser);
+routes.post('/api/tasks/:userid/:taskid', tasks.updateTaskStatusByUser);
+routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
+routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
+
 
 // player list
 routes.get('/api/players', getAllPlayers);
