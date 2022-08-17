@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Avatar,
   Accordion,
@@ -10,10 +11,11 @@ import {
   GridItem,
   Text
 } from '@chakra-ui/react';
-import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
+import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag, GiZeusSword} from 'react-icons/gi';
 
 
 function Playerlist () {
+  const [playerlist, setPlayerlist] = useState([]);
 
   //fetch players in the game (icons, usernames, planets, ships, currency, metal)
 
@@ -21,36 +23,11 @@ function Playerlist () {
 
   //rank will then be the index of the players in the list
 
-  const playerlist = [
-    {
-      user_id: 1,
-      icon: 'https://findicons.com/icon/53705/hard_hat',
-      username: 'This guy',
-      alliance: 'Kings',
-      planets: ['a', 'b', 'c'],
-      ships: [1, 2, 3, 4],
-      currency: 1234,
-      metal: 420
-    },
-    {
-      id: 13,
-      icon: 'https://findicons.com/icon/53705/hard_hat',
-      username: 'That guy',
-      alliance: '',
-      planets: ['a', 'b', 'c'],
-      ships: [1, 2, 3, 4],
-      currency: 1234,
-    },
-    {
-      id: 5,
-      icon: 'https://findicons.com/icon/53705/hard_hat',
-      username: 'Someone else',
-      alliance: 'Kings',
-      planets: ['a', 'b', 'c'],
-      ships: [1, 2, 3, 4],
-      currency: 2938,
-    }
-  ];
+  useEffect(() => {
+    axios.get('/api/players')
+      .then((results) => setPlayerlist(results.data))
+      .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
+  }, []);
 
   const panelProps = {
     display: 'contents'
@@ -70,10 +47,10 @@ function Playerlist () {
 
   return (
     <div id='player-list' style={{width:'100%', padding: '5%'}}>
-      <Accordion className='pl-acc'  allowToggle>
+      <Accordion className='pl-acc' allowToggle>
         <Text textAlign={'center'}>Current Ranking</Text>
         {playerlist.map((player, index) => (
-          <AccordionItem key={player.id}>
+          <AccordionItem key={player.userid}>
             <h2>
               <AccordionButton sx={accButton} w='100%'_expanded={{ bg: '#50b6ab', color: 'white' }}>
                 <Avatar size='xs' src='https://bit.ly/broken-link' />
@@ -91,16 +68,20 @@ function Playerlist () {
                 </GridItem>
                 <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
                   <GiBlackFlag className='p-list-smIcon'/>
-                  <Text>Alliance: <br /> {player.alliance || 'idependent'} </Text>
+                  <Text>Alliance: <br /> {player.alliance ? player.alliance.name : 'independent'} </Text>
                 </GridItem>
                 <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
-                  <GiRingedPlanet className='p-list-icon' /> {player.planets.length}
+                  <GiRingedPlanet className='p-list-icon' /> {}
+                  {/* <GiRingedPlanet className='p-list-icon' /> {player.planets.length} */}
                 </GridItem>
                 <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
-                  <GiJetpack className='p-list-icon' />  {player.ships.length}
+                  <GiJetpack className='p-list-icon' />  {player.ships ? player.ships.length : 0 }
                 </GridItem>
                 <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
                   <GiCash className='p-list-icon' /> {player.currency}
+                </GridItem>
+                <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
+                  <GiZeusSword className='p-list-icon' /> {player.motto}
                 </GridItem>
               </Grid>
             </AccordionPanel>

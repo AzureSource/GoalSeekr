@@ -4,6 +4,7 @@ const ship = require('./models/ship.js');
 const user = require('./models/user.js');
 const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
+const getAllPlayers = require('./models/players.js');
 
 const routes = Router();
 
@@ -16,6 +17,9 @@ routes.get('/api/tasks/', tasks.getAllTasks);
 routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
 routes.get('/api/tasks/currency/:userID', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
+
+// player list
+routes.get('/api/players', getAllPlayers);
 
 // routes.put('/api/users/:user_id',user.updateUserName);
 routes.post('/api/users',users.checkUser);
