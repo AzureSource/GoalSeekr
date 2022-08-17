@@ -8,11 +8,8 @@ const MenuSide = () => {
   return (
     <Flex
       className='menu-side-container'
-      justify='center'
-      alignItems='center'
-      margin='2rem'
-      width='min-content'
-      display='block'
+      flexDir='column'
+      margin='15px'
     >
       <Playerlist />
       <br/>

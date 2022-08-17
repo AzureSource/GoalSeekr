@@ -390,11 +390,10 @@ const overrides = {
       },
       '.menu-bottom-container': {
         zIndex: 10,
-        width: '80%',
-        height: '20%',
-        border: '2px solid #50b6ab',
-        backgroundColor: 'transparent',
-        borderRadius: '15px'
+        width: '65%',
+        height: '30%',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
+        margin: '15px'
       },
       //-------------------------------HAT MODAL
       '#hat-div': {
