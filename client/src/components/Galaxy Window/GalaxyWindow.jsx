@@ -42,7 +42,7 @@ export default function GalaxyWindow ({ setTitle }) {
       <div className='galaxy-window' color='white'>
         <Flex className='galaxy-window-top'>
           <MenuSide/>
-          <TransformWrapper>
+          <TransformWrapper initialScale={1}>
             <TransformComponent>
               <div className='planetsWindow'>
                 {/* <SparseGalaxy/> */}

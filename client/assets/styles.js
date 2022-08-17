@@ -18,8 +18,9 @@ const overrides = {
         height: '100%'
       },
       '.planetsWindow': {
+        marginTop: '10px',
         height: '550px',
-        width: '1100px'
+        width: '1120px'
       },
       '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
         // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
