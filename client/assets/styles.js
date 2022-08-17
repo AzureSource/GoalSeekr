@@ -587,7 +587,7 @@ const overrides = {
         margin: '15px 0px'
       },
       '.enter-existing-galaxy-input': {
-        margin: '5px'
+        margin: '10px 0px'
       },
       '.username-input-btn, .join-galaxy-btn, .create-new-galaxy-btn': {
         fontSize: '25px',

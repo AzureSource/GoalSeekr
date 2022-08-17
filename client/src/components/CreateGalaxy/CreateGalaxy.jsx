@@ -22,13 +22,12 @@ const CreateGalaxy = ({ setTitle }) => {
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
 
-  const submitGalaxy = (data) => {
-    return axios.get('endpoint', data);
-  };
+  const submitGalaxy = () => {
+    let send = {
 
-  useEffect(() => {
-    setTitle(false);
-  }, []);
+    }
+    return axios.put('endpoint', send);
+  };
 
   const handleCancel = (event) => {
     event.preventDefault();
@@ -39,6 +38,10 @@ const CreateGalaxy = ({ setTitle }) => {
     await submitGalaxy();
     redirectToGalaxyWindow();
   };
+
+  useEffect(() => {
+    setTitle(false);
+  }, []);
 
   return (
     <Flex className='create-galaxy-container'
