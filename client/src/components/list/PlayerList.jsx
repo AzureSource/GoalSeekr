@@ -58,9 +58,9 @@ function Playerlist () {
 
   const gridIprops = {
     display: 'flex',
-    'flex-flow': 'row nowrap',
-    'justify-content': 'space-evenly',
-    'align-items': 'center',
+    'flexFlow': 'row nowrap',
+    'justifyContent': 'space-evenly',
+    'alignItems': 'center',
   };
 
   const accButton = {

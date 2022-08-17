@@ -4,6 +4,7 @@ const ship = require('./models/ship.js');
 const user = require('./models/user.js');
 const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
+const galaxy =require('./models/galaxy.js');
 
 const routes = Router();
 
@@ -26,6 +27,9 @@ routes.get('/api/galaxy',users.checkGalaxyName);
 
 routes.get('/hats/:galaxy_id', hats.getAll);
 routes.put('/hats/:user_id/:galaxy_id', hats.updateHat);
+
+// insert galaxy route
+routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
 
 
 module.exports = routes;
