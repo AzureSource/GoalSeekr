@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import MissionSequence from '../missionSequence/missionSequence.jsx';
 import { setMissionQueue } from './missionModuleSlice';
 import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
@@ -11,6 +12,7 @@ export default function MissionModule() {
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
+  const endTurnActivation = useSelector((state) => state.toggleEndTurn.endTurn);
   const [shipSelection, setShipSelection] = useState({});
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
@@ -104,6 +106,9 @@ export default function MissionModule() {
           })}
         </ListItem>
       </List>
+      {endTurnActivation && (
+        <MissionSequence />
+      )}
     </div>
   );
 }

@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function MissionSequence() {
   // pull mission data from store
-  const missionData =
+  let missionData = useSelector((state) => state.missionQueue.missions);
+  console.log('missionData', missionData);
 
   return (
-
-  )
+    <div></div>
+  );
 }
 
 
