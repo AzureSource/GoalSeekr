@@ -258,10 +258,14 @@ CREATE OR REPLACE FUNCTION assignTaskToUser("taskname" TEXT, "userid" INT)
   RETURNS JSON AS $func$
 	DECLARE result JSON;
 BEGIN
-	WITH task AS (SELECT * FROM tasks WHERE description ILIKE $1)
-	INSERT INTO tasks_user (task_id, user_id) VALUES ((SELECT id FROM task), $2)
-	RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) INTO result;
-	RETURN result;
+	SELECT id FROM tasks_user WHERE user_id = $2 INTO exists;
+	IF NOT exists THEN
+		WITH task AS (SELECT * FROM tasks WHERE description ILIKE $1)
+		INSERT INTO tasks_user (task_id, user_id) VALUES ((SELECT id FROM task), $2)
+		RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) INTO result;
+		RETURN result;
+	END IF;
+	RETURN json_build_object('error', 'Already assigned');
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
