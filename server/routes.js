@@ -17,7 +17,6 @@ routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
 routes.get('/api/tasks/currency/:userID', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
 
-// routes.put('/api/users/:user_id',user.updateUserName);
 routes.post('/api/users',users.checkUser);
 routes.get('/api/galaxy',users.checkGalaxyName);
 

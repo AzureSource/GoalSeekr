@@ -15,7 +15,6 @@ export default function LoginAuth({ setTitle }) {
     signInWithPopup(auth,provider)
       .then((result)=>{
         // console.log('show result auth: ',result);
-        localStorage.setItem('isAuth',true);
         setIsAuth(true);
         const obj = {
           email: result.user.email,
