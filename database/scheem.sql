@@ -474,8 +474,7 @@ BEGIN
 	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped INTO result;
 	RETURN(result);
 END;
-$func$
-LANGUAGE plpgsql VOLATILE COST 100;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- same as above, except Ships are divided into a "byPlanet" division that has types of ships on each planet and their stats (used for gettingplayerData)
 CREATE OR REPLACE FUNCTION getusersshipssorted("userID" INT, "byPlanet" boolean)
@@ -523,7 +522,6 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
-
 -- returns all data of players with ships divided by planet name, divided by ship name/type
 CREATE OR REPLACE FUNCTION getplayerdatabygalaxyid("galaxyID" INT, "byPlanet?" boolean)
   RETURNS JSON AS $func$
@@ -566,7 +564,6 @@ $func$
 LANGUAGE plpgsql VOLATILE COST 100;
 
 --Toggles a users' completed status on their assigned task and updates their currency to reflect the toggle while returning data
-
 CREATE OR REPLACE FUNCTION toggletaskforuser("userID" INT, "taskID" INT)
   RETURNS JSON AS $func$
 	DECLARE
@@ -574,33 +571,60 @@ CREATE OR REPLACE FUNCTION toggletaskforuser("userID" INT, "taskID" INT)
 		currentMoney INT;
 		taskreward INT;
 BEGIN
-		SELECT isCompleted FROM tasks_user WHERE user_id = $1 AND task_id = $2 INTO isTaskComplete;
-		SELECT currency FROM users WHERE id = $1 INTO currentMoney;
-		SELECT reward FROM tasks WHERE id = $2 INTO taskreward;
-	  IF isTaskComplete THEN
-			RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
-			UPDATE USERS SET currency = currentMoney - taskreward WHERE id = $1;
-		ELSE
-		 RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
-		 UPDATE USERS SET currency = currentMoney + taskreward WHERE id = $1;
-		END IF;
-		UPDATE tasks_user SET isCompleted = NOT isTaskComplete WHERE user_id = $1 AND task_id = $2;
-		RETURN (
-			SELECT
-				json_build_object(
-				'userid', $1,
-				'previousBalance', currentMoney,
-				'newBalance', (SELECT currency FROM users WHERE id = $1),
-				'totalTaskRewardGain', (SELECT COALESCE(sum(reward), 0) as Sum from tasks where id in (SELECT task_id FROM tasks_user WHERE user_id = $1 AND iscompleted = true)),
-				'taskData', json_build_object(
-					'taskid', $2,
-					'taskname', (SELECT description FROM tasks WHERE id = $2),
-					'reward', taskreward
-				)
-				));
+	SELECT isCompleted FROM tasks_user WHERE user_id = $1 AND task_id = $2 INTO isTaskComplete;
+	SELECT currency FROM users WHERE id = $1 INTO currentMoney;
+	SELECT reward FROM tasks WHERE id = $2 INTO taskreward;
+	IF isTaskComplete THEN
+		RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
+		UPDATE USERS SET currency = currentMoney - taskreward WHERE id = $1;
+	ELSE
+		RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
+		UPDATE USERS SET currency = currentMoney + taskreward WHERE id = $1;
+	END IF;
+	UPDATE tasks_user SET isCompleted = NOT isTaskComplete WHERE user_id = $1 AND task_id = $2;
+	RETURN (
+		SELECT
+			json_build_object(
+			'userid', $1,
+			'previousBalance', currentMoney,
+			'newBalance', (SELECT currency FROM users WHERE id = $1),
+			'totalTaskRewardGain', (SELECT COALESCE(sum(reward), 0) as Sum from tasks where id in (SELECT task_id FROM tasks_user WHERE user_id = $1 AND iscompleted = true)),
+			'taskData', json_build_object(
+				'taskid', $2,
+				'taskname', (SELECT description FROM tasks WHERE id = $2),
+				'reward', taskreward)
+			)
+	);
 END
 $func$
 LANGUAGE plpgsql VOLATILE COST 100;
+
+-- assigns every task in the db to every user in the db only if the user currently does not have the task assigned to them already
+CREATE OR REPLACE FUNCTION assignalltaskstoallusers()
+  RETURNS text AS $func$
+	DECLARE
+	  ids INT;
+		taskID INT;
+		userCount INT := 0;
+BEGIN
+  FOR ids in SELECT id from users loop
+    --raise notice 'userID: %', ids;
+		--raise notice 'userCount is now: %', userCount;
+		FOR taskID in SELECT id from tasks loop
+			raise notice 'currentTaskID: %', taskID;
+			IF NOT EXISTS (SELECT task_id FROM tasks_user WHERE task_id = taskID AND user_id = ids )
+				THEN
+					raise notice 'userID: % does not have this task', ids;
+					userCount = (userCount + 1);
+					INSERT INTO tasks_user(user_id, task_id)
+					VALUES (ids, taskID);
+
+			END IF;
+		END loop;
+  END loop;
+	RETURN CONCAT('Assigned allTasks to ', userCount/(SELECT COUNT(tasks) FROM tasks), ' Users');
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- ================================================================= --
 -- ================================================================= --
