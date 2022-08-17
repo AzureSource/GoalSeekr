@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function MissionSequence() {
   // pull mission data from store
+  const missionData =
 
   return (
 

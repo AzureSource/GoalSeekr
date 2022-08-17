@@ -111,6 +111,13 @@ export default function MissionModule() {
 }
 
 
+// keep track of missionQueue with onchange listener, pass any changes to the store.
+// when end turn is clicked, pass state to missionSequence (toggle button on and off)
+  // if state is true for end turn button being clicked, mission data is passed.
+  // once missionsequence is finished, we reset the end turn button clicked
+
+
+
 // render a line between the planets
 // figure out turn count on mission module
 
