@@ -28,7 +28,6 @@ export default function GalaxyWindow ({ setTitle }) {
 
   useEffect(() => {
     setTitle(false);
-
   }, []);
 
   useEffect(() => {
@@ -42,16 +41,16 @@ export default function GalaxyWindow ({ setTitle }) {
   return (
     <UserContext.Provider value={id}>
       <div className='galaxy-window' color='white'>
+        <MenuSide/>
         <Flex className='galaxy-window-top'>
-          <MenuSide/>
-          <TransformWrapper>
-            <TransformComponent>
-              <div className='planetsWindow'>
+          <div className='planetsWindow'>
+            <TransformWrapper>
+              <TransformComponent>
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
-              </div>
-            </TransformComponent>
-          </TransformWrapper>
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
         </Flex>
         <MenuBottom/>
       </div>
