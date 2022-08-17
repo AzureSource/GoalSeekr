@@ -431,6 +431,8 @@ const overrides = {
       '.pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
+        height: '7rem',
+        overflow: 'auto'
 
       },
       '.player-list': {
