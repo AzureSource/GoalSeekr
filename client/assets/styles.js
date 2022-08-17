@@ -5,6 +5,7 @@ const overrides = {
   styles: {
     global: {
       // add styles here
+
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         backgroundImage: background,
@@ -15,7 +16,7 @@ const overrides = {
         height: '100%'
       },
       '#root': {
-        height: '100%'
+        height: '100%',
       },
       '.planetsWindow': {
         height: '550px',
@@ -446,7 +447,32 @@ const overrides = {
       'p-list-smIcon': {
         fontSize: '50%'
       },
-      //---------------------------------SIDE MENU
+      //---------------------------------SIDE MENU / LOWER TOOLBAR
+      '#total-stat': {
+        display: 'grid',
+        gridTemplateRows: '1fr 1fr',
+        gridTemplateColumns: '1fr 1fr'
+      },
+      '.stat-icon': {
+        fontSize: '1.6em'
+      },
+      '#t-stat1': {
+        gridColumn: 1,
+        gridRow: 1
+      },
+      '#t-stat2': {
+        gridColumn: 1,
+        gridRow: 2
+      },
+      '#t-stat3': {
+        gridColumn: 2,
+        gridRow: 1
+      },
+      '#t-stat4': {
+        gridColumn: 2,
+        gridRow: 2
+      },
+      //--------------------------------- LOWER TOOLBAR
       '.title-bar': {
         width: '100%',
         height: '27%',
@@ -589,7 +615,7 @@ const overrides = {
         margin: '15px 0px'
       },
       '.enter-existing-galaxy-input': {
-        margin: '5px'
+        margin: '10px 0px'
       },
       '.username-input-btn, .join-galaxy-btn, .create-new-galaxy-btn': {
         fontSize: '25px',

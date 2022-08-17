@@ -1,27 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import ShipListEntry from './ShipListEntry.jsx';
+import { setPlanetSelection } from '../../denseGalaxySlice';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
-
+  const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
+  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const [shipSelection, setShipSelection] = useState({});
   const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
+  const [ships, setShips] = useState([]);
+  const dispatch = useDispatch();
 
   // Dummy Data
-  let planetSelected = 'Earth';
-  let targetPlanetSelected = 'Mars';
   let shipList = [
     { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
   ];
 
-  //planetSelected needs to be a state.
-  // useEffect(() => {
-  //   if (planetSelected) {
-  //     checkForShips();
-  //   }
-  // }, [planetSelected]);
+  // Galaxy name disapears on refresh of page.
+  const checkForShips = () => {
+    const planetName = planets.homePlanet;
+    const galaxy = galaxyName;
+    axios.get(`/api/ships/${galaxy}/${planetName}`)
+      .then((res) => {
+        console.log('res', res.data[0].getusershipsonplanetbynames.players);
+        setShips(
+          res.data[0].getusershipsonplanetbynames.players
+        );
+      })
+      .catch((err) => {
+        console.log('There was an error grabbing the ship data.', err);
+      });
+  };
+
+  useEffect(() => {
+    if (planets.homePlanet) {
+      checkForShips();
+    }
+  }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
     setShipSelection(shipData);
@@ -29,23 +48,23 @@ export default function MissionModule() {
 
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
-    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planetSelected, type: missionType, ship: shipData, target: targetPlanetSelected }]));
-    console.log('mission Queue', missionQueue);
+    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
   };
 
   const editMission = (missionIndex) => {
-    console.log(missionIndex);
     setMissionQueue([
       ...missionQueue.slice(0, missionIndex),
       ...missionQueue.slice(missionIndex + 1)
     ]);
   };
 
+  // console.log('planets', planets);
+
   return (
     <div font='white'>
       <div>
-        {/* On First click of galaxy map, home planet is selected  */}
-        {planetSelected}
+        Home Planet
+        {planets.homePlanet}
       </div>
       <div>
         <Select
@@ -55,22 +74,24 @@ export default function MissionModule() {
           size='md'
           icon={<TriangleDownIcon />}
           onChange={(e) => setMissionType(e.target.value)}>
+          <option value='scout'>Scout</option>
           <option value='attack'>Attack</option>
           <option value='colonize'>Colonize</option>
         </Select>
       </div>
       <div>
-        {/* On second click of galaxy map, target planet is selected  */}
-        {targetPlanetSelected}
+        Target Planet
+        {planets.targetPlanet}
+        <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
       <Divider orientation='horizontal' />
-      {shipList.length === 0 ? (
+      {ships === null ? (
         <div>There are no fleets at this planet.</div>
       ) : (
-        <ShipListEntry shipList={shipList} handleShipSelection={handleShipSelection} />
+        <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
-      {/* On endTurn reset the queue  */}
+      {/* On endTurn reset the queue & queue is sent to local store for holding. */}
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
@@ -88,3 +109,30 @@ export default function MissionModule() {
     </div>
   );
 }
+
+
+// Sending a mission
+// end turn is clicked
+  // remove existing ships from home planet (may be attacked while away)
+  // Missions are saved on local redux store with userID.
+  // Mission has a turn count that is decremented until ships reach target planet.
+  // Need to decided on distance count
+  // every turn decrements the count.
+// once the count reaches 0, grab current information of target planet, for battle.
+
+//battle
+  // based on type of mission
+  //if scout mission provide run down of planet information
+  //if attack, decide based on number of attack ships.
+  //if colonize, check if attack ships are there, or if there are defenders
+    // Maybe say 2 attack ships needed to take out mothership.
+// once battle is complete send new data on planet ownership to database.
+// send notification of results to both users.
+
+
+// render a line between the planets
+// figure out turn count on mission module
+
+
+// need a query for what planets the user owns, if the user owns the planet then they can queue a mission, if not those arent their ships.
+

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Flex, Spacer } from '@chakra-ui/react';
+import Stats from './lowerToolbar/Stats.jsx';
 
 const MenuBottom = () => {
   return (
     <Flex className='menu-bottom' justifyContent='center'>
       <div className='menu-bottom-container'>
-        all your bottom modals
+        <Stats />
       </div>
     </Flex>
   );
