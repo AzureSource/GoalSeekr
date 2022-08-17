@@ -31,7 +31,7 @@ const CreateGalaxy = ({ setTitle }) => {
       alliance
     };
     console.log(send);
-    // return axios.put('endpoint', send);
+    return axios.put('endpoint', send);
   };
 
   const handleCancel = (event) => {
