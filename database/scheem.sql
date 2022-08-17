@@ -1,6 +1,6 @@
 
 DROP INDEX IF EXISTS users_id_index, users_galaxy_id_index, tasks_user_task_id_index, tasks_user_user_id_index, chat_user_id_index, chat_galaxy_id_index, chat_alliance_id_index, planets_galaxy_planet_id_index, planets_galaxy_galaxy_id_index, planets_galaxy_colonizedBy_index, ships_user_id_index, ships_user_ship_id_index, ships_user_ship_planet_id_index, ships_user_galaxy_id_index;
-DROP TABLE IF EXISTS galaxies, users, planets, ships, alliances, tasks, chat, planets_galaxy, ships_user, tasks_user CASCADE;
+DROP TABLE IF EXISTS galaxies, users, planets, ships, alliances, tasks, chat, planets_galaxy, ships_user, tasks_user, hats, hats_user CASCADE;
 
 CREATE TABLE galaxies (
   id SERIAL PRIMARY KEY,
@@ -8,7 +8,9 @@ CREATE TABLE galaxies (
   yearsPerTurn INT NOT NULL,
   currentYear INT NOT NULL,
   maxPlayers INT NOT NULL,
-  currentPlayers INT NOT NULL DEFAULT 1
+  currentPlayers INT NOT NULL DEFAULT 1,
+	allianceAllowed BOOLEAN NOT NULL,
+	smallGalaxy BOOLEAN NOT NULL
 );
 
 CREATE TABLE users (
@@ -40,7 +42,7 @@ CREATE TABLE ships (
 
 CREATE TABLE alliances (
   id SERIAL PRIMARY KEY,
-  name TEXT UNIQUE,
+  name TEXT UNIQUE NOT NULL,
   memberCount INT NOT NULL DEFAULT 1
 );
 
@@ -48,13 +50,14 @@ CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
   description TEXT NOT NULL UNIQUE,
   reward INT NOT NULL,
-  difficulty TEXT
+  difficulty TEXT NOT NULL
 );
 
 CREATE TABLE tasks_user (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  task_id INT REFERENCES tasks(id)
+  task_id INT REFERENCES tasks(id),
+	isCompleted BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE chat (
@@ -71,20 +74,33 @@ CREATE TABLE planets_galaxy (
   planet_id INT REFERENCES planets(id),
   galaxy_id INT REFERENCES galaxies(id),
   colonizedBy INT REFERENCES users(id) DEFAULT NULL,
-  discovered BOOLEAN DEFAULT false
+  discovered BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE ships_user (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
   user_ship_id INT REFERENCES ships(id),
-  user_ship_name TEXT,
-  user_ship_health FLOAT,
+  user_ship_name TEXT NOT NULL,
+  user_ship_health FLOAT NOT NULL,
   user_ship_rangeCapacity INT NOT NULL,
   user_ship_powerLevel INT NOT NULL,
   user_ship_planet_id INT REFERENCES planets(id),
   user_ship_galaxy_id INT REFERENCES galaxies(id)
 );
+
+CREATE TABLE hats (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  url TEXT
+);
+
+CREATE TABLE hats_user (
+  id SERIAL PRIMARY KEY,
+  galaxy_id INT REFERENCES galaxies(id),
+  user_id INT REFERENCES users(id)
+);
+
 
 -- ================================================================= --
 -- ================================================================= --
@@ -243,11 +259,16 @@ $func$ LANGUAGE plpgsql VOLATILE COST 100;
 CREATE OR REPLACE FUNCTION assignTaskToUser("taskname" TEXT, "userid" INT)
   RETURNS JSON AS $func$
 	DECLARE result JSON;
+	DECLARE exists BOOLEAN;
 BEGIN
-	WITH task AS (SELECT * FROM tasks WHERE description ILIKE $1)
-	INSERT INTO tasks_user (task_id, user_id) VALUES ((SELECT id FROM task), $2)
-	RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) INTO result;
-	RETURN result;
+	SELECT id FROM tasks_user WHERE user_id = $2 INTO exists;
+	IF NOT exists THEN
+		WITH task AS (SELECT * FROM tasks WHERE description ILIKE $1)
+		INSERT INTO tasks_user (task_id, user_id) VALUES ((SELECT id FROM task), $2)
+		RETURNING json_build_object('UserID', $2, 'Name', (SELECT description FROM task), 'Reward', (SELECT reward FROM task), 'Difficulty', (SELECT difficulty FROM task)) INTO result;
+		RETURN result;
+	END IF;
+	RETURN json_build_object('error', 'Already assigned');
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
@@ -380,6 +401,57 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+--Same as above except the args are by name instead of id
+CREATE OR REPLACE FUNCTION getusershipsonplanetbynames("galaxyName" text, "planetName" text)
+  RETURNS JSON AS $func$
+  DECLARE RESPONSE JSON;
+	DECLARE galaxyID INT;
+	DECLARE planetID INT;
+BEGIN
+		SELECT id FROM galaxies WHERE name = $1 INTO galaxyID;
+		SELECT id FROM planets WHERE name = $2 INTO planetID;
+		WITH grouped AS (
+		SELECT
+			user_id AS userid,
+			user_ship_name AS TYPE,
+			json_agg (
+				json_build_object (
+					'id', ID,
+					'health', user_ship_health,
+					'range', user_ship_rangecapacity,
+					'power', user_ship_powerlevel
+				)
+			) AS Ships
+		FROM
+			ships_user
+		WHERE
+			user_ship_galaxy_id = galaxyID
+			AND user_ship_planet_id = planetID
+		GROUP BY
+			1,
+			2
+		),
+		results AS (
+		SELECT
+			json_build_object (
+				'userid', userid,
+				'Ships', JSON_OBJECT_AGG ( TYPE, ships )
+			) AS Ships
+		FROM grouped
+		GROUP BY grouped.userid
+		)
+		SELECT
+		  json_build_object (
+				'galaxy', json_build_object ( 'id', galaxyID, 'name', $1 ),
+				'planet', json_build_object ( 'id', planetID, 'name', $2 ),
+				'players', json_agg ( ships )
+			)
+		FROM results INTO RESPONSE;
+	RETURN ( RESPONSE );
+
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
 --Create a new user or update a current user's username(display name) by user ID (will be changed upon Google UID implementation)
 CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" TEXT, "displayName" TEXT, "email" TEXT, "motto" TEXT, "about" TEXT, "avatarURL" TEXT)
   RETURNS json AS $func$
@@ -409,8 +481,7 @@ BEGIN
 	SELECT json_build_object('userid', $1, 'Ships', JSON_OBJECT_AGG ( TYPE, ships )) Ships FROM grouped INTO result;
 	RETURN(result);
 END;
-$func$
-LANGUAGE plpgsql VOLATILE COST 100;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- same as above, except Ships are divided into a "byPlanet" division that has types of ships on each planet and their stats (used for gettingplayerData)
 CREATE OR REPLACE FUNCTION getusersshipssorted("userID" INT, "byPlanet" boolean)
@@ -458,7 +529,6 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
-
 -- returns all data of players with ships divided by planet name, divided by ship name/type
 CREATE OR REPLACE FUNCTION getplayerdatabygalaxyid("galaxyID" INT, "byPlanet?" boolean)
   RETURNS JSON AS $func$
@@ -487,7 +557,80 @@ BEGIN
 END;
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+-- Creates a galaxy and returns the newly created galaxy as JSON
+CREATE OR REPLACE FUNCTION creategalaxy ("name" TEXT, "yearsPerTurn" INT, "maxPlayers" INT, "allianceallowed" BOOLEAN, "smallgalaxy" BOOLEAN)
+  RETURNS JSON AS $func$
+	DECLARE result galaxies%rowtype;
+BEGIN
+	INSERT INTO galaxies (name, yearsperturn, maxplayers, allianceallowed, smallgalaxy, currentyear, currentplayers)
+	VALUES($1, $2,$3, $4, $5, (SELECT extract(year from current_timestamp)), 1)
+	RETURNING * INTO result;
+	RETURN row_to_json(result);
+END;
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
 
+--Toggles a users' completed status on their assigned task and updates their currency to reflect the toggle while returning data
+CREATE OR REPLACE FUNCTION toggletaskforuser("userID" INT, "taskID" INT)
+  RETURNS JSON AS $func$
+	DECLARE
+	  isTaskComplete BOOLEAN;
+		currentMoney INT;
+		taskreward INT;
+BEGIN
+	SELECT isCompleted FROM tasks_user WHERE user_id = $1 AND task_id = $2 INTO isTaskComplete;
+	SELECT currency FROM users WHERE id = $1 INTO currentMoney;
+	SELECT reward FROM tasks WHERE id = $2 INTO taskreward;
+	IF isTaskComplete THEN
+		RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
+		UPDATE USERS SET currency = currentMoney - taskreward WHERE id = $1;
+	ELSE
+		RAISE NOTICE 'isTaskComplete?: %', isTaskComplete;
+		UPDATE USERS SET currency = currentMoney + taskreward WHERE id = $1;
+	END IF;
+	UPDATE tasks_user SET isCompleted = NOT isTaskComplete WHERE user_id = $1 AND task_id = $2;
+	RETURN (
+		SELECT
+			json_build_object(
+			'userid', $1,
+			'previousBalance', currentMoney,
+			'newBalance', (SELECT currency FROM users WHERE id = $1),
+			'totalTaskRewardGain', (SELECT COALESCE(sum(reward), 0) as Sum from tasks where id in (SELECT task_id FROM tasks_user WHERE user_id = $1 AND iscompleted = true)),
+			'taskData', json_build_object(
+				'taskid', $2,
+				'taskname', (SELECT description FROM tasks WHERE id = $2),
+				'reward', taskreward)
+			)
+	);
+END
+$func$
+LANGUAGE plpgsql VOLATILE COST 100;
+
+-- assigns every task in the db to every user in the db only if the user currently does not have the task assigned to them already
+CREATE OR REPLACE FUNCTION assignalltaskstoallusers()
+  RETURNS text AS $func$
+	DECLARE
+	  ids INT;
+		taskID INT;
+		userCount INT := 0;
+BEGIN
+  FOR ids in SELECT id from users loop
+    --raise notice 'userID: %', ids;
+		--raise notice 'userCount is now: %', userCount;
+		FOR taskID in SELECT id from tasks loop
+			raise notice 'currentTaskID: %', taskID;
+			IF NOT EXISTS (SELECT task_id FROM tasks_user WHERE task_id = taskID AND user_id = ids )
+				THEN
+					raise notice 'userID: % does not have this task', ids;
+					userCount = (userCount + 1);
+					INSERT INTO tasks_user(user_id, task_id)
+					VALUES (ids, taskID);
+
+			END IF;
+		END loop;
+  END loop;
+	RETURN CONCAT('Assigned allTasks to ', userCount/(SELECT COUNT(tasks) FROM tasks), ' Users');
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
 
 -- ================================================================= --
 -- ================================================================= --
@@ -503,7 +646,7 @@ BEGIN
 do $$
 begin
    for num in 1..10 loop
-   INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers) VALUES (CONCAT('Galaxy', num), 20, 2020, 12, 0);
+   INSERT INTO galaxies (name, yearsperturn, currentyear, maxplayers, currentplayers, allianceallowed, smallgalaxy) VALUES (CONCAT('Galaxy', num), 20, 2020, 12, 0, (SELECT num % 2 = 0), (SELECT num % 4 = 0));
    raise notice 'Galaxy% Inserted', num;
    end loop;
 end; $$;

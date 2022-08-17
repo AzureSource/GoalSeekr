@@ -14,7 +14,7 @@ export default function LoginAuth({ setTitle }) {
   const signInWithGoogle = ()=>{
     signInWithPopup(auth,provider)
       .then((result)=>{
-        console.log('show result auth: ',result);
+        // console.log('show result auth: ',result);
         localStorage.setItem('isAuth',true);
         setIsAuth(true);
         const obj = {
@@ -28,9 +28,7 @@ export default function LoginAuth({ setTitle }) {
       });
   };
 
-  useEffect(() => {
-    setTitle(true);
-  }, []);
+  useEffect(() => setTitle(true), []);
 
   return (
     <Flex

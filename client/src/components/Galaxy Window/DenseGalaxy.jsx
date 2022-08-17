@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlanetSelection } from './denseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
 import haku from '../../../assets/images/hakuUnexplored.png';
@@ -304,11 +306,25 @@ export default function DenseGalaxy() {
       left: 150
     }
   ];
+
+  const dispatch = useDispatch();
+
+  const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
+
+  const handlePlanetSelection = (name) => {
+    const planetSelection = name;
+    if (!firstPlanet) {
+      dispatch(setPlanetSelection({homePlanet: planetSelection}));
+    } else {
+      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+    }
+  };
+
   return (
     <div>
-      {planets.map((planet) => {
+      {planets.map((planet, index) => {
         return (
-          <div>
+          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
             <img src={planet.image} className={planet.classname}></img>
             <div className={planet.name}>{planet.name}</div>
             <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
@@ -318,5 +334,19 @@ export default function DenseGalaxy() {
       {/* <img src={egg} className='egg'></img> */}
       {/* <img src={bearears} className='bearears'></img> */}
     </div>
+
+  /* return (
+    <div>
+      {planets.map((planet, index) => {
+        return (
+          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
+            <Image src={planet.image} className={planet.classname}/>
+            <div className={planet.name}>{planet.name}</div>
+          </div>
+        );
+      })}
+      <img src={egg} className='egg'></img>
+      <img src={bearears} className='bearears'></img>
+    </div> */
   );
 }
