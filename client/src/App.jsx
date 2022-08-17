@@ -6,6 +6,7 @@ import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';
 import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
 import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';'react-zoom-pan-pinch';
 import LoginAuth from './components/Login/LoginAuth.jsx';
+import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
 // const App = () => {
 
@@ -42,6 +43,10 @@ const App = () => {
           <Route
             exact path = "/galaxy/uid/:id"
             element={<GalaxyWindow setTitle={setTitle}/>}
+          />
+          <Route
+            exact path = "/tasks/uid/:id"
+            element={<TaskTracker setTitle={setTitle}/>}
           />
         </Routes>
       </div>
