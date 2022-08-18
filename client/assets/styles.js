@@ -448,7 +448,7 @@ const overrides = {
         height: '25%',
         top: '4%',
         zIndex: 3,
-        right: '76%',
+        right: '7%',
         color: '#c7e4e9',
         backgroundColor: 'cadetblue',
         borderRadius: '12px'
