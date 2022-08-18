@@ -13,7 +13,7 @@ import Scout from '../missionSequence/missionType/Scout.jsx';
 export default function MissionModule() {
   const { id } = useParams();
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
-  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
+  const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
   const endTurnActivation = useSelector((state) => state.toggleEndTurn.endTurn);
   const [shipSelection, setShipSelection] = useState({});
@@ -21,28 +21,28 @@ export default function MissionModule() {
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
 
-  // Galaxy name disapears on refresh of page.
-  // const checkForShips = () => {
-  //   const planetName = planets.homePlanet;
-  //   const galaxy = galaxyName;
-  //   axios.get(`/api/ships/${galaxy}/${planetName}`);
-  //   axios.get(`/api/ships/Galaxy1/Mars`)
-  //     .then((res) => {
-  //       console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
-  //       console.log('res is ', res.data[0]);
-  //       setShips(
-  //         res.data[0].getusershipsonplanetbynames.players
-  //       );
-  //     })
-  //     .catch((err) => {
-  //       console.log('There was an error grabbing the ship data.', err);
-  //     });
-  // };
+  console.log('galaxy id', galaxyID);
+  console.log('planetId', planets);
+
   const checkForShips = () => {
-    setShips(
-      [{ name: 'scout', count: 1, power: 1000 }]
-    );
+    const planetId = planets.planetIdSelected;
+    axios.get(`/api/ships/${galaxyID}/${planetId}`)
+      .then((res) => {
+        console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
+        console.log('res is ', res.data[0]);
+        setShips(
+          res.data[0].getusershipsonplanetbynames.players
+        );
+      })
+      .catch((err) => {
+        console.log('There was an error grabbing the ship data.', err);
+      });
   };
+  // const checkForShips = () => {
+  //   setShips(
+  //     [{ name: 'scout', count: 1, power: 1000 }]
+  //   );
+  // };
 
   const scout = (targetPlanet) => {
     let config = {
