@@ -20,7 +20,7 @@ const BuildShip = () => {
 
   const planetIdSelected = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection.planetIdSelected);
 
-  console.log('planetIdSelected is ', planetIdSelected);
+  // console.log('planetIdSelected is ', planetIdSelected);
 
   useEffect(() => {
     const fetchData = async () => {
