@@ -13,7 +13,7 @@ const Task = ({ task, setTaskUpdated }) => {
     axios.get(`/api/tasks/${id}/${task.id}`)
       .then((result) => setTaskComplete(result.data, 'iscomlete line 14'))
       .catch((err) => console.log('error getting task status line 15:\n', err));
-  }), [taskComplete]);
+  }), []);
 
   function completeTask () {
     setTaskUpdated((prev) => !prev);

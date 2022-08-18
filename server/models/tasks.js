@@ -81,12 +81,10 @@ function getTaskStatusByUser(req, res) {
 }
 
 function updateTaskStatusByUser(req, res) {
-  console.log('update task status by user');
   const queryString = `
     SELECT toggletaskforuser($1, $2);
   `;
   const values = [req.params.userid, req.params.taskid];
-  console.log(values);
 
   db(queryString, values)
     .then((result) => res.send([result.command, result.rowCount]))
