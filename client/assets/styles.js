@@ -459,6 +459,12 @@ const overrides = {
         border: '2.5px solid rgba(80,182,171,0.4)',
         background: '#2e2f47',
       },
+      '.chats-container': {
+        marginLeft: '7.5px',
+      },
+      '.stats-container': {
+        marginRight: '7.5px',
+      },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
       '.tasks-modal-btn, .end-turn-btn': {
@@ -640,12 +646,20 @@ const overrides = {
         margin: '5px 0px',
       },
 
-
-
-
-
       // =============================
       // build ship
+      // =============================
+
+      // =============================
+      // Mission Module
+      // =============================
+      '.mission-module-container': {
+        height: '50%',
+        width: '90%',
+      },
+
+      // =============================
+      // Mission Module
       // =============================
     },
   },
