@@ -6,22 +6,53 @@ const overrides = {
     global: {
       // add styles here
 
-      'body.chakra-ui-light, html, #root, .appBackground': {
+      'body.chakra-ui-light, html, #root': {
         height: '100%',
         width: '100%',
         backgroundImage: background,
         backgroundSize: 'contain',
         zIndex: -1,
       },
+      // 'body.chakra-ui-light, html, #root, .appBackground': {
+      //   height: '100%',
+      //   width: '100%',
+      //   backgroundImage: background,
+      //   backgroundSize: 'contain',
+      //   zIndex: -1,
+      // },
       '.galaxy-window': {
+        float: 'right',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        marginLeft: '1000px'
+      },
+      '.userContext': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.galaxyWindow': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.galaxy-window-top': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.transformWrapper': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.transformComponent': {
+        float: 'right',
+        marginLeft: '1000px'
       },
       '#root': {
         height: '100%',
       },
       '.planetsWindow': {
-        marginTop: '10px',
+        float: 'right',
+        marginLeft: '8.785%',
+        marginTop: '0.01%',
         height: '1550px',
         width: '5120px'
       },
@@ -74,7 +105,7 @@ const overrides = {
         marginLeft: '16.59%'
       },
       '.PISCES': {
-        marginTop: '5.66%',
+        marginTop: '9.956%',
         marginLeft: '16.73%'
       },
       '.zero3': {
@@ -310,7 +341,7 @@ const overrides = {
         marginLeft: '4.295%'
       },
       '.BLADE': {
-        marginTop: '9.956$',
+        marginTop: '9.956%',
         marginLeft: '4.4316%'
       },
       '.calcifer4': {
@@ -388,10 +419,6 @@ const overrides = {
       '.SCAR': {
         marginTop: '4.685%',
         marginLeft: '3.1236%'
-      },
-      '.galaxy-window-top': {
-        width: '100%',
-        height: '70%'
       },
       '.menu-side': {
         width: '20%',

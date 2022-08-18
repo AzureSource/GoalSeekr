@@ -12,7 +12,8 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import ChooseHat from '../ChooseHat.jsx';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {getUserShipsFromDB} from '../buildShips/UserShipSlice';
+import {getUserShipsFromDB, getUserPlanetsFromDB} from '../buildShips/UserShipSlice';
+import { setGalaxyID } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
@@ -24,6 +25,8 @@ export default function GalaxyWindow ({ setTitle }) {
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
   const [gID, setGID] = useState(null);
+
+  // console.log('userPlanets is ', userPlanets);
 
   useEffect(() => {
     getGalaxyID(id);
@@ -37,6 +40,7 @@ export default function GalaxyWindow ({ setTitle }) {
         console.log(data.rows[0].currentgalaxy);
         setGID(data.rows[0].currentgalaxy);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
+        dispatch(setGalaxyID(data.rows[0]));
       })
       .catch((err) => console.log(err));
   };
@@ -46,9 +50,11 @@ export default function GalaxyWindow ({ setTitle }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`/api/users/${id}/ships`);
-      dispatch(getUserShipsFromDB(res.data.getusersships));
-      setUser(await axios.get(`planets/users/${id}`));
+      const ships = await axios.get(`/api/users/${id}/ships`);
+      dispatch(getUserShipsFromDB(ships.data.getusersships));
+      const planets = await axios.get(`/api/users/${id}/planets`);
+      console.log('planets.data is ', planets.data);
+      dispatch(getUserPlanetsFromDB(planets.data));
     };
     fetchData();
   }, []);
@@ -56,13 +62,13 @@ export default function GalaxyWindow ({ setTitle }) {
   const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={id, user}>
+    <UserContext.Provider value={id, user} className='userContext'>
       <div className='galaxy-window' color='white'>
         <MenuSide/>
         <MenuBottom/>
         <Flex className='galaxy-window-top'>
           <MenuSide/>
-          <TransformWrapper initialScale={1.02} className='transformWrapper'>
+          <TransformWrapper initialScale={1} className='transformWrapper'>
             <TransformComponent className='transformComponent'>
               <div className='planetsWindow'>
                 {hatModal && <ChooseHat gId={gID} setHatModal={setHatModal}/>}

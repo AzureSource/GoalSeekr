@@ -8,9 +8,9 @@ import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';'react-zo
 import LoginAuth from './components/Login/LoginAuth.jsx';
 import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
-const App = () => {
+// const App = () => {
 
-  const [title, setTitle] = useState(true);
+//   const [title, setTitle] = useState(true);
 //   return (
 //     <div className='appBackground'>
 //       <div className='app'>
@@ -21,6 +21,9 @@ const App = () => {
 // };
 
 // export default App;
+
+const App = () => {
+  const [title, setTitle] = useState(true);
 
   return (
     <HashRouter>
@@ -49,10 +52,6 @@ const App = () => {
           />
         </Routes>
       </div>
-      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-      {/* <CreateGalaxy /> */}
-      {/* <Title /> */}
-      {/* <Menu /> */}
     </HashRouter>
   );
 };
