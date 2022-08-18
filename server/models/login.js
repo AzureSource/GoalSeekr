@@ -1,16 +1,22 @@
 const client = require('../../database');
+// const axios = require('axios');
 
 module.exports = {
   //post
   checkUser: function (req, res) {
     // const query = `SELECT createorupdateuser(${req.body.googleuid},${req.body.displayname},${req.body.email})`;
     // client(query)
+    const disp_name = req.body.displayname;
+    const g_uid = req.body.googleuid;
     const query = 'SELECT createorupdateuser($1, $2, $3, $4, $5, $6)';
-    client(query, [req.body.googleuid, req.body.displayname, req.body.email, 'motto', 'about', 'url'])
-      .then((result) =>
+    client(query, [g_uid, disp_name, req.body.email, 'motto', 'about', 'url'])
+      .then((result) =>{
       //console.log(result.rows);
-        res.json(result.rows[0].createorupdateuser.id)
-      )
+        // axios.put(`/api/user/setguid/${disp_name}/${g_uid}`)
+        //   .then(() => console.log('update google id for user'))
+        //   .catch(() => console.log('did not update goodle uid'));
+        res.json(result.rows[0].createorupdateuser.id);
+      })
       .catch(() => res.status(500).send('Error in checking existing user using google uid'));
   },
   //put

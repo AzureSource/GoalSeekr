@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Box } from '@chakra-ui/react';
+import hatArr from './hatListObject.js';
 
 //galaxyID passed in as prop
 const ChooseHat = ( {gId} ) =>  {
@@ -11,8 +12,8 @@ const ChooseHat = ( {gId} ) =>  {
   //it to no longer render
 
   //state for the hatlist and the selected hat
-  const [hats, assignHats] = useState([]);
-  const [hatPick, selectHat] = useState([]);
+  const [hats, assignHats] = useState(hatArr);
+  const [hatPick, selectHat] = useState(null);
 
   //fetch hats for the galaxy and assign the hats to state
   const fetch = () => {
@@ -41,22 +42,18 @@ const ChooseHat = ( {gId} ) =>  {
     //container for list of hats (still need to filter out the ones already selected unless the query does)
     <div id='hat-div'>
       {hats.map((hat, ind) => {
-        if (hat.isNotTaken) {
+
+        return (
           <img
-            key={gId + ind}
+            key={ind}
             className={'hat-list-icon'}
             alt='hat-icon'
-            src={`https://media.istockphoto.com/photos/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-picture-id1154370446`}
+            src={hat.src}
             //assigns the clicked on hate to state (hatPick)
             onClick={(e) => selectHat(e.target)}
-          />;
-        } else {
-          //could render something in place of icon or maybe same thing with different classname/styling
-          <Box
-            key={gId + ind}
-            className={'hat-list-icon'}
-            alt='hat-icon-taken' />;
-        }
+          ></img>
+        );
+
       })}
       <button
         id='confirm-hat'

@@ -1,4 +1,4 @@
-import React, { useEffect, createContext} from 'react';
+import React, { useEffect, createContext, useState} from 'react';
 // import background from './images/sparse sky.png';
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios';
@@ -17,18 +17,31 @@ import {getUserShipsFromDB} from '../buildShips/UserShipSlice';
 export const UserContext = createContext(null);
 
 export default function GalaxyWindow ({ setTitle }) {
-
-  const {id} = useParams();
-
   const dispatch = useDispatch();
 
+
+  const [hatModal, setHatModal] = useState(true);
+  const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
 
-  // console.log('userShips is ', userShips);
 
   useEffect(() => {
+    getGalaxyID(id);
     setTitle(false);
   }, []);
+
+
+  const getGalaxyID = (id) => {
+    axios.get(`/api/galaxy/${id}`)
+      .then((result) => {
+        console.log(result);
+        //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,16 +54,17 @@ export default function GalaxyWindow ({ setTitle }) {
   return (
     <UserContext.Provider value={id}>
       <div className='galaxy-window' color='white'>
-        <MenuSide/>
         <Flex className='galaxy-window-top'>
-          <div className='planetsWindow'>
-            <TransformWrapper>
-              <TransformComponent>
+          <MenuSide/>
+          <TransformWrapper>
+            <TransformComponent>
+              <div className='planetsWindow'>
+                {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>}
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
-              </TransformComponent>
-            </TransformWrapper>
-          </div>
+              </div>
+            </TransformComponent>
+          </TransformWrapper>
         </Flex>
         <MenuBottom/>
       </div>

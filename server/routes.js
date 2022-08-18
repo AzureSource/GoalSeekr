@@ -29,11 +29,17 @@ routes.get('/api/players', getAllPlayers);
 routes.post('/api/users',users.checkUser);
 routes.get('/api/galaxy',users.checkGalaxyName);
 
-routes.get('/hats/:galaxy_id', hats.getAll);
-routes.put('/hats/:user_id/:galaxy_id', hats.updateHat);
+routes.get('/api/hats/:galaxy_id', hats.getAll);
+routes.put('/api/hats/:user_id/:galaxy_id', hats.updateHat);
 
 // insert galaxy route
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
 
+//galaxy_id update functions
+routes.put('/api/user/setguid/:display_name/:g_uid', user.updateUserGUID);
+routes.put('/api/user/:user_id/:galaxy_id', user.addUserToGalaxy);
+routes.put('/api/user/:user_id/:galaxy_name', user.addUserToGalaxy);
+
+routes.get('/api/galaxy/:user_id', galaxy.getUsersGalaxyID);
 
 module.exports = routes;

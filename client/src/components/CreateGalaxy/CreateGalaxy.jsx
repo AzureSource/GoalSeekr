@@ -36,8 +36,11 @@ const CreateGalaxy = ({ setTitle }) => {
       galaxySize,
     };
     console.log(send);
-    axios.post(localhost , send)
-      .then(() => console.log('posted'))
+    axios.post(localhost, send)
+      //put req User and galaxy id****************************
+      .then(({data}) => {
+        console.log(data);
+      })
       .catch(err => console.log(err));
   };
 
