@@ -14,11 +14,11 @@ const CreateGalaxy = ({ setTitle }) => {
   const dispatch = useDispatch();
 
   const redirectToEnterGalaxyPage = function() {
-    window.location.href = `http://localhost:7777/#/entergalaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/entergalaxy/userid/${params.id}`;
   };
 
   const redirectToGalaxyWindow = function(){
-    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);

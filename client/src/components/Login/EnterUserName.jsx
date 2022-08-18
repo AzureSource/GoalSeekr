@@ -7,7 +7,7 @@ export default function EnterUserName ({authData}) {
   const [text,setText] = useState('');
 
   const redirectToEnterGalaxyPage = function(id) {
-    window.location.href = `http://localhost:7777/#/entergalaxy/uid/${id}`;
+    window.location.href = `http://localhost:7777/#/entergalaxy/userid/${id}`;
   };
 
   const handleJoin = function(){

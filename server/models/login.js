@@ -24,7 +24,7 @@ module.exports = {
     // console.log(req.query);
     client('SELECT id FROM galaxies WHERE name = $1',[req.query.name])
       .then(({rows}) =>{
-        console.log(rows);
+        // console.log(rows);
         res.status(200).json(rows);
       })
       .catch(() => res.status(400).send('Error in check galaxy name'));
