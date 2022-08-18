@@ -12,7 +12,6 @@ const MenuSide = () => {
       alignItems='center'
     >
       <Playerlist />
-      <br/>
       <BuildShip/>
       <MissionModule />
       <Flex

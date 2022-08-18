@@ -46,7 +46,7 @@ function Playerlist () {
   };
 
   return (
-    <div id='player-list' style={{width:'100%', padding: '5%'}}>
+    <div id='player-list'>
       <Accordion className='pl-acc' allowToggle>
         <Text textAlign={'center'}>Current Ranking</Text>
         {playerlist.map((player, index) => (

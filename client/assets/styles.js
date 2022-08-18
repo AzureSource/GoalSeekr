@@ -429,20 +429,21 @@ const overrides = {
         width: '32%',
         height: '100%',
         position: 'absolute',
+        padding: '25px 0px',
+        justifyContent: 'space-between',
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         zIndex: 10,
       },
       '.pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
-        height: '200px',
+        height: '100%',
         overflow: 'auto'
 
       },
       '#player-list': {
-        width:'100%',
+        width:'90%',
         height: '30%',
-        padding: '5%',
       },
       '.p-list-icon': {
         fontSize: '250%',
@@ -473,9 +474,15 @@ const overrides = {
         color: 'rgba(80,182,171)',
         width: '50%',
         padding: '10px',
-        margin: '10px',
+        // margin: '10px 0px',
         border: '1px solid rgba(80,182,171)',
         // margin: '5px 0px',
+      },
+      '.end-turn-btn': {
+        marginRight: '7.5px',
+      },
+      '.tasks-modal-btn': {
+        marginLeft: '7.5px',
       },
       '.side-menu-bottom-btn-container': {
         width: '90%',
@@ -664,6 +671,7 @@ const overrides = {
       // Mission Module
       // =============================
       '.mission-module-container': {
+        borderRadius: '4px',
         height: '50%',
         width: '90%',
         flexDirection: 'column',
