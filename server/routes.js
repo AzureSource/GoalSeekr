@@ -6,6 +6,7 @@ const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
 const getAllPlayers = require('./models/players.js');
 const galaxy =require('./models/galaxy.js');
+const planets = require('./models/planets');
 
 const routes = Router();
 
@@ -38,6 +39,12 @@ routes.put('/api/hats/:user_id/:galaxy_id', hats.updateHat);
 
 // insert galaxy route
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
+
+
+//planets
+routes.get('/planets/:id', planets.getPlanetById);
+routes.get('/planets/users/:user_id', planets.getUserById);
+
 
 //galaxy_id update functions
 routes.put('/api/user/setguid/:display_name/:g_uid', user.updateUserGUID);
