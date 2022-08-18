@@ -33,19 +33,19 @@ const App = () => {
             element={<LoginAuth setTitle={setTitle}/>}
           />
           <Route
-            exact path="/entergalaxy/uid/:id"
+            exact path="/entergalaxy/userid/:id"
             element = {<EnterGalaxy setTitle={setTitle}/>}
           />
           <Route
-            exact path="/creategalaxy/uid/:id"
+            exact path="/creategalaxy/userid/:id"
             element={<CreateGalaxy setTitle={setTitle}/>}
           />
           <Route
-            exact path = "/galaxy/uid/:id"
+            exact path = "/galaxy/userid/:id"
             element={<GalaxyWindow setTitle={setTitle}/>}
           />
           <Route
-            exact path = "/tasks/uid/:id"
+            exact path = "/tasks/userid/:id"
             element={<TaskTracker setTitle={setTitle}/>}
           />
         </Routes>
@@ -54,7 +54,7 @@ const App = () => {
       {/* <CreateGalaxy /> */}
       {/* <Title /> */}
       {/* <Menu /> */}
-    </div>
+    </HashRouter>
   );
 };
 
@@ -67,9 +67,9 @@ const App = () => {
 //         {title ? <TitleBar/> : null}
 //         <Routes>
 //           <Route exact path="/" element={<LoginAuth setTitle={setTitle}/>} />
-//           <Route exact path="/entergalaxy/uid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
-//           <Route exact path="/creategalaxy/uid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
-//           <Route exact path = "/galaxy/uid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
+//           <Route exact path="/entergalaxy/userid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
+//           <Route exact path="/creategalaxy/userid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
+//           <Route exact path = "/galaxy/userid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
 //         </Routes>
 //       </div>
 //     </HashRouter>
