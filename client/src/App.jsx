@@ -58,23 +58,4 @@ const App = () => {
   );
 };
 
-// const App = () => {
-//   const [title, setTitle] = useState(true);
-
-//   return (
-//     <HashRouter>
-//       <div className='appBackground'>
-//         {title ? <TitleBar/> : null}
-//         <Routes>
-//           <Route exact path="/" element={<LoginAuth setTitle={setTitle}/>} />
-//           <Route exact path="/entergalaxy/userid/:id" element = {<EnterGalaxy setTitle={setTitle}/>} />
-//           <Route exact path="/creategalaxy/userid/:id" element={<CreateGalaxy setTitle={setTitle}/>} />
-//           <Route exact path = "/galaxy/userid/:id" element={<GalaxyWindow setTitle={setTitle}/>} />
-//         </Routes>
-//       </div>
-//     </HashRouter>
-//   );
-// };
-//   const [title, setTitle] = useState(true);
-
 export default App;
