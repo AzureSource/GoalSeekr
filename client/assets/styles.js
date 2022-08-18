@@ -458,6 +458,7 @@ const overrides = {
         borderRadius: '7px',
         border: '2.5px solid rgba(80,182,171,0.4)',
         background: '#2e2f47',
+        color: 'white',
       },
       '.chats-container': {
         marginLeft: '7.5px',
@@ -664,11 +665,21 @@ const overrides = {
       // Mission Module
       // =============================
       '.mission-module-container': {
-        height: '50%',
-        width: '90%',
+        height: '5%',
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'space-between',
       },
+
+      // =============================
+      // Chats Module
+      // =============================
+      // '.chatsTitle': {
+      //   height: '50%',
+      //   width: '90%',
+      //   flexDirection: 'column',
+      //   justifyContent: 'space-between',
+      // },
 
       // =============================
       // Mission Module
