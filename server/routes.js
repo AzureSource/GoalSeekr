@@ -11,11 +11,12 @@ const planets = require('./models/planets');
 const routes = Router();
 
 routes.get('/api/ships/', ship.getAll);
-routes.get('/api/ships/:galaxy_name/:planet_name', ship.getShipsByPlanet);
+routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
 routes.get('/api/users/:user_id/ships', user.getShips);
 routes.get('/api/users/:user_id', user.findOne);
 routes.post('/api/users/:user_id/ships', user.updateShips);
-routes.get('/api/galaxyName', user.getGalaxyName);
+routes.post('/api/users/:user_id/mission', user.doMission);
+routes.get('/api/users/:user_id/planets', user.getPlanets);
 
 // task tracker
 routes.get('/api/tasks/', tasks.getAllTasks);

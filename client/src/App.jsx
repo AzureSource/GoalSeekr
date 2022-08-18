@@ -8,19 +8,21 @@ import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';'react-zo
 import LoginAuth from './components/Login/LoginAuth.jsx';
 import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
-const App = () => {
+// const App = () => {
 
+//   const [title, setTitle] = useState(true);
+//   return (
+//     <div className='appBackground'>
+//       <div className='app'>
+//         <GalaxyWindow setTitle={setTitle} className='galaxyWindow' />
+//       </div>
+//     </div>
+//   );
+// };
+
+const App = () => {
   const [title, setTitle] = useState(true);
   return (
-  //     <div className='appBackground'>
-  //       <div className='app'>
-  //         <GalaxyWindow setTitle={setTitle} className='galaxyWindow' />
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  // export default App;
     <HashRouter>
       <div className='appBackground'>
         {title ? <TitleBar/> : null}
