@@ -52,7 +52,6 @@ export default function GalaxyWindow ({ setTitle }) {
       const ships = await axios.get(`/api/users/${id}/ships`);
       dispatch(getUserShipsFromDB(ships.data.getusersships));
       const planets = await axios.get(`/api/users/${id}/planets`);
-      console.log('planets.data is ', planets.data);
       dispatch(getUserPlanetsFromDB(planets.data));
     };
     fetchData();
@@ -61,16 +60,16 @@ export default function GalaxyWindow ({ setTitle }) {
   const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={id, user}>
+    <UserContext.Provider value={id, user} className='userContext'>
       <div className='galaxy-window' color='white'>
         <MenuSide/>
         <MenuBottom/>
         <Flex className='galaxy-window-top'>
           <MenuSide/>
-          <TransformWrapper initialScale={1.02} className='transformWrapper'>
+          <TransformWrapper initialScale={1} className='transformWrapper'>
             <TransformComponent className='transformComponent'>
               <div className='planetsWindow'>
-                {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>}
+                {/* {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>} */}
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
               </div>

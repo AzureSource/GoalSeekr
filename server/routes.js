@@ -14,6 +14,7 @@ routes.get('/api/ships/', ship.getAll);
 routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
 routes.get('/api/users/:user_id/ships', user.getShips);
 routes.get('/api/users/:user_id', user.findOne);
+routes.get('/api/users/:user_id/ships', user.getShips);
 routes.post('/api/users/:user_id/ships', user.updateShips);
 routes.post('/api/users/:user_id/mission', user.doMission);
 routes.get('/api/users/:user_id/planets', user.getPlanets);
@@ -31,7 +32,8 @@ routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
 // player list
 routes.get('/api/players', getAllPlayers);
 
-// routes.put('/api/users/:user_id',user.updateUserName);
+//user
+routes.get('/api/users',users.checkAllUser);
 routes.post('/api/users',users.checkUser);
 routes.get('/api/galaxy',users.checkGalaxyName);
 
