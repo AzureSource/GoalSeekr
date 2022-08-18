@@ -18,7 +18,7 @@ export default function EnterUserName ({authData}) {
         data:{...authData,displayname:text}
       })
         .then((result)=>redirectToEnterGalaxyPage(result.data))
-        .catch(()=>console.log('Err from enter user name'));
+        .catch(()=> alert('Err from enter user name'));
     }
     else{
       alert('Please Enter your Username!');
