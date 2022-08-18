@@ -65,9 +65,17 @@ const BuildShip = () => {
         >
           Build ship
         </Button>
-        <Modal onClose={restoreData} size='full' isOpen={isOpen}>
-          <ModalOverlay />
-          <ModalContent backgroundColor='rgba(46,47,71,255)' >
+        <Modal
+          size='l'
+          onClose={restoreData}
+          isOpen={isOpen}>
+          <ModalOverlay
+            backdropFilter='blur(.9px) hue-rotate(90deg)'
+          />
+          <ModalContent
+            className='ship-modal-content'
+            backgroundColor='rgba(46,47,71,255)'
+          >
             <ModalHeader color='gray.500'>Available Ship</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -76,7 +84,7 @@ const BuildShip = () => {
               </Wrap>
               <br/>
               <br/>
-              <Box bg='teal' w='100%' p={4} color='white'>
+              <Box bg='teal' p={4} color='white'>
               Your available currency is : $ {userCurrency}
               </Box>
             </ModalBody>

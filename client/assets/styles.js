@@ -13,6 +13,14 @@ const overrides = {
         backgroundSize: 'contain',
         zIndex: -1,
       },
+      '.galaxyBackground': {
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        backgroundImage: background,
+        backgroundSize: 'contain',
+        zIndex: 2,
+      },
       '.galaxy-window': {
         width: '100%',
         height: '100%'
@@ -21,8 +29,8 @@ const overrides = {
         height: '100%',
       },
       '.planetsWindow': {
-        height: '100%',
-        width: '100%'
+        height: '720px',
+        width: '1280px'
       },
       // '.divInPlanetComponent': {
       //   // marginTop: '10px',
@@ -704,6 +712,9 @@ const overrides = {
       // =============================
       // Mission Module
       // =============================
+    },
+    'section#chakra-modal-:r1': {
+      width: '70% !important',
     },
   },
 };

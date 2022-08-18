@@ -376,7 +376,7 @@ export default function DenseGalaxy() {
   var hatSource;
 
   return (
-    <div className='planetsWindow'>
+    <div className='galaxyBackground'>
       {planets.map((planet, index) => {
         return (
           <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
