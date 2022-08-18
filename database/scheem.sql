@@ -74,7 +74,7 @@ CREATE TABLE planets_galaxy (
   planet_id INT REFERENCES planets(id),
   galaxy_id INT REFERENCES galaxies(id),
   colonizedBy INT REFERENCES users(id) DEFAULT NULL,
-  discovered int[] DEFAULT array[]::int[] NOT NULL
+  discoveredBy INT[] DEFAULT NULL
 );
 
 CREATE TABLE ships_user (
@@ -91,14 +91,14 @@ CREATE TABLE ships_user (
 
 CREATE TABLE hats (
   id SERIAL PRIMARY KEY,
-  name TEXT,
-  url TEXT
+  name TEXT
 );
 
 CREATE TABLE hats_user (
   id SERIAL PRIMARY KEY,
   galaxy_id INT REFERENCES galaxies(id),
-  user_id INT REFERENCES users(id)
+  user_id INT REFERENCES users(id),
+	hat_id INT REFERENCES hats(id)
 );
 
 
@@ -157,6 +157,17 @@ CREATE INDEX ships_user_ship_planet_id_index
 CREATE INDEX ships_user_galaxy_id_index
   ON ships_user(user_ship_galaxy_id);
 
+-- hats_user
+CREATE INDEX hats_user_galaxy_id_index
+  ON hats_user(galaxy_id);
+
+CREATE INDEX hats_user_user_id_index
+  ON hats_user(user_id);
+
+CREATE INDEX hats_user_hat_id_index
+  ON hats_user(hat_id);
+
+
 -- ================================================================= --
 -- ================================================================= --
 --                        DB FUNCTIONS                               --
@@ -198,7 +209,7 @@ $func$ LANGUAGE plpgsql VOLATILE COST 100;
 --Purchases a ship by userID and name of ship (IF AFFORDABLE) and adds it to user_ship db and updates user's currency amount to decrease, then returns:
 -- Object with player prop whos properties are prevBal (balance before buying) and newBalance (balance after buying)
 -- Insufficient balance message stating how many dollars they are short from purchasing
-CREATE OR REPLACE FUNCTION buyShip("userID" INT, "shipname" TEXT)
+CREATE OR REPLACE FUNCTION buyShip("userID" INT, "planetID" INT, "shipname" TEXT)
   RETURNS JSON AS $func$
 DECLARE
 RESULT JSON;
@@ -208,14 +219,14 @@ BEGIN
 		-- Select player's currency and insert it into currentBalance variable
 		SELECT currency FROM users WHERE ID = $1 INTO currentBalance;
 		-- Select ship's cost and insert it into shipCost variable
-		SELECT cost FROM SHIPS WHERE NAME = $2 INTO shipCost;
+		SELECT cost FROM SHIPS WHERE NAME = $3 INTO shipCost;
 	-- IF ship cost is less than or equal to players balance
 	IF shipCost <= currentBalance
 	THEN
 		UPDATE users
 		  SET currency = ( currency - shipCost )
 	  WHERE ID = $1;
-		WITH shipinfo AS ( SELECT * FROM SHIPS WHERE NAME = $2 )
+		WITH shipinfo AS ( SELECT * FROM SHIPS WHERE NAME = $3 )
     INSERT INTO ships_user ( user_id, user_ship_id, user_ship_name, user_ship_health, user_ship_rangeCapacity, user_ship_powerLevel, user_ship_planet_id, user_ship_galaxy_id )
     VALUES (
         $1,
@@ -224,7 +235,7 @@ BEGIN
         ( SELECT healthLevel FROM shipinfo ),
         ( SELECT rangeCapacity FROM shipinfo ),
         ( SELECT powerLevel FROM shipinfo ),
-        1,
+        $2,
         ( SELECT currentGalaxy FROM users WHERE ID = $1 )
     )
         -- Return an object with player and ship key containing player's previous balance and new balance, along with ship's data
@@ -464,8 +475,8 @@ BEGIN
 		SELECT row_to_json(users) FROM users WHERE googleuid = $1 INTO result;
 		RETURN result;
 	ELSE
-	  INSERT INTO users (username, googleuid, email,  motto, about, profile_picture_url, currency, currentgalaxy)
-		VALUES ($2, $1, $3, $4, $5, $6, 10000, 1)
+	  INSERT INTO users (username, googleuid, email,  motto, about, profile_picture_url, currency)
+		VALUES ($2, $1, $3, $4, $5, $6, 10000)
 		RETURNING * INTO result;
   END IF;
 	RETURN result;
@@ -521,7 +532,9 @@ BEGIN
 		'avatarURL', profile_picture_url,
 		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
 		'galaxy', json_build_object('id', currentgalaxy, 'name', (SELECT name FROM galaxies WHERE id = currentgalaxy)),
-		'ships', (SELECT getusersshipssorted($1, $2))
+		'ships', (SELECT getusersshipssorted($1, $2)),
+		'planetsdiscovered', (SELECT json_agg(planet_id) as discoveredPlanets FROM planets_galaxy WHERE galaxy_id = currentgalaxy AND users.id = ANY(discoveredby)),
+		'planetsowned', (SELECT json_agg(planet_id) as colonizedPlanets FROM planets_galaxy WHERE galaxy_id = currentgalaxy AND colonizedby = id)
 		) AS results
 	FROM users
 	WHERE id = $1
@@ -532,7 +545,6 @@ $func$ LANGUAGE plpgsql VOLATILE COST 100;
 -- returns all data of players with ships divided by planet name, divided by ship name/type
 CREATE OR REPLACE FUNCTION getplayerdatabygalaxyid("galaxyID" INT, "byPlanet?" boolean)
   RETURNS JSON AS $func$
-DECLARE
 BEGIN
 	RETURN (
 	SELECT
@@ -550,6 +562,8 @@ BEGIN
 		'currency', currency,
 		'avatarURL', profile_picture_url,
 		'alliance', json_build_object('id', currentalliance, 'name', (SELECT name FROM alliances WHERE id = currentalliance)),
+		'planetsdiscovered', (SELECT json_agg(planet_id) as discoveredPlanets FROM planets_galaxy WHERE galaxy_id = $1 AND users.id = ANY(discoveredby)),
+		'planetsowned', (SELECT json_agg(planet_id) as colonizedPlanets FROM planets_galaxy WHERE galaxy_id = $1 AND colonizedby = users.id),
 		'ships', (SELECT getusersshipssorted(id, $2))) ORDER BY id ASC)) AS results
 	FROM users
 	WHERE currentgalaxy = $1
@@ -629,6 +643,83 @@ BEGIN
 		END loop;
   END loop;
 	RETURN CONCAT('Assigned allTasks to ', userCount/(SELECT COUNT(tasks) FROM tasks), ' Users');
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- Discovers a planet for a user by userID galaxyID and planetID
+CREATE OR REPLACE FUNCTION discoverplanetbygalaxy("userID" INT, "galaxyID" INT, "planetID" INT)
+  RETURNS JSON AS $func$
+	DECLARE
+		alreadyDiscovered BOOLEAN;
+		correctGalaxy BOOLEAN;
+	BEGIN
+			SELECT $2 = (SELECT currentgalaxy FROM users WHERE id = $1) INTO correctGalaxy;
+			SELECT EXISTS (SELECT user_id FROM (SELECT unnest(discoveredby) as user_id FROM planets_galaxy WHERE planet_id = $3 and galaxy_id = $2) Players WHERE user_id = $1) INTO alreadyDiscovered;
+			IF correctGalaxy THEN
+				IF NOT alreadyDiscovered THEN
+					UPDATE planets_galaxy SET discoveredby = array_append(discoveredby, $1) WHERE planet_id = $3 AND galaxy_id = $2;
+					RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $3 and galaxy_id = $2);
+				END IF;
+			RETURN (json_build_object('error', 'User already discovered this planet'));
+			END IF;
+			RETURN (json_build_object('error', 'User is not present in this galaxy'));
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- Same thing as above but galaxy is automatically determined.
+CREATE OR REPLACE FUNCTION discoverplanet("userID" INT, "planetID" INT)
+  RETURNS JSON AS $func$
+	DECLARE
+		alreadyDiscovered BOOLEAN;
+		galaxyID INT;
+		planetDataExists BOOLEAN;
+		creationResult planets_galaxy%rowtype;
+	BEGIN
+			SELECT currentgalaxy FROM users WHERE id = $1 INTO galaxyID;
+			SELECT EXISTS (SELECT planet_id FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID) INTO planetDataExists;
+			SELECT EXISTS (SELECT user_id FROM (SELECT unnest(discoveredby) as user_id FROM planets_galaxy WHERE planet_id = $2 and galaxy_id = galaxyID) Players WHERE user_id = $1) INTO alreadyDiscovered;
+
+		IF planetDataExists THEN
+			IF NOT alreadyDiscovered THEN
+					RAISE NOTICE 'User: % has not disovered planet % in galaxy %', $1, $2, galaxyid;
+					UPDATE planets_galaxy SET discoveredby = array_append(discoveredby, $1) WHERE planet_id = $2 AND galaxy_id = galaxyID;
+					RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 and galaxy_id = galaxyID);
+			END IF;
+			RETURN (json_build_object('error', 'User already discovered this planet'));
+		ELSE
+			INSERT INTO planets_galaxy (planet_id, galaxy_id, discoveredby) VALUES ($2, galaxyID, ARRAY[$1])
+			RETURNING * INTO creationResult;
+			RETURN row_to_json(creationResult);
+		END IF;
+
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- Updates the colonizedby field for a planet in planets_galaxy to be the passed in user
+CREATE OR REPLACE FUNCTION colonizeplanet("userID" INT, "planetID" INT)
+  RETURNS json AS $func$
+	DECLARE
+		alreadyDiscovered boolean;
+		galaxyID int;
+		planetDataExists boolean;
+		creationResult planets_galaxy%rowtype;
+	BEGIN
+			SELECT currentgalaxy FROM users WHERE id = $1 INTO galaxyID;
+			SELECT EXISTS (SELECT planet_id FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID) INTO planetDataExists;
+			SELECT EXISTS (SELECT user_id FROM (SELECT unnest(discoveredby) as user_id FROM planets_galaxy WHERE planet_id = $2 and galaxy_id = galaxyID) Players WHERE user_id = $1) INTO alreadyDiscovered;
+
+		IF planetDataExists THEN
+			IF alreadyDiscovered THEN
+					UPDATE planets_galaxy
+					SET colonizedby=$1
+					WHERE galaxy_id=galaxyID AND planet_id = $2;
+					RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID);
+				ELSE
+				  RAISE NOTICE 'User: % has not disovered planet % in galaxy %', $1, $2, galaxyid;
+					RETURN (json_build_object('error', 'User has not discovered this planet'));
+			END IF;
+		END IF;
+			RETURN (json_build_object('error', CONCAT('Data does not exist for planet:', $2, ' in galaxy:', galaxyID)));
 END
 $func$ LANGUAGE plpgsql VOLATILE COST 100;
 

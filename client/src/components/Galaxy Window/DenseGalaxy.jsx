@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlanetSelection } from './denseGalaxySlice';
 import zero from '../../../assets/images/zeroUnexplored.png';
@@ -13,7 +13,17 @@ import polaris from '../../../assets/images/polarisUnexplored.png';
 import steins from '../../../assets/images/steinsUnexplored.png';
 import egg from '../../../assets/hats/egg.png';
 import bearears from '../../../assets/hats/bearears.png';
+import bubble from '../../../assets/hats/bubble.png';
+import cowboy from '../../../assets/hats/cowboy.png';
+import crown from '../../../assets/hats/crown.png';
+import devil from '../../../assets/hats/devil.png';
+import halo from '../../../assets/hats/halo.png';
+import flowercrown from '../../../assets/hats/flowercrown.png';
+import banana from '../../../assets/hats/banana.png';
+import sprout from '../../../assets/hats/sprout.png';
 import { Image } from '@chakra-ui/react';
+import axios from 'axios';
+import { UserContext } from './GalaxyWindow.jsx';
 import MenuSide from './MenuSide.jsx';
 import MenuBottom from './MenuBottom.jsx';
 
@@ -343,9 +353,16 @@ export default function DenseGalaxy() {
 
   const dispatch = useDispatch();
 
+  const { user } = useContext(UserContext);
+
   const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
 
   const userPlanets = useSelector(state => state.userShips.planets);
+
+  const tempUserPlanets = {
+    colonized: [1, 2, 3, 4, 5],
+    scouted: [30, 31, 32],
+  };
 
   const handlePlanetSelection = (name, id) => {
     const planetSelection = name;
@@ -357,6 +374,10 @@ export default function DenseGalaxy() {
     }
   };
 
+  var image;
+  var hat;
+  var hatSource;
+
   return (
     <div className='appBackground planetsWindow'>
       {planets.map((planet, index) => {
@@ -364,11 +385,45 @@ export default function DenseGalaxy() {
           <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)}>
             <Image src={planet.image} className={planet.classname}/>
             <div className={planet.name}>{planet.name}</div>
+            <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
           </div>
         );
       })}
-      <img src={egg} className='egg'></img>
-      <img src={bearears} className='bearears'></img>
     </div>
   );
+
+  // return (
+  //   <div>
+  //     {planets.map((planet, index) => {
+  //       if (userPlanets.scouted.includes(planet.id)) {
+  //         image = <img src={planet.image} className={planet.classname}></img>;
+  //       } else {
+  //         image = <img src={planet.unexplored} className={planet.classname}></img>;
+  //       }
+
+  //       if (userPlanets.colonized.includes(planet.id)) {
+  //         hatSource = user.profile_picture_url;
+  //         <Image src={hatSource} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>;
+  //       } else {
+  //         hat = null;
+  //       }
+  //       return (
+  //       //if axios.getplanetbyid(id).discoveredBy !== null, and it matches current UserId, return div with colored planet image
+  //       //else return div with question mark planet image src
+  //       //if axios.getplanetbyid.conqueredBy !== null
+  //       //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
+  //       // if (axios.get('/planets/'))
+
+  //         <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
+  //           {image}
+  //           <div className={planet.name}>{planet.name}</div>
+  //           {hat}
+  //         </div>
+  //       );
+  //     })}
+  //     {/* <img src={egg} className='egg'></img> */}
+  //     {/* <img src={bearears} className='bearears'></img> */}
+  //   </div>
+  // );
 }
+

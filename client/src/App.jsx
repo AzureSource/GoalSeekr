@@ -22,7 +22,6 @@ import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
 const App = () => {
   const [title, setTitle] = useState(true);
-
   return (
     <HashRouter>
       <div className='appBackground'>
@@ -50,10 +49,6 @@ const App = () => {
           />
         </Routes>
       </div>
-      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-      {/* <CreateGalaxy /> */}
-      {/* <Title /> */}
-      {/* <Menu /> */}
     </HashRouter>
   );
 };

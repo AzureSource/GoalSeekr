@@ -10,11 +10,11 @@ const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
 
-  const redirectToEnterGalaxyPage = function() {
+  const redirectToEnterGalaxyPage = function () {
     window.location.href = `http://localhost:7777/#/entergalaxy/userid/${params.id}`;
   };
 
-  const redirectToGalaxyWindow = function(){
+  const redirectToGalaxyWindow = function () {
     window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
@@ -33,11 +33,14 @@ const CreateGalaxy = ({ setTitle }) => {
       alliance,
       galaxySize,
     };
-    console.log(send);
+    // console.log(send);
     axios.post(localhost, send)
-      //put req User and galaxy id****************************
-      .then(({data}) => {
-        console.log(data);
+      .then(({ data }) => {
+        const gx_id = data.creategalaxy.id;
+        // console.log(params.id, data);
+        axios.put(`/api/user/${params.id}/${gx_id}`)
+          .then(() => console.log('success'))
+          .catch((err) => console.log('ERROR:', err));
       })
       .catch(err => console.log(err));
   };
@@ -114,14 +117,14 @@ const CreateGalaxy = ({ setTitle }) => {
           <Button
             backgroundColor='#2e2f47'
             className='create-galaxy-btn'
-            onClick={(e)=>handleCancel(e)}
+            onClick={(e) => handleCancel(e)}
           >
             Cancel
           </Button>
           <Button
             backgroundColor='#2e2f47'
             className='create-galaxy-btn'
-            onClick = {(e)=>handleGoToGalaxyWindow(e)}
+            onClick={(e) => handleGoToGalaxyWindow(e)}
           >
             Create Galaxy
           </Button>
