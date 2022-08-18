@@ -24,6 +24,8 @@ import sprout from '../../../assets/hats/sprout.png';
 import { Image } from '@chakra-ui/react';
 import axios from 'axios';
 import { UserContext } from './GalaxyWindow.jsx';
+import MenuSide from './MenuSide.jsx';
+import MenuBottom from './MenuBottom.jsx';
 
 export default function DenseGalaxy() {
   var planets = [
@@ -374,7 +376,7 @@ export default function DenseGalaxy() {
   var hatSource;
 
   return (
-    <div>
+    <div className='appBackground planetsWindow'>
       {planets.map((planet, index) => {
         return (
           <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>

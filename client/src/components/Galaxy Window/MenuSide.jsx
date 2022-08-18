@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Button } from '@chakra-ui/react';
 import Playerlist  from '../list/PlayerList.jsx';
 import BuildShip from '../buildShips/BuildShip.jsx';
 import MissionModule from './actionsToolbar/missionModule/MissionModule.jsx';
@@ -8,16 +8,26 @@ const MenuSide = () => {
   return (
     <Flex
       className='menu-side-container'
-      justify='center'
+      flexDir='column'
       alignItems='center'
-      margin='2rem'
-      width='min-content'
-      display='block'
     >
       <Playerlist />
-      <br/>
       <BuildShip/>
       <MissionModule />
+      <Flex
+        className='side-menu-bottom-btn-container'
+      >
+        <Button
+          className='end-turn-btn'
+        >
+          End Turn
+        </Button>
+        <Button
+          className='tasks-modal-btn'
+        >
+          Tasks
+        </Button>
+      </Flex>
     </Flex>
 
   );

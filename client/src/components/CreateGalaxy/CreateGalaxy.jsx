@@ -14,11 +14,11 @@ const CreateGalaxy = ({ setTitle }) => {
   const dispatch = useDispatch();
 
   const redirectToEnterGalaxyPage = function() {
-    window.location.href = `http://localhost:7777/#/entergalaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/entergalaxy/userid/${params.id}`;
   };
 
   const redirectToGalaxyWindow = function(){
-    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
@@ -26,6 +26,7 @@ const CreateGalaxy = ({ setTitle }) => {
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
+  const [allGalaxies, setAllGalaxies] = useState();
 
   const submitGalaxy = () => {
     let send = {
@@ -36,9 +37,16 @@ const CreateGalaxy = ({ setTitle }) => {
       galaxySize,
     };
     console.log(send);
-    axios.post(localhost , send)
-      .then(() => console.log('posted'))
+    axios.post(localhost, send)
+      //put req User and galaxy id****************************
+      .then(({data}) => {
+        console.log(data);
+      })
       .catch(err => console.log(err));
+  };
+
+  const getGalaxies = () => {
+
   };
 
   const handleCancel = (event) => {
@@ -53,7 +61,10 @@ const CreateGalaxy = ({ setTitle }) => {
     redirectToGalaxyWindow();
   };
 
-  useEffect(() => setTitle(false), []);
+  useEffect(() => {
+    setTitle(false);
+
+  }, []);
 
   return (
     <Flex className='create-galaxy-container'

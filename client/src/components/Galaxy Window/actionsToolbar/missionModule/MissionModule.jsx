@@ -3,8 +3,8 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Divider, Select, List, ListItem } from '@chakra-ui/react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
+import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
@@ -61,7 +61,9 @@ export default function MissionModule() {
   // console.log('planets', planets);
 
   return (
-    <div font='white'>
+    <Flex
+      className='mission-module-container'
+    >
       <div>
         Home Planet
         {planets.homePlanet}
@@ -71,8 +73,8 @@ export default function MissionModule() {
           variant='filled'
           value={missionType}
           placeholder='Mission Type'
-          size='md'
-          icon={<TriangleDownIcon />}
+          size='sm'
+          icon={<ChevronDownIcon />}
           onChange={(e) => setMissionType(e.target.value)}>
           <option value='scout'>Scout</option>
           <option value='attack'>Attack</option>
@@ -84,7 +86,6 @@ export default function MissionModule() {
         {planets.targetPlanet}
         <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
-      <Divider orientation='horizontal' />
       {ships === null ? (
         <div>There are no fleets at this planet.</div>
       ) : (
@@ -106,26 +107,26 @@ export default function MissionModule() {
           })}
         </ListItem>
       </List>
-    </div>
+    </Flex>
   );
 }
 
 
 // Sending a mission
 // end turn is clicked
-  // remove existing ships from home planet (may be attacked while away)
-  // Missions are saved on local redux store with userID.
-  // Mission has a turn count that is decremented until ships reach target planet.
-  // Need to decided on distance count
-  // every turn decrements the count.
+// remove existing ships from home planet (may be attacked while away)
+// Missions are saved on local redux store with userID.
+// Mission has a turn count that is decremented until ships reach target planet.
+// Need to decided on distance count
+// every turn decrements the count.
 // once the count reaches 0, grab current information of target planet, for battle.
 
 //battle
-  // based on type of mission
-  //if scout mission provide run down of planet information
-  //if attack, decide based on number of attack ships.
-  //if colonize, check if attack ships are there, or if there are defenders
-    // Maybe say 2 attack ships needed to take out mothership.
+// based on type of mission
+//if scout mission provide run down of planet information
+//if attack, decide based on number of attack ships.
+//if colonize, check if attack ships are there, or if there are defenders
+// Maybe say 2 attack ships needed to take out mothership.
 // once battle is complete send new data on planet ownership to database.
 // send notification of results to both users.
 
