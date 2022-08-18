@@ -111,7 +111,9 @@ export default function MissionModule() {
         </ListItem>
       </List>
       {endTurnActivation && (
-        <MissionSequence />
+        <div>
+          <MissionSequence />
+        </div>
       )}
     </Flex >
   );

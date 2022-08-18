@@ -26,7 +26,7 @@ export default function MissionSequence() {
 
   const executeMission = (targetPlanetName) => {
     // console.log('planets is ', planets);
-    scout(17);
+    Scout(17);
   };
 
   return (
