@@ -5,6 +5,7 @@ import shipImg from '../../../assets/ship.png';
 import {Button, Modal, ModalOverlay, ModalContent, Box,
   Wrap, ModalHeader,
   ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 import { UserContext } from '../Galaxy Window/GalaxyWindow.jsx';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +17,7 @@ const BuildShip = () => {
   const [purchasedShips, setPurchasedShips] = useState([]);
   const [ships, setShips] = useState([]);
   const [user, setUser] = useState({});
-  const uid = useContext(UserContext);
+  const {id} = useParams();
 
   const planetIdSelected = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection.planetIdSelected);
 
@@ -25,7 +26,7 @@ const BuildShip = () => {
   useEffect(() => {
     const fetchData = async () => {
       const shipResponse = await axios.get('/api/ships/');
-      const userResponse = await axios.get(`/api/users/${uid}`);
+      const userResponse = await axios.get(`/api/users/${id}`);
       let shipsDB = shipResponse.data;
       let shipsWithImg = shipsDB.map(shipDB => ({...shipDB, imageUrl: shipImg}));
       setShips(shipsWithImg);
@@ -40,7 +41,11 @@ const BuildShip = () => {
   ));
 
   const restoreData = () => {
-    setUserCurrency(user.currency);
+    let tempCurrency = 0;
+    if (user) {
+      tempCurrency = user.currency;
+    }
+    setUserCurrency(tempCurrency);
     setPurchasedShips([]);
     onClose();
   };
@@ -53,7 +58,7 @@ const BuildShip = () => {
         'ships': purchasedShips
       }
     };
-    axios.post(`api/users/${uid}/ships`, config)
+    axios.post(`api/users/${id}/ships`, config)
       .then(() => {
         console.log('update user info');
         location.reload();
