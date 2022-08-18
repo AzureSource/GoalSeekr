@@ -5,6 +5,7 @@ const user = require('./models/user.js');
 const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
 const galaxy =require('./models/galaxy.js');
+const planets = require('./models/planets');
 
 const routes = Router();
 
@@ -30,6 +31,11 @@ routes.put('/hats/:user_id/:galaxy_id', hats.updateHat);
 
 // insert galaxy route
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
+
+//planets
+routes.get('/planets/:id', planets.getPlanetById);
+routes.get('/planets/users/:user_id', planets.getUserById);
+
 
 
 module.exports = routes;

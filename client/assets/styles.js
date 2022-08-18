@@ -20,9 +20,22 @@ const overrides = {
       },
       '.planetsWindow': {
         marginTop: '10px',
-        height: '550px',
-        width: '1120px'
+        height: '1550px',
+        width: '5120px'
       },
+      // '.divInPlanetComponent': {
+      //   // marginTop: '10px',
+      //   // height: '550px',
+      //   // width: '1120px'
+      // },
+      // '.transformWrapper': {
+      //   marginTop: '10px',
+      //   height: '100%',
+      //   width: '100%'
+      // },
+      // '.transformComponent': {
+      //   width: '100%'
+      // },
       '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
         // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
         // filter: 'drop-shadow(5px 5px 5px #222)',
