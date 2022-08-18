@@ -357,17 +357,20 @@ export default function DenseGalaxy() {
 
   const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
 
-  const userPlanets = {
+  const userPlanets = useSelector(state => state.userShips.planets);
+
+  const tempUserPlanets = {
     colonized: [1, 2, 3, 4, 5],
     scouted: [30, 31, 32],
   };
 
-  const handlePlanetSelection = (name) => {
+  const handlePlanetSelection = (name, id) => {
     const planetSelection = name;
+    const planetId = id;
     if (!firstPlanet) {
-      dispatch(setPlanetSelection({homePlanet: planetSelection}));
+      dispatch(setPlanetSelection({homePlanet: planetSelection, planetIdSelected: planetId}));
     } else {
-      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+      dispatch(setPlanetSelection({targetPlanet: planetSelection, targetPlanetId: planetId}));
     }
   };
 
@@ -379,10 +382,10 @@ export default function DenseGalaxy() {
     <div className='galaxyBackground'>
       {planets.map((planet, index) => {
         return (
-          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
+          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)}>
             <Image src={planet.image} className={planet.classname}/>
             <div className={planet.name}>{planet.name}</div>
-            <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
+            {/* <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image> */}
           </div>
         );
       })}
