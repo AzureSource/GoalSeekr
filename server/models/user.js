@@ -52,7 +52,7 @@ module.exports = {
       let type = req.body.data.type;
       if (type === 'scout') {
         let targetPlanet = req.body.data.targetPlanet;
-        const query = 'SELECT * FROM updateplantsgalaxy($1, $2)';
+        const query = 'SELECT * FROM discoverplanet($1, $2)';
         await client(query, [userId, targetPlanet]);
       }
       res.sendStatus(201);
@@ -61,19 +61,28 @@ module.exports = {
     }
   },
   getPlanets: async function (req, res) {
-    console.log('hit');
-    debugger;
     try {
       let userId = req.params.user_id;
-      console.log('hit');
-      const query = `SELECT * FROM public.planets_galaxy
-      WHERE colonizedby = $1 OR $1 = ANY (discoveredby)`;
-      const results = await client(query, [userId]);
-      console.log('results is ', results.rows());
+      const query1 = `SELECT planet_id FROM public.planets_galaxy
+      WHERE colonizedby = $1`;
+      const colonizedPlanetsDB = await client(query1, [userId]);
+      console.log('colonizedPlanets is ', colonizedPlanetsDB.rows);
+      const query2 = `SELECT planet_id FROM public.planets_galaxy
+      WHERE $1 = ANY (discoveredby)`;
+      const scoutedPlanetsDB = await client(query2, [userId]);
+      console.log('scoutedPlanets is ', scoutedPlanetsDB.rows);
+      var results = {};
+      results.colonizedPlanets = [];
+      results.scoutedPlanets = [];
+      for (let i = 0; i < colonizedPlanetsDB.rows.length; i++) {
+        results.colonizedPlanets.push(colonizedPlanetsDB.rows[i].planet_id);
+      }
+      for (let i = 0; i < scoutedPlanetsDB.rows.length; i++) {
+        results.scoutedPlanets.push(scoutedPlanetsDB.rows[i].planet_id);
+      }
       res.json(results);
     } catch (err) {
       res.end().status(500);
     }
   }
-
 };

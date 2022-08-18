@@ -24,11 +24,11 @@ export default function GalaxyWindow ({ setTitle }) {
 
   const userShips = useSelector(state => state.userShips.ships);
 
-  const userPlanets = useSelector(state => state.userShips.planets);
+  // const userPlanets = useSelector(state => state.userShips.planets);
 
-  console.log('userShips is ', userShips);
+  // console.log('userShips is ', userShips);
 
-  console.log('userPlanets is ', userPlanets);
+  // console.log('userPlanets is ', userPlanets);
 
   useEffect(() => {
     setTitle(false);
@@ -41,7 +41,7 @@ export default function GalaxyWindow ({ setTitle }) {
       dispatch(getUserShipsFromDB(ships.data.getusersships));
       const planets = await axios.get(`/api/users/${id}/planets`);
       console.log('planets.data is ', planets.data);
-      dispatch(getUserPlanetsFromDB(planets.data.getusersplants));
+      dispatch(getUserPlanetsFromDB(planets.data));
     };
     fetchData();
   }, []);
