@@ -26,6 +26,7 @@ const CreateGalaxy = ({ setTitle }) => {
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
+  const [allGalaxies, setAllGalaxies] = useState();
 
   const submitGalaxy = () => {
     let send = {
@@ -41,6 +42,10 @@ const CreateGalaxy = ({ setTitle }) => {
       .catch(err => console.log(err));
   };
 
+  const getGalaxies = () => {
+
+  };
+
   const handleCancel = (event) => {
     event.preventDefault();
     redirectToEnterGalaxyPage();
@@ -53,7 +58,10 @@ const CreateGalaxy = ({ setTitle }) => {
     redirectToGalaxyWindow();
   };
 
-  useEffect(() => setTitle(false), []);
+  useEffect(() => {
+    setTitle(false);
+
+  }, []);
 
   return (
     <Flex className='create-galaxy-container'

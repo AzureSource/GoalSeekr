@@ -59,7 +59,12 @@ const BuildShip = () => {
   return (
     <>
       <BuildShipContext.Provider value={{userCurrency, setUserCurrency, user, purchasedShips, setPurchasedShips}}>
-        <Button onClick={onOpen}>Build ship</Button>
+        <Button
+          className='build-modal-btn'
+          onClick={onOpen}
+        >
+          Build ship
+        </Button>
         <Modal onClose={restoreData} size='full' isOpen={isOpen}>
           <ModalOverlay />
           <ModalContent backgroundColor='rgba(46,47,71,255)' >
