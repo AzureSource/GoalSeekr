@@ -467,19 +467,21 @@ const overrides = {
       },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
-      '.tasks-modal-btn, .end-turn-btn': {
-        width: '45%',
-        height: '20%'
-      },
-      //--------------------------------- SIDE MENU
-      '.end-turn-btn, .task-modal-bth': {
+      '.end-turn-btn, .tasks-modal-btn': {
+        fontFamily: 'Abril fatface',
+        background: '#2e2f47 !important',
+        color: 'rgba(80,182,171)',
         width: '50%',
-        paddding: '10px',
+        padding: '10px',
+        margin: '10px',
+        border: '1px solid rgba(80,182,171)',
+        // margin: '5px 0px',
       },
       '.side-menu-bottom-btn-container': {
         width: '90%',
         justifyContent: 'space-between'
       },
+      //--------------------------------- SIDE MENU
       '.title-bar': {
         width: '100%',
         height: '27%',

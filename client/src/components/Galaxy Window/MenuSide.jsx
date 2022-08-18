@@ -21,12 +21,12 @@ const MenuSide = () => {
         <Button
           className='end-turn-btn'
         >
-          end button
+          End Turn
         </Button>
         <Button
           className='tasks-modal-btn'
         >
-          tasks button
+          Tasks
         </Button>
       </Flex>
     </Flex>
