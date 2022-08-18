@@ -47,7 +47,7 @@ function Playerlist () {
 
   return (
     <div id='player-list'>
-      <Accordion className='pl-acc' allowToggle>
+      <Accordion id='pl-acc' allowToggle>
         <Text textAlign={'center'}>Current Ranking</Text>
         {playerlist.map((player, index) => (
           <AccordionItem key={player.userid}>

@@ -434,16 +434,23 @@ const overrides = {
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         zIndex: 10,
       },
-      '.pl-acc': {
+      // '#player-list-conatiner': {
+      //   overflow: 'hidden'
+      // },
+      '#pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
         height: '100%',
         overflow: 'auto'
 
       },
+      '#pl-acc::-webkit-scrollbar': {
+        display: 'none'  /* Safari and Chrome */
+      },
       '#player-list': {
         width:'90%',
         height: '30%',
+        overflow: 'hidden'
       },
       '.p-list-icon': {
         fontSize: '250%',
