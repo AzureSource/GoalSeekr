@@ -33,23 +33,27 @@ const App = () => {
             element={<LoginAuth setTitle={setTitle}/>}
           />
           <Route
-            exact path="/entergalaxy/uid/:id"
+            exact path="/entergalaxy/userid/:id"
             element = {<EnterGalaxy setTitle={setTitle}/>}
           />
           <Route
-            exact path="/creategalaxy/uid/:id"
+            exact path="/creategalaxy/userid/:id"
             element={<CreateGalaxy setTitle={setTitle}/>}
           />
           <Route
-            exact path = "/galaxy/uid/:id"
+            exact path = "/galaxy/userid/:id"
             element={<GalaxyWindow setTitle={setTitle}/>}
           />
           <Route
-            exact path = "/tasks/uid/:id"
+            exact path = "/tasks/userid/:id"
             element={<TaskTracker setTitle={setTitle}/>}
           />
         </Routes>
       </div>
+      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
+      {/* <CreateGalaxy /> */}
+      {/* <Title /> */}
+      {/* <Menu /> */}
     </HashRouter>
   );
 };
