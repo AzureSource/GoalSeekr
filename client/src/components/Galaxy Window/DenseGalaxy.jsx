@@ -385,7 +385,7 @@ export default function DenseGalaxy() {
           <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)}>
             <Image src={planet.image} className={planet.classname}/>
             <div className={planet.name}>{planet.name}</div>
-            <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
+            {/* <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image> */}
           </div>
         );
       })}
