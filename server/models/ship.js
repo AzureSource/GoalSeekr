@@ -18,7 +18,6 @@ module.exports = {
       console.log('ids', galaxyId);
       console.log('iddsss', planetId);
       const query = 'SELECT * FROM getusershipsonplanet($1, $2)';
-      console.log('results is ', results.rows);
       const results = await client(query, [galaxyId, planetId]);
       res.json(results.rows);
     } catch (err) {

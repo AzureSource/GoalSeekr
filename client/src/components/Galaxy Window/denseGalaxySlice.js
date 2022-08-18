@@ -4,7 +4,8 @@ const initialState = {
   planetSelection: {
     homePlanet: '',
     targetPlanet: '',
-    planetIdSelected: 0
+    planetIdSelected: 0,
+    targetPlanetId: 0
   },
   firstSelection: false,
 };
@@ -21,6 +22,7 @@ export const denseGalaxyPlanetSelection = createSlice({
       }
       if (Object.keys(action.payload)[0] === 'targetPlanet') {
         state.planetSelection.targetPlanet = action.payload.targetPlanet;
+        state.planetSelection.targetPlanetId = action.payload.targetPlanetId;
       }
       if (action.payload === 'reset') {
         state.planetSelection.homePlanet = '';

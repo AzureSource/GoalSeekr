@@ -1,15 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Scout from './missionType/Scout.jsx';
+import Colony from './missionType/Colony.jsx';
 
 export default function MissionSequence() {
+  const { id } = useParams();
   // pull mission data from store
   let missionData = useSelector((state) => state.missionQueue.missions);
   console.log('missionData', missionData);
 
+  const scout = (targetPlanetId) => {
+    let config = {
+      data: {
+        'type': 'scout',
+        'targetPlanet': targetPlanetId
+      }
+    };
+    axios.post(`api/users/${id}/mission`, config)
+      .then(() => {
+        console.log('update user info');
+      });
+  };
+
+  const executeMission = (targetPlanetName) => {
+    // console.log('planets is ', planets);
+    scout(17);
+  };
+
   return (
     <div>
-
+      <button onClick={() => executeMission(missionData.target)}>Execute Mission</button>
     </div>
   );
 }

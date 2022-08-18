@@ -353,7 +353,7 @@ export default function DenseGalaxy() {
     if (!firstPlanet) {
       dispatch(setPlanetSelection({homePlanet: planetSelection, planetIdSelected: planetId}));
     } else {
-      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+      dispatch(setPlanetSelection({targetPlanet: planetSelection, targetPlanetId: planetId}));
     }
   };
 

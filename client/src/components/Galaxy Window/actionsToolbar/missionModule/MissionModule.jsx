@@ -4,14 +4,11 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
-import { useParams } from 'react-router-dom';
 import { setMissionQueue } from './missionModuleSlice';
 import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
-import Scout from '../missionSequence/missionType/Scout.jsx';
 
 export default function MissionModule() {
-  const { id } = useParams();
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
   const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
@@ -43,19 +40,6 @@ export default function MissionModule() {
     );
   };
 
-  const scout = (targetPlanet) => {
-    let config = {
-      data: {
-        'type': 'scout',
-        'targetPlanet': targetPlanet
-      }
-    };
-    axios.post(`api/users/${id}/mission`, config)
-      .then(() => {
-        console.log('update user info');
-      });
-  };
-
   useEffect(() => {
     if (planets.homePlanet) {
       checkForShips();
@@ -69,17 +53,12 @@ export default function MissionModule() {
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.power}`;
     dispatch(setMissionQueue({
-      add: { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }
+      add: { start: planets.homePlanet, type: missionType, ship: shipSelection, target: planets.targetPlanet, planetId: planets.planetIdSelected, targetId: planets.targetPlanetId}
     }));
   };
 
   const editMission = (missionIndex) => {
     dispatch(setMissionQueue({ remove: missionIndex }));
-  };
-
-  const executeMission = (targetPlanetName) => {
-    // console.log('planets is ', planets);
-    scout(17);
   };
 
   return (
@@ -122,12 +101,9 @@ export default function MissionModule() {
           {missionQueue.map((mission, index) => {
             return (
               <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships : {mission.ship} | Target Planet : {mission.target}
+                Home Planet : {mission.start} | Type : {mission.type} | Ships : {/*{mission.ship}*/} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
-                </div>
-                <div>
-                  <button onClick={() => executeMission(mission.target)}>Execute Mission</button>
                 </div>
               </div>
             );
