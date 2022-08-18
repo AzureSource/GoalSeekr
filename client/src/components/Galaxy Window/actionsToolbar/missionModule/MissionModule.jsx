@@ -18,11 +18,6 @@ export default function MissionModule() {
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
 
-  // Dummy Data
-  let shipList = [
-    { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
-  ];
-
   // Galaxy name disapears on refresh of page.
   const checkForShips = () => {
     const planetName = planets.homePlanet;
@@ -91,7 +86,6 @@ export default function MissionModule() {
         <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
-      {/* On endTurn reset the queue & queue is sent to local store for holding. */}
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
