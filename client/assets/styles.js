@@ -438,9 +438,12 @@ const overrides = {
       //   overflow: 'hidden'
       // },
       '#pl-acc': {
-        backgroundColor: '#41437e',
-        borderRadius: '10px',
+        fontFamily: 'Abril Fatface',
+        backgroundColor: '#2e2f47',
+        border: '2px solid rgba(80,182,171)',
+        borderRadius: '7px',
         height: '100%',
+        color: '#50b6ab',
         overflow: 'auto'
 
       },
@@ -449,7 +452,7 @@ const overrides = {
       },
       '#player-list': {
         width:'90%',
-        height: '30%',
+        height: '28.5%',
         overflow: 'hidden'
       },
       '.p-list-icon': {
@@ -499,8 +502,7 @@ const overrides = {
       '.title-bar': {
         width: '100%',
         height: '27%',
-        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.39399509803921573) 100%)',
-        backgroundOpacity: 0.7
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.72) 100%)',
       },
       '.title-name': {
         position: 'relative',
@@ -663,7 +665,7 @@ const overrides = {
       // =============================
       '.build-modal-btn': {
         background: '#2e2f47 !important',
-        border: '1px solid rgba(80,182,171)',
+        border: '2px solid rgba(80,182,171)',
         color: 'rgba(80,182,171)',
         fontFamily: 'Abril Fatface',
         width: '90%',
