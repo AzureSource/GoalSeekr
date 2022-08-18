@@ -35,7 +35,7 @@ routes.post('/api/users',users.checkUser);
 routes.get('/api/galaxy',users.checkGalaxyName);
 
 routes.get('/api/hats/:galaxy_id', hats.getAll);
-routes.put('/api/hats/:user_id/:galaxy_id', hats.updateHat);
+routes.put('/api/hats/:hat_id/:user_id/:galaxy_id', hats.updateHat);
 
 // insert galaxy route
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);

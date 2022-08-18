@@ -1,60 +1,110 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Box } from '@chakra-ui/react';
 import hatArr from './hatListObject.js';
 
 //galaxyID passed in as prop
 const ChooseHat = ( {gId} ) =>  {
 
-  //have useEffect() function below to call API request on mounting, if thatll work.
-  //Othewise, could juft have selecting a hat change the state of the Parent component, causing
-  //it to no longer render
-
+  const allHats = hatArr;
   //state for the hatlist and the selected hat
-  const [hats, assignHats] = useState(hatArr);
+  var [chosenHats, setChosenHats] = useState(['x', 'x', 'x']);
   const [hatPick, selectHat] = useState(null);
+  const {id} = useParams();
 
   //fetch hats for the galaxy and assign the hats to state
-  const fetch = () => {
-    axios.get(`/hats/${gId}`)
-      .then((res) => {
-        console.log(res);
-        assignHats(res.data.hats);
+  const getChosenHats = () => {
+
+    axios.get(`/api/hats/${gId}`)
+      .then(({data}) => {
+        console.log('SUCCESS HATS', data.rows);
+        if (data.rows.length) {
+          setChosenHats(data.rows.map((row) => (row.hat_id)));
+        }
+        console.log(chosenHats);
       })
       .catch((err) => {
         console.log(err);
+        console.log('FAILURE HATS');
       });
   };
 
+  useEffect( () => {
+    getChosenHats(gId), [gId];
+  }, []);
+
+  const hatClick = (e) => {
+    console.log(e.target);
+    selectHat(e.target.src);
+  };
+
   //call fetching function after mount
-  const useEffect = (() => fetch(gId), [gId]);
 
   //confirm the choice, post to DB (need to adjust/fix the body object based on table setup)
   const confirmHat = () => {
-    axios.put('/hat', {params: {hat: hatPick, user: 'user_id'}})
-      .then((res) => console.log(`Hat choice confirmed in DB`, res))
-      .catch((err) => console.log(err));
+    if (!hatPick){
+      alert('you must Select a hat, loser!');
+    } else {
+      axios.put(`/api/hats/${hatPick.id}/${id}/${gId}`)
+        .then((res) => console.log(`Hat choice confirmed in DB`, res))
+        .catch((err) => console.log(err));
+    }
   };
 
 
   return (
     //container for list of hats (still need to filter out the ones already selected unless the query does)
     <div id='hat-div'>
-      {hats.map((hat, ind) => {
+      <span id='hat-list-title'>Select a single hat and confirm your choice</span>
+      <ul className='hat-list1'>
+        {allHats.slice(0,5).map((hat, ind) => {
 
-        return (
-          <img
-            key={ind}
-            className={'hat-list-icon'}
-            alt='hat-icon'
-            src={hat.src}
-            //assigns the clicked on hate to state (hatPick)
-            onClick={(e) => selectHat(e.target)}
-          ></img>
-        );
+          return (
+            <>
+              <img
+                key={`img1-${ind}`}
+                className={'hat-list-icon'}
+                alt='hat-icon'
+                src={hat.name}
+              ></img>
+              {(!chosenHats.includes(hat.id)) &&
+                <input
+                  key={`input1-${ind}`}
+                  type="radio"
+                  name='hatPicker'
+                  onClick={((e) => selectHat(hat))}
+                ></input>
+              }
+            </>
+          );
 
-      })}
+        })}
+      </ul>
+      <ul className='hat-list2'>
+        {allHats.slice(5,11).map((hat, ind) => {
+
+          return (
+            <>
+              <img
+                key={`img2-${ind}`}
+                className={'hat-list-icon'}
+                alt='hat-icon'
+                src={hat.name}
+              ></img>
+              {(!chosenHats.includes(hat.id)) &&
+                <input
+                  key={`input1-${ind}`}
+                  type="radio"
+                  name='hatPicker'
+                  onClick={((e) => selectHat(hat))}
+                ></input>
+              }
+            </>
+          );
+
+        })}
+      </ul>
       <button
         id='confirm-hat'
         //confirms hatPick firing the post request to DB
@@ -62,6 +112,7 @@ const ChooseHat = ( {gId} ) =>  {
       >
         Confirm
       </button>
+
     </div>
   );
 

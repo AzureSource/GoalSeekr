@@ -23,7 +23,7 @@ export default function GalaxyWindow ({ setTitle }) {
   const [hatModal, setHatModal] = useState(true);
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
-
+  const [gID, setGID] = useState(null);
 
   useEffect(() => {
     getGalaxyID(id);
@@ -33,8 +33,9 @@ export default function GalaxyWindow ({ setTitle }) {
 
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
-      .then((result) => {
-        console.log(result);
+      .then(({ data }) => {
+        console.log(data.rows[0].currentgalaxy);
+        setGID(data.rows[0].currentgalaxy);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
       })
       .catch((err) => console.log(err));
@@ -64,7 +65,7 @@ export default function GalaxyWindow ({ setTitle }) {
           <TransformWrapper initialScale={1.02} className='transformWrapper'>
             <TransformComponent className='transformComponent'>
               <div className='planetsWindow'>
-                {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>}
+                {hatModal && <ChooseHat gId={gID} setHatModal={setHatModal}/>}
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
               </div>
