@@ -14,6 +14,8 @@ import steins from '../../../assets/images/steinsUnexplored.png';
 import egg from '../../../assets/hats/egg.png';
 import bearears from '../../../assets/hats/bearears.png';
 import { Image } from '@chakra-ui/react';
+import MenuSide from './MenuSide.jsx';
+import MenuBottom from './MenuBottom.jsx';
 
 export default function DenseGalaxy() {
   var planets = [
@@ -351,12 +353,12 @@ export default function DenseGalaxy() {
     if (!firstPlanet) {
       dispatch(setPlanetSelection({homePlanet: planetSelection, planetIdSelected: planetId}));
     } else {
-      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+      dispatch(setPlanetSelection({targetPlanet: planetSelection, targetPlanetId: planetId}));
     }
   };
 
   return (
-    <div>
+    <div className='appBackground planetsWindow'>
       {planets.map((planet, index) => {
         return (
           <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)}>

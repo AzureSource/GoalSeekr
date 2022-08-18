@@ -4,16 +4,13 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
-import { useParams } from 'react-router-dom';
 import { setMissionQueue } from './missionModuleSlice';
-import { Divider, Select, List, ListItem } from '@chakra-ui/react';
+import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
-import Scout from '../missionSequence/missionType/Scout.jsx';
 
 export default function MissionModule() {
-  const {id} = useParams();
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
-  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
+  const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
   const endTurnActivation = useSelector((state) => state.toggleEndTurn.endTurn);
   const [shipSelection, setShipSelection] = useState({});
@@ -21,22 +18,16 @@ export default function MissionModule() {
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
 
-  // Dummy Data
-  let shipList = [
-    { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
-  ];
-
-  // Galaxy name disapears on refresh of page.
   // const checkForShips = () => {
-  //   const planetName = planets.homePlanet;
-  //   const galaxy = galaxyName;
-  //   axios.get(`/api/ships/${galaxy}/${planetName}`);
-  //   axios.get(`/api/ships/Galaxy1/Mars`)
+  //   const planetId = planets.planetIdSelected;
+  //   console.log('galaxyId', galaxyID);
+  //   console.log('planetId', planetId);
+  //   axios.get(`/api/ships/${galaxyID}/${planetId}`)
   //     .then((res) => {
-  //       console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
-  //       console.log('res is ', res.data[0]);
+  //       // console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
+  //       console.log('res is ', res.data);
   //       setShips(
-  //         res.data[0].getusershipsonplanetbynames.players
+  //         // res.data[0].getusershipsonplanetbynames.players
   //       );
   //     })
   //     .catch((err) => {
@@ -45,21 +36,8 @@ export default function MissionModule() {
   // };
   const checkForShips = () => {
     setShips(
-      [{name: 'scout', count: 1, power: 1000}]
+      [{ name: 'scout', count: 1, power: 1000 }]
     );
-  };
-
-  const scout = (targetPlanet) => {
-    let config = {
-      data: {
-        'type': 'scout',
-        'targetPlanet': targetPlanet
-      }
-    };
-    axios.post(`api/users/${id}/mission`, config)
-      .then(() => {
-        console.log('update user info');
-      });
   };
 
   useEffect(() => {
@@ -69,30 +47,27 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
-    shipData = {name: 'scout', count: 1, power: 1000};
     setShipSelection(shipData);
   };
 
   const addToQueue = () => {
-    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
+    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.power}`;
     dispatch(setMissionQueue({
-      add: {start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet}
+      add: { start: planets.homePlanet, type: missionType, ship: shipSelection, target: planets.targetPlanet, planetId: planets.planetIdSelected, targetId: planets.targetPlanetId}
     }));
   };
 
   const editMission = (missionIndex) => {
-    dispatch(setMissionQueue({remove: missionIndex}));
-  };
-
-  const executeMission = (targetPlanetName) => {
-    // console.log('planets is ', planets);
-    scout(17);
+    dispatch(setMissionQueue({ remove: missionIndex }));
   };
 
   return (
-    <div font='white'>
+    <Flex
+      className='mission-module-container'
+    >
       <div>
         Home Planet
+        <br />
         {planets.homePlanet}
       </div>
       <div>
@@ -110,30 +85,25 @@ export default function MissionModule() {
       </div>
       <div>
         Target Planet
+        <br />
         {planets.targetPlanet}
         <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
       <Divider orientation='horizontal' />
-      {ships === null ? (
+      {ships === undefined ? (
         <div>There are no fleets at this planet.</div>
       ) : (
         <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
-      {/* On endTurn reset the queue & queue is sent to local store for holding. */}
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
-            {/* mission.ship = {'Scout': 1}; */}
-            console.log('mission is ', mission);
             return (
               <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships : {mission.ship} | Target Planet : {mission.target}
+                Home Planet : {mission.start} | Type : {mission.type} | Ships : {/*{mission.ship}*/} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
-                </div>
-                <div>
-                  <button onClick={() => executeMission(mission.target)}>Execute Mission</button>
                 </div>
               </div>
             );
@@ -141,9 +111,11 @@ export default function MissionModule() {
         </ListItem>
       </List>
       {endTurnActivation && (
-        <MissionSequence />
+        <div>
+          <MissionSequence />
+        </div>
       )}
-    </div>
+    </Flex >
   );
 }
 

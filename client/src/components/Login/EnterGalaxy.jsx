@@ -2,22 +2,19 @@ import React,{ useState, useEffect } from 'react';
 import axios from 'axios';
 import { Flex } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setGalaxyName } from '../CreateGalaxy/CreateGalaxySlice';
 
 export default function EnterGalaxy({ setTitle }){
   let params = useParams();
-  const dispatch = useDispatch();
 
   const redirectToCreateGalaxyPage = function(){
-    window.location.href = `http://localhost:7777/#/creategalaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/creategalaxy/userid/${params.id}`;
   };
 
   const redirectToGalaxyWindow = function(){
-    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
-  const[existingGalaxy,setExistingGalaxy]=useState('');
+  const [inputGalaxy,setInputGalaxy] = useState('');
   // const[galaxyData,setGalaxyData] = useState(undefined);
 
   const handleCreateGalaxy = function(event){
@@ -27,19 +24,23 @@ export default function EnterGalaxy({ setTitle }){
 
   const handleJoinGalaxy = function(event){
     event.preventDefault();
-    if(existingGalaxy){
+    if(inputGalaxy){
       axios({
         url:'/api/galaxy',
         method:'get',
         params:{
-          name:existingGalaxy,
+          name:inputGalaxy,
           id: params.id
         }
       })
         .then(({data})=>{
           //setGalaxyData(response.data),
           if(data.length){
-            dispatch(setGalaxyName(existingGalaxy));
+            const gal_id = data[0].id;
+            const u_id = params.id;  //googleuid
+            axios.put(`/api/user/${u_id}/${gal_id}`)
+              .then((res) => console.log( res ? 'User/Galaxy Updated' : 'Update Failed', res))
+              .catch((err) => console.log('Request unsucessful', err));
             redirectToGalaxyWindow();
           }
           //console.log(data);
@@ -84,7 +85,7 @@ export default function EnterGalaxy({ setTitle }){
           <p className='or-seperator'>OR</p>
           <input
             className='enter-existing-galaxy-input'
-            onChange={(event)=>setExistingGalaxy(event.target.value)}
+            onChange={(event)=>setInputGalaxy(event.target.value)}
             placeholder=" Join An Existing Galaxy "
           />
           <button
