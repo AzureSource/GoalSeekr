@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
 import { setMissionQueue } from './missionModuleSlice';
 import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
@@ -75,8 +75,8 @@ export default function MissionModule() {
           variant='filled'
           value={missionType}
           placeholder='Mission Type'
-          size='md'
-          icon={<TriangleDownIcon />}
+          size='sm'
+          icon={<ChevronDownIcon />}
           onChange={(e) => setMissionType(e.target.value)}>
           <option value='scout'>Scout</option>
           <option value='attack'>Attack</option>
