@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Scout from './missionType/Scout.jsx';
+// import Scout from './missionType/Scout.jsx';
 import Colony from './missionType/Colony.jsx';
 
 export default function MissionSequence() {
@@ -26,7 +26,7 @@ export default function MissionSequence() {
 
   const executeMission = (targetPlanetName) => {
     // console.log('planets is ', planets);
-    Scout(17);
+    scout(17);
   };
 
   return (
