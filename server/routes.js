@@ -36,19 +36,17 @@ routes.put('/api/hats/:user_id/:galaxy_id', hats.updateHat);
 // insert galaxy route
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
 
-<<<<<<< HEAD
+
 //planets
 routes.get('/planets/:id', planets.getPlanetById);
 routes.get('/planets/users/:user_id', planets.getUserById);
 
 
-=======
 //galaxy_id update functions
 routes.put('/api/user/setguid/:display_name/:g_uid', user.updateUserGUID);
 routes.put('/api/user/:user_id/:galaxy_id', user.addUserToGalaxy);
 routes.put('/api/user/:user_id/:galaxy_name', user.addUserToGalaxy);
 
 routes.get('/api/galaxy/:user_id', galaxy.getUsersGalaxyID);
->>>>>>> 961ca4ed4f6f05b789699cf72ea5fd40f1f97685
 
 module.exports = routes;
