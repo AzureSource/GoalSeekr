@@ -471,7 +471,7 @@ CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" TEXT, "displayName" TE
 BEGIN
 	SELECT EXISTS(SELECT id FROM users WHERE googleuid = $1) INTO userExists;
 	IF userExists THEN
-		UPDATE users SET username = $2 WHERE googleuid = $1;
+		UPDATE users SET username = $2, profile_picture_url = $6 WHERE googleuid = $1;
 		SELECT row_to_json(users) FROM users WHERE googleuid = $1 INTO result;
 		RETURN result;
 	ELSE
