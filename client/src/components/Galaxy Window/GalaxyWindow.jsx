@@ -55,15 +55,15 @@ export default function GalaxyWindow ({ setTitle }) {
   const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={id}>
+    <UserContext.Provider value={id, user}>
       <div className='galaxy-window'>
         <MenuSide/>
         <MenuBottom/>
+        {/* {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>} */}
         <Flex className='planetsWindow'>
           <TransformWrapper>
             <TransformComponent>
                 test
-              {/* {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>} */}
               {/* <SparseGalaxy/> */}
               <DenseGalaxy/>
             </TransformComponent>
