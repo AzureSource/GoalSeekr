@@ -15,7 +15,6 @@ export default function EnterGalaxy({ setTitle }){
   };
 
   const [inputGalaxy,setInputGalaxy] = useState('');
-  // const[galaxyData,setGalaxyData] = useState(undefined);
 
   const handleCreateGalaxy = function(event){
     event.preventDefault();
@@ -34,7 +33,7 @@ export default function EnterGalaxy({ setTitle }){
         }
       })
         .then(({data})=>{
-          //setGalaxyData(response.data),
+          //console.log(data);
           if(data.length){
             const gal_id = data[0].id;
             const u_id = params.id;  //googleuid
@@ -43,7 +42,6 @@ export default function EnterGalaxy({ setTitle }){
               .catch((err) => console.log('Request unsucessful', err));
             redirectToGalaxyWindow();
           }
-          //console.log(data);
           else{
             alert('Please Enter Correct Galaxy Name Or Create A New One');
           }

@@ -45,20 +45,35 @@ const CreateGalaxy = ({ setTitle }) => {
       .catch(err => console.log(err));
   };
 
-  const getGalaxies = () => {
-
-  };
-
   const handleCancel = (event) => {
     event.preventDefault();
     redirectToEnterGalaxyPage();
   };
 
+
   const handleGoToGalaxyWindow = async (event) => {
     event.preventDefault();
-    if (galaxyName < 1) return alert('Enter Galaxy Name');
-    await submitGalaxy();
-    redirectToGalaxyWindow();
+    if (galaxyName < 1) {
+      return alert('Enter Galaxy Name');
+    }
+    else{
+      axios({
+        url:'/api/galaxy',
+        method:'get',
+        params:{
+          name:galaxyName
+        }
+      })
+        .then( async ({data}) => {
+          if(data.length){
+            alert('Galaxy Name Already Exists, Please Enter A New One');
+          }
+          else{
+            await submitGalaxy();
+            redirectToGalaxyWindow();
+          }
+        });
+    }
   };
 
   useEffect(() => {
