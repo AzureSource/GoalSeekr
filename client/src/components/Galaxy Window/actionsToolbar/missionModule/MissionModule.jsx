@@ -65,31 +65,47 @@ export default function MissionModule() {
     <Flex
       className='mission-module-container'
     >
-      <div>
-        Home Planet
-        <br />
-        {planets.homePlanet}
-      </div>
-      <div>
-        <Select
-          variant='filled'
-          value={missionType}
-          placeholder='Mission Type'
-          size='sm'
-          icon={<ChevronDownIcon />}
-          onChange={(e) => setMissionType(e.target.value)}>
-          <option value='scout'>Scout</option>
-          <option value='attack'>Attack</option>
-          <option value='colonize'>Colonize</option>
-        </Select>
-      </div>
-      <div>
-        Target Planet
-        <br />
-        {planets.targetPlanet}
-        <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
-      </div>
-      <Divider orientation='horizontal' />
+      <Flex
+        className='mission-selector-container'
+      >
+        <Flex
+          className='planet-selection-container'
+          flexDir='column'
+        >
+          <div>
+            Home Planet
+            {planets.homePlanet}
+          </div>
+          <div>
+            Target Planet
+            {planets.targetPlanet}
+          </div>
+        </Flex>
+        <Flex
+          className='planet-mission-container'
+          flexDir='column'
+        >
+          <button
+            onClick={() => dispatch(setPlanetSelection('reset'))}
+          >
+            Reset Planets
+          </button>
+          <Select
+            className='select-mission-type'
+            variant='filled'
+            value={missionType}
+            placeholder='Mission Type'
+            size='sm'
+            icon={<ChevronDownIcon />}
+            onChange={(e) => setMissionType(e.target.value)}
+          >
+            <option value='scout'>Scout</option>
+            <option value='attack'>Attack</option>
+            <option value='colonize'>Colonize</option>
+          </Select>
+        </Flex>
+      </Flex>
+
       {ships === undefined ? (
         <div>There are no fleets at this planet.</div>
       ) : (

@@ -61,7 +61,6 @@ export default function GalaxyWindow ({ setTitle }) {
   const [user, setUser] = useState({});
 
   return (
-<<<<<<< HEAD
     <UserContext.Provider value={id, user}>
       <div className='galaxy-window'>
         <MenuSide/>
@@ -73,21 +72,6 @@ export default function GalaxyWindow ({ setTitle }) {
                 test
               {/* <SparseGalaxy/> */}
               <DenseGalaxy/>
-=======
-    <UserContext.Provider value={id, user} className='userContext'>
-      <div className='galaxy-window' color='white'>
-        <MenuSide/>
-        <MenuBottom/>
-        <Flex className='galaxy-window-top'>
-          <MenuSide/>
-          <TransformWrapper initialScale={1} className='transformWrapper'>
-            <TransformComponent className='transformComponent'>
-              <div className='planetsWindow'>
-                {/* {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>} */}
-                {/* <SparseGalaxy/> */}
-                <DenseGalaxy/>
-              </div>
->>>>>>> main
             </TransformComponent>
           </TransformWrapper>
         </Flex>
