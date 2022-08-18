@@ -472,6 +472,14 @@ const overrides = {
         height: '20%'
       },
       //--------------------------------- SIDE MENU
+      '.end-turn-btn, .task-modal-bth': {
+        width: '50%',
+        paddding: '10px',
+      },
+      '.side-menu-bottom-btn-container': {
+        width: '90%',
+        justifyContent: 'space-between'
+      },
       '.title-bar': {
         width: '100%',
         height: '27%',
@@ -656,6 +664,8 @@ const overrides = {
       '.mission-module-container': {
         height: '50%',
         width: '90%',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
       },
 
       // =============================

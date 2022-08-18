@@ -3,7 +3,7 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Divider, Select, List, ListItem } from '@chakra-ui/react';
+import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
@@ -61,7 +61,7 @@ export default function MissionModule() {
   // console.log('planets', planets);
 
   return (
-    <div
+    <Flex
       className='mission-module-container'
     >
       <div>
@@ -108,7 +108,7 @@ export default function MissionModule() {
           })}
         </ListItem>
       </List>
-    </div>
+    </Flex>
   );
 }
 
