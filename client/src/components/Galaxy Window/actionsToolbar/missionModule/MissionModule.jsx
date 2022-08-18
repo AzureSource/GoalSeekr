@@ -21,28 +21,27 @@ export default function MissionModule() {
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
 
-  console.log('galaxy id', galaxyID);
-  console.log('planetId', planets);
-
-  const checkForShips = () => {
-    const planetId = planets.planetIdSelected;
-    axios.get(`/api/ships/${galaxyID}/${planetId}`)
-      .then((res) => {
-        console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
-        console.log('res is ', res.data[0]);
-        setShips(
-          res.data[0].getusershipsonplanetbynames.players
-        );
-      })
-      .catch((err) => {
-        console.log('There was an error grabbing the ship data.', err);
-      });
-  };
   // const checkForShips = () => {
-  //   setShips(
-  //     [{ name: 'scout', count: 1, power: 1000 }]
-  //   );
+  //   const planetId = planets.planetIdSelected;
+  //   console.log('galaxyId', galaxyID);
+  //   console.log('planetId', planetId);
+  //   axios.get(`/api/ships/${galaxyID}/${planetId}`)
+  //     .then((res) => {
+  //       // console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
+  //       console.log('res is ', res.data);
+  //       setShips(
+  //         // res.data[0].getusershipsonplanetbynames.players
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log('There was an error grabbing the ship data.', err);
+  //     });
   // };
+  const checkForShips = () => {
+    setShips(
+      [{ name: 'scout', count: 1, power: 1000 }]
+    );
+  };
 
   const scout = (targetPlanet) => {
     let config = {
@@ -64,12 +63,11 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
-    // shipData = {name: 'scout', count: 1, power: 1000};
     setShipSelection(shipData);
   };
 
   const addToQueue = () => {
-    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
+    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.power}`;
     dispatch(setMissionQueue({
       add: { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }
     }));
@@ -90,6 +88,7 @@ export default function MissionModule() {
     >
       <div>
         Home Planet
+        <br />
         {planets.homePlanet}
       </div>
       <div>
@@ -107,11 +106,12 @@ export default function MissionModule() {
       </div>
       <div>
         Target Planet
+        <br />
         {planets.targetPlanet}
         <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
       <Divider orientation='horizontal' />
-      {ships === null ? (
+      {ships === undefined ? (
         <div>There are no fleets at this planet.</div>
       ) : (
         <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
@@ -120,8 +120,6 @@ export default function MissionModule() {
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
-            {/* mission.ship = {'Scout': 1}; */ }
-            console.log('mission is ', mission);
             return (
               <div key={index}>
                 Home Planet : {mission.start} | Type : {mission.type} | Ships : {mission.ship} | Target Planet : {mission.target}

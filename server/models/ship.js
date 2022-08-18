@@ -13,12 +13,13 @@ module.exports = {
   },
   getShipsByPlanet: async function(req, res) {
     try {
-      debugger;
-      let galaxy = req.params.galaxy_name;
-      let planet = req.params.planet_name;
-      const query = 'SELECT * FROM getusershipsonplanetbynames($1, $2)';
+      let galaxyId = req.params.galaxy_id;
+      let planetId = req.params.planet_id;
+      console.log('ids', galaxyId);
+      console.log('iddsss', planetId);
+      const query = 'SELECT * FROM getusershipsonplanet($1, $2)';
       console.log('results is ', results.rows);
-      const results = await client(query, [galaxy, planet]);
+      const results = await client(query, [galaxyId, planetId]);
       res.json(results.rows);
     } catch (err) {
       res.end().status(500);

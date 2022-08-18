@@ -10,7 +10,7 @@ const galaxy =require('./models/galaxy.js');
 const routes = Router();
 
 routes.get('/api/ships/', ship.getAll);
-routes.get('/api/ships/:galaxy_name/:planet_name', ship.getShipsByPlanet);
+routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
 routes.get('/api/users/:user_id/ships', user.getShips);
 routes.get('/api/users/:user_id', user.findOne);
 routes.post('/api/users/:user_id/ships', user.updateShips);
