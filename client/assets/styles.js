@@ -381,20 +381,21 @@ const overrides = {
       '.menu-side': {
         width: '20%',
       },
-      '.temp-div': {
-
-        width: '80%'
-      },
       '.menu-bottom': {
-        height: '30%',
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        alignItems: 'end',
+        justifyContent: 'end',
       },
       '.menu-bottom-container': {
         zIndex: 10,
-        width: '95%',
-        height: '80%',
-        border: '2px solid #50b6ab',
-        backgroundColor: 'transparent',
-        borderRadius: '15px'
+        width: '65%',
+        height: '30%',
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
+        margin: '0px 15px 10px',
+        justifyContent: 'center',
+        borderRadius: '4px'
       },
       //-------------------------------HAT MODAL
       '#hat-div': {
@@ -425,25 +426,23 @@ const overrides = {
       },
       //-------------------------------SIDE MENU
       '.menu-side-container': {
-        width: '70%',
-        height: '85%',
+        width: '32%',
+        height: '100%',
         position: 'absolute',
-        border: '2px solid #50b6ab',
-        backgroundColor: '#2e2f47',
-        borderRadius: '15px',
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         zIndex: 10,
       },
       '.pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
-        height: '7rem',
+        height: '200px',
         overflow: 'auto'
 
       },
-      '.player-list': {
+      '#player-list': {
         width:'100%',
+        height: '30%',
         padding: '5%',
-        backgroundColor: 'white'
       },
       '.p-list-icon': {
         fontSize: '250%',
@@ -452,32 +451,37 @@ const overrides = {
       'p-list-smIcon': {
         fontSize: '50%'
       },
-      //---------------------------------SIDE MENU / LOWER TOOLBAR
-      '#total-stat': {
-        display: 'grid',
-        gridTemplateRows: '1fr 1fr',
-        gridTemplateColumns: '1fr 1fr'
+      //--------------------------------- stats and chats
+      '.stats-container, .chats-container': {
+        width: '50%',
+        margin: '15px',
+        borderRadius: '7px',
+        border: '2.5px solid rgba(80,182,171,0.4)',
+        background: '#2e2f47',
       },
-      '.stat-icon': {
-        fontSize: '1.6em'
+      '.chats-container': {
+        marginLeft: '7.5px',
       },
-      '#t-stat1': {
-        gridColumn: 1,
-        gridRow: 1
+      '.stats-container': {
+        marginRight: '7.5px',
       },
-      '#t-stat2': {
-        gridColumn: 1,
-        gridRow: 2
+      //--------------------------------- stats
+      //---------------------------------SIDE MENU
+      '.end-turn-btn, .tasks-modal-btn': {
+        fontFamily: 'Abril fatface',
+        background: '#2e2f47 !important',
+        color: 'rgba(80,182,171)',
+        width: '50%',
+        padding: '10px',
+        margin: '10px',
+        border: '1px solid rgba(80,182,171)',
+        // margin: '5px 0px',
       },
-      '#t-stat3': {
-        gridColumn: 2,
-        gridRow: 1
+      '.side-menu-bottom-btn-container': {
+        width: '90%',
+        justifyContent: 'space-between'
       },
-      '#t-stat4': {
-        gridColumn: 2,
-        gridRow: 2
-      },
-      //--------------------------------- LOWER TOOLBAR
+      //--------------------------------- SIDE MENU
       '.title-bar': {
         width: '100%',
         height: '27%',
@@ -639,8 +643,36 @@ const overrides = {
         fontWeight: 800,
         fontFamily: 'Abril Fatface',
         paddingTop: '5px'
+      },
+      // =============================
+      // build ship
+      // =============================
+      '.build-modal-btn': {
+        background: '#2e2f47 !important',
+        border: '1px solid rgba(80,182,171)',
+        color: 'rgba(80,182,171)',
+        fontFamily: 'Abril Fatface',
+        width: '90%',
+        margin: '5px 0px',
+      },
 
-      }
+      // =============================
+      // build ship
+      // =============================
+
+      // =============================
+      // Mission Module
+      // =============================
+      '.mission-module-container': {
+        height: '50%',
+        width: '90%',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      },
+
+      // =============================
+      // Mission Module
+      // =============================
     },
   },
 };

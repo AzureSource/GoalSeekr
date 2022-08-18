@@ -42,7 +42,7 @@ function Playerlist () {
 
   const accButton = {
     display: 'flex',
-    'justify-content': 'space-between',
+    'justifyContent': 'space-between',
   };
 
   return (
