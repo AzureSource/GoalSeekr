@@ -55,6 +55,7 @@ const BuildShip = () => {
     console.log('userCurrency ', userCurrency);
     let config = {
       data: {
+        'planetId': planetIdSelected,
         'ships': purchasedShips
       }
     };
