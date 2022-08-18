@@ -9,11 +9,24 @@ const MenuSide = () => {
     <Flex
       className='menu-side-container'
       flexDir='column'
+      alignItems='center'
     >
       <Playerlist />
       <br/>
       <BuildShip/>
       <MissionModule />
+      <Flex>
+        <div
+          className='end-turn-btn'
+        >
+          end button
+        </div>
+        <div
+          className='tasks-modal-btn'
+        >
+          tasks button
+        </div>
+      </Flex>
     </Flex>
 
   );

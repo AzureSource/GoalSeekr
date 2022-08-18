@@ -61,7 +61,9 @@ export default function MissionModule() {
   // console.log('planets', planets);
 
   return (
-    <div font='white'>
+    <div
+      className='mission-module-container'
+    >
       <div>
         Home Planet
         {planets.homePlanet}

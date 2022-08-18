@@ -393,8 +393,9 @@ const overrides = {
         width: '65%',
         height: '30%',
         background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
-        margin: '0px 15px',
+        margin: '0px 15px 10px',
         justifyContent: 'center',
+        borderRadius: '4px'
       },
       //-------------------------------HAT MODAL
       '#hat-div': {
@@ -434,14 +435,14 @@ const overrides = {
       '.pl-acc': {
         backgroundColor: '#41437e',
         borderRadius: '10px',
-        height: '7rem',
+        height: '200px',
         overflow: 'auto'
 
       },
-      '.player-list': {
+      '#player-list': {
         width:'100%',
+        height: '30%',
         padding: '5%',
-        backgroundColor: 'white'
       },
       '.p-list-icon': {
         fontSize: '250%',
@@ -452,39 +453,19 @@ const overrides = {
       },
       //--------------------------------- stats and chats
       '.stats-container, .chats-container': {
-        width: '45%',
+        width: '50%',
         margin: '15px',
         borderRadius: '7px',
-        border: '2.5px solid rgba(80,182,171,0.6)',
+        border: '2.5px solid rgba(80,182,171,0.4)',
         background: '#2e2f47',
       },
       //--------------------------------- stats
-      //---------------------------------SIDE MENU / LOWER TOOLBAR
-      '#total-stat': {
-        display: 'grid',
-        gridTemplateRows: '1fr 1fr',
-        gridTemplateColumns: '1fr 1fr'
+      //---------------------------------SIDE MENU
+      '.tasks-modal-btn, .end-turn-btn': {
+        width: '45%',
+        height: '20%'
       },
-      '.stat-icon': {
-        fontSize: '1.6em'
-      },
-      '#t-stat1': {
-        gridColumn: 1,
-        gridRow: 1
-      },
-      '#t-stat2': {
-        gridColumn: 1,
-        gridRow: 2
-      },
-      '#t-stat3': {
-        gridColumn: 2,
-        gridRow: 1
-      },
-      '#t-stat4': {
-        gridColumn: 2,
-        gridRow: 2
-      },
-      //--------------------------------- LOWER TOOLBAR
+      //--------------------------------- SIDE MENU
       '.title-bar': {
         width: '100%',
         height: '27%',
@@ -646,8 +627,26 @@ const overrides = {
         fontWeight: 800,
         fontFamily: 'Abril Fatface',
         paddingTop: '5px'
+      },
+      // =============================
+      // build ship
+      // =============================
+      '.build-modal-btn': {
+        background: '#2e2f47 !important',
+        border: '1px solid rgba(80,182,171)',
+        color: 'rgba(80,182,171)',
+        fontFamily: 'Abril Fatface',
+        width: '90%',
+        margin: '5px 0px',
+      },
 
-      }
+
+
+
+
+      // =============================
+      // build ship
+      // =============================
     },
   },
 };
