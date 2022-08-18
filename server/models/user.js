@@ -25,7 +25,6 @@ module.exports = {
       let userId = req.params.user_id;
       let purchasedShips = req.body.data.ships;
       let planetId = req.body.data.planetId;
-      debugger;
       for (let i = 0; i < purchasedShips.length; i++) {
         let shipName = purchasedShips[i].name;
         let purchasedNumber = purchasedShips[i].count;

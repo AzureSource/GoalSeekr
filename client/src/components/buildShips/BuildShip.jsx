@@ -54,7 +54,6 @@ const BuildShip = () => {
         'ships': purchasedShips
       }
     };
-    debugger;
     axios.post(`api/users/${uid}/ships`, config)
       .then(() => {
         console.log('update user info');
