@@ -10,15 +10,15 @@ export default function EnterGalaxy({ setTitle }){
   const dispatch = useDispatch();
 
   const redirectToCreateGalaxyPage = function(){
-    window.location.href = `http://localhost:7777/#/creategalaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/creategalaxy/userid/${params.id}`;
   };
 
   const redirectToGalaxyWindow = function(){
-    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
   const[existingGalaxy,setExistingGalaxy]=useState('');
-  // const[galaxyData,setGalaxyData] = useState(undefined);
+
 
   const handleCreateGalaxy = function(event){
     event.preventDefault();
