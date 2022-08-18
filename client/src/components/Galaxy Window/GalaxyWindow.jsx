@@ -24,14 +24,6 @@ export default function GalaxyWindow ({ setTitle }) {
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
 
-<<<<<<< HEAD
-  // const userPlanets = useSelector(state => state.userShips.planets);
-
-  // console.log('userShips is ', userShips);
-||||||| cddd507
-  // console.log('userShips is ', userShips);
-=======
->>>>>>> 3d74ba45c91a4f0457d4bf1b3894d2401cb28d77
 
   // console.log('userPlanets is ', userPlanets);
 

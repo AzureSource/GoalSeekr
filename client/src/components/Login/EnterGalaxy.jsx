@@ -36,16 +36,11 @@ export default function EnterGalaxy({ setTitle }){
         .then(({data})=>{
           //setGalaxyData(response.data),
           if(data.length){
-<<<<<<< HEAD
-||||||| cddd507
-            dispatch(setGalaxyName(existingGalaxy));
-=======
             const gal_id = data[0].id;
             const u_id = params.id;  //googleuid
             axios.put(`/api/user/${u_id}/${gal_id}`)
               .then((res) => console.log( res ? 'User/Galaxy Updated' : 'Update Failed', res))
               .catch((err) => console.log('Request unsucessful', err));
->>>>>>> 3d74ba45c91a4f0457d4bf1b3894d2401cb28d77
             redirectToGalaxyWindow();
           }
           //console.log(data);
