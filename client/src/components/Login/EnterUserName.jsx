@@ -14,11 +14,25 @@ export default function EnterUserName ({authData}) {
     if(text){
       axios({
         url:'/api/users',
-        method:'post',
-        data:{...authData,displayname:text}
+        method:'get',
+        params:{name:text}
       })
-        .then((result)=>redirectToEnterGalaxyPage(result.data))
-        .catch(()=>console.log('Err from enter user name'));
+        .then((response)=>{
+          //console.log('show response: ',response);
+          if(response.data.length && response.data[0].googleuid!== authData.googleuid){
+            alert('Username Exists, Please Enter Other User Name');
+          }
+          else{
+            axios({
+              url:'/api/users',
+              method:'post',
+              data:{...authData,displayname:text}
+            })
+              .then((result)=>redirectToEnterGalaxyPage(result.data))
+              .catch(()=>console.log('Err from enter user name'));
+          }
+        })
+        .catch(()=>console.log('Err from checking user name'));
     }
     else{
       alert('Please Enter your Username!');

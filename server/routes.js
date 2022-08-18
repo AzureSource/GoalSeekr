@@ -25,7 +25,8 @@ routes.post('/api/tasks/', tasks.addTask);
 // player list
 routes.get('/api/players', getAllPlayers);
 
-// routes.put('/api/users/:user_id',user.updateUserName);
+//user
+routes.get('/api/users',users.checkAllUser);
 routes.post('/api/users',users.checkUser);
 routes.get('/api/galaxy',users.checkGalaxyName);
 
