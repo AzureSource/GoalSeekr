@@ -5,7 +5,6 @@ import { Flex } from '@chakra-ui/react';
 import {auth,provider} from '../../firebase.js';
 import {signInWithPopup} from 'firebase/auth';
 
-// import '../../../assets/login.css';
 
 export default function LoginAuth({ setTitle }) {
 
@@ -14,12 +13,12 @@ export default function LoginAuth({ setTitle }) {
   const signInWithGoogle = ()=>{
     signInWithPopup(auth,provider)
       .then((result)=>{
-        // console.log('show result auth: ',result);
-        localStorage.setItem('isAuth',true);
+        //console.log('show result auth: ',result);
         setIsAuth(true);
         const obj = {
           email: result.user.email,
-          googleuid:result.user.uid
+          googleuid:result.user.uid,
+          photoURL:result.user.photoURL
         };
         setAuthdata(obj);
       })
