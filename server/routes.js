@@ -4,6 +4,7 @@ const ship = require('./models/ship.js');
 const user = require('./models/user.js');
 const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
+const getAllPlayers = require('./models/players.js');
 const galaxy =require('./models/galaxy.js');
 
 const routes = Router();
@@ -20,8 +21,11 @@ routes.get('/api/users/:user_id/planets', user.getPlanets);
 // task tracker
 routes.get('/api/tasks/', tasks.getAllTasks);
 routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
-routes.get('/api/tasks/currency/:userID', tasks.getCurrencyByUser);
+routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
+
+// player list
+routes.get('/api/players', getAllPlayers);
 
 // routes.put('/api/users/:user_id',user.updateUserName);
 routes.post('/api/users',users.checkUser);

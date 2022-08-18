@@ -27,29 +27,8 @@ const Stats = (u_id) => {
 
 
   return (
-    <div id='stats'>
-      <Grid
-        h='200px'
-        templateRows='repeat(2, 1fr)'
-        templateColumns='repeat(5, 1fr)'
-        gap={4}
-      >
-        <GridItem id='turn-stat' rowSpan={2} colSpan={1} bg='tomato' >
-          <Box >Current Turn</Box>
-          <Box >
-            <Button onClick={endTurn}>End Turn</Button>
-          </Box>
-        </GridItem >
-        <GridItem id='planet-stat'colSpan={2} bg='papayawhip' > Select a Planet and see its available ships</GridItem >
-        <GridItem id='total-stat'colSpan={2} bg='papayawhip' >
-          <Box id='t-stat1'><GiCash className='stat-icon'/>Currency</Box>
-          <Box id='t-stat2'><GiJetpack className='stat-icon'/>Ships</Box>
-          <Box id='t-stat3'><GiRingedPlanet className='stat-icon' ></GiRingedPlanet>Planets</Box>
-          <Box id='t-stat4'><GiBlackFlag className='stat-icon'/>Alliance</Box>
-        </GridItem >
-        <GridItem id='task-link'colSpan={4} bg='tomato' > Link to the task Tracker</GridItem >
-      </Grid>
-
+    <div className='stats-container'>
+      stats
     </div>
   );
 

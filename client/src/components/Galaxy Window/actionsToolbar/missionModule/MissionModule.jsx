@@ -6,12 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
 import { useParams } from 'react-router-dom';
 import { setMissionQueue } from './missionModuleSlice';
-import { Divider, Select, List, ListItem } from '@chakra-ui/react';
+import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import Scout from '../missionSequence/missionType/Scout.jsx';
 
 export default function MissionModule() {
-  const {id} = useParams();
+  const { id } = useParams();
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
@@ -40,7 +40,7 @@ export default function MissionModule() {
   // };
   const checkForShips = () => {
     setShips(
-      [{name: 'scout', count: 1, power: 1000}]
+      [{ name: 'scout', count: 1, power: 1000 }]
     );
   };
 
@@ -71,12 +71,12 @@ export default function MissionModule() {
   const addToQueue = () => {
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
     dispatch(setMissionQueue({
-      add: {start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet}
+      add: { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }
     }));
   };
 
   const editMission = (missionIndex) => {
-    dispatch(setMissionQueue({remove: missionIndex}));
+    dispatch(setMissionQueue({ remove: missionIndex }));
   };
 
   const executeMission = (targetPlanetName) => {
@@ -85,7 +85,9 @@ export default function MissionModule() {
   };
 
   return (
-    <div font='white'>
+    <Flex
+      className='mission-module-container'
+    >
       <div>
         Home Planet
         {planets.homePlanet}
@@ -118,7 +120,7 @@ export default function MissionModule() {
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
-            {/* mission.ship = {'Scout': 1}; */}
+            {/* mission.ship = {'Scout': 1}; */ }
             console.log('mission is ', mission);
             return (
               <div key={index}>
@@ -137,7 +139,7 @@ export default function MissionModule() {
       {endTurnActivation && (
         <MissionSequence />
       )}
-    </div>
+    </Flex >
   );
 }
 
