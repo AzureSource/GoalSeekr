@@ -6,6 +6,7 @@ const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
 const getAllPlayers = require('./models/players.js');
 const galaxy =require('./models/galaxy.js');
+const chats =require('./models/chats.js');
 
 const routes = Router();
 
@@ -21,6 +22,9 @@ routes.get('/api/tasks/', tasks.getAllTasks);
 routes.get('/api/tasks/:difficulty', tasks.getTasksByDifficulty);
 routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
 routes.post('/api/tasks/', tasks.addTask);
+
+//chats
+routes.get('/api/chats/:gal_id', chats.getChatsByGalId);
 
 // player list
 routes.get('/api/players', getAllPlayers);
