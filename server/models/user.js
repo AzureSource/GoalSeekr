@@ -66,14 +66,48 @@ module.exports = {
       res.end().status(500);
     }
   },
-  getGalaxyName: async function (req, res) {
+  doMission: async function (req, res) {
     try {
-      const query = 'SELECT name FROM galaxies';
-      const results = await client(query);
+      let userId = req.params.user_id;
+      let type = req.body.data.type;
+      if (type === 'scout') {
+        let targetPlanet = req.body.data.targetPlanet;
+        const query = 'SELECT * FROM discoverplanet($1, $2)';
+        await client(query, [userId, targetPlanet]);
+      }
+      if (type === 'colony') {
+        let targetPlanet = req.body.data.targetPlanet;
+        const query = 'SELECT * FROM colonizeplanet($1, $2)';
+        await client(query, [userId, targetPlanet]);
+      }
+      res.sendStatus(201);
+    } catch (err) {
+      res.end().status(500);
+    }
+  },
+  getPlanets: async function (req, res) {
+    try {
+      let userId = req.params.user_id;
+      const query1 = `SELECT planet_id FROM public.planets_galaxy
+      WHERE colonizedby = $1`;
+      const colonizedPlanetsDB = await client(query1, [userId]);
+      console.log('colonizedPlanets is ', colonizedPlanetsDB.rows);
+      const query2 = `SELECT planet_id FROM public.planets_galaxy
+      WHERE $1 = ANY (discoveredby)`;
+      const scoutedPlanetsDB = await client(query2, [userId]);
+      console.log('scoutedPlanets is ', scoutedPlanetsDB.rows);
+      var results = {};
+      results.colonizedPlanets = [];
+      results.scoutedPlanets = [];
+      for (let i = 0; i < colonizedPlanetsDB.rows.length; i++) {
+        results.colonizedPlanets.push(colonizedPlanetsDB.rows[i].planet_id);
+      }
+      for (let i = 0; i < scoutedPlanetsDB.rows.length; i++) {
+        results.scoutedPlanets.push(scoutedPlanetsDB.rows[i].planet_id);
+      }
       res.json(results);
-    } catch (error) {
+    } catch (err) {
       res.end().status(500);
     }
   }
-
 };

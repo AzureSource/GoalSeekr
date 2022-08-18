@@ -6,6 +6,7 @@ import {Button, Modal, ModalOverlay, ModalContent, Box,
   Wrap, ModalHeader,
   ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
 import { UserContext } from '../Galaxy Window/GalaxyWindow.jsx';
+import { useSelector } from 'react-redux';
 
 export const BuildShipContext = createContext(null);
 
@@ -16,6 +17,10 @@ const BuildShip = () => {
   const [ships, setShips] = useState([]);
   const [user, setUser] = useState({});
   const uid = useContext(UserContext);
+
+  const planetIdSelected = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection.planetIdSelected);
+
+  console.log('planetIdSelected is ', planetIdSelected);
 
   useEffect(() => {
     const fetchData = async () => {
