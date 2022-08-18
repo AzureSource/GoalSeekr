@@ -7,14 +7,14 @@ export default function EnterGalaxy({ setTitle }){
   let params = useParams();
 
   const redirectToCreateGalaxyPage = function(){
-    window.location.href = `http://localhost:7777/#/creategalaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/creategalaxy/userid/${params.id}`;
   };
 
   const redirectToGalaxyWindow = function(){
-    window.location.href = `http://localhost:7777/#/galaxy/uid/${params.id}`;
+    window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
-  const[existingGalaxy,setExistingGalaxy]=useState('');
+  const [inputGalaxy,setInputGalaxy] = useState('');
   // const[galaxyData,setGalaxyData] = useState(undefined);
 
   const handleCreateGalaxy = function(event){
@@ -24,18 +24,28 @@ export default function EnterGalaxy({ setTitle }){
 
   const handleJoinGalaxy = function(event){
     event.preventDefault();
-    if(existingGalaxy){
+    if(inputGalaxy){
       axios({
         url:'/api/galaxy',
         method:'get',
         params:{
-          name:existingGalaxy,
+          name:inputGalaxy,
           id: params.id
         }
       })
         .then(({data})=>{
           //setGalaxyData(response.data),
           if(data.length){
+<<<<<<< HEAD
+||||||| cddd507
+            dispatch(setGalaxyName(existingGalaxy));
+=======
+            const gal_id = data[0].id;
+            const u_id = params.id;  //googleuid
+            axios.put(`/api/user/${u_id}/${gal_id}`)
+              .then((res) => console.log( res ? 'User/Galaxy Updated' : 'Update Failed', res))
+              .catch((err) => console.log('Request unsucessful', err));
+>>>>>>> 3d74ba45c91a4f0457d4bf1b3894d2401cb28d77
             redirectToGalaxyWindow();
           }
           //console.log(data);
@@ -80,7 +90,7 @@ export default function EnterGalaxy({ setTitle }){
           <p className='or-seperator'>OR</p>
           <input
             className='enter-existing-galaxy-input'
-            onChange={(event)=>setExistingGalaxy(event.target.value)}
+            onChange={(event)=>setInputGalaxy(event.target.value)}
             placeholder=" Join An Existing Galaxy "
           />
           <button

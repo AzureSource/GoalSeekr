@@ -7,7 +7,7 @@ export default function EnterUserName ({authData}) {
   const [text,setText] = useState('');
 
   const redirectToEnterGalaxyPage = function(id) {
-    window.location.href = `http://localhost:7777/#/entergalaxy/uid/${id}`;
+    window.location.href = `http://localhost:7777/#/entergalaxy/userid/${id}`;
   };
 
   const handleJoin = function(){
@@ -18,7 +18,7 @@ export default function EnterUserName ({authData}) {
         data:{...authData,displayname:text}
       })
         .then((result)=>redirectToEnterGalaxyPage(result.data))
-        .catch(()=>console.log('Err from enter user name'));
+        .catch(()=> alert('Err from enter user name'));
     }
     else{
       alert('Please Enter your Username!');

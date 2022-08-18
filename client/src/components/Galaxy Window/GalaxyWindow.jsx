@@ -1,4 +1,4 @@
-import React, { useEffect, createContext} from 'react';
+import React, { useEffect, createContext, useState} from 'react';
 // import background from './images/sparse sky.png';
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios';
@@ -17,22 +17,41 @@ import {getUserShipsFromDB, getUserPlanetsFromDB} from '../buildShips/UserShipSl
 export const UserContext = createContext(null);
 
 export default function GalaxyWindow ({ setTitle }) {
-
-  const {id} = useParams();
-
   const dispatch = useDispatch();
 
+
+  const [hatModal, setHatModal] = useState(true);
+  const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
 
+<<<<<<< HEAD
   // const userPlanets = useSelector(state => state.userShips.planets);
 
   // console.log('userShips is ', userShips);
+||||||| cddd507
+  // console.log('userShips is ', userShips);
+=======
+>>>>>>> 3d74ba45c91a4f0457d4bf1b3894d2401cb28d77
 
   // console.log('userPlanets is ', userPlanets);
 
   useEffect(() => {
+    getGalaxyID(id);
     setTitle(false);
   }, []);
+
+
+  const getGalaxyID = (id) => {
+    axios.get(`/api/galaxy/${id}`)
+      .then((result) => {
+        console.log(result);
+        //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,14 +70,16 @@ export default function GalaxyWindow ({ setTitle }) {
         <MenuSide/>
         <MenuBottom/>
         <Flex className='galaxy-window-top'>
-          <div className='planetsWindow'>
-            <TransformWrapper>
-              <TransformComponent>
+          <MenuSide/>
+          <TransformWrapper>
+            <TransformComponent>
+              <div className='planetsWindow'>
+                {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>}
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
-              </TransformComponent>
-            </TransformWrapper>
-          </div>
+              </div>
+            </TransformComponent>
+          </TransformWrapper>
         </Flex>
       </div>
     </UserContext.Provider>
