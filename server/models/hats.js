@@ -22,14 +22,17 @@ module.exports = {
     // First Select to see if user exists on table, if so update, otherwise, do insert
 
     try {
-      const query = 'SELECT * FROM hats_user WHERE user_id = $1 AND galaxy_id = $2;';
-      const results = await client(query, [u_id, g_id]);
+      // const query = 'SELECT * FROM hats_user WHERE user_id = $1 AND galaxy_id = $2;';
+      // const results = await client(query, [u_id, g_id]);
 
-      const query2 = `UPDATE hats_user SET hat_id = $1 WHERE user_id = $2;`;
+      const query = 'SELECT * FROM hats_user WHERE user_id = $1;';
+      const results = await client(query, [u_id]);
+
+      const query2 = `UPDATE hats_user SET hat_id = $1, galaxy_id = $2 WHERE user_id = $3;`;
       const query3 = `INSERT INTO hats_user (galaxy_id, user_id, hat_id) VALUES ($1, $2, $3);`;
 
       console.log(results.rows);
-      const results2 = (results.rows.length ? await client(query2, [h_id, u_id]) : await client(query3, [g_id, u_id, h_id]));
+      const results2 = (results.rows.length ? await client(query2, [h_id, g_id, u_id]) : await client(query3, [g_id, u_id, h_id]));
 
       res.json(results2);
     } catch (error) {

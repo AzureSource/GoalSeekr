@@ -5,7 +5,7 @@ import axios from 'axios';
 import hatArr from './hatListObject.js';
 
 //galaxyID passed in as prop
-const ChooseHat = ( {gId} ) =>  {
+const ChooseHat = ( {gId, setHatModal} ) =>  {
 
   const allHats = hatArr;
   //state for the hatlist and the selected hat
@@ -34,10 +34,6 @@ const ChooseHat = ( {gId} ) =>  {
     getChosenHats(gId), [gId];
   }, []);
 
-  const hatClick = (e) => {
-    console.log(e.target);
-    selectHat(e.target.src);
-  };
 
   //call fetching function after mount
 
@@ -47,9 +43,13 @@ const ChooseHat = ( {gId} ) =>  {
       alert('you must Select a hat, loser!');
     } else {
       axios.put(`/api/hats/${hatPick.id}/${id}/${gId}`)
-        .then((res) => console.log(`Hat choice confirmed in DB`, res))
+        .then((res) =>  {
+          setHatModal(false);
+          console.log(`Hat choice confirmed in DB`, res);
+        })
         .catch((err) => console.log(err));
     }
+
   };
 
 
