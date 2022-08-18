@@ -50,9 +50,11 @@ const BuildShip = () => {
     console.log('userCurrency ', userCurrency);
     let config = {
       data: {
+        'planetId': planetIdSelected,
         'ships': purchasedShips
       }
     };
+    debugger;
     axios.post(`api/users/${uid}/ships`, config)
       .then(() => {
         console.log('update user info');

@@ -24,12 +24,14 @@ module.exports = {
     try {
       let userId = req.params.user_id;
       let purchasedShips = req.body.data.ships;
+      let planetId = req.body.data.planetId;
+      debugger;
       for (let i = 0; i < purchasedShips.length; i++) {
         let shipName = purchasedShips[i].name;
         let purchasedNumber = purchasedShips[i].count;
         for (let j = 0; j < purchasedNumber; j++) {
-          const query = 'SELECT * FROM buyship($1, $2)';
-          await client(query, [userId, shipName]);
+          const query = 'SELECT * FROM buyship($1, $2, $3)';
+          await client(query, [userId, planetId, shipName]);
         }
       }
       res.sendStatus(201);
