@@ -8,7 +8,9 @@ export default function MissionSequence() {
   console.log('missionData', missionData);
 
   return (
-    <div></div>
+    <div>
+
+    </div>
   );
 }
 
