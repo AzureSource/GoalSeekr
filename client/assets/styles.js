@@ -8,6 +8,7 @@ const overrides = {
 
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
+        width: '100%',
         backgroundImage: background,
         backgroundSize: 'contain',
         zIndex: -1,
@@ -429,20 +430,31 @@ const overrides = {
         width: '32%',
         height: '100%',
         position: 'absolute',
+        padding: '25px 0px',
+        justifyContent: 'space-between',
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         zIndex: 10,
       },
-      '.pl-acc': {
-        backgroundColor: '#41437e',
-        borderRadius: '10px',
-        height: '200px',
+      // '#player-list-conatiner': {
+      //   overflow: 'hidden'
+      // },
+      '#pl-acc': {
+        fontFamily: 'Abril Fatface',
+        backgroundColor: '#2e2f47',
+        border: '2px solid rgba(80,182,171)',
+        borderRadius: '7px',
+        height: '100%',
+        color: '#50b6ab',
         overflow: 'auto'
 
       },
+      '#pl-acc::-webkit-scrollbar': {
+        display: 'none'  /* Safari and Chrome */
+      },
       '#player-list': {
-        width:'100%',
-        height: '30%',
-        padding: '5%',
+        width:'90%',
+        height: '28.5%',
+        overflow: 'hidden'
       },
       '.p-list-icon': {
         fontSize: '250%',
@@ -473,9 +485,15 @@ const overrides = {
         color: 'rgba(80,182,171)',
         width: '50%',
         padding: '10px',
-        margin: '10px',
+        // margin: '10px 0px',
         border: '1px solid rgba(80,182,171)',
         // margin: '5px 0px',
+      },
+      '.end-turn-btn': {
+        marginRight: '7.5px',
+      },
+      '.tasks-modal-btn': {
+        marginLeft: '7.5px',
       },
       '.side-menu-bottom-btn-container': {
         width: '90%',
@@ -485,8 +503,7 @@ const overrides = {
       '.title-bar': {
         width: '100%',
         height: '27%',
-        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.39399509803921573) 100%)',
-        backgroundOpacity: 0.7
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.72) 100%)',
       },
       '.title-name': {
         position: 'relative',
@@ -649,7 +666,7 @@ const overrides = {
       // =============================
       '.build-modal-btn': {
         background: '#2e2f47 !important',
-        border: '1px solid rgba(80,182,171)',
+        border: '2px solid rgba(80,182,171)',
         color: 'rgba(80,182,171)',
         fontFamily: 'Abril Fatface',
         width: '90%',
@@ -664,6 +681,7 @@ const overrides = {
       // Mission Module
       // =============================
       '.mission-module-container': {
+        borderRadius: '4px',
         height: '50%',
         width: '90%',
         flexDirection: 'column',
