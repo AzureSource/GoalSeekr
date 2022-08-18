@@ -8,6 +8,7 @@ const overrides = {
 
       'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
+        width: '100%',
         backgroundImage: background,
         backgroundSize: 'contain',
         zIndex: -1,
