@@ -235,7 +235,7 @@ export default function DenseGalaxy() {
   };
 
   return (
-    <div className='appBackground planetsWindow'>
+    <div className='planetsWindow'>
       {planets.map((planet, index) => {
         return (
           <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
