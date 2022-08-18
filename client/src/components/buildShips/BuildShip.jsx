@@ -6,7 +6,6 @@ import {Button, Modal, ModalOverlay, ModalContent, Box,
   Wrap, ModalHeader,
   ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { UserContext } from '../Galaxy Window/GalaxyWindow.jsx';
 import { useSelector } from 'react-redux';
 
 export const BuildShipContext = createContext(null);
