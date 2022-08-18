@@ -14,7 +14,7 @@ routes.get('/api/users/:user_id/ships', user.getShips);
 routes.get('/api/users/:user_id', user.findOne);
 routes.post('/api/users/:user_id/ships', user.updateShips);
 routes.get('/api/galaxyName', user.getGalaxyName);
-routes.post('api/users/:user_id/mission', user.doMission);
+routes.post('/api/users/:user_id/mission', user.doMission);
 routes.get('/api/users/:user_id/planets', user.getPlanets);
 
 // task tracker

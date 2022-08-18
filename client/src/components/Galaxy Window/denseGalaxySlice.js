@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   planetSelection: {
     homePlanet: '',
-    targetPlanet: ''
+    targetPlanet: '',
+    planetIdSelected: 0
   },
   firstSelection: false,
 };
@@ -16,6 +17,7 @@ export const denseGalaxyPlanetSelection = createSlice({
       if (Object.keys(action.payload)[0] === 'homePlanet') {
         state.planetSelection.homePlanet = action.payload.homePlanet;
         state.firstSelection = true;
+        state.planetSelection.planetIdSelected = action.payload.planetIdSelected;
       }
       if (Object.keys(action.payload)[0] === 'targetPlanet') {
         state.planetSelection.targetPlanet = action.payload.targetPlanet;

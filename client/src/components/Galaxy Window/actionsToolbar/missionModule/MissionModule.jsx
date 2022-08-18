@@ -4,11 +4,14 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
+import { useParams } from 'react-router-dom';
 import { setMissionQueue } from './missionModuleSlice';
 import { Divider, Select, List, ListItem } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
+import Scout from '../missionSequence/missionType/Scout.jsx';
 
 export default function MissionModule() {
+  const {id} = useParams();
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
   const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
@@ -19,18 +22,38 @@ export default function MissionModule() {
   const dispatch = useDispatch();
 
   // Galaxy name disapears on refresh of page.
+  // const checkForShips = () => {
+  //   const planetName = planets.homePlanet;
+  //   const galaxy = galaxyName;
+  //   axios.get(`/api/ships/${galaxy}/${planetName}`);
+  //   axios.get(`/api/ships/Galaxy1/Mars`)
+  //     .then((res) => {
+  //       console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
+  //       console.log('res is ', res.data[0]);
+  //       setShips(
+  //         res.data[0].getusershipsonplanetbynames.players
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log('There was an error grabbing the ship data.', err);
+  //     });
+  // };
   const checkForShips = () => {
-    const planetName = planets.homePlanet;
-    const galaxy = galaxyName;
-    axios.get(`/api/ships/${galaxy}/${planetName}`)
-      .then((res) => {
-        console.log('res', res.data[0].getusershipsonplanetbynames.players);
-        setShips(
-          res.data[0].getusershipsonplanetbynames.players
-        );
-      })
-      .catch((err) => {
-        console.log('There was an error grabbing the ship data.', err);
+    setShips(
+      [{name: 'scout', count: 1, power: 1000}]
+    );
+  };
+
+  const scout = (targetPlanet) => {
+    let config = {
+      data: {
+        'type': 'scout',
+        'targetPlanet': targetPlanet
+      }
+    };
+    axios.post(`api/users/${id}/mission`, config)
+      .then(() => {
+        console.log('update user info');
       });
   };
 
@@ -41,6 +64,7 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
+    shipData = {name: 'scout', count: 1, power: 1000};
     setShipSelection(shipData);
   };
 
@@ -53,6 +77,11 @@ export default function MissionModule() {
 
   const editMission = (missionIndex) => {
     dispatch(setMissionQueue({remove: missionIndex}));
+  };
+
+  const executeMission = (targetPlanetName) => {
+    // console.log('planets is ', planets);
+    scout(17);
   };
 
   return (
@@ -89,11 +118,16 @@ export default function MissionModule() {
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
+            {/* mission.ship = {'Scout': 1}; */}
+            console.log('mission is ', mission);
             return (
               <div key={index}>
                 Home Planet : {mission.start} | Type : {mission.type} | Ships : {mission.ship} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
+                </div>
+                <div>
+                  <button onClick={() => executeMission(mission.target)}>Execute Mission</button>
                 </div>
               </div>
             );
