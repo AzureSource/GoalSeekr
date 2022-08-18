@@ -3,7 +3,7 @@ import { Box, Flex, Heading, Tooltip, IconButton } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons'
 import TasksContainer from '../Tasks/TasksContainer.jsx';
 
-const DifficultyCol = ({ difficulty }) => {
+const DifficultyCol = ({ difficulty, setTaskUpdated }) => {
 
   return (
     <Flex className="singleColumnContainer"
@@ -30,7 +30,7 @@ const DifficultyCol = ({ difficulty }) => {
           </Tooltip>
         </Flex> */}
       </Flex>
-      <TasksContainer difficulty={difficulty}/>
+      <TasksContainer difficulty={difficulty} setTaskUpdated={setTaskUpdated}/>
     </Flex>
   );
 };
