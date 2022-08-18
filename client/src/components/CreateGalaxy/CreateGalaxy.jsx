@@ -4,14 +4,11 @@ import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setGalaxyName } from './CreateGalaxySlice';
 
 const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
 const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
-  const dispatch = useDispatch();
 
   const redirectToEnterGalaxyPage = function() {
     window.location.href = `http://localhost:7777/#/entergalaxy/userid/${params.id}`;
@@ -21,8 +18,7 @@ const CreateGalaxy = ({ setTitle }) => {
     window.location.href = `http://localhost:7777/#/galaxy/userid/${params.id}`;
   };
 
-  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
-  // const [galaxyName, setGalaxyName] = useState('');
+  const [galaxyName, setGalaxyName] = useState('');
   const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
@@ -89,7 +85,7 @@ const CreateGalaxy = ({ setTitle }) => {
             className='galaxy-name-input'
             placeholder='Enter Galaxy Name'
             value={galaxyName}
-            onChange={(e) => dispatch(setGalaxyName(e.target.value))}
+            onChange={(e) => setGalaxyName(e.target.value)}
           />
         </Flex>
         <Flex

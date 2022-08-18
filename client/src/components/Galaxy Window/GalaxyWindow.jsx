@@ -13,6 +13,7 @@ import ChooseHat from '../ChooseHat.jsx';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {getUserShipsFromDB, getUserPlanetsFromDB} from '../buildShips/UserShipSlice';
+import { setGalaxyName } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
@@ -36,8 +37,9 @@ export default function GalaxyWindow ({ setTitle }) {
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
       .then((result) => {
-        console.log(result);
+        console.log('galaxy', result.data.rows[0]);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
+        dispatch(setGalaxyName(result.data.rows[0]));
       })
       .catch((err) => console.log(err));
   };
