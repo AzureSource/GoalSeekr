@@ -55,6 +55,11 @@ module.exports = {
         const query = 'SELECT * FROM updateplantsgalaxy($1, $2)';
         await client(query, [userId, targetPlanet]);
       }
+      if (type === 'colony') {
+        let targetPlanet = req.body.data.targetPlanet;
+        const query = 'SELECT * FROM colonizeplanet($1, $2)';
+        await client(query, [userId, targetPlanet]);
+      }
       res.sendStatus(201);
     } catch (err) {
       res.end().status(500);
