@@ -4,7 +4,6 @@ import axios from 'axios';
 import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
 
 const Stats = (u_id) => {
-
   const [userObj, setUserObj] = useState({});
 
   //fetch the data for the current User and galaxy
@@ -17,12 +16,6 @@ const Stats = (u_id) => {
         console.log(err);
       });
   };
-
-  const endTurn = () => {
-
-  };
-
-
 
   return (
     <div className='stats-container'>
