@@ -64,7 +64,7 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
-    shipData = {name: 'scout', count: 1, power: 1000};
+    // shipData = {name: 'scout', count: 1, power: 1000};
     setShipSelection(shipData);
   };
 

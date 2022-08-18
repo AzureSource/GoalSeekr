@@ -25,6 +25,7 @@ export const denseGalaxyPlanetSelection = createSlice({
       if (action.payload === 'reset') {
         state.planetSelection.homePlanet = '';
         state.planetSelection.targetPlanet = '';
+        state.planetSelection.planetIdSelected = 0;
         state.firstSelection = false;
       }
     },
