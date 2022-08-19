@@ -7,8 +7,12 @@ const tasks = require('./models/tasks.js');
 const getAllPlayers = require('./models/players.js');
 const galaxy =require('./models/galaxy.js');
 const planets = require('./models/planets');
+const
 
 const routes = Router();
+
+routes.post('/api/galaxy/turns/:user_id/:galaxy_id', galaxy.beginGame);
+routes.put('/api/galaxy/turns/user_id/:glalaxy_id', galaxy.changeTurn);
 
 routes.get('/api/ships/', ship.getAll);
 routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
