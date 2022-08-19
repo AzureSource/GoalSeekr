@@ -10,23 +10,28 @@ const SendBox = ({ setChatAdded, id, galID }) => {
   }
 
   function handleFormSubmit(){
-    console.log(message);
     const messageObj = {
       message,
       userID: id,
     };
     axios.post(`/api/chats/${galID}`, messageObj)
       .then((result) => console.log('message sent:', result))
-      .then(setChatAdded((prev) => !prev))
+      .then(setTimeout(() => {setChatAdded((prev) => !prev);}, 0))
       .catch((err) => console.log('error sending message', err));
     setMessage('');
   }
 
   return (
-    <Flex className='chatsSendBox' h="12%" w="100%">
+    <Flex
+      className='chatsSendBox'
+      h="15%" w="100%"
+      // borderTop="1px solid"
+      // borderColor="#50b6ab"
+    >
       <Flex
         flexDirection="row"
         flexGrow="1"
+        alignSelf='center'
         borderColor="#50b6ab"
       >
         <Input

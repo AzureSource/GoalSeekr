@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve --config ./webpack.config.js --mode development",
     "build": "webpack --mode development",
+    "build-watch": "webpack --mode development --watch",
     "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
