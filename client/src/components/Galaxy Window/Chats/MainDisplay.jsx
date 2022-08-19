@@ -22,7 +22,6 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
           alignSelf={chat.userID.toString() === id ? 'flex-end' : 'flex-start'}
           background={chat.userID.toString() === id ? 'rgb(80 182 171 / 62%)' : 'rgba(66, 153, 225, 0.6)'}
         >
-
           <Text><b>{chat.Username}</b>:&nbsp;{chat.message}</Text>
         </Flex>
       ))}

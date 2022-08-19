@@ -17,7 +17,7 @@ const SendBox = ({ setChatAdded, id, galID }) => {
     };
     axios.post(`/api/chats/${galID}`, messageObj)
       .then((result) => console.log('message sent:', result))
-      .then(setChatAdded((prev) => !prev))
+      .then(setTimeout(() => {setChatAdded((prev) => !prev);}, 500))
       .catch((err) => console.log('error sending message', err));
     setMessage('');
   }
