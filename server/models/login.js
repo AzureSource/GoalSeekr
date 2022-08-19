@@ -39,7 +39,8 @@ module.exports = {
   },
   // update motto
   updateMotto(req, res) {
-    client('UPDATE users SET motto = $1 WHERE name = $2', [req.body.motto, req.body.name])
+    console.log(req.body);
+    client('UPDATE users SET motto = $1 WHERE username = $2', [req.body.motto, req.body.displayName])
       .then(res.status(201).end())
       .catch(res.status(500).end());
   },

@@ -32,9 +32,12 @@ export default function EnterUserName ({authData}) {
                 motto: motto,
               }
             })
-              .then((result)=>{
-
-                redirectToEnterGalaxyPage(result.data)
+              .then(async (result)=>{
+                await axios.put('/api/users/motto', {
+                  displayName: text,
+                  motto: motto
+                });
+                redirectToEnterGalaxyPage(result.data);
               })
               .catch(()=>console.log('Err from enter user name'));
           }
