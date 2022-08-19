@@ -473,7 +473,7 @@ export default function DenseGalaxy() {
     //if axios.getplanetbyid.conqueredBy !== null
     //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
     // if (axios.get('/planets/'))
-      <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
+      <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)} className='divInPlanetComponent'>
         {image}
         <div className={planet.name}>{planet.name}</div>
         {aHat}
