@@ -8,8 +8,6 @@ function getAllPlayers(req, res) {
 
   db(queryString)
     .then((result) => {
-      console.log(result.rows[0].getplayerdatabygalaxyid.Players);
-
       res.send(result.rows[0].getplayerdatabygalaxyid.Players);
     })
     .catch((err) => {

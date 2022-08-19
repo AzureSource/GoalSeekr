@@ -23,10 +23,10 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
   }, [galID, chatAdded, chatUpdater]);
 
   return (
-    <Flex className='chatsMainDisplay'h="73%" w="100%" flexDirection="column"
+    <Flex className='chatsMainDisplay'h="75%" w="100%" flexDirection="column"
       overflow="auto"
     >
-      {chats.map((chat) => (
+      {chats.length && chats.map((chat) => (
         <Flex className="messageContainer" key={chat.id} border="1px solid" m="0.2rem"
           maxWidth="80%" marginLeft="20px" marginRight="20px"
           borderRadius="10px" borderColor="#50b6ab" color="#2e2f47"

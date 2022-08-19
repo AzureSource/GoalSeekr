@@ -9,7 +9,11 @@ const galaxy =require('./models/galaxy.js');
 const chats =require('./models/chats.js');
 const planets = require('./models/planets');
 
+
 const routes = Router();
+
+routes.put('/api/galaxy/begin/:user_id/:galaxy_id', galaxy.beginGame);
+routes.put('/api/galaxy/turns/:user_id/:galaxy_id', galaxy.changeTurn);
 
 routes.get('/api/ships/', ship.getAll);
 routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
@@ -40,8 +44,10 @@ routes.get('/api/players/:galaxy_id', getAllPlayers);
 //user
 routes.get('/api/users',users.checkAllUser);
 routes.post('/api/users',users.checkUser);
+routes.put('/api/users/motto', users.updateMotto);
 routes.get('/api/galaxy',users.checkGalaxyName);
 
+routes.get('/api/user/hat/:userId', hats.getHatIdForUser);
 routes.get('/api/hats/:galaxy_id', hats.getAll);
 routes.put('/api/hats/:hat_id/:user_id/:galaxy_id', hats.updateHat);
 
