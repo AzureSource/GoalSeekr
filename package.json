@@ -32,7 +32,6 @@
     "express": "^4.18.1",
     "favicons-webpack-plugin": "^5.0.2",
     "firebase": "^9.9.2",
-    "formik": "^2.2.9",
     "framer-motion": "^7.1.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
