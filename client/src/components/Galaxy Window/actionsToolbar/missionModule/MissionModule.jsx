@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import ShipListEntry from "./ShipListEntry.jsx";
-import { setPlanetSelection } from "../../denseGalaxySlice";
-import { useSelector, useDispatch } from "react-redux";
-import MissionSequence from "../missionSequence/missionSequence.jsx";
-import { setMissionQueue } from "./missionModuleSlice";
-import { Button, Select, List, ListItem, Flex } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ShipListEntry from './ShipListEntry.jsx';
+import { setPlanetSelection } from '../../denseGalaxySlice';
+import { useSelector, useDispatch } from 'react-redux';
+import MissionSequence from '../missionSequence/missionSequence.jsx';
+import { setMissionQueue } from './missionModuleSlice';
+import { Button, Select, List, ListItem, Flex } from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
   const planets = useSelector(
