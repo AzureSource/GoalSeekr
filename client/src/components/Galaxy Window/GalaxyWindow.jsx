@@ -52,7 +52,6 @@ export default function GalaxyWindow ({ setTitle }) {
       const ships = await axios.get(`/api/users/${id}/ships`);
       dispatch(getUserShipsFromDB(ships.data.getusersships));
       const planets = await axios.get(`/api/users/${id}/planets`);
-      console.log('planets.data is ', planets.data);
       dispatch(getUserPlanetsFromDB(planets.data));
     };
     fetchData();
