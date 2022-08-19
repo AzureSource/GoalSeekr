@@ -18,27 +18,27 @@ export default function MissionModule() {
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
 
-  // const checkForShips = () => {
-  //   const planetId = planets.planetIdSelected;
-  //   console.log('galaxyId', galaxyID);
-  //   console.log('planetId', planetId);
-  //   axios.get(`/api/ships/${galaxyID}/${planetId}`)
-  //     .then((res) => {
-  //       // console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
-  //       console.log('res is ', res.data);
-  //       setShips(
-  //         // res.data[0].getusershipsonplanetbynames.players
-  //       );
-  //     })
-  //     .catch((err) => {
-  //       console.log('There was an error grabbing the ship data.', err);
-  //     });
-  // };
   const checkForShips = () => {
-    setShips(
-      [{ name: 'scout', count: 1, power: 1000 }]
-    );
+    const planetID = planets.planetIdSelected;
+    console.log('galaxyId', galaxyID);
+    console.log('planetId', planetID);
+    axios.get(`/api/ships/${galaxyID}/${planetID}`)
+      .then((res) => {
+        // console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
+        // console.log('res is ', res.data[0].getusershipsonplanet.players[0].Ships);
+        setShips(
+          res.data[0].getusershipsonplanet.players[0].Ships
+        );
+      })
+      .catch((err) => {
+        console.log('There was an error grabbing the ship data.', err);
+      });
   };
+  // const checkForShips = () => {
+  //   setShips(
+  //     [{ name: 'scout', count: 1, power: 1000 }]
+  //   );
+  // };
 
   useEffect(() => {
     if (planets.homePlanet) {
