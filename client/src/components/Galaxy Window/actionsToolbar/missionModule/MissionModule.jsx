@@ -15,6 +15,7 @@ export default function MissionModule() {
   const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
   const endTurnActivation = useSelector((state) => state.toggleEndTurn.endTurn);
+  const userColonizedPlanets = useSelector((state) => state.userShips.planets.colonizedPlanets);
   const [shipSelection, setShipSelection] = useState({});
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
@@ -43,18 +44,23 @@ export default function MissionModule() {
   };
 
   const addToQueue = () => {
-    dispatch(
-      setMissionQueue({
-        add: {
-          start: planets.homePlanet,
-          type: missionType,
-          ship: shipSelection,
-          target: planets.targetPlanet,
-          planetId: planets.planetIdSelected,
-          targetId: planets.targetPlanetId,
-        },
-      })
-    );
+    // check if planetId exists in list of user's owned planets
+    if (userColonizedPlanets.includes(planets.planetIdSelected)) {
+      dispatch(
+        setMissionQueue({
+          add: {
+            start: planets.homePlanet,
+            type: missionType,
+            ship: shipSelection,
+            target: planets.targetPlanet,
+            planetId: planets.planetIdSelected,
+            targetId: planets.targetPlanetId,
+          },
+        })
+      );
+    } else {
+      alert(`These aren't your ships, the ${planets.homePlanet} ruler is displeased.`);
+    }
   };
 
   const editMission = (missionIndex) => {
@@ -141,4 +147,4 @@ export default function MissionModule() {
 // render a line between the planets
 // figure out turn count on mission module
 
-// need a query for what planets the user owns, if the user owns the planet then they can queue a mission, if not those arent their ships.
+// when queue mission is clicked, check db to confirm listed ships are users
