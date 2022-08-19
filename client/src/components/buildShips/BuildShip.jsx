@@ -60,7 +60,7 @@ const BuildShip = () => {
 
   const handleOpenClick = () => {
     if (planetIdSelected === null || planetIdSelected === 0) {
-      alert('Please select a planet first');
+      alert('To start building ship, please select a planet first');
       return;
     } else {
       onOpen();

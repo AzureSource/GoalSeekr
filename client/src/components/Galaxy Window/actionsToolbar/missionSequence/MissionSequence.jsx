@@ -10,28 +10,47 @@ export default function MissionSequence() {
   // pull mission data from store
   let missionData = useSelector((state) => state.missionQueue.missions);
   console.log('missionData', missionData);
+  const missionResults = [];
 
-  const scout = (targetPlanetId) => {
+  const scout = async (targetPlanetId, targetPlanetName) => {
     let config = {
       data: {
         'type': 'scout',
         'targetPlanet': targetPlanetId
       }
     };
-    axios.post(`api/users/${id}/mission`, config)
-      .then(() => {
-        console.log('update user info');
-      });
+    await axios.post(`api/users/${id}/mission`, config);
+    console.log('update user info');
+    let missionRes = {};
+    missionRes.type = 'Scout';
+    missionRes.targetPlanetName = targetPlanetName;
+    missionRes.result = 'Scouted';
+    missionResults.push(missionRes);
   };
 
-  const executeMission = (targetPlanetName) => {
-    // console.log('planets is ', planets);
-    scout(17);
+  const executeMission1 = async () => {
+    console.log('start execute mission');
+    for (let i = 0; i < missionData.length; i++) {
+      switch (missionData[i].type) {
+      case 'scout':
+        await scout(missionData[i].targetId, missionData[i].target);
+        break;
+      default:
+      }
+    }
+    console.log('mission finished, following are the results');
+    for (let i = 0; i < missionResults.length; i++) {
+      console.log(JSON.stringify(missionResults[i]));
+    }
+  };
+
+  const executeMission = () => {
+    console.log('start execute mission');
   };
 
   return (
     <div>
-      <button onClick={() => executeMission(missionData.target)}>Execute Mission</button>
+      <button onClick={executeMission}>Execute Mission</button>
     </div>
   );
 }

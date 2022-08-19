@@ -51,6 +51,7 @@ export default function MissionModule() {
   };
 
   const addToQueue = () => {
+    // console.log('shipSelection is ', shipSelection);
     let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.power}`;
     dispatch(setMissionQueue({
       add: { start: planets.homePlanet, type: missionType, ship: shipSelection, target: planets.targetPlanet, planetId: planets.planetIdSelected, targetId: planets.targetPlanetId}
@@ -99,9 +100,10 @@ export default function MissionModule() {
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
+            {/* console.log('mission.ship is ', mission.ship); */}
             return (
               <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships : {/*{mission.ship}*/} | Target Planet : {mission.target}
+                Home Planet : {mission.start} | Type : {mission.type} | Ships : {JSON.stringify(mission.ship)} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
                 </div>
