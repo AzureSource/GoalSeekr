@@ -15,28 +15,7 @@ const overrides = {
       },
       '.galaxy-window, .appBackground': {
         width: '100%',
-<<<<<<< HEAD
-        height: '100%',
-        marginLeft: '1000px'
-      },
-      '.userContext': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.galaxyWindow': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.transformWrapper': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.transformComponent': {
-        float: 'right',
-        marginLeft: '1000px'
-=======
         height: '100%'
->>>>>>> 5229ead93cfc9bd78a5a79344fc9c03d02f3b423
       },
       '#root': {
         height: '100%',
