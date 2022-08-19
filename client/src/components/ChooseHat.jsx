@@ -68,6 +68,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
               ></img>
               {(!chosenHats.includes(hat.id)) &&
                 <input
+                  className='selectHatButtons1'
                   key={`input1-${ind}`}
                   type="radio"
                   name='hatPicker'
@@ -92,6 +93,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
               ></img>
               {(!chosenHats.includes(hat.id)) &&
                 <input
+                  className='selectHatButtons2'
                   key={`input1-${ind}`}
                   type="radio"
                   name='hatPicker'
