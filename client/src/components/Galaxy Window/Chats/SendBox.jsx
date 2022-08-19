@@ -44,6 +44,8 @@ const SendBox = ({ setChatAdded }) => {
         />
         <Button
           colorScheme="teal"
+          border="1px solid #50b6ab"
+          background="#2e2f47" color="#50b6ab"
           h="2rem"
           onClick={handleFormSubmit}
         >
