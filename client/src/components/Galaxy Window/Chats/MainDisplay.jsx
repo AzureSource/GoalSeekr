@@ -9,7 +9,6 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
   useEffect(() => {
     setInterval(() => {
       setChatUpdater((prev) => prev + 1);
-      console.log(chatUpdater);
     }, 2700);
   }, []);
 
