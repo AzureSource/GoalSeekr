@@ -362,18 +362,21 @@ export default function DenseGalaxy() {
 
   const userPlanets = useSelector(state => state.userShips.planets);
 
-  const [planetsObj, setPlanetsObj] = useState([]);
+  var planetsObj = {
+    scoutedPlanets: null,
+    colonizedPlanets: null
+  };
   const planetsObject = axios.get(`/api/users/${id}/planets`)
     .then(result => {
       console.log(result);
-      setPlanetsObj(result);
+      planetsObj = result;
     });
 
-  const [hat, setHat] = useState(null);
+  var hat = null;
   const userHat = axios.get(`/api/user/hat/${id}`)
     .then(result => {
       console.log(result);
-      setHat(result);
+      hat = result;
     });
 
   const tempUserPlanets = {
@@ -391,10 +394,42 @@ export default function DenseGalaxy() {
     }
   };
 
-  var image;
-  var aHat;
-  // var hatSource = hatArray[id -1] && hatArray[id - 1].name;
-  var hatSource = egg;
+  // var image;
+  // var aHat;
+  // // var hatSource = hatArray[id -1] && hatArray[id - 1].name;
+  // var hatSource = egg;
+
+  var map =  planets.map((planet, index) => {
+
+    var image;
+    var aHat;
+    // var hatSource = hatArray[id -1] && hatArray[id - 1].name;
+    var hatSource = egg;
+    if (planetsObj.scoutedPlanets && planetsObj.scoutedPlanets.includes(planet.id)) {
+      console.log('entered');
+      image = <img src={planet.image} className={planet.classname}></img>;
+    } else {
+      image = <img src={planet.unexplored} className={planet.classname}></img>;
+    }
+
+    /* if (planetsObj.colonizedPlanets && planetsObj.colonizedPlanets.includes(planet.id)) {
+      aHat = <Image src={hatSource} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>;
+    } else {
+      aHat = null;
+    }*/
+    return (
+    //if axios.getplanetbyid(id).discoveredBy !== null, and it matches current UserId, return div with colored planet image
+    //else return div with question mark planet image src
+    //if axios.getplanetbyid.conqueredBy !== null
+    //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
+    // if (axios.get('/planets/'))
+      <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
+        {image}
+        <div className={planet.name}>{planet.name}</div>
+        {aHat}
+      </div>
+    );
+  });
 
   // return (
   //   <div className='appBackground planetsWindow'>
@@ -412,34 +447,7 @@ export default function DenseGalaxy() {
 
   return (
     <div>
-      {planets.map((planet, index) => {
-        if (planetsObj.scoutedPlanets && planetsObj.scoutedPlanets.includes(planet.id)) {
-          image = <img src={planet.image} className={planet.classname}></img>;
-        } else {
-          image = <img src={planet.unexplored} className={planet.classname}></img>;
-        }
-
-        if (planetsObj.colonizedPlanets && planetsObj.colonizedPlanets.includes(planet.id)) {
-          aHat = <Image src={hatSource} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>;
-        } else {
-          aHat = null;
-        }
-        return (
-        //if axios.getplanetbyid(id).discoveredBy !== null, and it matches current UserId, return div with colored planet image
-        //else return div with question mark planet image src
-        //if axios.getplanetbyid.conqueredBy !== null
-        //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
-        // if (axios.get('/planets/'))
-
-          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
-            {image}
-            <div className={planet.name}>{planet.name}</div>
-            {hat}
-          </div>
-        );
-      })}
-      {/* <img src={egg} className='egg'></img> */}
-      {/* <img src={bearears} className='bearears'></img> */}
+      {map}
     </div>
   );
 }
