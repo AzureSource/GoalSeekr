@@ -21,10 +21,8 @@ const overrides = {
       //   zIndex: -1,
       // },
       '.galaxy-window': {
-        float: 'right',
         width: '100%',
         height: '100%',
-        marginLeft: '1000px'
       },
       '.userContext': {
         float: 'right',
@@ -50,11 +48,8 @@ const overrides = {
         height: '100%',
       },
       '.planetsWindow': {
-        float: 'right',
-        marginLeft: '8.785%',
-        marginTop: '0.01%',
-        height: '1550px',
-        width: '5120px'
+        height: '100%',
+        width: '100%'
       },
       // '.divInPlanetComponent': {
       //   // marginTop: '10px',
@@ -531,7 +526,7 @@ const overrides = {
         width: '50%',
         padding: '10px',
         // margin: '10px 0px',
-        border: '1px solid rgba(80,182,171)',
+        border: '2px solid rgba(80,182,171)',
         // margin: '5px 0px',
       },
       '.end-turn-btn': {
@@ -710,10 +705,10 @@ const overrides = {
       // build ship
       // =============================
       '.build-modal-btn': {
+        fontFamily: 'Abril Fatface',
         background: '#2e2f47 !important',
         border: '2px solid rgba(80,182,171)',
         color: 'rgba(80,182,171)',
-        fontFamily: 'Abril Fatface',
         width: '90%',
         margin: '5px 0px',
       },
@@ -732,14 +727,70 @@ const overrides = {
         flexDirection: 'column',
         justifyContent: 'space-between',
       },
+      '.mission-selector-container': {
+        height: '50%',
+        justifyContent: 'space-between'
+      },
+      '.planet-selection-container, .planet-mission-container': {
+        fontFamily: 'Abril fatface',
+        color: 'rgba(80,182,171)',
+        width: '50%',
+      },
+      '.planet-selection-container': {
+        marginRight: '7.5px',
+        justifyContent: 'center',
+        textAlign: 'center',
+      },
+      '.planet-mission-container': {
+        marginLeft: '7.5px',
+        justifyContent: 'space-between',
+        textAlign: 'center',
+      },
+      '.planet-selected-home': {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '5px',
+      },
+      '.planet-selected-target': {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '5px',
+      },
+      '#reset-btn': {
+        fontSize: '1em',
+        height: '50%',
+        marginBottom: '5px',
+        fontWeight: 500,
+      },
+
+      '#reset-btn, .planet-selected-target, .planet-selected-home': {
+        borderRadius: '4px',
+        height: '50%',
+        border: '2px solid rgba(80,182,171)',
+        backgroundColor: '#2e2f47',
+      },
+      '#select-mission-type': {
+        textAlign: 'center',
+        backgroundColor: '#2e2f47',
+      },
+      '#select-type-container': {
+        borderRadius: '4px',
+        border: '2px solid rgba(80,182,171)',
+        marginTop: '5px',
+        height: '44% !important',
+      },
+      // '.chakra-select__wrapper#select-mission-type': {
+      //   height: '50%',
+      //   marginTop: '5px',
+      // }
 
       // =============================
       // Mission Module
       // =============================
     },
-    'section#chakra-modal-:r1': {
-      width: '70% !important',
-    },
+  //   'section#chakra-modal-:r1': {
+  //     width: '70% !important',
+  //   },
   },
 };
 const theme = extendTheme(overrides);

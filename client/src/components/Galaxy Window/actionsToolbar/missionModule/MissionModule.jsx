@@ -5,7 +5,7 @@ import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
 import { setMissionQueue } from './missionModuleSlice';
-import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
+import { Button, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
@@ -65,53 +65,56 @@ export default function MissionModule() {
     <Flex
       className='mission-module-container'
     >
-      <Flex
-        className='mission-selector-container'
+      <div
+        className='top-module-container'
       >
-        <Flex
-          className='planet-selection-container'
-          flexDir='column'
-        >
-          <div>
-            Home Planet
-            {planets.homePlanet}
-          </div>
-          <div>
-            Target Planet
-            {planets.targetPlanet}
-          </div>
-        </Flex>
-        <Flex
-          className='planet-mission-container'
-          flexDir='column'
-        >
-          <button
-            onClick={() => dispatch(setPlanetSelection('reset'))}
+        <Flex className='mission-selector-container'>
+          <Flex
+            className='planet-selection-container'
+            flexDir='column'
           >
-            Reset Planets
-          </button>
-          <Select
-            className='select-mission-type'
-            variant='filled'
-            value={missionType}
-            placeholder='Mission Type'
-            size='sm'
-            icon={<ChevronDownIcon />}
-            onChange={(e) => setMissionType(e.target.value)}
+            <Flex className='planet-selected-home'>
+              {planets.homePlanet ? planets.homePlanet : 'Home Planet'}
+            </Flex>
+            <Flex className='planet-selected-target'>
+              {planets.targetPlanet ? planets.targetPlanet : 'Target Planet'}
+            </Flex>
+          </Flex>
+          <Flex
+            className='planet-mission-container'
+            flexDir='column'
           >
-            <option value='scout'>Scout</option>
-            <option value='attack'>Attack</option>
-            <option value='colonize'>Colonize</option>
-          </Select>
+            <Button
+              id='reset-btn'
+              onClick={() => dispatch(setPlanetSelection('reset'))}
+            >
+              Reset Planets
+            </Button>
+            <div id='select-type-container'>
+              <Select
+                id='select-mission-type'
+                variant='filled'
+                value={missionType}
+                placeholder='Mission Type'
+                size='sm'
+                icon={<ChevronDownIcon />}
+                onChange={(e) => setMissionType(e.target.value)}
+              >
+                <option value='scout'>Scout</option>
+                <option value='attack'>Attack</option>
+                <option value='colonize'>Colonize</option>
+              </Select>
+            </div>
+          </Flex>
         </Flex>
-      </Flex>
+        {ships === undefined ?
+          'There are no fleets at this planet.'
+          : (
+            <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
+          )}
+      </div>
 
-      {ships === undefined ? (
-        <div>There are no fleets at this planet.</div>
-      ) : (
-        <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
-      )}
-      <button onClick={addToQueue}>Queue Mission</button>
+      <Button onClick={addToQueue}>Queue Mission</Button>
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
@@ -119,7 +122,7 @@ export default function MissionModule() {
               <div key={index}>
                 Home Planet : {mission.start} | Type : {mission.type} | Ships : {/*{mission.ship}*/} | Target Planet : {mission.target}
                 <div>
-                  <button onClick={() => editMission(index)}>Remove</button>
+                  <Button onClick={() => editMission(index)}>Remove</Button>
                 </div>
               </div>
             );
