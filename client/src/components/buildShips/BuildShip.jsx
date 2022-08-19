@@ -59,7 +59,8 @@ const BuildShip = () => {
   }, []);
 
   const shipsComponents = ships.map(ship => (
-    <Ship key={ship.id} shipFromBackend={ship} />
+    ship.name === 'Tank' ? null :
+      <Ship key={ship.id} shipFromBackend={ship} />
   ));
 
   const restoreData = () => {
