@@ -13,7 +13,7 @@ const overrides = {
         backgroundSize: 'contain',
         zIndex: -1,
       },
-      '.galaxy-window': {
+      '.galaxy-window, .appBackground': {
         width: '100%',
         height: '100%'
       },
@@ -540,7 +540,7 @@ const overrides = {
       '.lobby-menu': {
         height: '80%',
         width: '35%',
-        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 100%)'
       },
       '.create-galaxy-container': {
         height: '100%',
@@ -713,7 +713,6 @@ const overrides = {
         justifyContent: 'space-between'
       },
       '#select-mission-type': {
-        height: '100%',
         textAlign: 'center',
         backgroundColor: '#2e2f47',
       },
