@@ -9,7 +9,7 @@ const TaskTracker = ({ setTitle }) => {
   useEffect((()=>setTitle(false)), []);
 
   return (
-    <Flex className="mainContainer" flexDirection="column" h="100vh">
+    <Flex className="mainContainer" flexDirection="column" h="100vh" color="teal">
       <Flex className="navBar" h="5%" justifyContent="center">
         Nav bar, etc will go here
       </Flex>
