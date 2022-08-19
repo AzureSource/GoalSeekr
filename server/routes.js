@@ -14,6 +14,7 @@ routes.get('/api/ships/', ship.getAll);
 routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
 routes.get('/api/users/:user_id/ships', user.getShips);
 routes.get('/api/users/:user_id', user.findOne);
+routes.get('/api/users/:user_id/ships', user.getShips);
 routes.post('/api/users/:user_id/ships', user.updateShips);
 routes.post('/api/users/:user_id/mission', user.doMission);
 routes.get('/api/users/:user_id/planets', user.getPlanets);
@@ -38,7 +39,7 @@ routes.get('/api/galaxy',users.checkGalaxyName);
 
 routes.get('/api/user/hat/:userId', hats.getHatIdForUser);
 routes.get('/api/hats/:galaxy_id', hats.getAll);
-routes.put('/api/hats/:user_id/:galaxy_id', hats.updateHat);
+routes.put('/api/hats/:hat_id/:user_id/:galaxy_id', hats.updateHat);
 
 // insert galaxy route
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);

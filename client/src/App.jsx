@@ -20,8 +20,11 @@ import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 //   );
 // };
 
+// export default App;
+
 const App = () => {
   const [title, setTitle] = useState(true);
+
   return (
     <HashRouter>
       <div className='appBackground'>
