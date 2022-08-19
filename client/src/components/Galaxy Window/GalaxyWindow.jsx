@@ -65,25 +65,13 @@ export default function GalaxyWindow ({ setTitle }) {
       <div className='galaxy-window'>
         <MenuSide/>
         <MenuBottom/>
-<<<<<<< HEAD
-        {/* {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>} */}
         <Flex className='planetsWindow'>
-          <TransformWrapper>
-            <TransformComponent>
-                test
-              {/* <SparseGalaxy/> */}
-              <DenseGalaxy/>
-=======
-        <Flex className='galaxy-window-top'>
           <MenuSide/>
           <TransformWrapper initialScale={1} className='transformWrapper'>
             <TransformComponent className='transformComponent'>
-              <div className='planetsWindow'>
-                {hatModal && <ChooseHat gId={gID} setHatModal={setHatModal}/>}
-                {/* <SparseGalaxy/> */}
-                <DenseGalaxy/>
-              </div>
->>>>>>> 76777240ab83501d296d0752f7228b50db30cf82
+              {hatModal && <ChooseHat gId={gID} setHatModal={setHatModal}/>}
+              {/* <SparseGalaxy/> */}
+              <DenseGalaxy/>
             </TransformComponent>
           </TransformWrapper>
         </Flex>

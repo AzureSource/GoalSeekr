@@ -6,7 +6,7 @@ const overrides = {
     global: {
       // add styles here
 
-      'body.chakra-ui-light, html, #root': {
+      'body.chakra-ui-light, html, #root, .appBackground': {
         height: '100%',
         width: '100%',
         backgroundImage: background,
