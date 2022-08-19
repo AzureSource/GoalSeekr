@@ -6,11 +6,8 @@ const users = require('./models/login.js');
 const tasks = require('./models/tasks.js');
 const getAllPlayers = require('./models/players.js');
 const galaxy =require('./models/galaxy.js');
-<<<<<<< HEAD
 const chats =require('./models/chats.js');
-=======
 const planets = require('./models/planets');
->>>>>>> main
 
 const routes = Router();
 
