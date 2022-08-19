@@ -33,10 +33,11 @@ export default function MissionSequence() {
     missionRes.type = 'Scout';
     missionRes.targetPlanetName = targetPlanetName;
     missionRes.result = 'Scouted';
+    missionRes.detail = '';
     missionResults.push(missionRes);
   };
 
-  const allMissions = async (targetPlanetId, shipIds) => {
+  const allMissions = async (targetPlanetId, shipIds, targetPlanetName) => {
     let config = {
       data: {
         'type': 'mission',
@@ -46,7 +47,16 @@ export default function MissionSequence() {
     };
     await axios.post(`api/users/${id}/mission`, config)
       .then((res) => {
-        console.log('mission results', res);
+        for (const val of Object.values(res.data[0])) {
+          for (const childVal of Object.values(val)) {
+            let missionRes = {};
+            missionRes.type = childVal.action;
+            missionRes.targetPlanetName = targetPlanetName;
+            missionRes.result = childVal.results;
+            missionRes.detail = JSON.stringify(childVal);
+            missionResults.push(missionRes);
+          }
+        }
       })
       .catch((err) => {
         console.log('error', err);
@@ -62,13 +72,13 @@ export default function MissionSequence() {
         await scout(missionData[i].targetId, missionData[i].target);
         break;
       case 'attack':
-        await allMissions(missionData[i].targetId, missionData[i].ship.ids);
+        await allMissions(missionData[i].targetId, missionData[i].ship.ids, missionData[i].target);
         break;
       case 'colonize':
-        await allMissions(missionData[i].targetId, missionData[i].ship.ids);
+        await allMissions(missionData[i].targetId, missionData[i].ship.ids, missionData[i].target);
         break;
       case 'transport':
-        await allMissions(missionData[i].targetId, missionData[i].ship.ids);
+        await allMissions(missionData[i].targetId, missionData[i].ship.ids, missionData[i].target);
         break;
       default:
       }

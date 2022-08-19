@@ -34,7 +34,9 @@ const MissionResult = () => {
     <MissionResultTableRow key={index}
       type={missionResult.type}
       targetPlanetName={missionResult.targetPlanetName}
-      result={missionResult.result} />
+      result={missionResult.result}
+      detail={missionResult.detail}
+    />
   ));
 
   return (
@@ -58,6 +60,7 @@ const MissionResult = () => {
                     <Th>Mission Type</Th>
                     <Th>Target Planet Name</Th>
                     <Th >Mission result</Th>
+                    <Th >Result detail</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
