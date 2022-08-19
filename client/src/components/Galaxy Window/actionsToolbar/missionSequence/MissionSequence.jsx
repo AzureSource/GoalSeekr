@@ -38,14 +38,13 @@ export default function MissionSequence() {
 
 
 // Austin - Scout Notificaiton Modal popup
-// Peter - Wrap up checkforships function
 // Peter - Attack/Colonization Modal popup
-// Peter - find where to use useEffect for results of missions
 
 // -------------------------
 
 //scout
 // useEffect on galaxy window, renders on change of discoverdby field
+// Isabelle is working on this
 
 
 // colonize
