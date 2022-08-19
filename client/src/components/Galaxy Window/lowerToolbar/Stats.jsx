@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem, Flex } from '@chakra-ui/react';
 import axios from 'axios';
 import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
 import { useParams } from 'react-router-dom';
@@ -27,15 +27,19 @@ const Stats = () => {
   console.log('playerinfo', playerInfo);
 
   return (
-    <div className='stats-container'>
+    <Flex
+      flexDir='column'
+      className='stats-container'
+    >
       <div>{playerInfo.motto}</div>
-      <div>{playerInfo.username}</div>
-      <div>{playerInfo.currency}</div>
-      <div>{playerInfo.planets && playerInfo.planets.length}</div>
+      <Flex className='stat-username-money-container'>
+        <div>{playerInfo.username}</div>
+        <div>{playerInfo.currency}</div>
+      </Flex>
+      <div>Planets Owned{playerInfo.planetsOwned ? playerInfo.planets.length : 0}</div>
       <div>{playerInfo.ships && playerInfo.ships.length || 0}</div>
-    </div>
+    </Flex>
   );
-
 
 };
 
