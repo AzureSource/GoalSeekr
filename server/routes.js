@@ -35,7 +35,7 @@ routes.get('/api/chats/:gal_id', chats.getChatsByGalId);
 routes.post('/api/chats/:gal_id', chats.addChatByGalId);
 
 // player list
-routes.get('/api/players', getAllPlayers);
+routes.get('/api/players/:galaxy_id', getAllPlayers);
 
 //user
 routes.get('/api/users',users.checkAllUser);
