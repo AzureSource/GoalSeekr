@@ -10,12 +10,14 @@ CREATE TABLE galaxies (
   maxPlayers INT NOT NULL,
   currentPlayers INT NOT NULL DEFAULT 1,
 	allianceAllowed BOOLEAN NOT NULL,
-	smallGalaxy BOOLEAN NOT NULL
+	smallGalaxy BOOLEAN NOT NULL,
+	activeuser INT,
+	gamestarted BOOLEAN
 );
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username TEXT UNIQUE,
+  username TEXT,
   googleuid TEXT,
 	email TEXT,
   motto TEXT,
@@ -25,6 +27,7 @@ CREATE TABLE users (
   currentGalaxy INT REFERENCES galaxies(id) DEFAULT NULL,
   currentAlliance INT
 );
+ALTER TABLE galaxies ADD CONSTRAINT activeuser_fkey FOREIGN KEY (activeuser) REFERENCES users(id);
 
 CREATE TABLE planets (
   id SERIAL PRIMARY KEY,
