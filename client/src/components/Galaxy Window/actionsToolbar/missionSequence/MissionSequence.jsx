@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import Scout from './missionType/Scout.jsx';
 import Colony from './missionType/Colony.jsx';
+import BuildShip from '../../../buildShips/BuildShip.jsx';
+import MissionResult from './MissionResult.jsx';
 
 export default function MissionSequence() {
   const { id } = useParams();
@@ -27,8 +29,8 @@ export default function MissionSequence() {
     missionResults.push(missionRes);
   };
 
-  const executeMission1 = async () => {
-    console.log('start execute mission');
+  const executeMission = async () => {
+    console.log('start execute mission......');
     for (let i = 0; i < missionData.length; i++) {
       switch (missionData[i].type) {
       case 'scout':
@@ -41,11 +43,12 @@ export default function MissionSequence() {
     for (let i = 0; i < missionResults.length; i++) {
       console.log(JSON.stringify(missionResults[i]));
     }
+    <MissionResult />;
   };
 
-  const executeMission = () => {
-    console.log('start execute mission');
-  };
+  // const executeMission1 = () => {
+  //   console.log('start execute mission');
+  // };
 
   return (
     <div>

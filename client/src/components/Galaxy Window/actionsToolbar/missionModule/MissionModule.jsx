@@ -123,11 +123,11 @@ export default function MissionModule() {
           })}
         </ListItem>
       </List>
-      {endTurnActivation && (
-        <div>
-          <MissionSequence />
-        </div>
-      )}
+      {/* {endTurnActivation && ( */}
+      <div>
+        <MissionSequence />
+      </div>
+      {/* )} */}
     </Flex>
   );
 }
