@@ -74,7 +74,7 @@ export default function MissionModule() {
             flexDir='column'
           >
             <Flex className='planet-selected-home'>
-              {planets.homePlanet ? planets.homePlanet : 'Home Planet'}
+              {planets.homePlanet ? planets.homePlanet.toString() : 'Home Planet'}
             </Flex>
             <Flex className='planet-selected-target'>
               {planets.targetPlanet ? planets.targetPlanet : 'Target Planet'}
@@ -114,7 +114,7 @@ export default function MissionModule() {
           )}
       </div>
 
-      <Button onClick={addToQueue}>Queue Mission</Button>
+      <Button className='queue-mission-btn'onClick={addToQueue}>Queue Mission</Button>
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {

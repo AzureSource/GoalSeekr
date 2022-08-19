@@ -28,12 +28,11 @@ const Stats = () => {
 
   return (
     <div className='stats-container'>
-      <span>{playerInfo.userid}</span>
-      <span>{playerInfo.currency}</span>
-      <span>{playerInfo.motto}</span>
-      <span>{playerInfo.planets && playerInfo.planets.length}</span>
-      <span>{playerInfo.ships && playerInfo.ships.length || 0}</span>
-
+      <div>{playerInfo.motto}</div>
+      <div>{playerInfo.userid}</div>
+      <div>{playerInfo.currency}</div>
+      <div>{playerInfo.planets && playerInfo.planets.length}</div>
+      <div>{playerInfo.ships && playerInfo.ships.length || 0}</div>
     </div>
   );
 

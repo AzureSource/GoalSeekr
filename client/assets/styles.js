@@ -13,7 +13,7 @@ const overrides = {
         backgroundSize: 'contain',
         zIndex: -1,
       },
-      '.galaxy-window': {
+      '.galaxy-window, .appBackground': {
         width: '100%',
         height: '100%'
       },
@@ -540,7 +540,7 @@ const overrides = {
       '.lobby-menu': {
         height: '80%',
         width: '35%',
-        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)'
+        background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 100%)'
       },
       '.create-galaxy-container': {
         height: '100%',
@@ -680,7 +680,7 @@ const overrides = {
       // =============================
       // build ship
       // =============================
-      '.build-modal-btn': {
+      '.build-modal-btn, .queue-mission-btn': {
         fontFamily: 'Abril Fatface',
         background: '#2e2f47 !important',
         border: '2px solid rgba(80,182,171)',
@@ -775,15 +775,19 @@ const overrides = {
 
       '#reset-btn, .planet-selected-target, .planet-selected-home': {
         borderRadius: '4px',
+        fontSize: '1em !important',
         height: '50%',
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
       },
-      // '.chakra-select__wrapper#select-mission-type': {
-      //   height: '50%',
-      //   marginTop: '5px',
-      // }
-
+      '.queue-mission-btn': {
+        fontFamily: 'Abril Fatface',
+        background: '#2e2f47 !important',
+        border: '2px solid rgba(80,182,171)',
+        color: 'rgba(80,182,171)',
+        width: '100%',
+        margin: '5px 0px',
+      },
       // =============================
       // Mission Module
       // =============================
