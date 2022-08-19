@@ -398,16 +398,16 @@ const overrides = {
       //-------------------------------HAT MODAL
       '#hat-div': {
         display: 'grid',
-        gridTemplateRows: '1fr 3fr 3fr 1fr',
+        gridTemplateRows: '.5fr 3fr 3fr 1fr',
         position: 'absolute',
-        width: '15%',
-        height: '25%',
+        width: '40%',
+        height: '50%',
         top: '4%',
-        zIndex: 3,
-        right: '7%',
+        zIndex: '3',
+        right: '9%',
         color: '#c7e4e9',
         backgroundColor: 'cadetblue',
-        borderRadius: '12px'
+        borderRadius: '13px'
       },
       '.hat-list1': {
         display: 'flex',
@@ -422,7 +422,9 @@ const overrides = {
         gridRow: 3
       },
       '#hat-list-title': {
-        gridRow: 1
+        gridRow: 1,
+        textAlign: 'center',
+        fontSize: '2rem'
       },
       '#confirm-hat': {
         height: '70%',
