@@ -34,6 +34,7 @@ export default function MissionModule() {
   //       console.log('There was an error grabbing the ship data.', err);
   //     });
   // };
+
   const checkForShips = () => {
     setShips(
       [{ name: 'scout', count: 1, power: 1000 }]
