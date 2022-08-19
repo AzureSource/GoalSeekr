@@ -46,9 +46,11 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
-    // setShipSelection(...shipSelection, shipData);
+    // setShipSelection(prev => [...prev, shipData]);
     setShipSelection(shipData);
   };
+
+  console.log('shipSelection', shipSelection);
 
   const addToQueue = () => {
     // check if planetId exists in list of user's owned planets
