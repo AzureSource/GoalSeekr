@@ -7,6 +7,8 @@ import devil from '../../assets/hats/devil.png';
 import egg from '../../assets/hats/egg.png';
 import flowercrown from '../../assets/hats/flowercrown.png';
 import halo from '../../assets/hats/halo.png';
+import sprout from '../../assets/hats/sprout.png';
+
 
 const hatArr = [
   {id: 1, name: banana},
@@ -17,7 +19,8 @@ const hatArr = [
   {id: 6, name: devil},
   {id: 7, name: egg},
   {id: 8, name: flowercrown},
-  {id: 9, name: halo}
+  {id: 9, name: halo},
+  {id: 10, name: sprout},
 ];
 
 export default hatArr;
