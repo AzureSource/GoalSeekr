@@ -116,7 +116,7 @@ export default function MissionModule() {
             {/* console.log('mission.ship is ', mission.ship); */}
             return (
               <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships : {JSON.stringify(mission.ship)} | Target Planet : {mission.target}
+                Home Planet : {mission.start} | Type : {mission.type} | Ships : {shipData} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
                 </div>
@@ -125,12 +125,12 @@ export default function MissionModule() {
           })}
         </ListItem>
       </List>
-      {/* {endTurnActivation && ( */}
+      {endTurnActivation && (
       <div>
         <MissionSequence />
-        {showMissionResult && <MissionResult />}
+        {/* {showMissionResult && <MissionResult />} */}
       </div>
-      {/* )} */}
+      )}
     </Flex>
   );
 }

@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import Scout from './missionType/Scout.jsx';
 // import Colony from './missionType/Colony.jsx';
-import MissionNotification from './MissionNotification.jsx';
-import Colony from './missionType/Colony.jsx';
-import BuildShip from '../../../buildShips/BuildShip.jsx';
+// import MissionNotification from './MissionNotification.jsx';
+// import Colony from './missionType/Colony.jsx';
+// import BuildShip from '../../../buildShips/BuildShip.jsx';
 import MissionResult from './MissionResult.jsx';
 import { toggleMissionFinished, updateMissionResults } from '../missionModule/missionModuleSlice';
 
@@ -14,11 +14,11 @@ export default function MissionSequence() {
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
   console.log('missionData', missionData);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [results, setResults] = useState('');
-  // console.log('missionData', missionData);
+  const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
+  // const [modalOpen, setModalOpen] = useState(false);
+  // const [results, setResults] = useState('');
   const missionResults = [];
-  const [showMissionResults, setShowMissionResults] = useState(true);
+  // const [showMissionResults, setShowMissionResults] = useState(true);
   const dispatch = useDispatch();
 
   const scout = async (targetPlanetId, targetPlanetName) => {
@@ -68,8 +68,10 @@ export default function MissionSequence() {
 
   return (
     <div>
-      <button onClick={executeMission}>Execute Mission</button>
-      {modalOpen && <MissionNotification results={results}/>}
+      {executeMission}
+      {/* <button onClick={executeMission}>Execute Mission</button> */}
+      {/* {modalOpen && <MissionNotification results={results}/>} */}
+      {showMissionResult && <MissionResult />}
     </div>
   );
 }

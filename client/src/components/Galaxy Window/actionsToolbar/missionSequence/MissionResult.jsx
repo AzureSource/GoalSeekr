@@ -1,9 +1,11 @@
 import React from 'react';
-import {Button, Modal, ModalOverlay, ModalContent, ModalHeader,
-  ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
-import {Table,Thead,Tbody,Tr,Th,TableContainer} from '@chakra-ui/react';
+import {
+  Button, Modal, ModalOverlay, ModalContent, ModalHeader,
+  ModalFooter, ModalCloseButton, ModalBody, useDisclosure
+} from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import {toggleMissionFinished, updateMissionResults, setMissionQueue} from '../missionModule/missionModuleSlice';
+import { toggleMissionFinished, updateMissionResults, setMissionQueue } from '../missionModule/missionModuleSlice';
 import MissionResultTableRow from './MissionResultTableRow.jsx';
 
 const MissionResult = () => {
@@ -32,7 +34,7 @@ const MissionResult = () => {
     <MissionResultTableRow key={index}
       type={missionResult.type}
       targetPlanetName={missionResult.targetPlanetName}
-      result={missionResult.result}/>
+      result={missionResult.result} />
   ));
 
   return (
@@ -44,7 +46,12 @@ const MissionResult = () => {
         Mission Result
       </Button>
       <Modal onClose={handleClose} size='full' isOpen={isOpen}>
-        <ModalOverlay />
+        <ModalOverlay
+          bg='none'
+          backdropFilter='auto'
+          backdropInvert='80%'
+          backdropBlur='2px'
+        />
         <ModalContent backgroundColor='rgba(46,47,71,255)' >
           <ModalHeader color='gray.500'>Mission Results</ModalHeader>
           <ModalCloseButton />
@@ -65,7 +72,7 @@ const MissionResult = () => {
             </TableContainer>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleClose} colorScheme='teal'>Close</Button>
+            <Button onClick={handleClose} colorScheme='teal'>Confirm</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
