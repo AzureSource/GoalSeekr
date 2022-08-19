@@ -33,7 +33,7 @@ const Stats = () => {
     >
       <Flex className='stat-username-money-container'>
         <div>{playerInfo.username}</div>
-        <div>{playerInfo.currency}</div>
+        <div>${playerInfo.currency}</div>
       </Flex>
       <div><b>Motto : </b>{playerInfo.motto}</div>
       <div><b>Ships Owned : </b>{playerInfo.ships && playerInfo.ships.length || 0}</div>
