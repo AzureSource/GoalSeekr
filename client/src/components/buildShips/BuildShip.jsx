@@ -6,7 +6,7 @@ import mothershipPic from '../../../assets/ships/mothershipPic.png';
 import scoutPic from '../../../assets/ships/scoutPic.png';
 import tankPic from '../../../assets/ships/tankPic.png';
 import {Button, Modal, ModalOverlay, ModalContent, Box,
-  Wrap, ModalHeader,
+  Flex, ModalHeader,
   ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -100,6 +100,7 @@ const BuildShip = () => {
           Build ship
         </Button>
         <Modal
+          className='build-ship-modal'
           size='l'
           onClose={restoreData}
           isOpen={isOpen}>
@@ -109,21 +110,20 @@ const BuildShip = () => {
           <ModalContent
             className='ship-modal-content'
           >
-            <ModalHeader color='gray.500'>Available Ship</ModalHeader>
-            <ModalCloseButton />
+            <ModalHeader color='rgba(80,182,171)' textAlign='center'>Build Ships</ModalHeader>
+            <ModalCloseButton className='build-ship-close'/>
             <ModalBody>
-              <Wrap justify='center'>
+              <Flex className='ship-box-containers'>
                 {shipsComponents}
-              </Wrap>
+              </Flex>
               <br/>
-              <br/>
-              <Box bg='teal' p={4} color='white'>
-              Your available currency is : $ {userCurrency}
-              </Box>
+              <Flex>
+                <Box bg='rgba(80,182,171)' p={4} color='white'>
+                  Your available currency is : $ {userCurrency}
+                </Box>
+                <Button onClick={confirmPurchaseShip} colorScheme='teal'>Confirm</Button>
+              </Flex>
             </ModalBody>
-            <ModalFooter>
-              <Button onClick={confirmPurchaseShip} colorScheme='teal'>Confirm</Button>
-            </ModalFooter>
           </ModalContent>
         </Modal>
       </BuildShipContext.Provider>

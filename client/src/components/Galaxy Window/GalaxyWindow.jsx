@@ -62,11 +62,10 @@ export default function GalaxyWindow ({ setTitle }) {
 
   return (
     <UserContext.Provider value={id, user}>
-      <div className='galaxy-window'>
+      <Flex className='galaxy-window'>
         <MenuSide/>
         <MenuBottom/>
         <Flex className='planetsWindow'>
-          <MenuSide/>
           <TransformWrapper initialScale={1} className='transformWrapper'>
             <TransformComponent className='transformComponent'>
               {hatModal && <ChooseHat gId={gID} setHatModal={setHatModal}/>}
@@ -75,7 +74,7 @@ export default function GalaxyWindow ({ setTitle }) {
             </TransformComponent>
           </TransformWrapper>
         </Flex>
-      </div>
+      </Flex>
     </UserContext.Provider>
   );
 }

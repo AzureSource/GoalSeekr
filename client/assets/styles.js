@@ -725,11 +725,39 @@ const overrides = {
         width: '90%',
         margin: '5px 0px',
       },
+      '.build-ship-modal': {
+        color: 'rgba(80,182,171) !important',
+      },
       '.ship-modal-content': {
         top: '50px',
-        width: '80% !important',
+        width: '85% !important',
         height: '70% !important',
         backgroundColor: '#2e2f47 !important',
+      },
+      '.build-ship-close': {
+        color: 'rgba(80,182,171)'
+      },
+      '.ship-boxes': {
+        width: '100%',
+        height: '100%',
+        margin: '0px 5px',
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
+        border: '2px solid rgba(80,182,171)',
+        borderRadius: '5px',
+      },
+      '.ship-box-containers': {
+        width: '100%',
+        justifyContent: 'space-between'
+      },
+      '#select-mission-type': {
+        textAlign: 'center',
+        backgroundColor: '#2e2f47',
+      },
+      '#select-type-container': {
+        borderRadius: '4px',
+        border: '2px solid rgba(80,182,171)',
+        marginTop: '5px',
+        height: '44% !important',
       },
       // =============================
       // build ship
@@ -786,16 +814,6 @@ const overrides = {
         height: '50%',
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
-      },
-      '#select-mission-type': {
-        textAlign: 'center',
-        backgroundColor: '#2e2f47',
-      },
-      '#select-type-container': {
-        borderRadius: '4px',
-        border: '2px solid rgba(80,182,171)',
-        marginTop: '5px',
-        height: '44% !important',
       },
       // '.chakra-select__wrapper#select-mission-type': {
       //   height: '50%',
