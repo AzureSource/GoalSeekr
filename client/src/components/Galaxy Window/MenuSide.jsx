@@ -5,6 +5,7 @@ import BuildShip from '../buildShips/BuildShip.jsx';
 import MissionModule from './actionsToolbar/missionModule/MissionModule.jsx';
 import { setEndTurnBoolean } from './menuSideSlice';
 import { useDispatch } from 'react-redux';
+import TaskModal from '../TaskTracker/TaskModal.jsx';
 
 const MenuSide = () => {
   const dispatch = useDispatch();
@@ -30,11 +31,7 @@ const MenuSide = () => {
         >
           End Turn
         </Button>
-        <Button
-          className='tasks-modal-btn'
-        >
-          Tasks
-        </Button>
+        <TaskModal />
       </Flex>
     </Flex>
 
