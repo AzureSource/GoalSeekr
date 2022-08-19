@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import {
   Avatar,
@@ -12,21 +13,28 @@ import {
   Text
 } from '@chakra-ui/react';
 import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag, GiZeusSword} from 'react-icons/gi';
+import { useParams } from 'react-router-dom';
 
 
 function Playerlist () {
+
+  // const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
   const [playerlist, setPlayerlist] = useState([]);
-
   //fetch players in the game (icons, usernames, planets, ships, currency, metal)
-
+  const {id} = useParams();
   //sort by planets owned
 
   //rank will then be the index of the players in the list
 
   useEffect(() => {
-    axios.get('/api/players')
-      .then((results) => setPlayerlist(results.data))
-      .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
+    axios.get(`/api/galaxy/${id}`)
+      .then(({data}) => {
+        const g_id = data.rows[0].currentgalaxy;
+        axios.get(`/api/players/${g_id}`)
+          .then((results) => setPlayerlist(results.data))
+          .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const panelProps = {
@@ -49,7 +57,7 @@ function Playerlist () {
     <div id='player-list'>
       <Accordion id='pl-acc' allowToggle>
         <Text textAlign={'center'}>Current Ranking</Text>
-        {playerlist.map((player, index) => (
+        {playerlist.length && playerlist.map((player, index) => (
           <AccordionItem key={player.userid}>
             <h2>
               <AccordionButton sx={accButton} w='100%'_expanded={{ bg: '#50b6ab', color: 'white' }}>
