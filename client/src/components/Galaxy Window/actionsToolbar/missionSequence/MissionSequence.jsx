@@ -5,7 +5,10 @@ import { useParams } from 'react-router-dom';
 // import Scout from './missionType/Scout.jsx';
 // import Colony from './missionType/Colony.jsx';
 import MissionNotification from './MissionNotification.jsx';
-
+import Colony from './missionType/Colony.jsx';
+import BuildShip from '../../../buildShips/BuildShip.jsx';
+import MissionResult from './MissionResult.jsx';
+import { toggleMissionFinished, updateMissionResults } from '../missionModule/missionModuleSlice';
 
 export default function MissionSequence() {
   const { id } = useParams();
@@ -13,30 +16,59 @@ export default function MissionSequence() {
   console.log('missionData', missionData);
   const [modalOpen, setModalOpen] = useState(false);
   const [results, setResults] = useState('');
+  // console.log('missionData', missionData);
+  const missionResults = [];
+  const [showMissionResults, setShowMissionResults] = useState(true);
+  const dispatch = useDispatch();
 
-  const scout = (targetPlanetId) => {
+  const scout = async (targetPlanetId, targetPlanetName) => {
     let config = {
       data: {
         'type': 'scout',
         'targetPlanet': targetPlanetId
       }
     };
-    axios.post(`api/users/${id}/mission`, config)
-      .then(() => {
-        console.log('update user info');
-        setResults('update user info');
-        setModalOpen(true);
-      });
+    await axios.post(`api/users/${id}/mission`, config);
+    console.log('update user info');
+    let missionRes = {};
+    missionRes.type = 'Scout';
+    missionRes.targetPlanetName = targetPlanetName;
+    missionRes.result = 'Scouted';
+    missionResults.push(missionRes);
+    // setResults('update user info');
+    // setModalOpen(true);
   };
 
-  const executeMission = (targetPlanetName) => {
-    // console.log('planets is ', planets);
-    scout(17);
+  const executeMission = async () => {
+    console.log('start execute mission......');
+    for (let i = 0; i < missionData.length; i++) {
+      switch (missionData[i].type) {
+      case 'scout':
+        await scout(missionData[i].targetId, missionData[i].target);
+        break;
+      default:
+      }
+    }
+    console.log('mission finished, following are the results');
+    // for (let i = 0; i < missionResults.length; i++) {
+    //   console.log(JSON.stringify(missionResults[i]));
+    // }
+    console.log('-----------------');
+    dispatch(
+      updateMissionResults(missionResults)
+    );
+    dispatch(
+      toggleMissionFinished('true')
+    );
   };
+
+  // const executeMission1 = () => {
+  //   console.log('start execute mission');
+  // };
 
   return (
     <div>
-      <button onClick={() => executeMission(missionData.target)}>Execute Mission</button>
+      <button onClick={executeMission}>Execute Mission</button>
       {modalOpen && <MissionNotification results={results}/>}
     </div>
   );
