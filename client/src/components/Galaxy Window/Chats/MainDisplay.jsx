@@ -29,6 +29,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
         <Flex className="messageContainer" key={chat.id} border="1px solid" m="0.2rem"
           maxWidth="80%" marginLeft="20px" marginRight="20px"
           borderRadius="10px" borderColor="#50b6ab"
+          flexDirection='column'
           px='.5rem' py='.2rem' mx='.3rem'
           alignSelf={chat.userID.toString() === id ? 'flex-end' : 'flex-start'}
           color={chat.userID.toString() === id ? 'rgb(80 182 171 / 82%)' : '#2e2f47'}
