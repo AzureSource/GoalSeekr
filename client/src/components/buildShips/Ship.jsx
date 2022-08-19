@@ -47,8 +47,10 @@ const Ship = ({ shipFromBackend }) => {
   };
 
   return (
-    <WrapItem>
-      <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+    <Flex>
+      <Box
+        className='ship-boxes' overflow='hidden'
+      >
         <Image src={shipFromBackend.imageUrl} alt={shipFromBackend.imageAlt} />
 
         <Box p='6'>
@@ -84,7 +86,7 @@ const Ship = ({ shipFromBackend }) => {
           </Box>
         </Flex>
       </Box>
-    </WrapItem>
+    </Flex>
   );
 };
 

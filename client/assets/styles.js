@@ -13,63 +13,18 @@ const overrides = {
         backgroundSize: 'contain',
         zIndex: -1,
       },
-      // 'body.chakra-ui-light, html, #root, .appBackground': {
-      //   height: '100%',
-      //   width: '100%',
-      //   backgroundImage: background,
-      //   backgroundSize: 'contain',
-      //   zIndex: -1,
-      // },
       '.galaxy-window': {
-        float: 'right',
         width: '100%',
-        height: '100%',
-        marginLeft: '1000px'
-      },
-      '.userContext': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.galaxyWindow': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.galaxy-window-top': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.transformWrapper': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
-      '.transformComponent': {
-        float: 'right',
-        marginLeft: '1000px'
+        height: '100%'
       },
       '#root': {
         height: '100%',
       },
       '.planetsWindow': {
-        float: 'right',
-        marginLeft: '8.785%',
-        marginTop: '0.01%',
-        height: '1550px',
-        width: '5120px'
+        height: '720px',
+        width: '1280px'
       },
-      // '.divInPlanetComponent': {
-      //   // marginTop: '10px',
-      //   // height: '550px',
-      //   // width: '1120px'
-      // },
-      // '.transformWrapper': {
-      //   marginTop: '10px',
-      //   height: '100%',
-      //   width: '100%'
-      // },
-      // '.transformComponent': {
-      //   width: '100%'
-      // },
-      '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4, .zeroAlso': {
+      '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
         // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
         // filter: 'drop-shadow(5px 5px 5px #222)',
         height: '50px',
@@ -78,7 +33,7 @@ const overrides = {
       '.ZERO, .PISCES, .CORBIN, .JADE, .PINKTOPIA, .TARUS, .MARSHALL, .AUSTIN, .POKITARU, .CAPRICORN, .JEROME, .IBRAHEEM, .STEINS, .VIRGO, .IZZI, .ALGO, .LAVA, .LEO, .BOOLEAN, .FLOWER, .HAKU, .SCORPIO, .XUTIS, .PEACH, .CHIHIRO, .REDUX, .APPLE, .VION, .CALCIFER, .FINN, .BLADE, .NEON, .ATHEA, .LOLLIPOP, .MEI, .LUNAR, .POLARIS, .PETER, .ZORIX, .SCAR, .TAURUS': {
         position: 'absolute',
         fontSize: '10px',
-        fontColor: 'black',
+        color: 'rgba(80,182,171) !important',
       },
       '.egg, .cowboy, .bearears': {
         height: '67px',
@@ -93,332 +48,332 @@ const overrides = {
         marginLeft: '431px'
       },
       '.zero': {
-        marginTop: '1.75%',
-        marginLeft: '8.59%'
+        marginTop: '90px',
+        marginLeft: '440px'
       },
       '.ZERO': {
-        marginTop: '2.73%',
-        marginLeft: '8.78%'
+        marginTop: '140px',
+        marginLeft: '450px'
       },
       '.zero2': {
-        marginTop: '8.98%',
-        marginLeft: '16.59%'
+        marginTop: '460px',
+        marginLeft: '850px'
       },
       '.PISCES': {
-        marginTop: '9.956%',
-        marginLeft: '16.73%'
+        marginTop: '510px',
+        marginLeft: '857px'
       },
       '.zero3': {
-        marginTop: '5.66%',
-        marginLeft: '8.39%'
+        marginTop: '290px',
+        marginLeft: '430px'
       },
       '.CORBIN': {
-        marginTop: '6.637%',
-        marginLeft: '8.49%'
+        marginTop: '340px',
+        marginLeft: '435px'
       },
       '.zero4': {
-        marginTop: '1.95%',
-        marginLeft: '12.689%'
+        marginTop: '100px',
+        marginLeft: '650px'
       },
       '.JADE': {
-        marginTop: '2.928%',
-        marginLeft: '12.885%'
+        marginTop: '150px',
+        marginLeft: '660px'
       },
       '.pinktopia': {
-        marginTop: '0.976%',
-        marginLeft: '0.976%'
+        marginTop: '50px',
+        marginLeft: '50px'
       },
       '.PINKTOPIA': {
-        marginTop: '1.95%',
-        marginLeft: '0.937%'
+        marginTop: '100px',
+        marginLeft: '48px'
       },
       '.pinktopia2': {
-        marginTop: '0.39%',
-        marginLeft: '17.57%'
+        marginTop: '20px',
+        marginLeft: '900px'
       },
       '.TAURUS': {
-        marginTop: '1.366%',
-        marginLeft: '17.629%'
+        marginTop: '70px',
+        marginLeft: '903px'
       },
       '.pinktopia3': {
-        marginTop: '7.416%',
-        marginLeft: '3.9%'
+        marginTop: '380px',
+        marginLeft: '200px'
       },
       '.MARSHALL': {
-        marginTop: '8.394%',
-        marginLeft: '3.865%'
+        marginTop: '430px',
+        marginLeft: '198px'
       },
       '.pinktopia4': {
-        marginTop: '7.418%',
-        marginLeft: '15.2277%'
+        marginTop: '380px',
+        marginLeft: '780px'
       },
       '.AUSTIN': {
-        marginTop: '8.39%',
-        marginLeft: '15.325%'
+        marginTop: '430px',
+        marginLeft: '785px'
       },
       '.pokitaru': {
-        marginTop: '0.234%',
-        marginLeft: '3.9%'
+        marginTop: '12px',
+        marginLeft: '200px'
       },
       '.POKITARU': {
-        marginTop: '1.2%',
-        marginLeft: '3.9%'
+        marginTop: '62px',
+        marginLeft: '200px'
       },
       '.pokitaru2': {
-        marginTop: '3.318%',
-        marginLeft: '17.765%'
+        marginTop: '170px',
+        marginLeft: '910px'
       },
       '.CAPRICORN': {
-        marginTop: '4.295%',
-        marginLeft: '17.687%'
+        marginTop: '220px',
+        marginLeft: '906px'
       },
       '.pokitaru3': {
-        marginTop: '0.39%',
-        marginLeft: '8.785%'
+        marginTop: '20px',
+        marginLeft: '450px'
       },
       '.JEROME': {
-        marginTop: '1.347%',
-        marginLeft: '8.84%'
+        marginTop: '69px',
+        marginLeft: '453px'
       },
       '.pokitaru4': {
-        marginTop: '8.785%',
-        marginLeft: '7.418%'
+        marginTop: '450px',
+        marginLeft: '380px'
       },
       '.IBRAHEEM': {
-        marginTop: '9.76%',
-        marginLeft: '7.399%'
+        marginTop: '500px',
+        marginLeft: '379px'
       },
       '.steins': {
-        marginTop: '4.88%',
-        marginLeft: '0.976%'
+        marginTop: '250px',
+        marginLeft: '50px'
       },
       '.STEINS': {
-        marginTop: '5.8569%',
-        marginLeft: '1.073%'
+        marginTop: '300px',
+        marginLeft: '55px'
       },
       '.steins2': {
-        marginTop: '5.466%',
-        marginLeft: '16.59%'
+        marginTop: '280px',
+        marginLeft: '850px'
       },
       '.VIRGO': {
-        marginTop: '6.4425%',
-        marginLeft: '16.7505%'
+        marginTop: '330px',
+        marginLeft: '858px'
       },
       '.steins3': {
-        marginTop: '0.39%',
-        marginLeft: '14.64%'
+        marginTop: '20px',
+        marginLeft: '750px'
       },
       '.IZZI': {
-        marginTop: '1.366%',
-        marginLeft: '14.915%'
+        marginTop: '70px',
+        marginLeft: '764px'
       },
       '.steins4': {
-        marginTop: '2.34%',
-        marginLeft: '10.737%'
+        marginTop: '120px',
+        marginLeft: '550px'
       },
       '.ALGO': {
-        marginTop: '3.318%',
-        marginLeft: '10.93%'
+        marginTop: '170px',
+        marginLeft: '560px'
       },
       '.lava': {
         height: '65px',
-        marginTop: '6.83%',
-        marginLeft: '18.156%'
+        marginTop: '350px',
+        marginLeft: '930px'
       },
       '.LAVA': {
-        marginTop: '7.9%',
-        marginLeft: '18.546%'
+        marginTop: '405px',
+        marginLeft: '950px'
       },
       '.lava2': {
         height: '65px',
-        marginTop: '2.73%',
-        marginLeft: '4.685%'
+        marginTop: '140px',
+        marginLeft: '240px'
       },
       '.LEO': {
-        marginTop: '3.8%',
-        marginLeft: '5.134%'
+        marginTop: '195px',
+        marginLeft: '263px'
       },
       '.lava3': {
         height: '65px',
-        marginTop: '6.44%',
-        marginLeft: '10.7375%'
+        marginTop: '330px',
+        marginLeft: '550px'
       },
       '.BOOLEAN': {
-        marginTop: '7.477%',
-        marginLeft: '10.89%'
+        marginTop: '383px',
+        marginLeft: '558px'
       },
       '.lava4': {
         height: '65px',
-        marginTop: '6.4425%',
-        marginLeft: '1.171%'
+        marginTop: '330px',
+        marginLeft: '60px'
       },
       '.FLOWER': {
-        marginTop: '7.516%',
-        marginLeft: '1.366%'
+        marginTop: '385px',
+        marginLeft: '70px'
       },
       '.haku': {
-        marginTop: '8.16%',
-        marginLeft: '1.95%'
+        marginTop: '418px',
+        marginLeft: '100px'
       },
       '.HAKU': {
-        marginTop: '9.1366%',
-        marginLeft: '2.1279%'
+        marginTop: '468px',
+        marginLeft: '109px'
       },
       '.haku2': {
-        marginTop: '6.83%',
-        marginLeft: '13.1778%'
+        marginTop: '350px',
+        marginLeft: '675px'
       },
       '.SCORPIO': {
-        marginTop: '7.8%',
-        marginLeft: '13.236%'
+        marginTop: '400px',
+        marginLeft: '678px'
       },
       '.haku3': {
-        marginTop: '0.976%',
-        marginLeft: '5.8568%'
+        marginTop: '50px',
+        marginLeft: '300px'
       },
       '.XUTIS': {
-        marginTop: '1.95%',
-        marginLeft: '6.0325%'
+        marginTop: '100px',
+        marginLeft: '309px'
       },
       '.haku4': {
-        marginTop: '5.66%',
-        marginLeft: '5.466%'
+        marginTop: '290px',
+        marginLeft: '280px'
       },
       '.PEACH': {
-        marginTop: '6.637%',
-        marginLeft: '5.6%'
+        marginTop: '340px',
+        marginLeft: '287px'
       },
       '.chihiro': {
-        marginTop: '1.95%',
-        marginLeft: '15.13%'
+        marginTop: '100px',
+        marginLeft: '775px'
       },
       '.CHIHIRO': {
-        marginTop: '2.928%',
-        marginLeft: '15.169%'
+        marginTop: '150px',
+        marginLeft: '777px'
       },
       '.chihiro2': {
-        marginTop: '4.295%',
-        marginLeft: '6.8329%'
+        marginTop: '220px',
+        marginLeft: '350px'
       },
       '.REDUX': {
-        marginTop: '5.27%',
-        marginLeft: '6.969%'
+        marginTop: '270px',
+        marginLeft: '357px'
       },
       '.chihiro3': {
-        marginTop: '2.34%',
-        marginLeft: '2.34%'
+        marginTop: '120px',
+        marginLeft: '120px'
       },
       '.APPLE': {
-        marginTop: '3.3188%',
-        marginLeft: '2.498%'
+        marginTop: '170px',
+        marginLeft: '128px'
       },
       '.chihiro4': {
-        marginTop: '8.785%',
-        marginLeft: '11.32%'
+        marginTop: '450px',
+        marginLeft: '580px'
       },
       '.VION': {
-        marginTop: '9.76%',
-        marginLeft: '11.557%'
+        marginTop: '500px',
+        marginLeft: '592px'
       },
       '.calcifer': {
-        marginTop: '8.1995%',
-        marginLeft: '9.566%'
+        marginTop: '420px',
+        marginLeft: '490px'
       },
       '.CALCIFER': {
-        marginTop: '9.1756%',
-        marginLeft: '9.566%'
+        marginTop: '470px',
+        marginLeft: '490px'
       },
       '.calcifer2': {
-        marginTop: '3.9%',
-        marginLeft: '12.885%'
+        marginTop: '200px',
+        marginLeft: '660px'
       },
       '.FINN': {
-        marginTop: '4.88%',
-        marginLeft: '13.099%'
+        marginTop: '250px',
+        marginLeft: '671px'
       },
       '.calcifer3': {
-        marginTop: '8.98%',
-        marginLeft: '4.295%'
+        marginTop: '460px',
+        marginLeft: '220px'
       },
       '.BLADE': {
-        marginTop: '9.956%',
-        marginLeft: '4.4316%'
+        marginTop: '510px',
+        marginLeft: '227px'
       },
       '.calcifer4': {
-        marginTop: '3.514%',
-        marginLeft: '8.59%'
+        marginTop: '180px',
+        marginLeft: '440px'
       },
       '.NEON': {
-        marginTop: '4.49%',
-        marginLeft: '8.785%'
+        marginTop: '230px',
+        marginLeft: '450px'
       },
       '.athea': {
         height: '90px',
-        marginTop: '6.8329%',
-        marginLeft: '5.8568%'
+        marginTop: '350px',
+        marginLeft: '300px'
       },
       '.ATHEA': {
-        marginTop: '8.16%',
-        marginLeft: '6.34488%'
+        marginTop: '418px',
+        marginLeft: '325px'
       },
       '.athea2': {
         height: '90px',
-        marginTop: '0.195%',
-        marginLeft: '11.32%'
+        marginTop: '10px',
+        marginLeft: '580px'
       },
       '.LOLLIPOP': {
-        marginTop: '1.5227%',
-        marginLeft: '11.71%'
+        marginTop: '78px',
+        marginLeft: '600px'
       },
       '.athea3': {
         height: '90px',
-        marginTop: '8.785%',
-        marginLeft: '13.275%'
+        marginTop: '450px',
+        marginLeft: '680px'
       },
       '.MEI': {
-        marginTop: '10.1518%',
-        marginLeft: '13.95875%'
+        marginTop: '520px',
+        marginLeft: '715px'
       },
       '.athea4': {
         height: '90px',
-        marginTop: '4.88%',
-        marginLeft: '14.056%'
+        marginTop: '250px',
+        marginLeft: '720px'
       },
       '.LUNAR': {
-        marginTop: '6.247%',
-        marginLeft: '14.58%'
+        marginTop: '320px',
+        marginLeft: '747px'
       },
       '.polaris': {
-        marginTop: '5.466%',
-        marginLeft: '3.514%'
+        marginTop: '280px',
+        marginLeft: '180px'
       },
       '.POLARIS': {
-        marginTop: '6.4425%',
-        marginLeft: '3.572%'
+        marginTop: '330px',
+        marginLeft: '183px'
       },
       '.polaris2': {
-        marginTop: '4.49%',
-        marginLeft: '10.054%'
+        marginTop: '230px',
+        marginLeft: '515px'
       },
       '.PETER': {
-        marginTop: '5.466%',
-        marginLeft: '10.21%'
+        marginTop: '280px',
+        marginLeft: '523px'
       },
       '.polaris3': {
-        marginTop: '3.9%',
-        marginLeft: '15.2277%'
+        marginTop: '200px',
+        marginLeft: '780px'
       },
       '.ZORIX': {
-        marginTop: '4.88%',
-        marginLeft: '15.3839%'
+        marginTop: '250px',
+        marginLeft: '788px'
       },
       '.polaris4': {
-        marginTop: '3.709%',
-        marginLeft: '2.928%'
+        marginTop: '190px',
+        marginLeft: '150px'
       },
       '.SCAR': {
-        marginTop: '4.685%',
-        marginLeft: '3.1236%'
+        marginTop: '240px',
+        marginLeft: '160px'
       },
       '.menu-side': {
         width: '20%',
@@ -544,7 +499,7 @@ const overrides = {
         width: '50%',
         padding: '10px',
         // margin: '10px 0px',
-        border: '1px solid rgba(80,182,171)',
+        border: '2px solid rgba(80,182,171)',
         // margin: '5px 0px',
       },
       '.end-turn-btn': {
@@ -723,14 +678,47 @@ const overrides = {
       // build ship
       // =============================
       '.build-modal-btn': {
+        fontFamily: 'Abril Fatface',
         background: '#2e2f47 !important',
         border: '2px solid rgba(80,182,171)',
         color: 'rgba(80,182,171)',
-        fontFamily: 'Abril Fatface',
         width: '90%',
         margin: '5px 0px',
       },
-
+      '.build-ship-modal': {
+        color: 'rgba(80,182,171) !important',
+      },
+      '.ship-modal-content': {
+        top: '50px',
+        width: '85% !important',
+        height: '70% !important',
+        backgroundColor: '#2e2f47 !important',
+      },
+      '.build-ship-close': {
+        color: 'rgba(80,182,171)'
+      },
+      '.ship-boxes': {
+        width: '100%',
+        height: '100%',
+        margin: '0px 5px',
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
+        border: '2px solid rgba(80,182,171)',
+        borderRadius: '5px',
+      },
+      '.ship-box-containers': {
+        width: '100%',
+        justifyContent: 'space-between'
+      },
+      '#select-mission-type': {
+        textAlign: 'center',
+        backgroundColor: '#2e2f47',
+      },
+      '#select-type-container': {
+        borderRadius: '4px',
+        border: '2px solid rgba(80,182,171)',
+        marginTop: '5px',
+        height: '44% !important',
+      },
       // =============================
       // build ship
       // =============================
@@ -745,11 +733,60 @@ const overrides = {
         flexDirection: 'column',
         justifyContent: 'space-between',
       },
+      '.mission-selector-container': {
+        height: '50%',
+        justifyContent: 'space-between'
+      },
+      '.planet-selection-container, .planet-mission-container': {
+        fontFamily: 'Abril fatface',
+        color: 'rgba(80,182,171)',
+        width: '50%',
+      },
+      '.planet-selection-container': {
+        marginRight: '7.5px',
+        justifyContent: 'center',
+        textAlign: 'center',
+      },
+      '.planet-mission-container': {
+        marginLeft: '7.5px',
+        justifyContent: 'space-between',
+        textAlign: 'center',
+      },
+      '.planet-selected-home': {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '5px',
+      },
+      '.planet-selected-target': {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '5px',
+      },
+      '#reset-btn': {
+        fontSize: '1em',
+        height: '50%',
+        marginBottom: '5px',
+        fontWeight: 500,
+      },
+
+      '#reset-btn, .planet-selected-target, .planet-selected-home': {
+        borderRadius: '4px',
+        height: '50%',
+        border: '2px solid rgba(80,182,171)',
+        backgroundColor: '#2e2f47',
+      },
+      // '.chakra-select__wrapper#select-mission-type': {
+      //   height: '50%',
+      //   marginTop: '5px',
+      // }
 
       // =============================
       // Mission Module
       // =============================
     },
+  //   'section#chakra-modal-:r1': {
+  //     width: '70% !important',
+  //   },
   },
 };
 const theme = extendTheme(overrides);
