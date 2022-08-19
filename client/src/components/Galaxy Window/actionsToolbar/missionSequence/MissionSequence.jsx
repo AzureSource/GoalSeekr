@@ -7,7 +7,6 @@ import Colony from './missionType/Colony.jsx';
 
 export default function MissionSequence() {
   const { id } = useParams();
-  // pull mission data from store
   let missionData = useSelector((state) => state.missionQueue.missions);
   console.log('missionData', missionData);
   const missionResults = [];
@@ -57,27 +56,41 @@ export default function MissionSequence() {
 
 
 
-// Sending a mission
-// end turn is clicked
-  // remove existing ships from home planet (may be attacked while away)
-  // Missions are saved on local redux store with userID.
-  // Mission has a turn count that is decremented until ships reach target planet. (Ignore this part)
-  // every turn decrements the count. (Ignore)
-// once the count reaches 0, grab current information of target planet, for battle.
+// Austin - Scout Notificaiton Modal popup
+// Peter - Wrap up checkforships function
+// Peter - Attack/Colonization Modal popup
+// Peter - find where to use useEffect for results of missions
+
+// -------------------------
+
+//scout
+// useEffect on galaxy window, renders on change of discoverdby field
 
 
-//battle upon clicking end turn
-  // based on type of mission
-   // remove existing ships from home planet (may be attacked while away)
-  //if scout mission provide run down of planet information
-  //if attack, decide based on number of attack ships.
-  //if colonize, check if attack ships are there, or if there are defenders
-    // Maybe say 2 attack ships needed to take out mothership.
-// once battle is complete send new data on planet ownership to database.
-// reset endTurnActivation to false.
-// send notification of results to both users.
+// colonize
+// useEffect on galaxy window, renders on change of colonizedBy
+// adding ship id to params to move ship to the colonized planet.
 
 
 
-// calculate Distance
-// Ignore the distance, and every ship can reach another planet in one turn.
+// attacking
+// - could change colonizedBy, but also deletes user ships.
+// remove ships based on ship id.
+// send put request to the server to determine which ships were destroyed.
+// Notificaiton of which ships were destroyed and if planet was taken.
+
+
+// colonize / attack
+// check if planet is not colonizedBy
+  // check if attacker sent a mothership
+    // if so update colonizedBy and change attacker ships to new planet Id
+  // otherwise, notify attacker needs mothership
+// if it is colonizedBy another user
+  // check for ships on planet
+    // attack sequence would be check number of attack ships and number of defending ships and subtract out a winner (mothership should take 3 attacker ships to defeat)
+    // if attacker wins, check that they have a mothership to colonize
+    // else send ships back with attack report
+  // if no ships on planet, check if attacker sent a colonize ship
+    // change planet id and keep attacker ships on planet.
+
+    // reset endTurnActivation to false.

@@ -1,10 +1,53 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer,
+import {
+  Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer,
 } from '@chakra-ui/react';
 
 export default function ShipListEntry({ shipList, handleShipSelection }) {
+
+  const newShipList = Object.keys(shipList).map((shipName) => {
+    let count = 0;
+    let ids = [];
+    let powerLevel = 0;
+    let currentShipList = shipList[shipName];
+
+    switch (shipName) {
+    case 'Fighter':
+      count = currentShipList.length;
+      // var ids = [];
+      for (let i = 0; i < currentShipList.length; i++) {
+        ids.push(currentShipList[i].id);
+        powerLevel += currentShipList[i].power;
+      }
+      break;
+    case 'Scout':
+      count = currentShipList.length;
+      for (let i = 0; i < currentShipList.length; i++) {
+        ids.push(currentShipList[i].id);
+        powerLevel += currentShipList[i].power;
+      }
+      break;
+    case 'Mothership':
+      count = currentShipList.length;
+      for (let i = 0; i < currentShipList.length; i++) {
+        ids.push(currentShipList[i].id);
+        powerLevel += currentShipList[i].power;
+      }
+      break;
+    default:
+      break;
+    }
+
+    return ({
+      name: shipName,
+      ids: ids,
+      count: count,
+      power: powerLevel
+    });
+  });
+
   return (
     <TableContainer>
       <Table variant="simple">
@@ -13,17 +56,15 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
           <Tr>
             <Th>Count</Th>
             <Th>Ship</Th>
-            {/* <Th>Type</Th> */}
             <Th>Power Level</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {shipList.map((ship, index) => {
+          {newShipList.map((ship, index) => {
             return (
-              <Tr key={index} onClick={() => {handleShipSelection(ship);}}>
+              <Tr key={index} onClick={() => { handleShipSelection(ship); }}>
                 <Td>{ship.count}</Td>
                 <Td>{ship.name}</Td>
-                {/* <Td>{ship.type}</Td> */}
                 <Td>{ship.power}</Td>
               </Tr>
             );
