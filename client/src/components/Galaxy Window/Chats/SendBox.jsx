@@ -27,6 +27,7 @@ const SendBox = ({ setChatAdded, id, galID }) => {
       <Flex
         flexDirection="row"
         flexGrow="1"
+        alignSelf='center'
         borderColor="#50b6ab"
       >
         <Input

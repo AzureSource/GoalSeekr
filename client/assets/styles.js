@@ -495,6 +495,9 @@ const overrides = {
         marginRight: '7.5px',
         alignItems: 'center',
       },
+      '.chatsMainDisplay::-webkit-scrollbar': {
+        display: 'none'  /* Safari and Chrome */
+      },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
       '.end-turn-btn, .tasks-modal-btn': {
