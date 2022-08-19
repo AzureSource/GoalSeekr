@@ -13,9 +13,10 @@ export const missionQueue = createSlice({
     setMissionQueue: (state, action) => {
       if (Object.keys(action.payload)[0] === 'add') {
         state.missions.push(action.payload.add);
-      }
-      if (Object.keys(action.payload)[0] === 'remove') {
+      } else if (Object.keys(action.payload)[0] === 'remove') {
         state.missions.splice(action.payload.remove, 1);
+      } else {
+        state.missions = [];
       }
     },
     toggleMissionFinished: (state, action) => {

@@ -18,7 +18,7 @@ export default function MissionModule() {
   const userColonizedPlanets = useSelector(
     (state) => state.userShips.planets.colonizedPlanets
   );
-  const [shipSelection, setShipSelection] = useState({});
+  const [shipSelection, setShipSelection] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
@@ -46,6 +46,7 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
+    // setShipSelection(...shipSelection, shipData);
     setShipSelection(shipData);
   };
 
@@ -125,6 +126,7 @@ export default function MissionModule() {
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
+            // Need to calculate here, iterate the array of ships find the total count, names, and power.
             let shipData = `Count : ${mission.ship.count} | Ship : ${mission.ship.name} | Power : ${mission.ship.power}`;
             return (
               <div key={index}>

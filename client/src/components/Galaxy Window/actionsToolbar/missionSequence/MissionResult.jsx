@@ -6,6 +6,7 @@ import {
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMissionFinished, updateMissionResults, setMissionQueue } from '../missionModule/missionModuleSlice';
+import { setEndTurnBoolean } from '../../menuSideSlice';
 import MissionResultTableRow from './MissionResultTableRow.jsx';
 
 const MissionResult = () => {
@@ -26,7 +27,9 @@ const MissionResult = () => {
     dispatch(
       setMissionQueue([])
     );
-    location.reload();
+    dispatch(setEndTurnBoolean('reset'));
+    // location.reload();
+    // Only effects DenseGalaxy, will need a useEffect to render colonized and scouted list.
     // onClose();
   };
 
