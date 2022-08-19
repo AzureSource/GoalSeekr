@@ -46,10 +46,6 @@ const App = () => {
             exact path = "/galaxy/userid/:id"
             element={<GalaxyWindow setTitle={setTitle}/>}
           />
-          <Route
-            exact path = "/tasks/userid/:id"
-            element={<TaskTracker setTitle={setTitle}/>}
-          />
         </Routes>
       </div>
     </HashRouter>

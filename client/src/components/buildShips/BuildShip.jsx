@@ -126,11 +126,11 @@ const BuildShip = () => {
                 {shipsComponents}
               </Flex>
               <br/>
-              <Flex>
-                <Box bg='rgba(80,182,171)' p={4} color='white'>
+              <Flex className='bottom-ship-container'>
+                <Box className='buildship-currency-bottom' p={2} >
                   Your available currency is : $ {userCurrency}
                 </Box>
-                <Button onClick={confirmPurchaseShip} colorScheme='teal'>Confirm</Button>
+                <Button onClick={confirmPurchaseShip} background='rgba(80,182,171)'>Confirm</Button>
               </Flex>
             </ModalBody>
           </ModalContent>
