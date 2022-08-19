@@ -20,10 +20,10 @@ module.exports = {
 
     console.log(galaxy_id, user_id);
     try {
-      const query1 = `UPDATE galaxies SET currentplayers = currentplayers + 1 WHERE  id = ${galaxy_id};`;
-      const result1 = await client(query1);
       const query2 = `UPDATE users SET currentGalaxy = ${galaxy_id} WHERE id = ${user_id};`;
-      const result2 = await client(query2);
+      const result1 = await client(query2);
+      const query1 = `UPDATE galaxies SET currentplayers = (SELECT count(*) FROM users WHERE currentGalaxy = ${galaxy_id}) WHERE  id = ${galaxy_id};`;
+      const result2 = await client(query1);
       res.json(result1 && result2);
     } catch (error) {
       res.end().status(500);
