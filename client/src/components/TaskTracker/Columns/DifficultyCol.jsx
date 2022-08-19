@@ -15,7 +15,7 @@ const DifficultyCol = ({ difficulty, setTaskUpdated }) => {
         border="thick double" borderWidth="medium"
         justifyContent="center" alignItems="center" background="#0080805e" borderRadius="10px"
       >
-        <Heading fontSize="2rem" color="white">{difficulty}</Heading>
+        <Heading fontSize="2rem" color="rgb(80 182 171)">{difficulty}</Heading>
         {/* future feature ability to add tasks */}
         {/* <Flex className="taskStatus" onClick={() => null}>
           <Tooltip className="tooltip" label='Add a task'>
