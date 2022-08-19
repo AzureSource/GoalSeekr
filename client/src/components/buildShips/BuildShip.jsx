@@ -58,8 +58,19 @@ const BuildShip = () => {
     fetchData();
   }, []);
 
+  const handleOpenClick = () => {
+    // if (planetIdSelected === null || planetIdSelected === 0) {
+    //   alert('To start building ship, please select a planet first');
+    //   return;
+    // } else {
+    //   onOpen();
+    // }
+    onOpen();
+  };
+
   const shipsComponents = ships.map(ship => (
-    <Ship key={ship.id} shipFromBackend={ship} />
+    ship.name === 'Tank' ? null :
+      <Ship key={ship.id} shipFromBackend={ship} />
   ));
 
   const restoreData = () => {
@@ -73,8 +84,8 @@ const BuildShip = () => {
   };
 
   const confirmPurchaseShip = () => {
-    console.log('purchased ships ', purchasedShips);
-    console.log('userCurrency ', userCurrency);
+    // console.log('purchased ships ', purchasedShips);
+    // console.log('userCurrency ', userCurrency);
     let config = {
       data: {
         'planetId': planetIdSelected,
@@ -94,7 +105,7 @@ const BuildShip = () => {
       <BuildShipContext.Provider value={{userCurrency, setUserCurrency, user, purchasedShips, setPurchasedShips}}>
         <Button
           className='build-modal-btn'
-          onClick={onOpen}
+          onClick={handleOpenClick}
         >
           Build ship
         </Button>
