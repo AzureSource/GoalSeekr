@@ -34,6 +34,7 @@ export default function MissionSequence() {
     let config = {
       data: {
         'type': 'mission',
+        'targetPlanetId': targetPlanetId,
         'shipIds': shipIds
       }
     };

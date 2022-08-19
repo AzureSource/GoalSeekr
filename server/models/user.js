@@ -71,6 +71,7 @@ module.exports = {
     try {
       let userId = req.params.user_id;
       let type = req.body.data.type;
+      let targetId = req.params.targetPlanetId;
       if (type === 'scout') {
         let targetPlanet = req.body.data.targetPlanet;
         const query = 'SELECT * FROM discoverplanet($1, $2)';
@@ -78,8 +79,8 @@ module.exports = {
       }
       if (type === 'mission') {
         let shipIds = req.body.data.shipIds;
-        const query = 'SELECT * FROM colonizeplanet($1, $2)';
-        await client(query, [userId, shipIds]);
+        const query = 'SELECT * FROM attackandcolonizeplanet($1, $2, $3)';
+        await client(query, [userId, targetId, shipIds]);
       }
       res.sendStatus(201);
     } catch (err) {
