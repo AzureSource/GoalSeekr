@@ -107,7 +107,6 @@ const BuildShip = () => {
           />
           <ModalContent
             className='ship-modal-content'
-            backgroundColor='rgba(46,47,71,255)'
           >
             <ModalHeader color='gray.500'>Available Ship</ModalHeader>
             <ModalCloseButton />

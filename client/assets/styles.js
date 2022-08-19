@@ -725,7 +725,12 @@ const overrides = {
         width: '90%',
         margin: '5px 0px',
       },
-
+      '.ship-modal-content': {
+        top: '50px',
+        width: '80% !important',
+        height: '70% !important',
+        backgroundColor: '#2e2f47 !important',
+      },
       // =============================
       // build ship
       // =============================
