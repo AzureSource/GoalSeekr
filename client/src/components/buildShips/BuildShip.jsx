@@ -114,7 +114,7 @@ const BuildShip = () => {
           onClose={restoreData}
           isOpen={isOpen}>
           <ModalOverlay
-            backdropFilter='blur(.9px) hue-rotate(90deg)'
+            backdropFilter='blur(.9px) hue-rotate(10deg)'
           />
           <ModalContent
             className='ship-modal-content'

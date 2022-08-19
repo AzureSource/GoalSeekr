@@ -80,7 +80,7 @@ export default function MissionModule() {
             flexDir='column'
           >
             <Flex className='planet-selected-home'>
-              {planets.homePlanet ? planets.homePlanet : 'Home Planet'}
+              {planets.homePlanet ? planets.homePlanet.toString() : 'Home Planet'}
             </Flex>
             <Flex className='planet-selected-target'>
               {planets.targetPlanet ? planets.targetPlanet : 'Target Planet'}
@@ -119,8 +119,8 @@ export default function MissionModule() {
             <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
           )}
       </div>
-      <Button onClick={addToQueue}>Queue Mission</Button>
-      <List spacing={3} id={'planet-mission-list'}>
+      <Button className='queue-mission-btn'onClick={addToQueue}>Queue Mission</Button>
+      <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
             let shipData = `Count : ${mission.ship.count} | Ship : ${mission.ship.name} | Power : ${mission.ship.power}`;
