@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlanetSelection } from './denseGalaxySlice';
+import { useParams } from 'react-router-dom';
 import zero from '../../../assets/images/zeroUnexplored.png';
 import athea from '../../../assets/images/atheaUnexplored.png';
 import haku from '../../../assets/images/hakuUnexplored.png';
@@ -26,6 +27,7 @@ import axios from 'axios';
 import { UserContext } from './GalaxyWindow.jsx';
 import MenuSide from './MenuSide.jsx';
 import MenuBottom from './MenuBottom.jsx';
+import hatArray from '../hatListObject';
 
 export default function DenseGalaxy() {
   var planets = [
@@ -354,73 +356,91 @@ export default function DenseGalaxy() {
   const dispatch = useDispatch();
 
   const { user } = useContext(UserContext);
+  const { id } = useParams();
 
   const firstPlanet = useSelector((state) => state.denseGalaxyPlanetSelection.firstSelection);
 
-  const userPlanets = {
+  const userPlanets = useSelector(state => state.userShips.planets);
+
+  const [planetsObj, setPlanetsObj] = useState([]);
+  const planetsObject = axios.get(`/api/users/${id}/planets`)
+    .then(result => {
+      console.log(result);
+      setPlanetsObj(result);
+    });
+
+  const [hat, setHat] = useState(null);
+  const userHat = axios.get(`/api/user/hat/${id}`)
+    .then(result => {
+      console.log(result);
+      setHat(result);
+    });
+
+  const tempUserPlanets = {
     colonized: [1, 2, 3, 4, 5],
     scouted: [30, 31, 32],
   };
 
-  const handlePlanetSelection = (name) => {
+  const handlePlanetSelection = (name, id) => {
     const planetSelection = name;
+    const planetId = id;
     if (!firstPlanet) {
-      dispatch(setPlanetSelection({homePlanet: planetSelection}));
+      dispatch(setPlanetSelection({homePlanet: planetSelection, planetIdSelected: planetId}));
     } else {
-      dispatch(setPlanetSelection({targetPlanet: planetSelection}));
+      dispatch(setPlanetSelection({targetPlanet: planetSelection, targetPlanetId: planetId}));
     }
   };
 
   var image;
-  var hat;
-  var hatSource;
-
-  return (
-    <div className='appBackground planetsWindow'>
-      {planets.map((planet, index) => {
-        return (
-          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)}>
-            <Image src={planet.image} className={planet.classname}/>
-            <div className={planet.name}>{planet.name}</div>
-            {/* <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image> */}
-          </div>
-        );
-      })}
-    </div>
-  );
+  var aHat;
+  // var hatSource = hatArray[id -1] && hatArray[id - 1].name;
+  var hatSource = egg;
 
   // return (
-  //   <div>
+  //   <div className='appBackground planetsWindow'>
   //     {planets.map((planet, index) => {
-  //       if (userPlanets.scouted.includes(planet.id)) {
-  //         image = <img src={planet.image} className={planet.classname}></img>;
-  //       } else {
-  //         image = <img src={planet.unexplored} className={planet.classname}></img>;
-  //       }
-
-  //       if (userPlanets.colonized.includes(planet.id)) {
-  //         hatSource = user.profile_picture_url;
-  //         <Image src={hatSource} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>;
-  //       } else {
-  //         hat = null;
-  //       }
   //       return (
-  //       //if axios.getplanetbyid(id).discoveredBy !== null, and it matches current UserId, return div with colored planet image
-  //       //else return div with question mark planet image src
-  //       //if axios.getplanetbyid.conqueredBy !== null
-  //       //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
-  //       // if (axios.get('/planets/'))
-
-  //         <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
-  //           {image}
+  //         <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)}>
+  //           <Image src={planet.image} className={planet.classname}/>
   //           <div className={planet.name}>{planet.name}</div>
-  //           {hat}
+  //           <Image src={devil} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>
   //         </div>
   //       );
   //     })}
-  //     {/* <img src={egg} className='egg'></img> */}
-  //     {/* <img src={bearears} className='bearears'></img> */}
   //   </div>
   // );
+
+  return (
+    <div>
+      {planets.map((planet, index) => {
+        if (planetsObj.scoutedPlanets && planetsObj.scoutedPlanets.includes(planet.id)) {
+          image = <img src={planet.image} className={planet.classname}></img>;
+        } else {
+          image = <img src={planet.unexplored} className={planet.classname}></img>;
+        }
+
+        if (planetsObj.colonizedPlanets && planetsObj.colonizedPlanets.includes(planet.id)) {
+          aHat = <Image src={hatSource} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>;
+        } else {
+          aHat = null;
+        }
+        return (
+        //if axios.getplanetbyid(id).discoveredBy !== null, and it matches current UserId, return div with colored planet image
+        //else return div with question mark planet image src
+        //if axios.getplanetbyid.conqueredBy !== null
+        //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
+        // if (axios.get('/planets/'))
+
+          <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
+            {image}
+            <div className={planet.name}>{planet.name}</div>
+            {hat}
+          </div>
+        );
+      })}
+      {/* <img src={egg} className='egg'></img> */}
+      {/* <img src={bearears} className='bearears'></img> */}
+    </div>
+  );
 }
 

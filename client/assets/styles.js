@@ -34,10 +34,6 @@ const overrides = {
         float: 'right',
         marginLeft: '1000px'
       },
-      '.galaxy-window-top': {
-        float: 'right',
-        marginLeft: '1000px'
-      },
       '.transformWrapper': {
         float: 'right',
         marginLeft: '1000px'

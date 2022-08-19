@@ -13,6 +13,17 @@ module.exports = {
       res.end().status(500);
     }
   },
+  getHatIdForUser: async function (req, res) {
+    const userId = req.params.userId;
+
+    try {
+      const query = `SELECT * FROM hats_user WHERE user_id = ${userId}`;
+      const results = await client(query, []);
+      res.json(results.rows);
+    } catch (error) {
+      res.end().status(500);
+    }
+  },
   updateHat: async function (req, res) {
 
     const {u_id, g_id, hat_id} = req.query;

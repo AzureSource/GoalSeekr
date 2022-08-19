@@ -13,7 +13,7 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
           <Tr>
             <Th>Count</Th>
             <Th>Ship</Th>
-            <Th>Type</Th>
+            {/* <Th>Type</Th> */}
             <Th>Power Level</Th>
           </Tr>
         </Thead>

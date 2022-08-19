@@ -2,12 +2,9 @@ import React,{ useState, useEffect } from 'react';
 import axios from 'axios';
 import { Flex } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setGalaxyName } from '../CreateGalaxy/CreateGalaxySlice';
 
 export default function EnterGalaxy({ setTitle }){
   let params = useParams();
-  const dispatch = useDispatch();
 
   const redirectToCreateGalaxyPage = function(){
     window.location.href = `http://localhost:7777/#/creategalaxy/userid/${params.id}`;

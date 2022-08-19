@@ -12,7 +12,8 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import ChooseHat from '../ChooseHat.jsx';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {getUserShipsFromDB} from '../buildShips/UserShipSlice';
+import {getUserShipsFromDB, getUserPlanetsFromDB} from '../buildShips/UserShipSlice';
+import { setGalaxyID } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
@@ -25,6 +26,8 @@ export default function GalaxyWindow ({ setTitle }) {
   const userShips = useSelector(state => state.userShips.ships);
 
 
+  // console.log('userPlanets is ', userPlanets);
+
   useEffect(() => {
     getGalaxyID(id);
     setTitle(false);
@@ -34,8 +37,9 @@ export default function GalaxyWindow ({ setTitle }) {
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
       .then((result) => {
-        console.log(result);
+        console.log('galaxy', result.data.rows[0]);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
+        dispatch(setGalaxyID(result.data.rows[0]));
       })
       .catch((err) => console.log(err));
   };
@@ -45,9 +49,11 @@ export default function GalaxyWindow ({ setTitle }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`/api/users/${id}/ships`);
-      dispatch(getUserShipsFromDB(res.data.getusersships));
-      setUser(await axios.get(`planets/users/${id}`));
+      const ships = await axios.get(`/api/users/${id}/ships`);
+      dispatch(getUserShipsFromDB(ships.data.getusersships));
+      const planets = await axios.get(`/api/users/${id}/planets`);
+      console.log('planets.data is ', planets.data);
+      dispatch(getUserPlanetsFromDB(planets.data));
     };
     fetchData();
   }, []);
