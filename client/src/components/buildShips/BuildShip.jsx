@@ -93,7 +93,7 @@ const BuildShip = () => {
     };
     axios.post(`api/users/${id}/ships`, config)
       .then(() => {
-        console.log('update user info');
+        // console.log('update user info');
         location.reload();
       });
     onClose();

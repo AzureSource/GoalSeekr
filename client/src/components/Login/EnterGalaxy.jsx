@@ -33,7 +33,7 @@ export default function EnterGalaxy({ setTitle }) {
         }
       })
         .then(({ data }) => {
-          console.log('show Data: ', data);
+          // console.log('show Data: ', data);
           if (data.length) {
             const gal_id = data[0].id;
             const u_id = params.id;//user id
