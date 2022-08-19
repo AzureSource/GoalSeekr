@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+
+}
+
+html, body {
+  font-size: 1em;
+  font-family: 'Abril Fatface';
+  box-sizing: border-box;
+}
