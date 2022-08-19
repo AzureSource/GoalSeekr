@@ -9,7 +9,11 @@ const galaxy =require('./models/galaxy.js');
 const chats =require('./models/chats.js');
 const planets = require('./models/planets');
 
+
 const routes = Router();
+
+routes.put('/api/galaxy/begin/:user_id/:galaxy_id', galaxy.beginGame);
+routes.put('/api/galaxy/turns/:user_id/:galaxy_id', galaxy.changeTurn);
 
 routes.get('/api/ships/', ship.getAll);
 routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
