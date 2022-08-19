@@ -146,5 +146,3 @@ export default function MissionModule() {
 
 // render a line between the planets
 // figure out turn count on mission module
-
-// when queue mission is clicked, check db to confirm listed ships are users
