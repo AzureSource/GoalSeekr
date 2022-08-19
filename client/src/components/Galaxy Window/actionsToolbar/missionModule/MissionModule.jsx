@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ShipListEntry from './ShipListEntry.jsx';
-import { setPlanetSelection } from '../../denseGalaxySlice';
-import { useSelector, useDispatch } from 'react-redux';
-import MissionSequence from '../missionSequence/missionSequence.jsx';
-import { setMissionQueue } from './missionModuleSlice';
-import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ShipListEntry from "./ShipListEntry.jsx";
+import { setPlanetSelection } from "../../denseGalaxySlice";
+import { useSelector, useDispatch } from "react-redux";
+import MissionSequence from "../missionSequence/missionSequence.jsx";
+import { setMissionQueue } from "./missionModuleSlice";
+import { Divider, Select, List, ListItem, Flex } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 export default function MissionModule() {
-  const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
+  const planets = useSelector(
+    (state) => state.denseGalaxyPlanetSelection.planetSelection
+  );
   const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
   const missionQueue = useSelector((state) => state.missionQueue.missions);
   const endTurnActivation = useSelector((state) => state.toggleEndTurn.endTurn);
@@ -20,15 +22,10 @@ export default function MissionModule() {
 
   const checkForShips = () => {
     const planetID = planets.planetIdSelected;
-    console.log('galaxyId', galaxyID);
-    console.log('planetId', planetID);
-    axios.get(`/api/ships/${galaxyID}/${planetID}`)
+    axios
+      .get(`/api/ships/${galaxyID}/${planetID}`)
       .then((res) => {
-        // console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
-        // console.log('res is ', res.data[0].getusershipsonplanet.players[0].Ships);
-        setShips(
-          res.data[0].getusershipsonplanet.players[0].Ships
-        );
+        setShips(res.data[0].getusershipsonplanet.players[0].Ships);
       })
       .catch((err) => {
         console.log('There was an error grabbing the ship data.', err);
@@ -51,20 +48,28 @@ export default function MissionModule() {
   };
 
   const addToQueue = () => {
-    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.power}`;
-    dispatch(setMissionQueue({
-      add: { start: planets.homePlanet, type: missionType, ship: shipSelection, target: planets.targetPlanet, planetId: planets.planetIdSelected, targetId: planets.targetPlanetId}
-    }));
+    dispatch(
+      setMissionQueue({
+        add: {
+          start: planets.homePlanet,
+          type: missionType,
+          ship: shipSelection,
+          target: planets.targetPlanet,
+          planetId: planets.planetIdSelected,
+          targetId: planets.targetPlanetId,
+        },
+      })
+    );
   };
 
   const editMission = (missionIndex) => {
     dispatch(setMissionQueue({ remove: missionIndex }));
   };
 
+  let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Power : ${shipSelection.power}`;
+
   return (
-    <Flex
-      className='mission-module-container'
-    >
+    <Flex className="mission-module-container">
       <div>
         Home Planet
         <br />
@@ -72,28 +77,35 @@ export default function MissionModule() {
       </div>
       <div>
         <Select
-          variant='filled'
+          variant="filled"
           value={missionType}
-          placeholder='Mission Type'
-          size='sm'
+          placeholder="Mission Type"
+          size="sm"
           icon={<ChevronDownIcon />}
-          onChange={(e) => setMissionType(e.target.value)}>
-          <option value='scout'>Scout</option>
-          <option value='attack'>Attack</option>
-          <option value='colonize'>Colonize</option>
+          onChange={(e) => setMissionType(e.target.value)}
+        >
+          <option value="scout">Scout</option>
+          <option value="attack">Attack</option>
+          <option value="colonize">Colonize</option>
         </Select>
       </div>
       <div>
         Target Planet
         <br />
         {planets.targetPlanet}
-        <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
+        <br />
+        <button onClick={() => dispatch(setPlanetSelection('reset'))}>
+          Reset Planets
+        </button>
       </div>
-      <Divider orientation='horizontal' />
+      <Divider orientation="horizontal" />
       {ships === undefined ? (
         <div>There are no fleets at this planet.</div>
       ) : (
-        <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
+        <ShipListEntry
+          shipList={ships}
+          handleShipSelection={handleShipSelection}
+        />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
       <List spacing={3}>
@@ -101,7 +113,8 @@ export default function MissionModule() {
           {missionQueue.map((mission, index) => {
             return (
               <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships : {/*{mission.ship}*/} | Target Planet : {mission.target}
+                Home Planet : {mission.start} | Type : {mission.type} | Ships :{' '}
+                {shipData} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
                 </div>
@@ -115,13 +128,11 @@ export default function MissionModule() {
           <MissionSequence />
         </div>
       )}
-    </Flex >
+    </Flex>
   );
 }
 
 // render a line between the planets
 // figure out turn count on mission module
 
-
 // need a query for what planets the user owns, if the user owns the planet then they can queue a mission, if not those arent their ships.
-
