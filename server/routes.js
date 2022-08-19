@@ -40,6 +40,7 @@ routes.get('/api/players/:galaxy_id', getAllPlayers);
 //user
 routes.get('/api/users',users.checkAllUser);
 routes.post('/api/users',users.checkUser);
+routes.put('/api/users/motto', users.updateMotto);
 routes.get('/api/galaxy',users.checkGalaxyName);
 
 routes.get('/api/user/hat/:userId', hats.getHatIdForUser);
