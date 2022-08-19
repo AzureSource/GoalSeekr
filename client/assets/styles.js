@@ -775,6 +775,10 @@ const overrides = {
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
       },
+      '#planet-mission-list': {
+        height: '30%',
+        overflow: 'auto'
+      }
       // '.chakra-select__wrapper#select-mission-type': {
       //   height: '50%',
       //   marginTop: '5px',

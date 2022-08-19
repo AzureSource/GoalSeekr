@@ -46,12 +46,7 @@ const MissionResult = () => {
         Mission Result
       </Button>
       <Modal onClose={handleClose} size='full' isOpen={isOpen}>
-        <ModalOverlay
-          bg='none'
-          backdropFilter='auto'
-          backdropInvert='80%'
-          backdropBlur='2px'
-        />
+        <ModalOverlay/>
         <ModalContent backgroundColor='rgba(46,47,71,255)' >
           <ModalHeader color='gray.500'>Mission Results</ModalHeader>
           <ModalCloseButton />

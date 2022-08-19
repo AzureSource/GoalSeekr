@@ -61,8 +61,6 @@ export default function MissionModule() {
     dispatch(setMissionQueue({ remove: missionIndex }));
   };
 
-  let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Power : ${shipSelection.power}`;
-
   return (
     <Flex
       className='mission-module-container'
@@ -116,9 +114,10 @@ export default function MissionModule() {
           )}
       </div>
       <Button onClick={addToQueue}>Queue Mission</Button>
-      <List spacing={3}>
+      <List spacing={3} id={'planet-mission-list'}>
         <ListItem>
           {missionQueue.map((mission, index) => {
+            let shipData = `Count : ${mission.ship.count} | Ship : ${mission.ship.name} | Power : ${mission.ship.power}`;
             return (
               <div key={index}>
                 Home Planet : {mission.start} | Type : {mission.type} | Ships : {shipData} | Target Planet : {mission.target}
