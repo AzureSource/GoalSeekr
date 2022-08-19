@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Button, Input } from '@chakra-ui/react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
 
-const SendBox = ({ setChatAdded }) => {
+const SendBox = ({ setChatAdded, id, galID }) => {
   const [message, setMessage] = useState('');
-  const {id} = useParams();
-  const [galID, setGalID] = useState();
-
-  useEffect(() => {
-    axios.get(`/api/galaxy/${id}`)
-      .then((result) => setGalID(result.data.rows[0].currentgalaxy))
-      .catch((err) => console.log('error getting galID line 15:\n', err));
-  },[]);
 
   function handleInputChange(event){
     setMessage(event.target.value);
