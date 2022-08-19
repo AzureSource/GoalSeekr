@@ -52,7 +52,7 @@ export default function MissionModule() {
 
   const addToQueue = () => {
     // check if planetId exists in list of user's owned planets
-    // if (userColonizedPlanets.includes(planets.planetIdSelected)) {
+    if (userColonizedPlanets.includes(planets.planetIdSelected)) {
       dispatch(
         setMissionQueue({
           add: {
@@ -65,9 +65,9 @@ export default function MissionModule() {
           },
         })
       );
-    // } else {
-    //   alert(`These aren't your ships, the ${planets.homePlanet} ruler is displeased.`);
-    // }
+    } else {
+      alert(`These aren't your ships, the ${planets.homePlanet} ruler is displeased.`);
+    }
   };
 
   const editMission = (missionIndex) => {
