@@ -25,16 +25,16 @@ const Task = ({ task, setTaskUpdated }) => {
 
   return (
     <Flex className="singleTaskContainer"
-      border="1px solid"
+      border="1px solid" background="rgb(0 128 128 / 47%)" borderRadius="10px"
       m=".3rem" h="5rem" minH="5rem"
       overflow="auto"
       justifyContent="space-around" alignItems="center"
     >
-      <Flex className="description" w="60%">
+      <Flex className="description" w="60%" color="white">
         {task.description}
       </Flex>
       <Flex className="reward+status" flexDirection="column-reverse">
-        <Flex className="reward">
+        <Flex className="reward" color="white">
           ${task.reward}
         </Flex>
         <Flex className="taskStatus" onClick={completeTask}>
