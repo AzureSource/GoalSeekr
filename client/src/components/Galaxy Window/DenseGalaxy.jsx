@@ -419,14 +419,11 @@ export default function DenseGalaxy() {
   const planetsObject = () => {
     axios.get(`/api/users/${id}/planets`)
       .then(result => {
-        console.log('RESULT.DATA', result.data);
         setScouted(result.data.scoutedPlanets);
         setColonized(result.data.colonizedPlanets);
-        console.log('INSIDE', colonized, scouted);
       });
     return;
   };
-  console.log('OUTSIDE', colonized, scouted);
 
   const [hat, setHat] = useState(null);
   const userHat = () => {
@@ -468,7 +465,6 @@ export default function DenseGalaxy() {
 
     // var hatSource = egg;
     if (scouted && scouted.includes(planet.id)) {
-      console.log('entered');
       image = <img src={planet.image} className={planet.classname}></img>;
     } else {
       image = <img src={planet.unexplored} className={planet.classname}></img>;
