@@ -678,7 +678,7 @@ const overrides = {
       // =============================
       // build ship
       // =============================
-      '.build-modal-btn': {
+      '.build-modal-btn, .queue-mission-btn': {
         fontFamily: 'Abril Fatface',
         background: '#2e2f47 !important',
         border: '2px solid rgba(80,182,171)',
@@ -779,11 +779,14 @@ const overrides = {
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
       },
-      // '.chakra-select__wrapper#select-mission-type': {
-      //   height: '50%',
-      //   marginTop: '5px',
-      // }
-
+      '.queue-mission-btn': {
+        fontFamily: 'Abril Fatface',
+        background: '#2e2f47 !important',
+        border: '2px solid rgba(80,182,171)',
+        color: 'rgba(80,182,171)',
+        width: '100%',
+        margin: '5px 0px',
+      },
       // =============================
       // Mission Module
       // =============================

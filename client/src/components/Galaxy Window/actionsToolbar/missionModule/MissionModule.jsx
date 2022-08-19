@@ -114,7 +114,7 @@ export default function MissionModule() {
           )}
       </div>
 
-      <Button onClick={addToQueue}>Queue Mission</Button>
+      <Button className='queue-mission-btn'onClick={addToQueue}>Queue Mission</Button>
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
