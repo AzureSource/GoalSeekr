@@ -24,12 +24,12 @@ const Stats = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(playerInfo);
+  console.log('playerinfo', playerInfo);
 
   return (
     <div className='stats-container'>
       <div>{playerInfo.motto}</div>
-      <div>{playerInfo.userid}</div>
+      <div>{playerInfo.username}</div>
       <div>{playerInfo.currency}</div>
       <div>{playerInfo.planets && playerInfo.planets.length}</div>
       <div>{playerInfo.ships && playerInfo.ships.length || 0}</div>

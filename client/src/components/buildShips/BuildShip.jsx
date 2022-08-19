@@ -127,7 +127,7 @@ const BuildShip = () => {
                 {shipsComponents}
               </Flex>
               <br/>
-              <Flex>
+              <Flex className=''>
                 <Box bg='rgba(80,182,171)' p={4} color='white'>
                   Your available currency is : $ {userCurrency}
                 </Box>
