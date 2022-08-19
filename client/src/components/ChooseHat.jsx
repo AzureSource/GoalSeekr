@@ -44,7 +44,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
       axios.put(`/api/hats/${hatPick.id}/${id}/${gId}`)
         .then((res) =>  {
           setHatModal(false);
-          console.log(`Hat choice confirmed in DB`, res);
+          // console.log(`Hat choice confirmed in DB`, res);
         })
         .catch((err) => console.log(err));
     }

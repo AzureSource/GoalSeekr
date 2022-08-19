@@ -50,7 +50,7 @@ export default function MissionModule() {
     setShipSelection(shipData);
   };
 
-  console.log('shipSelection', shipSelection);
+  // console.log('shipSelection', shipSelection);
 
   const addToQueue = () => {
     // check if planetId exists in list of user's owned planets

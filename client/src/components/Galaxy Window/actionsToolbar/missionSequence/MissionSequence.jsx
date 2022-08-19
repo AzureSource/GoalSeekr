@@ -9,7 +9,7 @@ export default function MissionSequence() {
   const dispatch = useDispatch();
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
-  console.log('missionData', missionData);
+  // console.log('missionData', missionData);
   const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
   const missionResults = [];
 
