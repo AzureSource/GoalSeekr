@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlanetSelection } from './denseGalaxySlice';
 import { useParams } from 'react-router-dom';
@@ -412,27 +412,36 @@ export default function DenseGalaxy() {
 
   const userPlanets = useSelector(state => state.userShips.planets);
 
-  var planetsObj = {
-    scoutedPlanets: null,
-    colonizedPlanets: null
-  };
-  const planetsObject = axios.get(`/api/users/${id}/planets`)
-    .then(result => {
-      console.log(result);
-      planetsObj = result;
-    });
 
-  var hat = null;
-  const userHat = axios.get(`/api/user/hat/${id}`)
-    .then(result => {
-      console.log(result);
-      hat = result;
-    });
+  const [colonized, setColonized] = useState([]);
+  const [scouted, setScouted] = useState([]);
 
-  const tempUserPlanets = {
-    colonized: [1, 2, 3, 4, 5],
-    scouted: [30, 31, 32],
+  const planetsObject = () => {
+    axios.get(`/api/users/${id}/planets`)
+      .then(result => {
+        setScouted(result.data.scoutedPlanets);
+        setColonized(result.data.colonizedPlanets);
+      });
+    return;
   };
+
+  const [hat, setHat] = useState(null);
+  const userHat = () => {
+    axios.get(`/api/user/hat/${id}`)
+      .then(result => {
+        setHat(result.data[0].hat_id);
+      });
+  };
+
+  useEffect(() => {
+    planetsObject();
+    userHat();
+  }, [hat]);
+
+  // const tempUserPlanets = {
+  //   colonized: [1, 2, 3, 4, 5],
+  //   scouted: [30, 31, 32],
+  // };
 
   const handlePlanetSelection = (name, id) => {
     const planetSelection = name;
@@ -450,29 +459,23 @@ export default function DenseGalaxy() {
   // var hatSource = egg;
 
   var map =  planets.map((planet, index) => {
-
     var image;
     var aHat;
-    // var hatSource = hatArray[id -1] && hatArray[id - 1].name;
-    var hatSource = egg;
-    if (planetsObj.scoutedPlanets && planetsObj.scoutedPlanets.includes(planet.id)) {
-      console.log('entered');
+    var hatSource = hatArray[hat -1] && hatArray[hat - 1].name;
+
+    // var hatSource = egg;
+    if (scouted && scouted.includes(planet.id)) {
       image = <img src={planet.image} className={planet.classname}></img>;
     } else {
       image = <img src={planet.unexplored} className={planet.classname}></img>;
     }
 
-    /* if (planetsObj.colonizedPlanets && planetsObj.colonizedPlanets.includes(planet.id)) {
+    if (colonized && colonized.includes(planet.id)) {
       aHat = <Image src={hatSource} height='67px' marginTop={planet.top - 15} marginLeft={planet.left - 9} position='absolute'></Image>;
     } else {
       aHat = null;
-    }*/
+    }
     return (
-    //if axios.getplanetbyid(id).discoveredBy !== null, and it matches current UserId, return div with colored planet image
-    //else return div with question mark planet image src
-    //if axios.getplanetbyid.conqueredBy !== null
-    //return div with image src axios.getuserbyid(getplanetbyid(arrayid).conqueredBy).profilepictureurl
-    // if (axios.get('/planets/'))
       <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
         {image}
         <div className={planet.name}>{planet.name}</div>
