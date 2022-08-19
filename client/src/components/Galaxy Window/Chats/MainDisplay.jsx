@@ -4,12 +4,23 @@ import { Flex, Text} from '@chakra-ui/react';
 
 const MainDisplay = ({ chatAdded, galID, id }) => {
   const [chats, setChats] = useState([]);
+  const [chatUpdater, setChatUpdater] = useState(0);
+
+  useEffect(() => {
+    setInterval(() => {
+      setChatUpdater((prev) => prev + 1);
+      console.log(chatUpdater);
+    }, 5000);
+  }, []);
 
   useEffect(() => {
     axios.get(`/api/chats/${galID}`)
-      .then((result) => setChats(result.data))
+      .then((result) => {
+        setChats(result.data);
+        console.log('chats refreshed');
+      })
       .catch((err) => console.log(err));
-  }, [galID, chatAdded]);
+  }, [galID, chatAdded, chatUpdater]);
 
   return (
     <Flex className='chatsMainDisplay'h="73%" w="100%" flexDirection="column"

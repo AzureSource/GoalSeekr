@@ -11,6 +11,8 @@ const Chats = () => {
   const [galID, setGalID] = useState();
   const {id} = useParams();
 
+  // setInterval(()=>setChatAdded((prev)=>!prev), 5000);
+
   useEffect(() => {
     axios.get(`/api/galaxy/${id}`)
       .then((result) => setGalID(result.data.rows[0].currentgalaxy))
