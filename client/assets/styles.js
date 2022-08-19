@@ -500,6 +500,7 @@ const overrides = {
       },
       '.stats-container': {
         marginRight: '7.5px',
+        alignItems: 'center',
       },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
@@ -729,6 +730,19 @@ const overrides = {
         border: '2px solid rgba(80,182,171)',
         marginTop: '5px',
         height: '44% !important',
+      },
+      '.bottom-ship-container': {
+        fontFamily: 'Abril Fatface',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        margin: '5px',
+      },
+      '.buildship-currency-bottom': {
+        width: '33%',
+        textAlign: 'center',
+        borderRadius: '5px',
+        color: '#2e2f47',
+        backgroundColor: 'rgba(80,182,171)'
       },
       // =============================
       // build ship

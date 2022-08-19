@@ -19,7 +19,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
         <Flex className="messageContainer" key={chat.id} border="1px solid" m="0.2rem"
           borderRadius="10px" borderColor="#50b6ab" color="#2e2f47" background={chat.userID.toString() === id ? 'rgb(80 182 171 / 62%)' : 'rgba(66, 153, 225, 0.6)'}
         >
-          {console.log([chat.userID, id], 'ibraheeeem')}
+  
           <Text><b>{chat.Username}</b>:&nbsp;{chat.message}</Text>
         </Flex>
       ))}

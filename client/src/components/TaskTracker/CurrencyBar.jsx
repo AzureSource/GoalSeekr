@@ -33,7 +33,7 @@ const CurrencyBar = ({taskUpdated}) => {
         fontSize="2xl" justifyContent="center"
         border="1px solid" borderRadius="10px"
       >
-        Currency earned: ${currency}
+        Total currency: ${currency}
       </Tag>
     </Flex>
   );
