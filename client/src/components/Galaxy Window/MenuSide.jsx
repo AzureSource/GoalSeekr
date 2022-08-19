@@ -76,7 +76,7 @@ const MenuSide = () => {
       <Flex
         className='side-menu-bottom-btn-container'
       >
-      {isStarted ? endTurnButton : beginGameButton }
+        {isStarted ? endTurnButton : beginGameButton }
         <TaskModal />
       </Flex>
     </Flex>
