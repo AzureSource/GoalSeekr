@@ -17,7 +17,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
     axios.get(`/api/chats/${galID}`)
       .then((result) => {
         setChats(result.data);
-        console.log('chats refreshed');
+        // console.log('chats refreshed');
       })
       .catch((err) => console.log(err));
   }, [galID, chatAdded, chatUpdater]);
