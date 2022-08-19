@@ -18,10 +18,11 @@ const TaskModal = () => {
         isOpen={isOpen} onClose={onClose} color="rgba(80,182,171)"
       >
         <ModalOverlay
-          bg='none'
-          backdropFilter='auto'
-          backdropInvert='10%'
-          backdropBlur='2px'
+//           bg='none'
+//           backdropFilter='auto'
+//           backdropInvert='10%'
+//           backdropBlur='2px'
+           backdropFilter='blur(.9px) hue-rotate(10deg)'
         />
         <ModalContent className="tasks-modal-content"
           h="70%" w="85%" maxWidth="85%" top="50px"
