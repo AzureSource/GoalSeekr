@@ -74,7 +74,7 @@ export default function MissionModule() {
             flexDir='column'
           >
             <Flex className='planet-selected-home'>
-              {planets.homePlanet ? planets.homePlanet : 'Home Planet'}
+              {planets.homePlanet ? planets.homePlanet.toString() : 'Home Planet'}
             </Flex>
             <Flex className='planet-selected-target'>
               {planets.targetPlanet ? planets.targetPlanet : 'Target Planet'}

@@ -710,6 +710,7 @@ const overrides = {
         justifyContent: 'space-between'
       },
       '#select-mission-type': {
+        height: '100%',
         textAlign: 'center',
         backgroundColor: '#2e2f47',
       },
@@ -771,6 +772,7 @@ const overrides = {
 
       '#reset-btn, .planet-selected-target, .planet-selected-home': {
         borderRadius: '4px',
+        fontSize: '1em !important',
         height: '50%',
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
