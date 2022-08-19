@@ -11,24 +11,27 @@ const TaskModal = () => {
   return (
     <>
       <Button className="tasks-modal-btn" onClick={onOpen}>
-        Tasksss
+        Tasks
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal className='tasks-modal'
+        isOpen={isOpen} onClose={onClose} color="rgba(80,182,171)"
+      >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+        <ModalContent className="tasks-modal-content"
+          h="70%" w="85%" maxWidth="85%" top="50px"
+          backgroundColor="#2e2f47"
+        >
+          <ModalHeader className="tasks-modal-header"
+            color='rgba(80,182,171)' textAlign='center' paddingBottom="0rem"
+            fontSize="1.5rem"
+          >
+            Task Tracker
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <TaskTracker />
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

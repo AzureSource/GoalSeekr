@@ -7,8 +7,8 @@ const TaskTracker = () => {
   const [taskUpdated, setTaskUpdated] = useState(false);
 
   return (
-    <Flex className="mainContainer" flexDirection="column" h="100vh" color="teal">
-      <Flex className="taskTrackerContainer" h="85%">
+    <Flex className="mainContainer" flexDirection="column" h="100%" w="100%" color="teal">
+      <Flex className="taskTrackerContainer" h="90%">
         <ColsContainer setTaskUpdated={setTaskUpdated}/>
       </Flex>
       <Flex className="footer" h="10%" justifyContent="flex-end">
