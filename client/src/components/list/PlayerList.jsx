@@ -79,8 +79,7 @@ function Playerlist () {
                   <Text>Alliance: <br /> {player.alliance ? player.alliance.name : 'independent'} </Text>
                 </GridItem>
                 <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
-                  <GiRingedPlanet className='p-list-icon' /> {}
-                  {/* <GiRingedPlanet className='p-list-icon' /> {player.planets.length} */}
+                  <GiRingedPlanet className='p-list-icon' /> { player.planets ?player.planets.length : 0}
                 </GridItem>
                 <GridItem sx={gridIprops} w='100%' h='10' width='13' bg={'gray.100'}>
                   <GiJetpack className='p-list-icon' />  {player.ships ? player.ships.length : 0 }
