@@ -3,7 +3,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import axios from 'axios';
 import Task from './Task.jsx';
 
-const TasksContainer = ( {difficulty} ) => {
+const TasksContainer = ( {difficulty, setTaskUpdated} ) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(
@@ -27,7 +27,7 @@ const TasksContainer = ( {difficulty} ) => {
       // border="1px solid"
       w="99%"
     >
-      {tasks.map((task) => <Task key={task.id} task={task}/> )}
+      {tasks.map((task) => <Task key={task.id} task={task} setTaskUpdated={setTaskUpdated}/> )}
     </Flex>
   );
 };

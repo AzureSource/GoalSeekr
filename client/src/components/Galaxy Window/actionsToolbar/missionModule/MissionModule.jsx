@@ -1,39 +1,43 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import MissionSequence from '../missionSequence/MissionSequence.jsx';
+import { setMissionQueue } from './missionModuleSlice';
 import { Divider, Select, List, ListItem, Flex } from '@chakra-ui/react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
   const planets = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection);
-  const galaxyName = useSelector((state) => state.currentGalaxyName.galaxyName);
+  const galaxyID = useSelector((state) => state.currentGalaxyID.galaxyID);
+  const missionQueue = useSelector((state) => state.missionQueue.missions);
+  const endTurnActivation = useSelector((state) => state.toggleEndTurn.endTurn);
   const [shipSelection, setShipSelection] = useState({});
-  const [missionQueue, setMissionQueue] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
 
-  // Dummy Data
-  let shipList = [
-    { count: 5, name: 'ship1', type: 'attack', powerLevel: 1, }, { count: 4, name: 'ship2', type: 'attack', powerLevel: 1, }, { count: 2, name: 'ship3', type: 'colony', powerLevel: 1, }
-  ];
-
-  // Galaxy name disapears on refresh of page.
+  // const checkForShips = () => {
+  //   const planetId = planets.planetIdSelected;
+  //   console.log('galaxyId', galaxyID);
+  //   console.log('planetId', planetId);
+  //   axios.get(`/api/ships/${galaxyID}/${planetId}`)
+  //     .then((res) => {
+  //       // console.log('res is ', res.data[0].getusershipsonplanetbynames.players);
+  //       console.log('res is ', res.data);
+  //       setShips(
+  //         // res.data[0].getusershipsonplanetbynames.players
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log('There was an error grabbing the ship data.', err);
+  //     });
+  // };
   const checkForShips = () => {
-    const planetName = planets.homePlanet;
-    const galaxy = galaxyName;
-    axios.get(`/api/ships/${galaxy}/${planetName}`)
-      .then((res) => {
-        console.log('res', res.data[0].getusershipsonplanetbynames.players);
-        setShips(
-          res.data[0].getusershipsonplanetbynames.players
-        );
-      })
-      .catch((err) => {
-        console.log('There was an error grabbing the ship data.', err);
-      });
+    setShips(
+      [{ name: 'scout', count: 1, power: 1000 }]
+    );
   };
 
   useEffect(() => {
@@ -47,18 +51,15 @@ export default function MissionModule() {
   };
 
   const addToQueue = () => {
-    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.powerLevel}`;
-    setMissionQueue((prevMissionQueue) => ([...prevMissionQueue, { start: planets.homePlanet, type: missionType, ship: shipData, target: planets.targetPlanet }]));
+    let shipData = `Count : ${shipSelection.count} | Ship : ${shipSelection.name} | Level : ${shipSelection.power}`;
+    dispatch(setMissionQueue({
+      add: { start: planets.homePlanet, type: missionType, ship: shipSelection, target: planets.targetPlanet, planetId: planets.planetIdSelected, targetId: planets.targetPlanetId}
+    }));
   };
 
   const editMission = (missionIndex) => {
-    setMissionQueue([
-      ...missionQueue.slice(0, missionIndex),
-      ...missionQueue.slice(missionIndex + 1)
-    ]);
+    dispatch(setMissionQueue({ remove: missionIndex }));
   };
-
-  // console.log('planets', planets);
 
   return (
     <Flex
@@ -66,6 +67,7 @@ export default function MissionModule() {
     >
       <div>
         Home Planet
+        <br />
         {planets.homePlanet}
       </div>
       <div>
@@ -73,8 +75,8 @@ export default function MissionModule() {
           variant='filled'
           value={missionType}
           placeholder='Mission Type'
-          size='md'
-          icon={<TriangleDownIcon />}
+          size='sm'
+          icon={<ChevronDownIcon />}
           onChange={(e) => setMissionType(e.target.value)}>
           <option value='scout'>Scout</option>
           <option value='attack'>Attack</option>
@@ -83,23 +85,23 @@ export default function MissionModule() {
       </div>
       <div>
         Target Planet
+        <br />
         {planets.targetPlanet}
         <button onClick={() => dispatch(setPlanetSelection('reset'))}>Reset Planets</button>
       </div>
       <Divider orientation='horizontal' />
-      {ships === null ? (
+      {ships === undefined ? (
         <div>There are no fleets at this planet.</div>
       ) : (
         <ShipListEntry shipList={ships} handleShipSelection={handleShipSelection} />
       )}
       <button onClick={addToQueue}>Queue Mission</button>
-      {/* On endTurn reset the queue & queue is sent to local store for holding. */}
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
             return (
               <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships : {mission.ship} | Target Planet : {mission.target}
+                Home Planet : {mission.start} | Type : {mission.type} | Ships : {/*{mission.ship}*/} | Target Planet : {mission.target}
                 <div>
                   <button onClick={() => editMission(index)}>Remove</button>
                 </div>
@@ -108,29 +110,14 @@ export default function MissionModule() {
           })}
         </ListItem>
       </List>
-    </Flex>
+      {endTurnActivation && (
+        <div>
+          <MissionSequence />
+        </div>
+      )}
+    </Flex >
   );
 }
-
-
-// Sending a mission
-// end turn is clicked
-  // remove existing ships from home planet (may be attacked while away)
-  // Missions are saved on local redux store with userID.
-  // Mission has a turn count that is decremented until ships reach target planet.
-  // Need to decided on distance count
-  // every turn decrements the count.
-// once the count reaches 0, grab current information of target planet, for battle.
-
-//battle
-  // based on type of mission
-  //if scout mission provide run down of planet information
-  //if attack, decide based on number of attack ships.
-  //if colonize, check if attack ships are there, or if there are defenders
-    // Maybe say 2 attack ships needed to take out mothership.
-// once battle is complete send new data on planet ownership to database.
-// send notification of results to both users.
-
 
 // render a line between the planets
 // figure out turn count on mission module

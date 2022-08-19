@@ -20,6 +20,8 @@ import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 //   );
 // };
 
+// export default App;
+
 const App = () => {
   const [title, setTitle] = useState(true);
 
@@ -50,10 +52,6 @@ const App = () => {
           />
         </Routes>
       </div>
-      {/*<button className="login-with-google-btn" onClick = {signInWithGoogle}> Sign In With Google</button>*/}
-      {/* <CreateGalaxy /> */}
-      {/* <Title /> */}
-      {/* <Menu /> */}
     </HashRouter>
   );
 };

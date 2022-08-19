@@ -6,24 +6,70 @@ const overrides = {
     global: {
       // add styles here
 
-      'body.chakra-ui-light, html, #root, .appBackground': {
+      'body.chakra-ui-light, html, #root': {
         height: '100%',
+        width: '100%',
         backgroundImage: background,
         backgroundSize: 'contain',
         zIndex: -1,
       },
+      // 'body.chakra-ui-light, html, #root, .appBackground': {
+      //   height: '100%',
+      //   width: '100%',
+      //   backgroundImage: background,
+      //   backgroundSize: 'contain',
+      //   zIndex: -1,
+      // },
       '.galaxy-window': {
+        float: 'right',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        marginLeft: '1000px'
+      },
+      '.userContext': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.galaxyWindow': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.galaxy-window-top': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.transformWrapper': {
+        float: 'right',
+        marginLeft: '1000px'
+      },
+      '.transformComponent': {
+        float: 'right',
+        marginLeft: '1000px'
       },
       '#root': {
         height: '100%',
       },
       '.planetsWindow': {
-        height: '720px',
-        width: '1280px'
+        float: 'right',
+        marginLeft: '8.785%',
+        marginTop: '0.01%',
+        height: '1550px',
+        width: '5120px'
       },
-      '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4': {
+      // '.divInPlanetComponent': {
+      //   // marginTop: '10px',
+      //   // height: '550px',
+      //   // width: '1120px'
+      // },
+      // '.transformWrapper': {
+      //   marginTop: '10px',
+      //   height: '100%',
+      //   width: '100%'
+      // },
+      // '.transformComponent': {
+      //   width: '100%'
+      // },
+      '.zero, .zero2, .zero3, .zero4, .pinktopia, .pinktopia2, .pinktopia3, .pinktopia4, .pokitaru, .pokitaru2, .pokitaru3, .pokitaru4, .steins, .steins2, .steins3, .steins4, .lava, .lava2, .lava3, .lava4, .haku, .haku2, .haku3, .haku4, .chihiro, .chihiro2, .chihiro3, .chihiro4, .calcifer, .calcifer2, .calcifer3, .calcifer4, .athea, .athea2, .athea3, .athea4, .polaris, .polaris2, .polaris3, .polaris4, .zeroAlso': {
         // '-webkit-filter': 'drop-shadow(5px 5px 5px #222)',
         // filter: 'drop-shadow(5px 5px 5px #222)',
         height: '50px',
@@ -47,336 +93,332 @@ const overrides = {
         marginLeft: '431px'
       },
       '.zero': {
-        marginTop: '90px',
-        marginLeft: '440px'
+        marginTop: '1.75%',
+        marginLeft: '8.59%'
       },
       '.ZERO': {
-        marginTop: '140px',
-        marginLeft: '450px'
+        marginTop: '2.73%',
+        marginLeft: '8.78%'
       },
       '.zero2': {
-        marginTop: '460px',
-        marginLeft: '850px'
+        marginTop: '8.98%',
+        marginLeft: '16.59%'
       },
       '.PISCES': {
-        marginTop: '510px',
-        marginLeft: '857px'
+        marginTop: '9.956%',
+        marginLeft: '16.73%'
       },
       '.zero3': {
-        marginTop: '290px',
-        marginLeft: '430px'
+        marginTop: '5.66%',
+        marginLeft: '8.39%'
       },
       '.CORBIN': {
-        marginTop: '340px',
-        marginLeft: '435px'
+        marginTop: '6.637%',
+        marginLeft: '8.49%'
       },
       '.zero4': {
-        marginTop: '100px',
-        marginLeft: '650px'
+        marginTop: '1.95%',
+        marginLeft: '12.689%'
       },
       '.JADE': {
-        marginTop: '150px',
-        marginLeft: '660px'
+        marginTop: '2.928%',
+        marginLeft: '12.885%'
       },
       '.pinktopia': {
-        marginTop: '50px',
-        marginLeft: '50px'
+        marginTop: '0.976%',
+        marginLeft: '0.976%'
       },
       '.PINKTOPIA': {
-        marginTop: '100px',
-        marginLeft: '48px'
+        marginTop: '1.95%',
+        marginLeft: '0.937%'
       },
       '.pinktopia2': {
-        marginTop: '20px',
-        marginLeft: '900px'
+        marginTop: '0.39%',
+        marginLeft: '17.57%'
       },
       '.TAURUS': {
-        marginTop: '70px',
-        marginLeft: '903px'
+        marginTop: '1.366%',
+        marginLeft: '17.629%'
       },
       '.pinktopia3': {
-        marginTop: '380px',
-        marginLeft: '200px'
+        marginTop: '7.416%',
+        marginLeft: '3.9%'
       },
       '.MARSHALL': {
-        marginTop: '430px',
-        marginLeft: '198px'
+        marginTop: '8.394%',
+        marginLeft: '3.865%'
       },
       '.pinktopia4': {
-        marginTop: '380px',
-        marginLeft: '780px'
+        marginTop: '7.418%',
+        marginLeft: '15.2277%'
       },
       '.AUSTIN': {
-        marginTop: '430px',
-        marginLeft: '785px'
+        marginTop: '8.39%',
+        marginLeft: '15.325%'
       },
       '.pokitaru': {
-        marginTop: '12px',
-        marginLeft: '200px'
+        marginTop: '0.234%',
+        marginLeft: '3.9%'
       },
       '.POKITARU': {
-        marginTop: '62px',
-        marginLeft: '200px'
+        marginTop: '1.2%',
+        marginLeft: '3.9%'
       },
       '.pokitaru2': {
-        marginTop: '170px',
-        marginLeft: '910px'
+        marginTop: '3.318%',
+        marginLeft: '17.765%'
       },
       '.CAPRICORN': {
-        marginTop: '220px',
-        marginLeft: '906px'
+        marginTop: '4.295%',
+        marginLeft: '17.687%'
       },
       '.pokitaru3': {
-        marginTop: '20px',
-        marginLeft: '450px'
+        marginTop: '0.39%',
+        marginLeft: '8.785%'
       },
       '.JEROME': {
-        marginTop: '69px',
-        marginLeft: '453px'
+        marginTop: '1.347%',
+        marginLeft: '8.84%'
       },
       '.pokitaru4': {
-        marginTop: '450px',
-        marginLeft: '380px'
+        marginTop: '8.785%',
+        marginLeft: '7.418%'
       },
       '.IBRAHEEM': {
-        marginTop: '500px',
-        marginLeft: '379px'
+        marginTop: '9.76%',
+        marginLeft: '7.399%'
       },
       '.steins': {
-        marginTop: '250px',
-        marginLeft: '50px'
+        marginTop: '4.88%',
+        marginLeft: '0.976%'
       },
       '.STEINS': {
-        marginTop: '300px',
-        marginLeft: '55px'
+        marginTop: '5.8569%',
+        marginLeft: '1.073%'
       },
       '.steins2': {
-        marginTop: '280px',
-        marginLeft: '850px'
+        marginTop: '5.466%',
+        marginLeft: '16.59%'
       },
       '.VIRGO': {
-        marginTop: '330px',
-        marginLeft: '858px'
+        marginTop: '6.4425%',
+        marginLeft: '16.7505%'
       },
       '.steins3': {
-        marginTop: '20px',
-        marginLeft: '750px'
+        marginTop: '0.39%',
+        marginLeft: '14.64%'
       },
       '.IZZI': {
-        marginTop: '70px',
-        marginLeft: '764px'
+        marginTop: '1.366%',
+        marginLeft: '14.915%'
       },
       '.steins4': {
-        marginTop: '120px',
-        marginLeft: '550px'
+        marginTop: '2.34%',
+        marginLeft: '10.737%'
       },
       '.ALGO': {
-        marginTop: '170px',
-        marginLeft: '560px'
+        marginTop: '3.318%',
+        marginLeft: '10.93%'
       },
       '.lava': {
         height: '65px',
-        marginTop: '350px',
-        marginLeft: '930px'
+        marginTop: '6.83%',
+        marginLeft: '18.156%'
       },
       '.LAVA': {
-        marginTop: '405px',
-        marginLeft: '950px'
+        marginTop: '7.9%',
+        marginLeft: '18.546%'
       },
       '.lava2': {
         height: '65px',
-        marginTop: '140px',
-        marginLeft: '240px'
+        marginTop: '2.73%',
+        marginLeft: '4.685%'
       },
       '.LEO': {
-        marginTop: '195px',
-        marginLeft: '263px'
+        marginTop: '3.8%',
+        marginLeft: '5.134%'
       },
       '.lava3': {
         height: '65px',
-        marginTop: '330px',
-        marginLeft: '550px'
+        marginTop: '6.44%',
+        marginLeft: '10.7375%'
       },
       '.BOOLEAN': {
-        marginTop: '383px',
-        marginLeft: '558px'
+        marginTop: '7.477%',
+        marginLeft: '10.89%'
       },
       '.lava4': {
         height: '65px',
-        marginTop: '330px',
-        marginLeft: '60px'
+        marginTop: '6.4425%',
+        marginLeft: '1.171%'
       },
       '.FLOWER': {
-        marginTop: '385px',
-        marginLeft: '70px'
+        marginTop: '7.516%',
+        marginLeft: '1.366%'
       },
       '.haku': {
-        marginTop: '418px',
-        marginLeft: '100px'
+        marginTop: '8.16%',
+        marginLeft: '1.95%'
       },
       '.HAKU': {
-        marginTop: '468px',
-        marginLeft: '109px'
+        marginTop: '9.1366%',
+        marginLeft: '2.1279%'
       },
       '.haku2': {
-        marginTop: '350px',
-        marginLeft: '675px'
+        marginTop: '6.83%',
+        marginLeft: '13.1778%'
       },
       '.SCORPIO': {
-        marginTop: '400px',
-        marginLeft: '678px'
+        marginTop: '7.8%',
+        marginLeft: '13.236%'
       },
       '.haku3': {
-        marginTop: '50px',
-        marginLeft: '300px'
+        marginTop: '0.976%',
+        marginLeft: '5.8568%'
       },
       '.XUTIS': {
-        marginTop: '100px',
-        marginLeft: '309px'
+        marginTop: '1.95%',
+        marginLeft: '6.0325%'
       },
       '.haku4': {
-        marginTop: '290px',
-        marginLeft: '280px'
+        marginTop: '5.66%',
+        marginLeft: '5.466%'
       },
       '.PEACH': {
-        marginTop: '340px',
-        marginLeft: '287px'
+        marginTop: '6.637%',
+        marginLeft: '5.6%'
       },
       '.chihiro': {
-        marginTop: '100px',
-        marginLeft: '775px'
+        marginTop: '1.95%',
+        marginLeft: '15.13%'
       },
       '.CHIHIRO': {
-        marginTop: '150px',
-        marginLeft: '777px'
+        marginTop: '2.928%',
+        marginLeft: '15.169%'
       },
       '.chihiro2': {
-        marginTop: '220px',
-        marginLeft: '350px'
+        marginTop: '4.295%',
+        marginLeft: '6.8329%'
       },
       '.REDUX': {
-        marginTop: '270px',
-        marginLeft: '357px'
+        marginTop: '5.27%',
+        marginLeft: '6.969%'
       },
       '.chihiro3': {
-        marginTop: '120px',
-        marginLeft: '120px'
+        marginTop: '2.34%',
+        marginLeft: '2.34%'
       },
       '.APPLE': {
-        marginTop: '170px',
-        marginLeft: '128px'
+        marginTop: '3.3188%',
+        marginLeft: '2.498%'
       },
       '.chihiro4': {
-        marginTop: '450px',
-        marginLeft: '580px'
+        marginTop: '8.785%',
+        marginLeft: '11.32%'
       },
       '.VION': {
-        marginTop: '500px',
-        marginLeft: '592px'
+        marginTop: '9.76%',
+        marginLeft: '11.557%'
       },
       '.calcifer': {
-        marginTop: '420px',
-        marginLeft: '490px'
+        marginTop: '8.1995%',
+        marginLeft: '9.566%'
       },
       '.CALCIFER': {
-        marginTop: '470px',
-        marginLeft: '490px'
+        marginTop: '9.1756%',
+        marginLeft: '9.566%'
       },
       '.calcifer2': {
-        marginTop: '200px',
-        marginLeft: '660px'
+        marginTop: '3.9%',
+        marginLeft: '12.885%'
       },
       '.FINN': {
-        marginTop: '250px',
-        marginLeft: '671px'
+        marginTop: '4.88%',
+        marginLeft: '13.099%'
       },
       '.calcifer3': {
-        marginTop: '460px',
-        marginLeft: '220px'
+        marginTop: '8.98%',
+        marginLeft: '4.295%'
       },
       '.BLADE': {
-        marginTop: '510px',
-        marginLeft: '227px'
+        marginTop: '9.956%',
+        marginLeft: '4.4316%'
       },
       '.calcifer4': {
-        marginTop: '180px',
-        marginLeft: '440px'
+        marginTop: '3.514%',
+        marginLeft: '8.59%'
       },
       '.NEON': {
-        marginTop: '230px',
-        marginLeft: '450px'
+        marginTop: '4.49%',
+        marginLeft: '8.785%'
       },
       '.athea': {
         height: '90px',
-        marginTop: '350px',
-        marginLeft: '300px'
+        marginTop: '6.8329%',
+        marginLeft: '5.8568%'
       },
       '.ATHEA': {
-        marginTop: '418px',
-        marginLeft: '325px'
+        marginTop: '8.16%',
+        marginLeft: '6.34488%'
       },
       '.athea2': {
         height: '90px',
-        marginTop: '10px',
-        marginLeft: '580px'
+        marginTop: '0.195%',
+        marginLeft: '11.32%'
       },
       '.LOLLIPOP': {
-        marginTop: '78px',
-        marginLeft: '600px'
+        marginTop: '1.5227%',
+        marginLeft: '11.71%'
       },
       '.athea3': {
         height: '90px',
-        marginTop: '450px',
-        marginLeft: '680px'
+        marginTop: '8.785%',
+        marginLeft: '13.275%'
       },
       '.MEI': {
-        marginTop: '520px',
-        marginLeft: '715px'
+        marginTop: '10.1518%',
+        marginLeft: '13.95875%'
       },
       '.athea4': {
         height: '90px',
-        marginTop: '250px',
-        marginLeft: '720px'
+        marginTop: '4.88%',
+        marginLeft: '14.056%'
       },
       '.LUNAR': {
-        marginTop: '320px',
-        marginLeft: '747px'
+        marginTop: '6.247%',
+        marginLeft: '14.58%'
       },
       '.polaris': {
-        marginTop: '280px',
-        marginLeft: '180px'
+        marginTop: '5.466%',
+        marginLeft: '3.514%'
       },
       '.POLARIS': {
-        marginTop: '330px',
-        marginLeft: '183px'
+        marginTop: '6.4425%',
+        marginLeft: '3.572%'
       },
       '.polaris2': {
-        marginTop: '230px',
-        marginLeft: '515px'
+        marginTop: '4.49%',
+        marginLeft: '10.054%'
       },
       '.PETER': {
-        marginTop: '280px',
-        marginLeft: '523px'
+        marginTop: '5.466%',
+        marginLeft: '10.21%'
       },
       '.polaris3': {
-        marginTop: '200px',
-        marginLeft: '780px'
+        marginTop: '3.9%',
+        marginLeft: '15.2277%'
       },
       '.ZORIX': {
-        marginTop: '250px',
-        marginLeft: '788px'
+        marginTop: '4.88%',
+        marginLeft: '15.3839%'
       },
       '.polaris4': {
-        marginTop: '190px',
-        marginLeft: '150px'
+        marginTop: '3.709%',
+        marginLeft: '2.928%'
       },
       '.SCAR': {
-        marginTop: '240px',
-        marginLeft: '160px'
-      },
-      '.galaxy-window-top': {
-        width: '100%',
-        height: '70%'
+        marginTop: '4.685%',
+        marginLeft: '3.1236%'
       },
       '.menu-side': {
         width: '20%',
@@ -400,15 +442,31 @@ const overrides = {
       //-------------------------------HAT MODAL
       '#hat-div': {
         display: 'grid',
-        gridTemplateRows: '1fr 5fr 1fr',
+        gridTemplateRows: '1fr 3fr 3fr 1fr',
         position: 'absolute',
-        width: '60%',
-        height: '40%',
-        top: '30%',
-        right: '18%',
+        width: '15%',
+        height: '25%',
+        top: '4%',
+        zIndex: 3,
+        right: '7%',
         color: '#c7e4e9',
         backgroundColor: 'cadetblue',
         borderRadius: '12px'
+      },
+      '.hat-list1': {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginTop: '5%',
+        gridRow: 2
+      },
+      '.hat-list2': {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginTop: '5%',
+        gridRow: 3
+      },
+      '#hat-list-title': {
+        gridRow: 1
       },
       '#confirm-hat': {
         height: '70%',
@@ -417,32 +475,44 @@ const overrides = {
         backgroundColor: '#2626a3',
         borderRadius: '10px',
         border: '1px solid white',
-        gridRow: 3,
+        gridRow: 4,
         justifySelf: 'center'
       },
       '.hat-list-icon': {
-        height: '20px',
-        width: '20px'
+        height: '100px',
+        width: '100px',
+        zIndex: 4
       },
       //-------------------------------SIDE MENU
       '.menu-side-container': {
         width: '32%',
         height: '100%',
         position: 'absolute',
+        padding: '25px 0px',
+        justifyContent: 'space-between',
         background: 'linear-gradient(180deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.7536057692307692) 85%)',
         zIndex: 10,
       },
-      '.pl-acc': {
-        backgroundColor: '#41437e',
-        borderRadius: '10px',
-        height: '200px',
+      // '#player-list-conatiner': {
+      //   overflow: 'hidden'
+      // },
+      '#pl-acc': {
+        fontFamily: 'Abril Fatface',
+        backgroundColor: '#2e2f47',
+        border: '2px solid rgba(80,182,171)',
+        borderRadius: '7px',
+        height: '100%',
+        color: '#50b6ab',
         overflow: 'auto'
 
       },
+      '#pl-acc::-webkit-scrollbar': {
+        display: 'none'  /* Safari and Chrome */
+      },
       '#player-list': {
-        width:'100%',
-        height: '30%',
-        padding: '5%',
+        width:'90%',
+        height: '28.5%',
+        overflow: 'hidden'
       },
       '.p-list-icon': {
         fontSize: '250%',
@@ -474,9 +544,15 @@ const overrides = {
         color: 'rgba(80,182,171)',
         width: '50%',
         padding: '10px',
-        margin: '10px',
+        // margin: '10px 0px',
         border: '1px solid rgba(80,182,171)',
         // margin: '5px 0px',
+      },
+      '.end-turn-btn': {
+        marginRight: '7.5px',
+      },
+      '.tasks-modal-btn': {
+        marginLeft: '7.5px',
       },
       '.side-menu-bottom-btn-container': {
         width: '90%',
@@ -486,8 +562,7 @@ const overrides = {
       '.title-bar': {
         width: '100%',
         height: '27%',
-        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.39399509803921573) 100%)',
-        backgroundOpacity: 0.7
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(9,188,138,0.72) 100%)',
       },
       '.title-name': {
         position: 'relative',
@@ -650,7 +725,7 @@ const overrides = {
       // =============================
       '.build-modal-btn': {
         background: '#2e2f47 !important',
-        border: '1px solid rgba(80,182,171)',
+        border: '2px solid rgba(80,182,171)',
         color: 'rgba(80,182,171)',
         fontFamily: 'Abril Fatface',
         width: '90%',
@@ -665,22 +740,12 @@ const overrides = {
       // Mission Module
       // =============================
       '.mission-module-container': {
-        height: '5%',
-        width: '100%',
+        borderRadius: '4px',
+        height: '50%',
+        width: '90%',
         flexDirection: 'column',
         justifyContent: 'space-between',
       },
-
-      // =============================
-      // Chats Module
-      // =============================
-      // '.chatsTitle': {
-      //   height: '50%',
-      //   width: '90%',
-      //   flexDirection: 'column',
-      //   justifyContent: 'space-between',
-      // },
-
       // =============================
       // Mission Module
       // =============================
