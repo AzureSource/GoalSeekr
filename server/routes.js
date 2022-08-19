@@ -25,6 +25,7 @@ routes.post('/api/tasks/', tasks.addTask);
 
 //chats
 routes.get('/api/chats/:gal_id', chats.getChatsByGalId);
+routes.post('/api/chats/:gal_id', chats.addChatByGalId);
 
 // player list
 routes.get('/api/players', getAllPlayers);
