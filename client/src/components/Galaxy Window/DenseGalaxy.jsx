@@ -476,7 +476,7 @@ export default function DenseGalaxy() {
       aHat = null;
     }
     return (
-      <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name)} className='divInPlanetComponent'>
+      <div key={index} role='button' onClick={() => handlePlanetSelection(planet.name, planet.id)} className='divInPlanetComponent'>
         {image}
         <div className={planet.name}>{planet.name}</div>
         {aHat}

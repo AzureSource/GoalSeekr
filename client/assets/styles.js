@@ -838,6 +838,10 @@ const overrides = {
         width: '100%',
         margin: '5px 0px',
       },
+      '#planet-mission-list': {
+        height: '30%',
+        overflow: 'auto'
+      }
       // =============================
       // Mission Module
       // =============================

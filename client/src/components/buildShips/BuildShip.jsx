@@ -59,13 +59,12 @@ const BuildShip = () => {
   }, []);
 
   const handleOpenClick = () => {
-    // if (planetIdSelected === null || planetIdSelected === 0) {
-    //   alert('To start building ship, please select a planet first');
-    //   return;
-    // } else {
-    //   onOpen();
-    // }
-    onOpen();
+    if (planetIdSelected === null || planetIdSelected === 0) {
+      alert('To start building ship, please select a planet first');
+      return;
+    } else {
+      onOpen();
+    }
   };
 
   const shipsComponents = ships.map(ship => (
@@ -94,8 +93,8 @@ const BuildShip = () => {
     };
     axios.post(`api/users/${id}/ships`, config)
       .then(() => {
-        console.log('update user info');
-        location.reload();
+        // console.log('update user info');
+        // location.reload();
       });
     onClose();
   };

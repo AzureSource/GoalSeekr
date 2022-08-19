@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   missions: [],
+  missionFinished: false,
+  missionResults: []
 };
 
 export const missionQueue = createSlice({
@@ -11,13 +13,26 @@ export const missionQueue = createSlice({
     setMissionQueue: (state, action) => {
       if (Object.keys(action.payload)[0] === 'add') {
         state.missions.push(action.payload.add);
-      }
-      if (Object.keys(action.payload)[0] === 'remove') {
+      } else if (Object.keys(action.payload)[0] === 'remove') {
         state.missions.splice(action.payload.remove, 1);
+      } else {
+        state.missions = [];
       }
     },
+    toggleMissionFinished: (state, action) => {
+      if (action.payload === 'true') {
+        state.missionFinished = true;
+      }
+      if (action.payload === 'false') {
+        state.missionFinished = false;
+      }
+    },
+    updateMissionResults: (state, action) => {
+      console.log('action.payload is ', action.payload);
+      state.missionResults = action.payload;
+    }
   },
 });
 
-export const { setMissionQueue } = missionQueue.actions;
+export const { setMissionQueue, toggleMissionFinished, updateMissionResults } = missionQueue.actions;
 export default missionQueue.reducer;

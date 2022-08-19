@@ -15,8 +15,8 @@ const Stats = () => {
         const g_id = data.rows[0].currentgalaxy;
         axios.get(`/api/players/${g_id}`)
           .then((results) =>  {
-            console.log('PLAYERLIST: ', results.data[0].userid);
-            console.log(id);
+            // console.log('PLAYERLIST: ', results.data[0].userid);
+            // console.log(id);
             setPlayerInfo(results.data.filter((row) => (row.userid == id))[0]);
           })
           .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
@@ -24,7 +24,7 @@ const Stats = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log('playerinfo', playerInfo);
+  // console.log(playerInfo);
 
   return (
     <Flex
