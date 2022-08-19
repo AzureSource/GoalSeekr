@@ -16,7 +16,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
       overflow="auto"
     >
       {chats.map((chat) => (
-        <Flex className="messageContainer" key={chat.id} border="1px solid" m="0.2rem"
+        <Flex className="messageContainer" key={chat.id} border="1px solid" m="0.2rem" px='.5rem' py='.2rem'
           borderRadius="5px" borderColor="#50b6ab"
           color={chat.userID.toString() === id ? 'rgb(80 182 171 / 62%)' : '#2e2f47'}
           background={chat.userID.toString() === id ? '#2e2f47' : 'rgb(80 182 171 / 62%)'}
