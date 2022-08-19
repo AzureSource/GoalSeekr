@@ -50,7 +50,7 @@ const MissionResult = () => {
           <ModalCloseButton />
           <ModalBody>
             <TableContainer>
-              <Table variant='striped' colorScheme='teal'>
+              <Table variant='striped' colorScheme='teal' color='orange'>
                 <Thead>
                   <Tr>
                     <Th>Mission Type</Th>
