@@ -30,7 +30,7 @@ routes.get('/api/currency/:userid', tasks.getCurrencyByUser);
 
 
 // player list
-routes.get('/api/players', getAllPlayers);
+routes.get('/api/players/:galaxy_id', getAllPlayers);
 
 //user
 routes.get('/api/users',users.checkAllUser);
