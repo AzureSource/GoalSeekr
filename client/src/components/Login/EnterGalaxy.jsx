@@ -33,14 +33,18 @@ export default function EnterGalaxy({ setTitle }){
         }
       })
         .then(({data})=>{
-          //console.log(data);
           if(data.length){
             const gal_id = data[0].id;
-            const u_id = params.id;  //googleuid
+            const u_id = params.id;//user id
+            // if(data[0].isGameOn){
+            //   alert('Galaxy Battle Started, Please Join Another Galxy Or Create A New One');
+            // }
+            // else{
             axios.put(`/api/user/${u_id}/${gal_id}`)
               .then((res) => console.log( res ? 'User/Galaxy Updated' : 'Update Failed', res))
               .catch((err) => console.log('Request unsucessful', err));
             redirectToGalaxyWindow();
+            // }
           }
           else{
             alert('Please Enter Correct Galaxy Name Or Create A New One');
