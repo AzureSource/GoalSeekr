@@ -34,9 +34,11 @@ const Stats = () => {
         flexDir='column'
         className='stats-content-container'
       >
-        <Flex className='stat-username-money-container'>
-          <div>{playerInfo.username}</div>
-          <div>${playerInfo.currency}</div>
+        <Flex
+          className='stat-username-money-container'
+        >
+          <div><b>{playerInfo.username}</b></div>
+          <div><b>${playerInfo.currency}</b></div>
         </Flex>
         <div><b>Motto : </b>{playerInfo.motto}</div>
         <div><b>Ships Owned : </b>{playerInfo.ships && playerInfo.ships.length || 0}</div>

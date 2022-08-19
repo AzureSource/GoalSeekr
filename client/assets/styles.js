@@ -516,9 +516,14 @@ const overrides = {
       },
       '.stats-content-container': {
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         height: '100% !important',
         width: '100%',
+      },
+      '.stat-username-money-container': {
+        width: '90%',
+        justifyContent: 'space-around',
+        fontSize: '1.5rem'
       },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
