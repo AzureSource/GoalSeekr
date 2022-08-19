@@ -3,12 +3,16 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import Scout from './missionType/Scout.jsx';
-import Colony from './missionType/Colony.jsx';
+// import Colony from './missionType/Colony.jsx';
+import MissionNotification from './MissionNotification.jsx';
+
 
 export default function MissionSequence() {
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
   console.log('missionData', missionData);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [results, setResults] = useState('');
 
   const scout = (targetPlanetId) => {
     let config = {
@@ -20,6 +24,8 @@ export default function MissionSequence() {
     axios.post(`api/users/${id}/mission`, config)
       .then(() => {
         console.log('update user info');
+        setResults('update user info');
+        setModalOpen(true);
       });
   };
 
@@ -31,6 +37,7 @@ export default function MissionSequence() {
   return (
     <div>
       <button onClick={() => executeMission(missionData.target)}>Execute Mission</button>
+      {modalOpen && <MissionNotification results={results}/>}
     </div>
   );
 }
