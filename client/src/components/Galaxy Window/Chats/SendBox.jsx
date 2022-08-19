@@ -23,7 +23,12 @@ const SendBox = ({ setChatAdded, id, galID }) => {
   }
 
   return (
-    <Flex className='chatsSendBox' h="15%" w="100%">
+    <Flex
+      className='chatsSendBox'
+      h="15%" w="100%"
+      // borderTop="1px solid"
+      // borderColor="#50b6ab"
+    >
       <Flex
         flexDirection="row"
         flexGrow="1"

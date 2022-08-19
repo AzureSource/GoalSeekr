@@ -498,6 +498,9 @@ const overrides = {
       '.chatsMainDisplay::-webkit-scrollbar': {
         display: 'none'  /* Safari and Chrome */
       },
+      '.chatsSendBox, .chatsMainDisplay, .stats-container, .chatsTitle': {
+        fontFamily: 'Abril Fatface',
+      },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
       '.end-turn-btn, .tasks-modal-btn': {
