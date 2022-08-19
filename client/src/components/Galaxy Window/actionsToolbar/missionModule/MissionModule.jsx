@@ -3,7 +3,7 @@ import axios from 'axios';
 import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
-import MissionSequence from '../missionSequence/missionSequence.jsx';
+import MissionSequence from '../missionSequence/MissionSequence.jsx';
 import { setMissionQueue } from './missionModuleSlice';
 import { Button, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';

@@ -1,7 +1,10 @@
-import React, {useState, createContext, useEffect, useContext} from 'react';
+import React, {useState, createContext, useEffect} from 'react';
 import axios from 'axios';
 import Ship from './Ship.jsx';
-import shipImg from '../../../assets/ship.png';
+import attackPic from '../../../assets/ships/attackPic.png';
+import mothershipPic from '../../../assets/ships/mothershipPic.png';
+import scoutPic from '../../../assets/ships/scoutPic.png';
+import tankPic from '../../../assets/ships/tankPic.png';
 import {Button, Modal, ModalOverlay, ModalContent, Box,
   Wrap, ModalHeader,
   ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
@@ -20,14 +23,34 @@ const BuildShip = () => {
 
   const planetIdSelected = useSelector((state) => state.denseGalaxyPlanetSelection.planetSelection.planetIdSelected);
 
-  console.log('planetIdSelected is ', planetIdSelected);
+  // console.log('planetIdSelected is ', planetIdSelected);
 
   useEffect(() => {
     const fetchData = async () => {
       const shipResponse = await axios.get('/api/ships/');
       const userResponse = await axios.get(`/api/users/${id}`);
       let shipsDB = shipResponse.data;
-      let shipsWithImg = shipsDB.map(shipDB => ({...shipDB, imageUrl: shipImg}));
+      let shipsWithImg = shipsDB.map(shipDB => {
+        var shipWithImg = {...shipDB};
+        shipWithImg.imageUrl = attackPic;
+        switch (shipWithImg.name) {
+        case 'Scout':
+          shipWithImg.imageUrl = scoutPic;
+          break;
+        case 'Fighter':
+          shipWithImg.imageUrl = attackPic;
+          break;
+        case 'Mothership':
+          shipWithImg.imageUrl = mothershipPic;
+          break;
+        case 'Tank':
+          shipWithImg.imageUrl = tankPic;
+          break;
+        default:
+          shipWithImg.imageUrl = tankPic;
+        }
+        return shipWithImg;
+      });
       setShips(shipsWithImg);
       setUser(userResponse.data[0]);
       setUserCurrency(userResponse.data[0].currency);
