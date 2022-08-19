@@ -24,7 +24,7 @@ export default function GalaxyWindow ({ setTitle }) {
   const [hatModal, setHatModal] = useState(true);
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
-
+  const [gID, setGID] = useState(null);
 
   // console.log('userPlanets is ', userPlanets);
 
@@ -36,10 +36,11 @@ export default function GalaxyWindow ({ setTitle }) {
 
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
-      .then((result) => {
-        console.log('galaxy', result.data.rows[0]);
+      .then(({ data }) => {
+        console.log(data.rows[0].currentgalaxy);
+        setGID(data.rows[0].currentgalaxy);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
-        dispatch(setGalaxyID(result.data.rows[0]));
+        dispatch(setGalaxyID(data.rows[0]));
       })
       .catch((err) => console.log(err));
   };
@@ -52,7 +53,6 @@ export default function GalaxyWindow ({ setTitle }) {
       const ships = await axios.get(`/api/users/${id}/ships`);
       dispatch(getUserShipsFromDB(ships.data.getusersships));
       const planets = await axios.get(`/api/users/${id}/planets`);
-      console.log('planets.data is ', planets.data);
       dispatch(getUserPlanetsFromDB(planets.data));
     };
     fetchData();
@@ -70,7 +70,7 @@ export default function GalaxyWindow ({ setTitle }) {
           <TransformWrapper initialScale={1} className='transformWrapper'>
             <TransformComponent className='transformComponent'>
               <div className='planetsWindow'>
-                {/* {hatModal && <ChooseHat gId={1} setHatModal={setHatModal}/>} */}
+                {hatModal && <ChooseHat gId={gID} setHatModal={setHatModal}/>}
                 {/* <SparseGalaxy/> */}
                 <DenseGalaxy/>
               </div>

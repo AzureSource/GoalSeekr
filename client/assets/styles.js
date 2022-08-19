@@ -420,10 +420,6 @@ const overrides = {
         marginTop: '4.685%',
         marginLeft: '3.1236%'
       },
-      '.galaxy-window-top': {
-        width: '100%',
-        height: '70%'
-      },
       '.menu-side': {
         width: '20%',
       },
@@ -446,15 +442,31 @@ const overrides = {
       //-------------------------------HAT MODAL
       '#hat-div': {
         display: 'grid',
-        gridTemplateRows: '1fr 5fr 1fr',
+        gridTemplateRows: '1fr 3fr 3fr 1fr',
         position: 'absolute',
-        width: '60%',
-        height: '40%',
-        top: '30%',
-        right: '18%',
+        width: '15%',
+        height: '25%',
+        top: '4%',
+        zIndex: 3,
+        right: '7%',
         color: '#c7e4e9',
         backgroundColor: 'cadetblue',
         borderRadius: '12px'
+      },
+      '.hat-list1': {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginTop: '5%',
+        gridRow: 2
+      },
+      '.hat-list2': {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginTop: '5%',
+        gridRow: 3
+      },
+      '#hat-list-title': {
+        gridRow: 1
       },
       '#confirm-hat': {
         height: '70%',
@@ -463,12 +475,13 @@ const overrides = {
         backgroundColor: '#2626a3',
         borderRadius: '10px',
         border: '1px solid white',
-        gridRow: 3,
+        gridRow: 4,
         justifySelf: 'center'
       },
       '.hat-list-icon': {
-        height: '20px',
-        width: '20px'
+        height: '100px',
+        width: '100px',
+        zIndex: 4
       },
       //-------------------------------SIDE MENU
       '.menu-side-container': {
