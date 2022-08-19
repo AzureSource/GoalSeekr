@@ -494,12 +494,15 @@ const overrides = {
       '.stats-container': {
         marginRight: '7.5px',
         alignItems: 'center',
+        fontFamily: 'Abril Fatface',
+        color:  'rgba(80,182,171)'
       },
       '.chatsMainDisplay::-webkit-scrollbar': {
         display: 'none'  /* Safari and Chrome */
       },
-      '.chatsSendBox, .chatsMainDisplay, .stats-container, .chatsTitle': {
+      '.chatsSendBox, .chatsMainDisplay, .chatsTitle': {
         fontFamily: 'Abril Fatface',
+        color:  'rgba(80,182,171)'
       },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
@@ -654,7 +657,7 @@ const overrides = {
         justifyContent: 'center',
         width: '85px'
       },
-      '.username-input, .enter-existing-galaxy-input': {
+      '.username-input, .enter-existing-galaxy-input, .motto-input': {
         width: '200px',
         fontFamily: 'Abril Fatface',
         size: '20px',
@@ -662,7 +665,12 @@ const overrides = {
         borderRadius: '4px',
         border:'2px solid #2e2f47',
         height: '37px',
-        margin: '15px 0px'
+      },
+      '.username-input': {
+        marginBottom: '5px',
+      },
+      '.motto-input': {
+        margin: '5px 0px 10px',
       },
       '.enter-existing-galaxy-input': {
         margin: '10px 0px'
