@@ -511,6 +511,20 @@ const overrides = {
         fontFamily: 'Abril Fatface',
         color:  'rgba(80,182,171)'
       },
+      '.chatsSendBox': {
+        height: '100%',
+      },
+      '.stats-content-container': {
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        height: '100% !important',
+        width: '100%',
+      },
+      '.stat-username-money-container': {
+        width: '90%',
+        justifyContent: 'space-around',
+        fontSize: '1.5rem'
+      },
       //--------------------------------- stats
       //---------------------------------SIDE MENU
       '.end-turn-btn, .tasks-modal-btn': {

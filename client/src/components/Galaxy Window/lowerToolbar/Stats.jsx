@@ -28,16 +28,22 @@ const Stats = () => {
 
   return (
     <Flex
-      flexDir='column'
       className='stats-container'
     >
-      <Flex className='stat-username-money-container'>
-        <div>{playerInfo.username}</div>
-        <div>${playerInfo.currency}</div>
+      <Flex
+        flexDir='column'
+        className='stats-content-container'
+      >
+        <Flex
+          className='stat-username-money-container'
+        >
+          <div><b>{playerInfo.username}</b></div>
+          <div><b>${playerInfo.currency}</b></div>
+        </Flex>
+        <div><b>Motto : </b>{playerInfo.motto}</div>
+        <div><b>Ships Owned : </b>{playerInfo.ships && playerInfo.ships.length || 0}</div>
+        <div><b>Planets Conquered : </b>{playerInfo.planetsOwned ? playerInfo.planets.length : 0}</div>
       </Flex>
-      <div><b>Motto : </b>{playerInfo.motto}</div>
-      <div><b>Ships Owned : </b>{playerInfo.ships && playerInfo.ships.length || 0}</div>
-      <div><b>Planets Conquered : </b>{playerInfo.planetsOwned ? playerInfo.planets.length : 0}</div>
     </Flex>
   );
 
