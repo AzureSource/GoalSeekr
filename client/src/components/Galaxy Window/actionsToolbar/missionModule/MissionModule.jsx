@@ -7,7 +7,6 @@ import MissionSequence from "../missionSequence/missionSequence.jsx";
 import { setMissionQueue } from "./missionModuleSlice";
 import { Button, Select, List, ListItem, Flex } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import MissionResult from '../missionSequence/MissionResult.jsx';
 
 export default function MissionModule() {
   const planets = useSelector(
@@ -20,7 +19,6 @@ export default function MissionModule() {
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
-  const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
 
   const checkForShips = () => {
     const planetID = planets.planetIdSelected;
@@ -33,11 +31,6 @@ export default function MissionModule() {
         console.log('There was an error grabbing the ship data.', err);
       });
   };
-  // const checkForShips = () => {
-  //   setShips(
-  //     [{ name: 'scout', count: 1, power: 1000 }]
-  //   );
-  // };
 
   useEffect(() => {
     if (planets.homePlanet) {
@@ -126,7 +119,6 @@ export default function MissionModule() {
       <List spacing={3}>
         <ListItem>
           {missionQueue.map((mission, index) => {
-            {/* console.log('mission.ship is ', mission.ship); */ }
             return (
               <div key={index}>
                 Home Planet : {mission.start} | Type : {mission.type} | Ships : {shipData} | Target Planet : {mission.target}
@@ -141,7 +133,6 @@ export default function MissionModule() {
       {endTurnActivation && (
         <div>
           <MissionSequence />
-          {/* {showMissionResult && <MissionResult />} */}
         </div>
       )}
     </Flex>

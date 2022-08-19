@@ -2,24 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-// import Scout from './missionType/Scout.jsx';
-// import Colony from './missionType/Colony.jsx';
-// import MissionNotification from './MissionNotification.jsx';
-// import Colony from './missionType/Colony.jsx';
-// import BuildShip from '../../../buildShips/BuildShip.jsx';
 import MissionResult from './MissionResult.jsx';
 import { toggleMissionFinished, updateMissionResults } from '../missionModule/missionModuleSlice';
 
 export default function MissionSequence() {
+  const dispatch = useDispatch();
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
-  console.log('missionData', missionData);
   const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [results, setResults] = useState('');
   const missionResults = [];
-  // const [showMissionResults, setShowMissionResults] = useState(true);
-  const dispatch = useDispatch();
+
 
   const scout = async (targetPlanetId, targetPlanetName) => {
     let config = {
@@ -35,8 +27,6 @@ export default function MissionSequence() {
     missionRes.targetPlanetName = targetPlanetName;
     missionRes.result = 'Scouted';
     missionResults.push(missionRes);
-    // setResults('update user info');
-    // setModalOpen(true);
   };
 
   const executeMission = async () => {
@@ -50,9 +40,6 @@ export default function MissionSequence() {
       }
     }
     console.log('mission finished, following are the results');
-    // for (let i = 0; i < missionResults.length; i++) {
-    //   console.log(JSON.stringify(missionResults[i]));
-    // }
     console.log('-----------------');
     dispatch(
       updateMissionResults(missionResults)
@@ -62,36 +49,23 @@ export default function MissionSequence() {
     );
   };
 
-  // const executeMission1 = () => {
-  //   console.log('start execute mission');
-  // };
+  useEffect(() => {
+    executeMission();
+  }, []);
 
   return (
     <div>
-      {executeMission}
-      {/* <button onClick={executeMission}>Execute Mission</button> */}
-      {/* {modalOpen && <MissionNotification results={results}/>} */}
       {showMissionResult && <MissionResult />}
     </div>
   );
 }
 
 
-
-// Austin - Scout Notificaiton Modal popup
-// Peter - Attack/Colonization Modal popup
-
 // -------------------------
-
-//scout
-// useEffect on galaxy window, renders on change of discoverdby field
-// Isabelle is working on this
-
 
 // colonize
 // useEffect on galaxy window, renders on change of colonizedBy
 // adding ship id to params to move ship to the colonized planet.
-
 
 
 // attacking
