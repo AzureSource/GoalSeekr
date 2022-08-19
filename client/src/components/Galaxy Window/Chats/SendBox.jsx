@@ -23,7 +23,7 @@ const SendBox = ({ setChatAdded, id, galID }) => {
   }
 
   return (
-    <Flex className='chatsSendBox' h="12%" w="100%">
+    <Flex className='chatsSendBox' h="15%" w="100%">
       <Flex
         flexDirection="row"
         flexGrow="1"

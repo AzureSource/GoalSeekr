@@ -12,7 +12,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
   }, [galID, chatAdded]);
 
   return (
-    <Flex className='chatsMainDisplay'h="70%" w="100%" flexDirection="column"
+    <Flex className='chatsMainDisplay'h="75%" w="100%" flexDirection="column"
       overflow="auto"
     >
       {chats.map((chat) => (
