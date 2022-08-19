@@ -7,6 +7,7 @@ import MissionSequence from "../missionSequence/missionSequence.jsx";
 import { setMissionQueue } from "./missionModuleSlice";
 import { Divider, Select, List, ListItem, Flex } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import MissionResult from '../missionSequence/MissionResult.jsx';
 
 export default function MissionModule() {
   const planets = useSelector(
@@ -19,6 +20,7 @@ export default function MissionModule() {
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
   const dispatch = useDispatch();
+  const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
 
   const checkForShips = () => {
     const planetID = planets.planetIdSelected;
@@ -126,6 +128,7 @@ export default function MissionModule() {
       {/* {endTurnActivation && ( */}
       <div>
         <MissionSequence />
+        {showMissionResult && <MissionResult />}
       </div>
       {/* )} */}
     </Flex>

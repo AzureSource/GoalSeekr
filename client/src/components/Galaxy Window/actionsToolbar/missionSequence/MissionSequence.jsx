@@ -6,12 +6,15 @@ import { useParams } from 'react-router-dom';
 import Colony from './missionType/Colony.jsx';
 import BuildShip from '../../../buildShips/BuildShip.jsx';
 import MissionResult from './MissionResult.jsx';
+import { toggleMissionFinished, updateMissionResults } from '../missionModule/missionModuleSlice';
 
 export default function MissionSequence() {
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
-  console.log('missionData', missionData);
+  // console.log('missionData', missionData);
   const missionResults = [];
+  const [showMissionResults, setShowMissionResults] = useState(true);
+  const dispatch = useDispatch();
 
   const scout = async (targetPlanetId, targetPlanetName) => {
     let config = {
@@ -40,10 +43,16 @@ export default function MissionSequence() {
       }
     }
     console.log('mission finished, following are the results');
-    for (let i = 0; i < missionResults.length; i++) {
-      console.log(JSON.stringify(missionResults[i]));
-    }
-    <MissionResult />;
+    // for (let i = 0; i < missionResults.length; i++) {
+    //   console.log(JSON.stringify(missionResults[i]));
+    // }
+    console.log('-----------------');
+    dispatch(
+      updateMissionResults(missionResults)
+    );
+    dispatch(
+      toggleMissionFinished('true')
+    );
   };
 
   // const executeMission1 = () => {
