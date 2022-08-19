@@ -486,6 +486,7 @@ const overrides = {
         borderRadius: '7px',
         border: '2.5px solid rgba(80,182,171,0.4)',
         background: '#2e2f47',
+        color: 'white',
       },
       '.chats-container': {
         marginLeft: '7.5px',
