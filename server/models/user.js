@@ -76,10 +76,10 @@ module.exports = {
         const query = 'SELECT * FROM discoverplanet($1, $2)';
         await client(query, [userId, targetPlanet]);
       }
-      if (type === 'colony') {
-        let targetPlanet = req.body.data.targetPlanet;
+      if (type === 'mission') {
+        let shipIds = req.body.data.shipIds;
         const query = 'SELECT * FROM colonizeplanet($1, $2)';
-        await client(query, [userId, targetPlanet]);
+        await client(query, [userId, shipIds]);
       }
       res.sendStatus(201);
     } catch (err) {

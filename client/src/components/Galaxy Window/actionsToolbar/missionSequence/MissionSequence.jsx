@@ -9,6 +9,7 @@ export default function MissionSequence() {
   const dispatch = useDispatch();
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
+  console.log('missionData', missionData);
   const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
   const missionResults = [];
 
@@ -29,12 +30,35 @@ export default function MissionSequence() {
     missionResults.push(missionRes);
   };
 
+  const allMissions = async (targetPlanetId, shipIds) => {
+    let config = {
+      data: {
+        'type': 'mission',
+        'shipIds': shipIds
+      }
+    };
+    await axios.post(`api/users/${id}/mission`, config)
+      .then((res) => {
+        console.log(res);
+      });
+
+  };
+
   const executeMission = async () => {
     console.log('start execute mission......');
     for (let i = 0; i < missionData.length; i++) {
       switch (missionData[i].type) {
       case 'scout':
         await scout(missionData[i].targetId, missionData[i].target);
+        break;
+      case 'attack':
+        await allMissions(missionData[i].targetId, missionData[i].ship.ids);
+        break;
+      case 'colonize':
+        await allMissions(missionData[i].targetId, missionData[i].ship.ids);
+        break;
+      case 'transport':
+        await allMissions(missionData[i].targetId, missionData[i].ship.ids);
         break;
       default:
       }
