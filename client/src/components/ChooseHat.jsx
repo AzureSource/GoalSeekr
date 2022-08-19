@@ -15,7 +15,6 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
 
   //fetch hats for the galaxy and assign the hats to state
   const getChosenHats = () => {
-
     axios.get(`/api/hats/${gId}`)
       .then(({data}) => {
         console.log('SUCCESS HATS', data.rows);
@@ -40,7 +39,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
   //confirm the choice, post to DB (need to adjust/fix the body object based on table setup)
   const confirmHat = () => {
     if (!hatPick){
-      alert('you must Select a hat, loser!');
+      return alert('you must Select a hat, loser!');
     } else {
       axios.put(`/api/hats/${hatPick.id}/${id}/${gId}`)
         .then((res) =>  {
@@ -49,7 +48,6 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
         })
         .catch((err) => console.log(err));
     }
-
   };
 
 
@@ -70,6 +68,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
               ></img>
               {(!chosenHats.includes(hat.id)) &&
                 <input
+                  className='selectHatButtons1'
                   key={`input1-${ind}`}
                   type="radio"
                   name='hatPicker'
@@ -94,6 +93,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
               ></img>
               {(!chosenHats.includes(hat.id)) &&
                 <input
+                  className='selectHatButtons2'
                   key={`input1-${ind}`}
                   type="radio"
                   name='hatPicker'

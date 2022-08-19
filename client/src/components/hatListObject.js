@@ -1,13 +1,13 @@
-import banana from '../../assets/hats/banana.png';
-import bearears from '../../assets/hats/bearears.png';
-import bubble from '../../assets/hats/bubble.png';
-import cowboy from '../../assets/hats/cowboy.png';
-import crown from '../../assets/hats/crown.png';
-import devil from '../../assets/hats/devil.png';
-import egg from '../../assets/hats/egg.png';
-import flowercrown from '../../assets/hats/flowercrown.png';
-import halo from '../../assets/hats/halo.png';
-import sprout from '../../assets/hats/sprout.png';
+import banana from '../../assets/hatImages/banana.png';
+import bearears from '../../assets/hatImages/bearears.png';
+import bubble from '../../assets/hatImages/bubble.png';
+import cowboy from '../../assets/hatImages/cowboy.png';
+import crown from '../../assets/hatImages/crown.png';
+import devil from '../../assets/hatImages/devil.png';
+import egg from '../../assets/hatImages/egg.png';
+import flowercrown from '../../assets/hatImages/flowercrown.png';
+import halo from '../../assets/hatImages/halo.png';
+import sprout from '../../assets/hatImages/sprout.png';
 
 
 const hatArr = [

@@ -8,7 +8,7 @@ import { setActiveUser, setGalaxyStarted } from './galaxyWindowSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import TaskModal from '../TaskTracker/TaskModal.jsx';
 
 const MenuSide = () => {
   const dispatch = useDispatch();
@@ -76,13 +76,8 @@ const MenuSide = () => {
       <Flex
         className='side-menu-bottom-btn-container'
       >
-        {/* <span>ACTIVE USER: {activeUserID} </span> */}
-        {isStarted ? endTurnButton : beginGameButton }
-        <Button
-          className='tasks-modal-btn'
-        >
-          Tasks
-        </Button>
+      {isStarted ? endTurnButton : beginGameButton }
+        <TaskModal />
       </Flex>
     </Flex>
 

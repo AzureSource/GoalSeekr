@@ -10,12 +10,14 @@ CREATE TABLE galaxies (
   maxPlayers INT NOT NULL,
   currentPlayers INT NOT NULL DEFAULT 1,
 	allianceAllowed BOOLEAN NOT NULL,
-	smallGalaxy BOOLEAN NOT NULL
+	smallGalaxy BOOLEAN NOT NULL,
+	activeuser INT,
+	gamestarted BOOLEAN
 );
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username TEXT UNIQUE,
+  username TEXT,
   googleuid TEXT,
 	email TEXT,
   motto TEXT,
@@ -25,6 +27,7 @@ CREATE TABLE users (
   currentGalaxy INT REFERENCES galaxies(id) DEFAULT NULL,
   currentAlliance INT
 );
+ALTER TABLE galaxies ADD CONSTRAINT activeuser_fkey FOREIGN KEY (activeuser) REFERENCES users(id);
 
 CREATE TABLE planets (
   id SERIAL PRIMARY KEY,
@@ -471,7 +474,7 @@ CREATE OR REPLACE FUNCTION createorupdateuser("googleUID" TEXT, "displayName" TE
 BEGIN
 	SELECT EXISTS(SELECT id FROM users WHERE googleuid = $1) INTO userExists;
 	IF userExists THEN
-		UPDATE users SET username = $2 WHERE googleuid = $1;
+		UPDATE users SET username = $2, profile_picture_url = $6 WHERE googleuid = $1;
 		SELECT row_to_json(users) FROM users WHERE googleuid = $1 INTO result;
 		RETURN result;
 	ELSE
@@ -715,6 +718,389 @@ CREATE OR REPLACE FUNCTION colonizeplanet("userID" INT, "planetID" INT)
 					WHERE galaxy_id=galaxyID AND planet_id = $2;
 					RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID);
 				ELSE
+				  RAISE NOTICE 'User: % has not disovered planet % in galaxy %', $1, $2, galaxyid;
+					RETURN (json_build_object('error', 'User has not discovered this planet'));
+			END IF;
+		END IF;
+			RETURN (json_build_object('error', CONCAT('Data does not exist for planet:', $2, ' in galaxy:', galaxyID)));
+END
+$func$ LANGUAGE plpgsql VOLATILE COST 100;
+
+-- Handles transportation of ships between owned planets, Battle logic/reward , and colonizations
+CREATE OR REPLACE FUNCTION attackandcolonizeplanet("userID" INT, "planetID" INT, "shipIds" INT[])
+  RETURNS JSON AS $func$
+	DECLARE
+		alreadyDiscovered BOOLEAN;
+		galaxyID INT;
+		planetDataExists BOOLEAN;
+		creationResult planets_galaxy%rowtype;
+		planetOwner INT;
+		userSentMotherShip BOOLEAN;
+		shipsOnPlanet BOOLEAN;
+		userTotalPower FLOAT;
+		enemyTotalPower FLOAT;
+		startingPlanetID INT;
+		shipId INT;
+		totalPowerLevel INT;
+		cummulative INT := 0;
+		userShipsLost INT;
+		userShipCount INT;
+		enemyShipCount INT;
+		enemyShipsDestroyed INT;
+		currentBalance INT;
+		currentEnemyBalance INT;
+	BEGIN
+			SELECT (SELECT COUNT(*) FROM (SELECT UNNEST($3)) result) INTO userShipCount;
+			RAISE NOTICE 'USER SHIP COUNT: %', enemyShipCount;
+			SELECT currentgalaxy FROM users WHERE id = $1 INTO galaxyID;
+			RAISE NOTICE 'currentGalaxy: %', galaxyID;
+			SELECT currency FROM users where id = $1 INTO currentBalance;
+			SELECT user_ship_planet_id FROM ships_user WHERE id IN (SELECT UNNEST($3)) INTO startingPlanetID;
+			SELECT EXISTS (SELECT planet_id FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID) INTO planetDataExists;
+			SELECT EXISTS (SELECT user_id FROM (SELECT unnest(discoveredby) as user_id FROM planets_galaxy WHERE planet_id = $2 and galaxy_id = galaxyID) Players WHERE user_id = $1) INTO alreadyDiscovered;
+			SELECT colonizedby FROM planets_galaxy WHERE planet_id = $2 and galaxy_id = galaxyID INTO planetOwner;
+			SELECT EXISTS(SELECT id FROM ships_user WHERE user_ship_name = 'Mothership' AND id IN (SELECT UNNEST($3))) INTO userSentMotherShip;
+			SELECT EXISTS(SELECT user_ship_name FROM ships_user WHERE user_ship_galaxy_id = galaxyID AND user_ship_planet_id = $2) INTO shipsOnPlanet;
+			RAISE NOTICE 'planetDataExists?: %', planetDataExists;
+			RAISE NOTICE	'alreadyDiscovered?: %', alreadyDiscovered;
+			RAISE NOTICE	'planetOwnerID?: %', planetOwner;
+			RAISE NOTICE	'userSentMothership?: %', userSentMotherShip;
+		IF planetDataExists THEN
+			IF alreadyDiscovered THEN
+				IF planetOwner IS NULL THEN
+					IF userSentMothership THEN
+							UPDATE planets_galaxy SET colonizedby=$1 WHERE galaxy_id=galaxyID AND planet_id = $2;
+							UPDATE ships_user SET user_ship_planet_id = $2 WHERE id IN (SELECT UNNEST($3));
+							--RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID);
+							RETURN (
+									json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'colonize',
+																	'results', 'victory',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', null,
+																	'enemy_name', null,
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipslost', 0,
+																	'moneyearned', 0
+																	)
+													)
+
+							);
+					ELSE
+							RETURN (json_build_object('error', 'Please send a mothership to colonize this planet!, returning to base'));
+					END IF;
+				ELSE
+					SELECT COUNT(*) FROM SHIPS_USER WHERE user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID INTO enemyShipCount;
+					RAISE NOTICE 'Planet owner is % ', planetOwner;
+					SELECT SUM(user_ship_powerlevel * user_ship_health) FROM ships_user WHERE user_id = $1 AND user_ship_galaxy_id = galaxyID AND id IN (SELECT UNNEST($3)) INTO userTotalPower;
+					SELECT SUM(user_ship_powerlevel * user_ship_health) FROM ships_user WHERE user_id = planetOwner AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID INTO enemyTotalPower;
+					RAISE NOTICE 'shipsOnPlanet?: %', shipsOnPlanet;
+					RAISE NOTICE 'yourTotalPower: %', userTotalPower;
+					RAISE NOTICE 'enemyTotalPower: %', enemyTotalPower;
+					IF enemyTotalPower IS NOT NULL THEN
+							IF planetOwner = $1 THEN --this is your planet, just move to it
+								 UPDATE planets_galaxy SET colonizedby=$1 WHERE galaxy_id=galaxyID AND planet_id = $2;
+								 UPDATE ships_user SET user_ship_planet_id = $2 WHERE id IN (SELECT UNNEST($3));
+								 SELECT COUNT(*) FROM SHIPS_USER WHERE user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID INTO enemyShipCount;
+								 --RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID);
+								 RAISE NOTICE 'THIS IS YOUR PLANET WITH SHIPS ON IT';
+								 RETURN (
+									json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'transport',
+																	'results', 'success',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', null,
+																	'enemy_name', null,
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipsleftstationed', (SELECT COUNT(*) FROM SHIPS_USER WHERE user_ship_planet_id = startingPlanetID AND user_ship_galaxy_id = galaxyID),
+																	'shipsonnewplanet', enemyShipCount,
+																	'shipslost', 0,
+																	'moneyearned', 0
+																	)
+													)
+
+							);
+							ELSE
+								SELECT currency FROM users where id = planetOwner INTO currentEnemyBalance;
+								RAISE NOTICE 'EnemyShipCount: %', enemyShipCount;
+								IF userTotalPower < enemyTotalPower THEN
+									 RAISE NOTICE 'You have lost this fight';
+									 DELETE FROM ships_user WHERE id IN (SELECT UNNEST($3));
+									 UPDATE users SET currency = currency + userTotalPower WHERE id = planetOwner;
+									 for shipid, totalpowerlevel in SELECT id, user_ship_powerlevel * user_ship_health FROM ships_user WHERE user_id = planetOwner AND user_ship_galaxy_id = galaxyID AND user_ship_planet_id = $2 ORDER BY user_ship_id loop
+															cummulative = cummulative + totalpowerlevel;
+															raise notice 'ship: %', shipid;
+															raise notice 'power: %', totalpowerlevel;
+															raise notice 'total: %', cummulative;
+															IF cummulative < (SELECT ROUND(enemyTotalPower - (enemyTotalPower - userTotalPower)))  THEN
+																	DELETE FROM ships_user WHERE id = shipid;
+																	RAISE NOTICE '^^deleted^^';
+															END IF;
+													end loop;
+
+
+										IF userSentMothership THEN
+										RETURN (
+													json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'colonize',
+																	'results', 'defeat',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', planetOwner,
+																	'enemy_name', (SELECT username FROM users WHERE id = planetOwner),
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipslost', userShipCount,
+																	'remainingships', 0,
+																	'previousbalance', currentBalance,
+																	'newbalance', currentBalance,
+																	'moneyearned', 0
+																	),
+
+																	'defense',json_build_object(
+																	'results', 'victory',
+																	'userid', planetowner,
+																	'ownership_lost', false,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', $1,
+																	'enemy_name', (SELECT username FROM users WHERE id = $1),
+																	'shipsstationed', enemyShipCount,
+																	'shipslost', enemyShipCount - (SELECT COUNT(*) FROM SHIPS_USER WHERE user_id = planetOwner AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID),
+																	'remainingships', (SELECT JSON_AGG(id) FROM SHIPS_USER WHERE user_id = planetOwner AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID),
+																	'previousbalance', currentEnemyBalance,
+																	'newbalance', currentEnemyBalance + userTotalPower,
+																	'moneyearned', userTotalPower
+																	)
+
+
+													)
+
+										);
+									ELSE
+											RETURN (
+													json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'attack',
+																	'results', 'defeat',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', planetOwner,
+																	'enemy_name', (SELECT username FROM users WHERE id = planetOwner),
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipslost', userShipCount,
+																	'remainingships', 0,
+																	'previousbalance', currentBalance,
+																	'newbalance', currentBalance,
+																	'moneyearned', 0
+																	),
+
+																	'defense',json_build_object(
+																	'results', 'victory',
+																	'userid', planetowner,
+																	'ownership_lost', false,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', $1,
+																	'enemy_name', (SELECT username FROM users WHERE id = $1),
+																	'shipsstationed', enemyShipCount,
+																	'shipslost', enemyShipCount - (SELECT COUNT(*) FROM SHIPS_USER WHERE user_id = planetOwner AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID),
+																	'remainingships', (SELECT JSON_AGG(id) FROM SHIPS_USER WHERE user_id = planetOwner AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID),
+																	'previousbalance', currentEnemyBalance,
+																	'newbalance', currentEnemyBalance + userTotalPower,
+																	'moneyearned', userTotalPower
+																	)
+
+
+													)
+
+										);
+
+
+
+									END IF;
+								 ELSIF userTotalPower > enemyTotalPower THEN -- your power is higher than
+										RAISE NOTICE 'You have won this fight';
+											DELETE FROM ships_user WHERE user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID AND user_id = planetOwner;
+											UPDATE users SET currency = currency + enemyTotalPower WHERE id = $1;
+											FOR shipid, totalpowerlevel in SELECT id, user_ship_powerlevel * user_ship_health FROM ships_user WHERE user_id = $1 AND user_ship_galaxy_id = galaxyID AND user_ship_planet_id = startingPlanetID ORDER BY user_ship_id loop
+															cummulative = cummulative + totalpowerlevel;
+															raise notice 'ship: %', shipid;
+															raise notice 'power: %', totalpowerlevel;
+															raise notice 'total: %', cummulative;
+															IF cummulative < (SELECT ROUND(userTotalPower - (userTotalPower - enemyTotalPower))) THEN
+																	DELETE FROM ships_user WHERE id = shipid;
+																	RAISE NOTICE '^^deleted^^';
+															END IF;
+												end loop;
+
+
+											IF userSentMothership THEN
+												UPDATE planets_galaxy SET colonizedby=$1 WHERE galaxy_id=galaxyID AND planet_id = $2;
+												UPDATE ships_user SET user_ship_planet_id = $2 WHERE id IN (SELECT UNNEST($3));
+			-- 									RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID);
+
+
+													RETURN (
+																		json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'colonize',
+																	'results', 'victory',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', planetOwner,
+																	'enemy_name', (SELECT username FROM users WHERE id = planetOwner),
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipslost', userShipCount - (SELECT COUNT(*) FROM SHIPS_USER WHERE user_id = $1 AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID),
+																	'remainingships', (SELECT JSON_AGG(id) FROM SHIPS_USER WHERE user_id = $1 AND user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID),
+																	'previousbalance', currentBalance,
+																	'newbalance', currentBalance + enemyTotalPower,
+																	'moneyearned', enemyTotalPower
+																	),
+
+																	'defense',json_build_object(
+																	'results', 'defeat',
+																	'userid', planetowner,
+																	'ownership_lost', true,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', $1,
+																	'enemy_name', (SELECT username FROM users WHERE id = $1),
+																	'shipsstationed', enemyShipCount,
+																	'shipslost', enemyShipCount,
+																	'remainingships', 0
+																	)
+
+
+													)
+												);
+											ELSE
+												RETURN (
+																json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'attack',
+																	'results', 'victory',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', planetOwner,
+																	'enemy_name', (SELECT username FROM users WHERE id = planetOwner),
+																	'planet_owner_id', planetOwner,
+																	'planet_owner_name', (SELECT username FROM users WHERE id = planetOwner),
+																	'colonized', false,
+																	'shipssent', userShipCount,
+																	'shipslost', userShipCount - (SELECT COUNT(*) FROM SHIPS_USER WHERE user_id = $1 AND user_ship_planet_id = startingPlanetID AND user_ship_galaxy_id = galaxyID),
+																	'remainingships', (SELECT JSON_AGG(id) FROM SHIPS_USER WHERE user_id = $1 AND user_ship_planet_id = startingPlanetID AND user_ship_galaxy_id = galaxyID),
+																	'previousbalance', currentBalance,
+																	'newbalance', currentBalance + enemyTotalPower,
+																	'moneyearned', enemyTotalPower
+																	),
+
+																	'defense',json_build_object(
+																	'results', 'defeat',
+																	'userid', planetowner,
+																	'ownership_lost', false,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', $1,
+																	'enemy_name', (SELECT username FROM users WHERE id = $1),
+																	'shipsstationed', enemyShipCount,
+																	'shipslost', enemyShipCount,
+																	'remainingships', 0
+																	)
+																)
+															);
+											END IF;
+									ELSIF userTotalPower = enemyTotalPower THEN
+										RAISE NOTICE 'Same amount of power';
+										RETURN (json_build_object('Tie', 'We Flip a coin here'));
+									END IF;
+							END IF;
+					ELSE -- There are no ships on a colonized planet
+						IF planetOwner = $1 THEN --this is your planet, just move to it
+						 UPDATE planets_galaxy SET colonizedby=$1 WHERE galaxy_id=galaxyID AND planet_id = $2;
+ 						 UPDATE ships_user SET user_ship_planet_id = $2 WHERE id IN (SELECT UNNEST($3));
+						 SELECT COUNT(*) FROM SHIPS_USER WHERE user_ship_planet_id = $2 AND user_ship_galaxy_id = galaxyID INTO enemyShipCount;
+ 						 --RETURN (SELECT row_to_json(planets_galaxy) FROM planets_galaxy WHERE planet_id = $2 AND galaxy_id = galaxyID);
+							 RETURN (json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'transport',
+																	'results', 'success',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', null,
+																	'enemy_name', null,
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipsleftstationed', (SELECT COUNT(*) FROM SHIPS_USER WHERE user_ship_planet_id = startingPlanetID AND user_ship_galaxy_id = galaxyID),
+																	'shipsonnewplanet', enemyShipCount,
+																	'shipslost', 0,
+																	'moneyearned', 0
+																	)
+													)
+								);
+						ELSE
+							IF userSentMothership THEN
+									UPDATE planets_galaxy SET colonizedby=$1 WHERE galaxy_id=galaxyID AND planet_id = $2;
+									UPDATE ships_user SET user_ship_planet_id = $2 WHERE id IN (SELECT UNNEST($3));
+									RETURN (
+											json_build_object(
+																	'attacker', json_build_object(
+																	'action', 'colonize',
+																	'results', 'victory',
+																	'userid', $1,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', planetOwner,
+																	'enemy_name', (SELECT username FROM users WHERE id = planetOwner),
+																	'colonized', true,
+																	'shipssent', userShipCount,
+																	'shipslost', 0,
+																	'remainingships', $3,
+																	'previousbalance', currentBalance,
+																	'newbalance', currentBalance,
+																	'moneyearned', 0
+																	),
+
+																	'defense',json_build_object(
+																	'results', 'defeat',
+																	'userid', planetowner,
+																	'ownership_lost', true,
+																	'planetid', $2,
+																	'galaxyid', galaxyID,
+																	'enemy_id', $1,
+																	'enemy_name', (SELECT username FROM users WHERE id = $1),
+																	'shipsstationed', 0,
+																	'shipslost', 0,
+																	'remainingships', 0
+																	)
+
+
+													)
+									);
+							ELSE
+								RETURN (json_build_object('error', 'Please send a mothership to colonize this planet!, Returning to base.'));
+							END IF;
+						END IF;
+					END IF;
+					RETURN (json_build_object('error', 'This planet is already colonized'));
+				END IF;
+			ELSE
 				  RAISE NOTICE 'User: % has not disovered planet % in galaxy %', $1, $2, galaxyid;
 					RETURN (json_build_object('error', 'User has not discovered this planet'));
 			END IF;
