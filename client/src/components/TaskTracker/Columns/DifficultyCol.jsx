@@ -8,7 +8,7 @@ const DifficultyCol = ({ difficulty, setTaskUpdated }) => {
   return (
     <Flex className="singleColumnContainer"
       flexDirection="column" justifyContent="flex-start" alignItems="center" flexGrow="1"
-      w="20%" border="1px solid" m="0.1rem" borderRadius="10px"
+      w="20%" border="2px solid" m="0.1rem" borderRadius="10px"
     >
       <Flex className="titleContainer"
         h="8%" minH="8%" w="92%" minW="92%" m="0.1rem" mb="1rem"

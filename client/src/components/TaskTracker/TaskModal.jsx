@@ -17,7 +17,12 @@ const TaskModal = () => {
       <Modal className='tasks-modal'
         isOpen={isOpen} onClose={onClose} color="rgba(80,182,171)"
       >
-        <ModalOverlay />
+        <ModalOverlay
+          bg='none'
+          backdropFilter='auto'
+          backdropInvert='10%'
+          backdropBlur='2px'
+        />
         <ModalContent className="tasks-modal-content"
           h="70%" w="85%" maxWidth="85%" top="50px"
           backgroundColor="#2e2f47"
@@ -28,7 +33,7 @@ const TaskModal = () => {
           >
             Task Tracker
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color='rgba(80,182,171)'/>
           <ModalBody>
             <TaskTracker />
           </ModalBody>
