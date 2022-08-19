@@ -20,7 +20,7 @@ export const currentGalaxyID = createSlice({
     },
     setActiveUser: (state, action) => {
       console.log('STORE: active userID is', action.payload);
-      state.activeUserId = Number(action.payload.activeUser);
+      state.activeUser = Number(action.payload.activeUserId);
     }
   },
 });

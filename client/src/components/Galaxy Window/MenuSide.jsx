@@ -28,14 +28,14 @@ const MenuSide = () => {
         const newActiveUser = data;
         console.log('Next User: ', newActiveUser);
         dispatch(setEndTurnBoolean( 'true' ));
-        dispatch(setActiveUser({ activeUser: newActiveUser }));
+        dispatch(setActiveUser({ activeUserId: newActiveUser }));
       });
 
   };
 
   const beginGame = () => {
     axios.put(url('begin', id, g_id))
-      .then(({data}) => {
+      .then(() => {
         dispatch(setActiveUser({ activeUserId: id}));
         dispatch(setGalaxyStarted({ hasStarted: true }));
       })
@@ -55,12 +55,12 @@ const MenuSide = () => {
     </Button>
   );
 
-  const endTurnButton = (
-    <Button
-      className='end-turn-btn'
-      onClick={endTurn}
-    >
+  const endTurnButton = (id == activeUserId ?
+    <Button className='end-turn-btn' onClick={endTurn} >
       End Turn
+    </Button>
+    : <Button className='end-turn-btn' >
+      Wait Your Turn
     </Button>
   );
 

@@ -26,14 +26,14 @@ module.exports = {
 
       const query1 = `SELECT id FROM users WHERE currentgalaxy = $1;`;
       const userArray = await client(query1, [g_id]);
-      console.log(userArray);
-      var nextIndex = userArray.rows.map((user) => (user.id.id))
-        .indexOf(u_id) + 1;
-      console.log(nextIndex);
-      if (nextIndex > userArray.length - 1) {
-        nextIndex = 0;
+
+      var arrayOfIDs = userArray.rows.map((user) => (user.id));
+      var indexof = arrayOfIDs.indexOf(Number(u_id)) + 1;
+
+      if (indexof > userArray.length - 1) {
+        indexof = 0;
       }
-      const nextUserID = userArray[nextIndex];
+      const nextUserID = arrayOfIDs[indexof];
 
       const query2 = `UPDATE galaxies SET activeuser = $1 WHERE id = $2;`;
       const result = await client(query2, [nextUserID, g_id]);
