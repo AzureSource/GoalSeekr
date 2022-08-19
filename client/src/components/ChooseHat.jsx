@@ -18,11 +18,11 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
 
     axios.get(`/api/hats/${gId}`)
       .then(({data}) => {
-        console.log('SUCCESS HATS', data.rows);
+        // console.log('SUCCESS HATS', data.rows);
         if (data.rows.length) {
           setChosenHats(data.rows.map((row) => (row.hat_id)));
         }
-        console.log(chosenHats);
+        // console.log(chosenHats);
       })
       .catch((err) => {
         console.log(err);

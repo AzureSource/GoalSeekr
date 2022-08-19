@@ -60,15 +60,17 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
           </Tr>
         </Thead>
         <Tbody>
-          {newShipList.map((ship, index) => {
-            return (
-              <Tr key={index} onClick={() => { handleShipSelection(ship); }}>
-                <Td>{ship.count}</Td>
-                <Td>{ship.name}</Td>
-                <Td>{ship.power}</Td>
-              </Tr>
-            );
-          })}
+          {newShipList === undefined ? 'There are no fleets at this planet.' : (
+            newShipList.map((ship, index) => {
+              return (
+                <Tr key={index} onClick={() => { handleShipSelection(ship); }}>
+                  <Td>{ship.count}</Td>
+                  <Td>{ship.name}</Td>
+                  <Td>{ship.power}</Td>
+                </Tr>
+              );
+            })
+          )}
         </Tbody>
       </Table>
     </TableContainer>

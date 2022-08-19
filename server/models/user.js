@@ -69,22 +69,26 @@ module.exports = {
   },
   doMission: async function (req, res) {
     try {
+      let results = [];
       let userId = req.params.user_id;
       let type = req.body.data.type;
-      let targetId = req.params.targetPlanetId;
+      let targetId = req.body.data.targetPlanetId;
+      // debugger;
       if (type === 'scout') {
         let targetPlanet = req.body.data.targetPlanet;
         const query = 'SELECT * FROM discoverplanet($1, $2)';
         await client(query, [userId, targetPlanet]);
-      }
-      if (type === 'mission') {
+        res.sendStatus(201);
+      } else if (type === 'mission') {
         let shipIds = req.body.data.shipIds;
         const query = 'SELECT * FROM attackandcolonizeplanet($1, $2, $3)';
-        await client(query, [userId, targetId, shipIds]);
+        const viewResult = await client(query, [userId, targetId, shipIds]);
+        results.push(viewResult.rows[0]);
+        console.log('results', results);
+        res.json(results);
       }
-      res.sendStatus(201);
     } catch (err) {
-      res.end().status(500);
+      res.status(500).send(err);
     }
   },
   getPlanets: async function (req, res) {

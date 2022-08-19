@@ -37,7 +37,7 @@ export default function GalaxyWindow ({ setTitle }) {
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
       .then(({ data }) => {
-        console.log(data.rows[0].currentgalaxy);
+        // console.log(data.rows[0].currentgalaxy);
         setGID(data.rows[0].currentgalaxy);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
         dispatch(setGalaxyID(data.rows[0]));

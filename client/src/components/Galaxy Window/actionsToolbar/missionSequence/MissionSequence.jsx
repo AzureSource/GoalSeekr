@@ -21,8 +21,14 @@ export default function MissionSequence() {
         'targetPlanet': targetPlanetId
       }
     };
-    await axios.post(`api/users/${id}/mission`, config);
-    console.log('update user info');
+    await axios.post(`api/users/${id}/mission`, config)
+      .then((res) => {
+        console.log('mission results', res);
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+    // console.log('update user info');
     let missionRes = {};
     missionRes.type = 'Scout';
     missionRes.targetPlanetName = targetPlanetName;
@@ -40,13 +46,16 @@ export default function MissionSequence() {
     };
     await axios.post(`api/users/${id}/mission`, config)
       .then((res) => {
-        console.log(res);
+        console.log('mission results', res);
+      })
+      .catch((err) => {
+        console.log('error', err);
       });
 
   };
 
   const executeMission = async () => {
-    console.log('start execute mission......');
+    // console.log('start execute mission......');
     for (let i = 0; i < missionData.length; i++) {
       switch (missionData[i].type) {
       case 'scout':
@@ -64,8 +73,8 @@ export default function MissionSequence() {
       default:
       }
     }
-    console.log('mission finished, following are the results');
-    console.log('-----------------');
+    // console.log('mission finished, following are the results');
+    // console.log('-----------------');
     dispatch(
       updateMissionResults(missionResults)
     );

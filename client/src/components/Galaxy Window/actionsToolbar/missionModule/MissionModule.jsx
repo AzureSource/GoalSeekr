@@ -28,7 +28,11 @@ export default function MissionModule() {
     axios
       .get(`/api/ships/${galaxyID}/${planetID}`)
       .then((res) => {
-        setShips(res.data[0].getusershipsonplanet.players[0].Ships);
+        if (res.data[0].getusershipsonplanet.players !== null) {
+          setShips(res.data[0].getusershipsonplanet.players[0].Ships);
+        } else {
+          setShips([]);
+        }
       })
       .catch((err) => {
         console.log('There was an error grabbing the ship data.', err);
@@ -48,18 +52,18 @@ export default function MissionModule() {
   const addToQueue = () => {
     // check if planetId exists in list of user's owned planets
     // if (userColonizedPlanets.includes(planets.planetIdSelected)) {
-    dispatch(
-      setMissionQueue({
-        add: {
-          start: planets.homePlanet,
-          type: missionType,
-          ship: shipSelection,
-          target: planets.targetPlanet,
-          planetId: planets.planetIdSelected,
-          targetId: planets.targetPlanetId,
-        },
-      })
-    );
+      dispatch(
+        setMissionQueue({
+          add: {
+            start: planets.homePlanet,
+            type: missionType,
+            ship: shipSelection,
+            target: planets.targetPlanet,
+            planetId: planets.planetIdSelected,
+            targetId: planets.targetPlanetId,
+          },
+        })
+      );
     // } else {
     //   alert(`These aren't your ships, the ${planets.homePlanet} ruler is displeased.`);
     // }
@@ -108,14 +112,12 @@ export default function MissionModule() {
             </div>
           </Flex>
         </Flex>
-        {ships === undefined ? (
-          'There are no fleets at this planet.'
-        ) : (
-          <ShipListEntry
-            shipList={ships}
-            handleShipSelection={handleShipSelection}
-          />
-        )}
+        {/* {ships === undefined ? ('There are no fleets at this planet.') : ( */}
+        <ShipListEntry
+          shipList={ships}
+          handleShipSelection={handleShipSelection}
+        />
+        {/* )} */}
       </div>
       <Button className="queue-mission-btn" onClick={addToQueue}>
         Queue Mission

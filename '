@@ -1,0 +1,12 @@
+Added db function for attack and colonize planets in doMission
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch missionSequence
+# Your branch is ahead of 'origin/missionSequence' by 48 commits.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   client/src/components/Galaxy Window/actionsToolbar/missionSequence/MissionSequence.jsx
+#	modified:   server/models/user.js
+#
