@@ -29,7 +29,7 @@ module.exports = {
   //get
   checkGalaxyName: function (req, res) {
     // console.log(req.query);
-    client('SELECT id FROM galaxies WHERE name = $1',[req.query.name])
+    client('SELECT id,gamestarted FROM galaxies WHERE name = $1',[req.query.name])
       .then(({rows}) =>{
         console.log('show result for galaxy: ',rows);
         res.status(200).json(rows);
