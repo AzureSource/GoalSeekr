@@ -21,7 +21,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
           color={chat.userID.toString() === id ? 'rgb(80 182 171 / 62%)' : '#2e2f47'}
           background={chat.userID.toString() === id ? '#2e2f47' : 'rgb(80 182 171 / 62%)'}
         >
-          {console.log([chat.userID, id], 'ibraheeeem')}
+  
           <Text><b>{chat.Username}</b>:&nbsp;{chat.message}</Text>
         </Flex>
       ))}
