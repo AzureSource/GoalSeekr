@@ -5,15 +5,16 @@ import userShipsReducer  from '../components/buildShips/UserShipSlice';
 import currentGalaxyIDReducer from '../components/Galaxy Window/galaxyWindowSlice';
 import missionQueueReducer from '../components/Galaxy Window/actionsToolbar/missionModule/missionModuleSlice';
 import toggleEndTurnReducer from '../components/Galaxy Window/menuSideSlice';
+import currencyUpdateFlagReducer from '../components/TaskTracker/currencyUpdateFlag.js';
 
 export default configureStore({
   reducer: {
     galaxyOptions: galaxyOptionsReducer,
     denseGalaxyPlanetSelection: denseGalaxyPlanetSelectionReducer,
-    galaxyOptions: galaxyOptionsReducer,
     userShips: userShipsReducer,
     currentGalaxyID: currentGalaxyIDReducer,
     missionQueue: missionQueueReducer,
     toggleEndTurn: toggleEndTurnReducer,
+    currencyUpdateFlag: currencyUpdateFlagReducer,
   }
 });
