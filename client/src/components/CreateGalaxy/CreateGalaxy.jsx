@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
-const CreateGalaxy = ({ setTitle, galaxySize, setGalaxySize }) => {
+const CreateGalaxy = ({ setTitle, smallGalaxy, setSmallGalaxy }) => {
   let params = useParams();
 
   const redirectToEnterGalaxyPage = function () {
@@ -29,7 +29,7 @@ const CreateGalaxy = ({ setTitle, galaxySize, setGalaxySize }) => {
       yearsPerTurn,
       maxPlayerCount,
       alliance,
-      galaxySize,
+      smallGalaxy,
     };
     // console.log(send);
     axios.post(localhost, send)
@@ -109,8 +109,8 @@ const CreateGalaxy = ({ setTitle, galaxySize, setGalaxySize }) => {
           justify='space-evenly'
         >
           <SelectGalaxySize
-            galaxySize={galaxySize}
-            setGalaxySize={setGalaxySize}
+            smallGalaxy={smallGalaxy}
+            setSmallGalaxy={setSmallGalaxy}
             setMaxPlayerCount={setMaxPlayerCount}
           />
           <GalaxyOptions
@@ -118,7 +118,7 @@ const CreateGalaxy = ({ setTitle, galaxySize, setGalaxySize }) => {
             setYearsPerTurn={setYearsPerTurn}
             alliance={alliance}
             setAlliance={setAlliance}
-            galaxySize={galaxySize}
+            smallGalaxy={smallGalaxy}
             maxPlayerCount={maxPlayerCount}
             setMaxPlayerCount={setMaxPlayerCount}
           />

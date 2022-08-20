@@ -17,7 +17,7 @@ import { setGalaxyID } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
-export default function GalaxyWindow ({ setTitle }) {
+export default function GalaxyWindow ({ setTitle, galaxySize }) {
   const dispatch = useDispatch();
 
 

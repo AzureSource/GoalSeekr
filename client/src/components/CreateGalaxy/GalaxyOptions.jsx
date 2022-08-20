@@ -3,17 +3,17 @@ import { FiPlus, FiMinus } from 'react-icons/fi';
 import { Flex, Switch, FormControl } from '@chakra-ui/react';
 
 const GalaxyOptions = ({
-  galaxySize,setAlliance,
+  smallGalaxy,setAlliance,
   maxPlayerCount, setMaxPlayerCount,
   yearsPerTurn, setYearsPerTurn,
 }) => {
 
   const incrementPlayer = () => {
-    if (maxPlayerCount === 5 && galaxySize) {
+    if (maxPlayerCount === 5 && smallGalaxy) {
       alert ('Max Players');
       return;
     }
-    if (maxPlayerCount === 10 && !galaxySize) {
+    if (maxPlayerCount === 10 && !smallGalaxy) {
       alert ('Max Players');
       return;
     }
