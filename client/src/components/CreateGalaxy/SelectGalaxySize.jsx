@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Image, Box } from '@chakra-ui/react';
-import smallGalaxy from '../../../assets/images/smallGalaxy.jpeg';
+import sparseGalaxy from '../../../assets/images/smallGalaxy.jpeg';
 import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
 
 const SelectGalaxySize = ({ smallGalaxy, setSmallGalaxy, setMaxPlayerCount }) => {
@@ -28,7 +28,7 @@ const SelectGalaxySize = ({ smallGalaxy, setSmallGalaxy, setMaxPlayerCount }) =>
           className={smallGalaxy ? 'galaxy-size-images' : 'galaxy-size-unselected galaxy-size-images'}
           boxSize='155px'
           objectFit='contain'
-          backgroundImage={smallGalaxy}
+          backgroundImage={sparseGalaxy}
           onClick={() => changeGalaxySize(true)}
         >Sparse (sm)</Box>
         <Box
