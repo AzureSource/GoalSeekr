@@ -3,10 +3,14 @@ import {useParams} from 'react-router-dom';
 import { Flex, IconButton, Tooltip } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUpdateFlag } from '../currencyUpdateFlag';
 
 const Task = ({ task, setTaskUpdated }) => {
   const [taskComplete, setTaskComplete] = useState();
   const {id} = useParams();
+  const dispatch = useDispatch();
+  const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);
 
   //sets status of task based on users_tasks table
   useEffect((() => {
@@ -16,7 +20,10 @@ const Task = ({ task, setTaskUpdated }) => {
   }), []);
 
   function completeTask () {
-    setTaskUpdated((prev) => !prev);
+    // setTaskUpdated((prev) => !prev);
+    dispatch(setUpdateFlag());
+    console.log('setupdat flage new value:', setUpdateFlag);
+
     setTaskComplete(!taskComplete);
     axios.post(`/api/tasks/${id}/${task.id}`)
       .then((result) => console.log(result.data))
