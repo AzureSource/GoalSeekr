@@ -20,19 +20,15 @@ export const UserContext = createContext(null);
 export default function GalaxyWindow ({ setTitle, galaxySize }) {
   const dispatch = useDispatch();
 
-
   const [hatModal, setHatModal] = useState(true);
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
   const [gID, setGID] = useState(null);
 
-  // console.log('userPlanets is ', userPlanets);
-
   useEffect(() => {
     getGalaxyID(id);
     setTitle(false);
   }, []);
-
 
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
@@ -44,9 +40,6 @@ export default function GalaxyWindow ({ setTitle, galaxySize }) {
       })
       .catch((err) => console.log(err));
   };
-
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,8 +63,10 @@ export default function GalaxyWindow ({ setTitle, galaxySize }) {
           <TransformWrapper >
             <TransformComponent >
               <div className='planetsWindow'>
-                {/* <SparseGalaxy/> */}
-                <DenseGalaxy/>
+                {galaxySize ?
+                  <SparseGalaxy/> :
+                  <DenseGalaxy/>
+                }
               </div>
             </TransformComponent>
           </TransformWrapper>
@@ -80,12 +75,3 @@ export default function GalaxyWindow ({ setTitle, galaxySize }) {
     </UserContext.Provider>
   );
 }
-
-{/* <TransformWrapper className='planetsWindow'>
-<TransformComponent>
-  {/* <SparseGalaxy/>
-  <div>
-    <DenseGalaxy/>
-  </div>
-</TransformComponent>
-</TransformWrapper> */}
