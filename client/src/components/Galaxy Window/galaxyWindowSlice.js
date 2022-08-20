@@ -4,7 +4,8 @@ import SelectGalaxySize from '../CreateGalaxy/SelectGalaxySize.jsx';
 const initialState = {
   galaxyID: 0,
   hasStarted: false,
-  activeUser: null
+  activeUser: null,
+  galaxyOwner: null
 };
 
 export const currentGalaxyID = createSlice({
@@ -13,6 +14,10 @@ export const currentGalaxyID = createSlice({
   reducers: {
     setGalaxyID: (state, action) => {
       state.galaxyID = action.payload.currentgalaxy;
+    },
+    setGalaxyOwner: (state, action) => {
+      console.log('GalaxyOwner is: ', action.payload.galaxyOwner);
+      state.galaxyOwner = action.payload.galaxyOwner;
     },
     setGalaxyStarted: (state, action) => {
       console.log('STORE: game has begun', action.payload);
@@ -27,5 +32,5 @@ export const currentGalaxyID = createSlice({
 
 
 
-export const { setGalaxyID, setGalaxyStarted, setActiveUser } = currentGalaxyID.actions;
+export const { setGalaxyID, setGalaxyOwner, setGalaxyStarted, setActiveUser } = currentGalaxyID.actions;
 export default currentGalaxyID.reducer;

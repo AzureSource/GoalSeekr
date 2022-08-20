@@ -17,6 +17,7 @@ const MenuSide = () => {
   const g_id = useSelector((state) => state.currentGalaxyID.galaxyID);
   const activeUserId = useSelector((state) => state.currentGalaxyID.activeUser);
   const isStarted = useSelector((state) => state.currentGalaxyID.hasStarted);
+  const galaxyOwner = useSelector((state) => state.currentGalaxyID.galaxyOwner);
 
   const { id } = useParams();
 
@@ -46,13 +47,19 @@ const MenuSide = () => {
 
 
 
-  const beginGameButton = (
+  const beginGameButton = (id == galaxyOwner ? 
     <Button
       className='end-turn-btn'
       onClick={beginGame}
     >
       Begin Game
     </Button>
+    :
+    <span
+      className='await-start'
+    >
+      Awaiting Start
+    </span>
   );
 
   const endTurnButton = (id == activeUserId ?

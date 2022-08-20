@@ -67,9 +67,10 @@ module.exports = {
       maxPlayerCount,
       alliance,
       galaxySize,
+      createdBy
     } = req.body;
-    const text = 'SELECT * FROM creategalaxy($1, $2, $3, $4, $5)';
-    const values = [ galaxyName, yearsPerTurn, maxPlayerCount, alliance, galaxySize ];
+    const text = 'SELECT * FROM creategalaxy($1, $2, $3, $4, $5, $6)';
+    const values = [ galaxyName, yearsPerTurn, maxPlayerCount, alliance, galaxySize, createdBy ];
     client(text, values)
       .then(({rows}) => handleResponse(res, 201, rows[0]))
       .catch(err => handleError(res, err));

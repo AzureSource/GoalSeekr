@@ -14,17 +14,6 @@ module.exports = {
     }
   },
 
-  getUserById: async function (req, res) {
 
-    const user_id = req.query.user_id;
-
-    try {
-      const query = `SELECT * FROM users WHERE id = ${user_id} `;
-      const results = await client(query, []);
-      res.json(results.rows);
-    } catch (error) {
-      res.end().status(500);
-    }
-  },
 
 };

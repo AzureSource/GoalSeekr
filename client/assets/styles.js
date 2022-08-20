@@ -537,6 +537,14 @@ const overrides = {
         border: '2px solid rgba(80,182,171)',
         // margin: '5px 0px',
       },
+      'await-start': {
+        fontFamily: 'Abril fatface',
+        background: '#2e2f47 !important',
+        color: 'rgba(80,182,171)',
+        width: '50%',
+        padding: '10px',
+        border: '2px solid rgba(80,182,171)',
+      },
       '.end-turn-btn': {
         marginRight: '7.5px',
       },

@@ -4,6 +4,7 @@ import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 import { useParams } from 'react-router-dom';
+import { setGalaxyOwner } from '../Galaxy Window/galaxyWindowSlice.js';
 
 const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
@@ -23,6 +24,7 @@ const CreateGalaxy = ({ setTitle }) => {
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
+  const [createdBy, setCreatedBy] = useState(params.id);
   const [allGalaxies, setAllGalaxies] = useState();
 
   const submitGalaxy = () => {
@@ -32,6 +34,7 @@ const CreateGalaxy = ({ setTitle }) => {
       maxPlayerCount,
       alliance,
       galaxySize,
+      createdBy
     };
     // console.log(send);
     axios.post(localhost, send)
@@ -39,7 +42,7 @@ const CreateGalaxy = ({ setTitle }) => {
         const gx_id = data.creategalaxy.id;
         // console.log(params.id, data);
         axios.put(`/api/user/${params.id}/${gx_id}`)
-          .then(() => console.log('success'))
+          .then(() => dispatch(setGalaxyOwner({ setGalaxyOwner: params.id })))
           .catch((err) => console.log('ERROR:', err));
       })
       .catch(err => console.log(err));
