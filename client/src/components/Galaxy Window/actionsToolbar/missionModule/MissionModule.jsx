@@ -4,6 +4,7 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
+import QueueMissionList from './QueueMissionList.jsx';
 import { setMissionQueue } from './missionModuleSlice';
 import { Button, Select, List, ListItem, Flex } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
@@ -21,6 +22,7 @@ export default function MissionModule() {
   const [shipSelection, setShipSelection] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
+  const [queueModal, setQueueModal] = useState(false);
   const dispatch = useDispatch();
 
   const checkForShips = () => {
@@ -75,10 +77,15 @@ export default function MissionModule() {
     }
   };
 
+  const QueueModalToggle = () => {
+    setQueueModal(!queueModal);
+  };
+
   const editMission = (missionIndex) => {
     dispatch(setMissionQueue({ remove: missionIndex }));
   };
 
+  console.log('missionQueue', missionQueue);
   return (
     <Flex className="mission-module-container">
       <div className="top-module-container">
@@ -126,25 +133,15 @@ export default function MissionModule() {
         {/* )} */}
       </div>
       <Button className="queue-mission-btn" onClick={addToQueue}>
-        Queue Mission
+        Add To Queue
       </Button>
-      <List spacing={3}>
-        <ListItem>
-          {missionQueue.map((mission, index) => {
-            // Need to calculate here, iterate the array of ships find the total count, names, and power.
-            let shipData = `Count : ${mission.ship.count} | Ship : ${mission.ship.name} | Power : ${mission.ship.power}`;
-            return (
-              <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships :{' '}
-                {shipData} | Target Planet : {mission.target}
-                <div>
-                  <Button onClick={() => editMission(index)}>Remove</Button>
-                </div>
-              </div>
-            );
-          })}
-        </ListItem>
-      </List>
+      <Button className="queue-mission-btn" onClick={QueueModalToggle}>
+        Check Queued Missions
+      </Button>
+      {/* Pass the missionQueue and editMission function  */}
+      {queueModal && (
+        <QueueMissionList missionQueue={missionQueue} editMission={editMission}/>
+      )}
       {endTurnActivation && (
         <div>
           <MissionSequence />
