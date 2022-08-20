@@ -17,6 +17,7 @@ export default function SparseGalaxy() {
   const targetPlanet = (event) =>  {
 
   };
+
   return (
     <div>
       <div className='allPlanets'>

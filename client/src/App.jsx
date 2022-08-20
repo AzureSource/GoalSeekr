@@ -24,6 +24,7 @@ import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
 const App = () => {
   const [title, setTitle] = useState(true);
+  const [galaxySize, setGalaxySize] = useState(true);
 
   return (
     <HashRouter>
@@ -40,11 +41,18 @@ const App = () => {
           />
           <Route
             exact path="/creategalaxy/userid/:id"
-            element={<CreateGalaxy setTitle={setTitle}/>}
+            element={<CreateGalaxy
+              setTitle={setTitle}
+              galaxySize={galaxySize}
+              setGalaxySize={setGalaxySize}
+            />}
           />
           <Route
             exact path = "/galaxy/userid/:id"
-            element={<GalaxyWindow setTitle={setTitle}/>}
+            element={<GalaxyWindow
+              galaxySize={galaxySize}
+              setTitle={setTitle}
+            />}
           />
         </Routes>
       </div>
