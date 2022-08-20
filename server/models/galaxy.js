@@ -45,8 +45,6 @@ module.exports = {
     }
   },
 
-
-
   getUsersGalaxyID: async function (req, res) {
 
     const u_id = req.params.user_id;
@@ -66,10 +64,10 @@ module.exports = {
       yearsPerTurn,
       maxPlayerCount,
       alliance,
-      galaxySize,
+      smallGalaxy,
     } = req.body;
     const text = 'SELECT * FROM creategalaxy($1, $2, $3, $4, $5)';
-    const values = [ galaxyName, yearsPerTurn, maxPlayerCount, alliance, galaxySize ];
+    const values = [ galaxyName, yearsPerTurn, maxPlayerCount, alliance, smallGalaxy ];
     client(text, values)
       .then(({rows}) => handleResponse(res, 201, rows[0]))
       .catch(err => handleError(res, err));
