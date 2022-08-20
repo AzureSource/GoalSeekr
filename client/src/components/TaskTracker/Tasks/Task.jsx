@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUpdateFlag } from '../currencyUpdateFlag';
 
-const Task = ({ task, setTaskUpdated }) => {
+const Task = ({ task }) => {
   const [taskComplete, setTaskComplete] = useState();
   const {id} = useParams();
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const Task = ({ task, setTaskUpdated }) => {
   }), []);
 
   function completeTask () {
-    // setTaskUpdated((prev) => !prev);
     dispatch(setUpdateFlag());
     console.log('setupdat flage new value:', setUpdateFlag);
 

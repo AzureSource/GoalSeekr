@@ -5,7 +5,7 @@ import {Button, Modal, ModalOverlay, ModalContent, Box,
 import TaskTracker from './TaskTracker.jsx';
 
 const TaskModal = () => {
-  const [taskUpdated, setTaskUpdated] = useState(false);
+  const [taskUpdated] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
