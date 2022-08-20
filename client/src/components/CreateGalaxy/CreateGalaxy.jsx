@@ -151,6 +151,4 @@ const CreateGalaxy = ({ setTitle }) => {
   );
 };
 
-
-
 export default CreateGalaxy;
