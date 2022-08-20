@@ -46,14 +46,17 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
-    // setShipSelection(prev => [...prev, shipData]);
-    setShipSelection(shipData);
+    let shipDataIndex = shipSelection.map(ship => ship.name).indexOf(shipData.name);
+    if (shipDataIndex !== -1) {
+      setShipSelection(shipSelection.filter(data => data.name !== shipData.name));
+    } else {
+      setShipSelection(shipSelection => [...shipSelection, shipData]);
+    }
   };
 
-  // console.log('shipSelection', shipSelection);
+  console.log('shipSelection', shipSelection);
 
   const addToQueue = () => {
-    // check if planetId exists in list of user's owned planets
     if (userColonizedPlanets.includes(planets.planetIdSelected)) {
       dispatch(
         setMissionQueue({
@@ -156,3 +159,9 @@ export default function MissionModule() {
 
 
 // set mission selection so user can select more than one
+
+// Remove Mission Type ?
+
+// Change ship selection table to have hover over of each row.
+
+// clean up mission summary
