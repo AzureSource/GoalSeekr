@@ -3,7 +3,7 @@ import {
   Button, Modal, ModalOverlay, ModalContent, ModalHeader,
   ModalFooter, ModalCloseButton, ModalBody, useDisclosure
 } from '@chakra-ui/react';
-import { List, ListItem, Flex } from '@chakra-ui/react';
+import { List, ListItem } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react';
 
 const QueueMissionList = ({ missionQueue, editMission }) => {
@@ -13,7 +13,7 @@ const QueueMissionList = ({ missionQueue, editMission }) => {
       <Modal onClose={onClose} size='xl' isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent backgroundColor='rgba(46,47,71,255)' >
-          <ModalHeader color='gray.500'>Queued Missions List</ModalHeader>
+          <ModalHeader color='gray.500'>Missions List</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <List spacing={3} id="planet-mission-list">

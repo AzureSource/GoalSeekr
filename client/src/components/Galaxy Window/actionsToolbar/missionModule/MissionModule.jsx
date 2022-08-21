@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
 import QueueMissionList from './QueueMissionList.jsx';
 import { setMissionQueue } from './missionModuleSlice';
-import { Button, Select, List, ListItem, Flex } from '@chakra-ui/react';
+import { Button, Select, Flex } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
@@ -56,8 +56,6 @@ export default function MissionModule() {
     }
   };
 
-  console.log('shipSelection', shipSelection);
-
   const addToQueue = () => {
     if (userColonizedPlanets.includes(planets.planetIdSelected)) {
       dispatch(
@@ -85,7 +83,6 @@ export default function MissionModule() {
     dispatch(setMissionQueue({ remove: missionIndex }));
   };
 
-  console.log('missionQueue', missionQueue);
   return (
     <Flex className="mission-module-container">
       <div className="top-module-container">
@@ -138,7 +135,6 @@ export default function MissionModule() {
       <Button className="queue-mission-btn" onClick={QueueModalToggle}>
         Check Queued Missions
       </Button>
-      {/* Pass the missionQueue and editMission function  */}
       {queueModal && (
         <QueueMissionList missionQueue={missionQueue} editMission={editMission}/>
       )}
@@ -152,8 +148,6 @@ export default function MissionModule() {
 }
 
 // render a line between the planets
-// figure out turn count on mission module
-
 
 // set mission selection so user can select more than one
 
