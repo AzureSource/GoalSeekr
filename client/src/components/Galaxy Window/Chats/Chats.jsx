@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Stack } from '@chakra-ui/react';
 import SendBox from './SendBox.jsx';
 import MainDisplay from './MainDisplay.jsx';
@@ -17,10 +17,13 @@ const Chats = () => {
       .catch((err) => console.log('error getting galID line 15:\n', err));
   },[]);
 
+
   return (
     <Stack className='chats-container'>
       <ChatsTitle />
-      <MainDisplay chatAdded={chatAdded} galID={galID} id={id}/>
+      <MainDisplay
+        chatAdded={chatAdded} galID={galID} id={id}
+      />
       <SendBox setChatAdded={setChatAdded} galID={galID} id={id}/>
 
     </Stack>
