@@ -5,11 +5,13 @@ import SelectGalaxySize from './SelectGalaxySize.jsx';
 import GalaxyOptions from './GalaxyOptions.jsx';
 import { useParams } from 'react-router-dom';
 import { setGalaxyOwner } from '../Galaxy Window/galaxyWindowSlice.js';
+import { useDispatch } from 'react-redux';
 
 const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
 const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
+  const dispatch = useDispatch();
 
   const redirectToEnterGalaxyPage = function () {
     window.location.href = `http://localhost:7777/#/entergalaxy/userid/${params.id}`;
@@ -42,8 +44,10 @@ const CreateGalaxy = ({ setTitle }) => {
         const gx_id = data.creategalaxy.id;
         // console.log(params.id, data);
         axios.put(`/api/user/${params.id}/${gx_id}`)
-          .then(() => dispatch(setGalaxyOwner({ setGalaxyOwner: params.id })))
-          .catch((err) => console.log('ERROR:', err));
+          .then(() => {
+            dispatch(setGalaxyOwner({ galaxyOwner: params.id }));
+          })
+          .catch((err) => console.log(err));
       })
       .catch(err => console.log(err));
   };

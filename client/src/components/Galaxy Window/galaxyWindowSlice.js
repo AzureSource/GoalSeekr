@@ -5,7 +5,6 @@ const initialState = {
   galaxyID: 0,
   hasStarted: false,
   activeUser: null,
-  galaxyOwner: null
 };
 
 export const currentGalaxyID = createSlice({

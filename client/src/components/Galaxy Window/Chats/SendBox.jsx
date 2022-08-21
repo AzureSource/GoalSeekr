@@ -9,17 +9,17 @@ const SendBox = ({ setChatAdded, id, galID }) => {
     setMessage(event.target.value);
   }
 
-  function handleFormSubmit(){
-    const messageObj = {
-      message,
-      userID: id,
-    };
-    axios.post(`/api/chats/${galID}`, messageObj)
-      .then((result) => console.log('message sent:', result))
-      .then(setTimeout(() => {setChatAdded((prev) => !prev);}, 0))
-      .catch((err) => console.log('error sending message', err));
-    setMessage('');
-  }
+  // function handleFormSubmit(){
+  //   const messageObj = {
+  //     message,
+  //     userID: id,
+  //   };
+  //   axios.post(`/api/chats/${galID}`, messageObj)
+  //     .then((result) => console.log('message sent:', result))
+  //     .then(setTimeout(() => {setChatAdded((prev) => !prev);}, 0))
+  //     .catch((err) => console.log('error sending message', err));
+  //   setMessage('');
+  // }
 
   return (
     <Flex
@@ -36,14 +36,14 @@ const SendBox = ({ setChatAdded, id, galID }) => {
       >
         <Input
           h="2rem" focusBorderColor='teal.400' placeholder='Send a message to the galaxy...'
-          onChange={(event) => handleInputChange(event)} value={message}
+          // onChange={(event) => handleInputChange(event)} value={message}
         />
         <Button
           colorScheme="teal"
           border="1px solid #50b6ab"
           background="#2e2f47" color="#50b6ab"
           h="2rem"
-          onClick={handleFormSubmit}
+          // onClick={handleFormSubmit}
         >
           Send
         </Button>

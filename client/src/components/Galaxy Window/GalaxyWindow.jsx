@@ -13,7 +13,7 @@ import ChooseHat from '../ChooseHat.jsx';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {getUserShipsFromDB, getUserPlanetsFromDB} from '../buildShips/UserShipSlice';
-import { setGalaxyID } from './galaxyWindowSlice';
+import { setGalaxyID, setActiveUser, setGalaxyStarted, setGalaxyOwner } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
@@ -37,10 +37,16 @@ export default function GalaxyWindow ({ setTitle }) {
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
       .then(({ data }) => {
-        // console.log(data.rows[0].currentgalaxy);
-        setGID(data.rows[0].currentgalaxy);
-        //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
         dispatch(setGalaxyID(data.rows[0]));
+        setGID(data.rows[0].currentgalaxy);
+        axios.get(`/api/galaxy/data/${data.rows[0].currentgalaxy}`)
+          .then(({data}) => {
+            data = data.rows[0];
+            dispatch(setActiveUser({ activeUserId: data.activeuser}));
+            dispatch(setGalaxyStarted({ hasStarted: data.gamestarted }));
+            dispatch(setGalaxyOwner({ galaxyOwner: data.createdby }));
+          });
+
       })
       .catch((err) => console.log(err));
   };

@@ -47,7 +47,7 @@ const MenuSide = () => {
 
 
 
-  const beginGameButton = (id == galaxyOwner ? 
+  const beginGameButton = (id == galaxyOwner ?
     <Button
       className='end-turn-btn'
       onClick={beginGame}

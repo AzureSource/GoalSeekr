@@ -44,9 +44,18 @@ module.exports = {
       res.end().status(500);
     }
   },
+  getGalaxyData: async function (req, res) {
 
-
-
+    const g_id = req.params.galaxy_id;
+    try {
+      const query = (`SELECT * FROM galaxies WHERE id = ${g_id};`);
+      const results = await client(query);
+      console.log(results.rows[0]);
+      res.json(results);
+    } catch (errors) {
+      res.end().status(500);
+    }
+  },
   getUsersGalaxyID: async function (req, res) {
 
     const u_id = req.params.user_id;

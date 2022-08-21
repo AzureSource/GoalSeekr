@@ -12,6 +12,7 @@ const planets = require('./models/planets');
 
 const routes = Router();
 
+routes.get(`/api/galaxy/data/:galaxy_id`, galaxy.getGalaxyData);
 routes.get('/api/galaxy/:user_id', galaxy.getUsersGalaxyID);
 routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
 routes.put('/api/galaxy/begin/:user_id/:galaxy_id', galaxy.beginGame);
