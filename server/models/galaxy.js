@@ -26,21 +26,22 @@ module.exports = {
 
       const query1 = `SELECT id FROM users WHERE currentgalaxy = $1;`;
       const userArray = await client(query1, [g_id]);
+      console.log('OldUser, ALL USERS: ', u_id, userArray.rows);/////
 
       var arrayOfIDs = userArray.rows.map((user) => (user.id));
-      var indexof = arrayOfIDs.indexOf(Number(u_id)) + 1;
+      var newIndex = arrayOfIDs.indexOf(Number(u_id)) + 1;
+      newIndex = ( newIndex > userArray.length ? 0 : newIndex);
 
-      if (indexof > userArray.length - 1) {
-        indexof = 0;
-      }
-      const nextUserID = arrayOfIDs[indexof];
+      const nextUserID = arrayOfIDs[newIndex];
+      console.log('oldActive, index, newActive: ', u_id, newIndex, nextUserID );/////
 
       const query2 = `UPDATE galaxies SET activeuser = $1 WHERE id = $2;`;
       const result = await client(query2, [nextUserID, g_id]);
       console.log('change turn result: ', result);
       res.json(nextUserID);
 
-    } catch {
+    } catch (error) {
+      console.log(error);
       res.end().status(500);
     }
   },
