@@ -33,11 +33,10 @@ const CreateGalaxy = ({ setTitle }) => {
       alliance,
       smallGalaxy,
     };
-    // console.log(send);
     axios.post(localhost, send)
       .then(({ data }) => {
         const gx_id = data.creategalaxy.id;
-        // console.log(params.id, data);
+
         axios.put(`/api/user/${params.id}/${gx_id}`)
           .then(() => console.log('success'))
           .catch((err) => console.log('ERROR:', err));

@@ -23,7 +23,6 @@ import LoginAuth from './components/Login/LoginAuth.jsx';
 
 const App = () => {
   const [title, setTitle] = useState(true);
-  const [smallGalaxy, setSmallGalaxy] = useState(true);
 
   return (
     <HashRouter>
@@ -40,18 +39,11 @@ const App = () => {
           />
           <Route
             exact path="/creategalaxy/userid/:id"
-            element={<CreateGalaxy
-              setTitle={setTitle}
-              smallGalaxy={smallGalaxy}
-              setSmallGalaxy={setSmallGalaxy}
-            />}
+            element={<CreateGalaxy setTitle={setTitle}/>}
           />
           <Route
             exact path = "/galaxy/userid/:id"
-            element={<GalaxyWindow
-              smallGalaxy={smallGalaxy}
-              setTitle={setTitle}
-            />}
+            element={<GalaxyWindow setTitle={setTitle}/>}
           />
         </Routes>
       </div>
