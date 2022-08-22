@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Flex } from '@chakra-ui/react';
 import axios from 'axios';
 import {
   Tag,
 } from '@chakra-ui/react';
 
-const CurrencyBar = ({taskUpdated}) => {
+const CurrencyBar = ({ taskUpdated }) => {
   const [currency, setCurrency] = useState();
   const {id} = useParams();
+  const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);
 
   useEffect(
     () => {
@@ -18,7 +20,7 @@ const CurrencyBar = ({taskUpdated}) => {
           setCurrency(parseInt(results.data));
         })
         .catch((err) => console.log('issue getting currency line 18:\n', err));
-    }, [id, taskUpdated]
+    }, [id, taskUpdatedFlag]
   );
 
   return (
