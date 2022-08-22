@@ -21,7 +21,6 @@ const Task = ({ task }) => {
 
   function completeTask () {
     dispatch(setUpdateFlag());
-    console.log('setupdat flage new value:', setUpdateFlag);
 
     setTaskComplete(!taskComplete);
     axios.post(`/api/tasks/${id}/${task.id}`)

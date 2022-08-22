@@ -16,7 +16,6 @@ const CurrencyBar = ({ taskUpdated }) => {
     () => {
       axios.get(`/api/currency/${id}`)
         .then((results) => {
-          console.log(results.data);
           setCurrency(parseInt(results.data));
         })
         .catch((err) => console.log('issue getting currency line 18:\n', err));

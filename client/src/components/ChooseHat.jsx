@@ -94,7 +94,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
               {(!chosenHats.includes(hat.id)) &&
                 <input
                   className='selectHatButtons2'
-                  key={`input1-${ind}`}
+                  key={`input2-${ind}`}
                   type="radio"
                   name='hatPicker'
                   onClick={((e) => selectHat(hat))}
@@ -115,7 +115,6 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
 
     </div>
   );
-
 
 };
 
