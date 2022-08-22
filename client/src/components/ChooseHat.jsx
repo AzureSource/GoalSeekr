@@ -118,8 +118,9 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
 
 };
 
-export default ChooseHat;
-
 ChooseHat.propTypes = {
-  gId: PropTypes.number,
+  gId: PropTypes.number.isRequired,
+  setHatModal: PropTypes.func.isRequired,
 };
+
+export default ChooseHat;

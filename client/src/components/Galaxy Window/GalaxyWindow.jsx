@@ -15,22 +15,35 @@ import { setGalaxyID } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
-const GalaxyWindow = ({ setTitle, smallGalaxy }) => {
+const GalaxyWindow = ({ setTitle }) => {
   const dispatch = useDispatch();
+
   const [hatModal, setHatModal] = useState(true);
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
   const [gID, setGID] = useState(null);
+  const [user, setUser] = useState({});
+  const [smallGalaxy, setSmallGalaxy] = useState('wait');
 
   const getGalaxyID = (id) => {
-    axios.get(`/api/galaxy/${id}`)
+    return axios.get(`/api/galaxy/${id}`)
       .then(({ data }) => {
         console.log('data', data.rows[0]);
         setGID(data.rows[0].currentgalaxy);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
         dispatch(setGalaxyID(data.rows[0]));
+        return data.rows[0].currentgalaxy;
       })
+      .then(getGalaxySize)
       .catch((err) => console.log(err));
+  };
+
+  const getGalaxySize = (galaxyID) => {
+    return axios.get(`/api/galaxy/size/${galaxyID}`)
+      .then(({ data }) => {
+        setSmallGalaxy(data.smallGalaxy);
+      })
+      .catch(err => console.log('error gettting galaxy size', err));
   };
 
 
@@ -49,7 +62,7 @@ const GalaxyWindow = ({ setTitle, smallGalaxy }) => {
     fetchData();
   }, []);
 
-  const [user, setUser] = useState({});
+  if (smallGalaxy === 'wait') return null;
 
   return (
     <UserContext.Provider value={id, user}>
@@ -61,7 +74,7 @@ const GalaxyWindow = ({ setTitle, smallGalaxy }) => {
           <TransformWrapper >
             <TransformComponent >
               <div className='planetsWindow'>
-                {!smallGalaxy ?
+                {smallGalaxy ?
                   <SparseGalaxy/> :
                   <DenseGalaxy/>
                 }
@@ -76,7 +89,6 @@ const GalaxyWindow = ({ setTitle, smallGalaxy }) => {
 
 GalaxyWindow.propTypes = {
   setTitle: PropTypes.func.isRequired,
-  smallGalaxy: PropTypes.bool.isRequired
 };
 
 export default GalaxyWindow;

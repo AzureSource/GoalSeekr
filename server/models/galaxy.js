@@ -44,20 +44,17 @@ module.exports = {
       res.end().status(500);
     }
   },
-
   getUsersGalaxyID: async function (req, res) {
 
     const u_id = req.params.user_id;
     try {
       const query = (`SELECT currentgalaxy FROM users WHERE id = ${u_id};`);
       const results = await client(query);
-      console.log(results.rows[0]);
       res.json(results);
     } catch (errors) {
       res.end().status(500);
     }
   },
-
   postGalaxy(req, res) {
     const {
       galaxyName,
@@ -72,4 +69,17 @@ module.exports = {
       .then(({rows}) => handleResponse(res, 201, rows[0]))
       .catch(err => handleError(res, err));
   },
+  getGalaxySize: async (req, res) => {
+    console.log(req.params, 'gasdlkfjasdflkjasdlfksjdflksdjflksdjflskdfjsldkfjsdlkfj');
+    const u_id = req.params.galaxy_id;
+    console.log('in galaxy size asjdf;asldfajslkdfjsadlkfjalskfjaldskfjladksfjlskdfjlskdfj', u_id);
+    try {
+      const text = `SELECT smallgalaxy from galaxies WHERE id = ${u_id}`;
+      const { rows } = await client(text);
+      handleResponse(res, 201, rows[0]);
+    }
+    catch (err) {
+      handleError(res, err);
+    }
+  }
 };

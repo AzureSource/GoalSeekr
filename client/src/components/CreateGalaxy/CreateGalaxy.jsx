@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 const localhost = `http://localhost:7777/api/galaxy/create_galaxy`;
 
-const CreateGalaxy = ({ setTitle, smallGalaxy, setSmallGalaxy }) => {
+const CreateGalaxy = ({ setTitle }) => {
   let params = useParams();
 
   const redirectToEnterGalaxyPage = function () {
@@ -23,6 +23,7 @@ const CreateGalaxy = ({ setTitle, smallGalaxy, setSmallGalaxy }) => {
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
+  const [smallGalaxy, setSmallGalaxy] = useState(true);
 
   const submitGalaxy = () => {
     let send = {
@@ -152,8 +153,6 @@ const CreateGalaxy = ({ setTitle, smallGalaxy, setSmallGalaxy }) => {
 
 CreateGalaxy.propTypes = {
   setTitle: PropTypes.func.isRequired,
-  setSmallGalaxy: PropTypes.func.isRequired,
-  smallGalaxy: PropTypes.bool.isRequired
 };
 
 export default CreateGalaxy;
