@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
@@ -147,6 +148,12 @@ const CreateGalaxy = ({ setTitle, smallGalaxy, setSmallGalaxy }) => {
       </Flex>
     </Flex>
   );
+};
+
+CreateGalaxy.propTypes = {
+  setTitle: PropTypes.func.isRequired,
+  setSmallGalaxy: PropTypes.func.isRequired,
+  smallGalaxy: PropTypes.bool.isRequired
 };
 
 export default CreateGalaxy;

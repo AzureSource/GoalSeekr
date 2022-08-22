@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext} from 'react';
 import { FiPlus, FiMinus } from 'react-icons/fi';
-import {Box, Image, Badge, WrapItem, Button, Flex, Tag} from '@chakra-ui/react';
+import {Box, Image, Badge, Flex, Tag} from '@chakra-ui/react';
 import { BuildShipContext } from './BuildShip.jsx';
 
 

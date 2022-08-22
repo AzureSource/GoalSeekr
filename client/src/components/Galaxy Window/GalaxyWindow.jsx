@@ -1,11 +1,9 @@
 import React, { useEffect, createContext, useState} from 'react';
-// import background from './images/sparse sky.png';
-// eslint-disable-next-line no-unused-vars
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import SparseGalaxy from './SparseGalaxy.jsx';
 import DenseGalaxy from './DenseGalaxy.jsx';
-// eslint-disable-next-line no-unused-vars
-import { Flex, Spacer } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import MenuSide from './MenuSide.jsx';
 import MenuBottom from './MenuBottom.jsx';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
@@ -17,29 +15,29 @@ import { setGalaxyID } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
-export default function GalaxyWindow ({ setTitle, galaxySize }) {
+const GalaxyWindow = ({ setTitle, smallGalaxy }) => {
   const dispatch = useDispatch();
-
   const [hatModal, setHatModal] = useState(true);
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
   const [gID, setGID] = useState(null);
 
-  useEffect(() => {
-    getGalaxyID(id);
-    setTitle(false);
-  }, []);
-
   const getGalaxyID = (id) => {
     axios.get(`/api/galaxy/${id}`)
       .then(({ data }) => {
-        // console.log(data.rows[0].currentgalaxy);
+        console.log('data', data.rows[0]);
         setGID(data.rows[0].currentgalaxy);
         //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
         dispatch(setGalaxyID(data.rows[0]));
       })
       .catch((err) => console.log(err));
   };
+
+
+  useEffect(() => {
+    setTitle(false);
+    getGalaxyID(id);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +61,7 @@ export default function GalaxyWindow ({ setTitle, galaxySize }) {
           <TransformWrapper >
             <TransformComponent >
               <div className='planetsWindow'>
-                {galaxySize ?
+                {!smallGalaxy ?
                   <SparseGalaxy/> :
                   <DenseGalaxy/>
                 }
@@ -74,4 +72,11 @@ export default function GalaxyWindow ({ setTitle, galaxySize }) {
       </div>
     </UserContext.Provider>
   );
-}
+};
+
+GalaxyWindow.propTypes = {
+  setTitle: PropTypes.func.isRequired,
+  smallGalaxy: PropTypes.bool.isRequired
+};
+
+export default GalaxyWindow;

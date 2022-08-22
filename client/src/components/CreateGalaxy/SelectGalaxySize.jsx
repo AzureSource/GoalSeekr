@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Flex, Image, Box } from '@chakra-ui/react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Flex, Box } from '@chakra-ui/react';
 import sparseGalaxy from '../../../assets/images/smallGalaxy.jpeg';
 import bigGalaxy from '../../../assets/images/bigGalaxy.jpeg';
 
@@ -41,6 +42,12 @@ const SelectGalaxySize = ({ smallGalaxy, setSmallGalaxy, setMaxPlayerCount }) =>
       </Flex>
     </Flex>
   );
+};
+
+SelectGalaxySize.propTypes = {
+  smallGalaxy: PropTypes.bool.isRequired,
+  setSmallGalaxy: PropTypes.func.isRequired,
+  setMaxPlayerCount: PropTypes.func.isRequired,
 };
 
 export default SelectGalaxySize;
