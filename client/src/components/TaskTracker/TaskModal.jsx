@@ -36,7 +36,7 @@ const TaskModal = () => {
           </ModalHeader>
           <ModalCloseButton color='rgba(80,182,171)'/>
           <ModalBody h="100%">
-            <TaskTracker />
+            <TaskTracker taskUpdated={taskUpdated}/>
           </ModalBody>
         </ModalContent>
       </Modal>

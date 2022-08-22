@@ -3,7 +3,7 @@ import ColsContainer from './Columns/ColsContainer.jsx';
 import CurrencyBar from './CurrencyBar.jsx';
 import {Flex} from '@chakra-ui/react';
 
-const TaskTracker = () => {
+const TaskTracker = ({ taskUpdated }) => {
 
   return (
     <Flex className="mainContainer" flexDirection="column" h="86%" w="100%" color="teal">
