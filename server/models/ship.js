@@ -15,8 +15,6 @@ module.exports = {
     try {
       let galaxyId = req.params.galaxy_id;
       let planetId = req.params.planet_id;
-      console.log('ids', galaxyId);
-      console.log('iddsss', planetId);
       const query = 'SELECT * FROM getusershipsonplanet($1, $2)';
       const results = await client(query, [galaxyId, planetId]);
       res.json(results.rows);

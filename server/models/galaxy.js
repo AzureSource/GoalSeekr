@@ -70,9 +70,7 @@ module.exports = {
       .catch(err => handleError(res, err));
   },
   getGalaxySize: async (req, res) => {
-    console.log(req.params, 'gasdlkfjasdflkjasdlfksjdflksdjflksdjflskdfjsldkfjsdlkfj');
     const u_id = req.params.galaxy_id;
-    console.log('in galaxy size asjdf;asldfajslkdfjsadlkfjalskfjaldskfjladksfjlskdfjlskdfj', u_id);
     try {
       const text = `SELECT smallgalaxy from galaxies WHERE id = ${u_id}`;
       const { rows } = await client(text);

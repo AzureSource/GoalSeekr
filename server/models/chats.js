@@ -20,7 +20,6 @@ function addChatByGalId(req, res) {
     VALUES ($1, $2, $3, false);
   `;
   const values = [req.body.message, req.body.userID, req.params.gal_id];
-  console.log(values, 'ibraheeeem values')
 
   pool(queryString, values)
     .then((result) => res.send(result))
