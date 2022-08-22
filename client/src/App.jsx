@@ -6,7 +6,6 @@ import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';
 import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
 import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';'react-zoom-pan-pinch';
 import LoginAuth from './components/Login/LoginAuth.jsx';
-import TaskTracker from './components/TaskTracker/TaskTracker.jsx';
 
 // const App = () => {
 

@@ -16,7 +16,6 @@ const CurrencyBar = ({ taskUpdated }) => {
     () => {
       axios.get(`/api/currency/${id}`)
         .then((results) => {
-          console.log(results.data);
           setCurrency(parseInt(results.data));
         })
         .catch((err) => console.log('issue getting currency line 18:\n', err));
@@ -26,14 +25,15 @@ const CurrencyBar = ({ taskUpdated }) => {
   return (
     <Flex
       className="currBarContainer"
-      m=".5rem" h="55%"
+      mt=".5rem" h="100%"
       w="50%" size="lg"
     >
       <Tag
         className="currBar"
-        colorScheme="teal" w="100%"
+        background='rgb(80 182 171)'
+        w="100%"
         fontSize="2xl" justifyContent="center"
-        border="1px solid" borderRadius="10px"
+        border="1px solid" borderRadius="5px"
       >
         Total currency: ${currency}
       </Tag>
