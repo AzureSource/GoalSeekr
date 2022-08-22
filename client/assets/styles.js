@@ -669,7 +669,7 @@ const overrides = {
         background: 'white',
         borderRadius: '4px'
       },
-      '.create-galaxy-icons:hover, .galaxy-size-unselected': {
+      '.create-galaxy-icons:hover, .galaxy-size-unselected, .plusShip, .minusShip': {
         cursor: 'pointer'
       },
       '.alliance-switch': {
