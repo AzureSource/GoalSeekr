@@ -841,9 +841,34 @@ const overrides = {
       '#planet-mission-list': {
         height: '30%',
         overflow: 'auto'
-      }
+      },
       // =============================
       // Mission Module
+      // =============================
+      // =============================
+      // tasks
+      // =============================
+      '.tasksContainer::-webkit-scrollbar': {
+        display: 'none'  /* Safari and Chrome */
+      },
+      '.singleTaskContainer': {
+        background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
+      },
+      '.tasks-modal-content, .titleContainer, .taskContainer, .titleContainer': {
+        fontFamily: 'Abril Fatface !important',
+        color: '#2e2f47 !important',
+      },
+      '#titleContainer, .singleColumnContainer': {
+        fontFamily: 'Abril Fatface !important',
+        color: '#2e2f47 !important',
+      },
+      '.currBar': {
+        backgroundColor: 'rgba(80,182,171)',
+        padding: '3px',
+      }
+
+      // =============================
+      // tasks
       // =============================
     },
   //   'section#chakra-modal-:r1': {

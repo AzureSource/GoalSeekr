@@ -8,14 +8,15 @@ const DifficultyCol = ({ difficulty }) => {
   return (
     <Flex className="singleColumnContainer"
       flexDirection="column" justifyContent="flex-start" alignItems="center" flexGrow="1"
-      w="20%" border="2px solid" m="0.1rem" borderRadius="10px"
+      w="20%" border="2px solid rgb(80 182 171)" m="0.1rem" borderRadius="6px"
     >
-      <Flex className="titleContainer"
-        h="8%" minH="8%" w="92%" minW="92%" m="0.1rem" mb="1rem"
-        border="thick double" borderWidth="medium"
-        justifyContent="center" alignItems="center" background="#0080805e" borderRadius="10px"
+      <Flex id="titleContainer"
+        h="8%" minH="8%" w="92%" minW="92%" m="0.1rem" mb="1rem" mt='1rem'
+        p='1rem'
+        borderWidth="small"
+        justifyContent="center" alignItems="center" background="rgb(80 182 171)" borderRadius="5px"
       >
-        <Heading fontSize="2rem" color="rgb(80 182 171)">{difficulty}</Heading>
+        <Heading fontSize="2rem" fontFamily='Abril Fatface'>{difficulty}</Heading>
         {/* future feature ability to add tasks */}
         {/* <Flex className="taskStatus" onClick={() => null}>
           <Tooltip className="tooltip" label='Add a task'>

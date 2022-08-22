@@ -30,7 +30,7 @@ const Task = ({ task }) => {
 
   return (
     <Flex className="singleTaskContainer"
-      border="1px solid" background="rgb(0 128 128 / 47%)" borderRadius="10px"
+      border="1px solid" borderRadius="6px"
       m=".3rem" h="5rem" minH="5rem"
       overflow="auto"
       justifyContent="space-around" alignItems="center"
@@ -42,7 +42,7 @@ const Task = ({ task }) => {
         <Flex className="reward" color="white">
           ${task.reward}
         </Flex>
-        <Flex className="taskStatus" onClick={completeTask}>
+        <Flex className="taskStatus" onClick={completeTask} justifyContent='end'>
           <Tooltip className="tooltip" label={taskComplete? '' : 'Click to mark task complete!'}>
             <div className="iconContainer">
               <IconButton
