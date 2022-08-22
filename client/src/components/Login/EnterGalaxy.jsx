@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Flex } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
@@ -108,5 +109,8 @@ export default function EnterGalaxy({ setTitle }) {
       </Flex>
     </Flex>
   );
-
 }
+
+EnterGalaxy.propTypes = {
+  setTitle: PropTypes.func.isRequired,
+};

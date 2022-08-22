@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Grid, GridItem, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import axios from 'axios';
-import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

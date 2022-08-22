@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
 import { Flex, IconButton, Tooltip } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
@@ -10,7 +11,7 @@ const Task = ({ task }) => {
   const [taskComplete, setTaskComplete] = useState();
   const {id} = useParams();
   const dispatch = useDispatch();
-  const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);
+  // const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);
 
   //sets status of task based on users_tasks table
   useEffect((() => {
@@ -57,6 +58,10 @@ const Task = ({ task }) => {
       </Flex>
     </Flex>
   );
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
 };
 
 export default Task;

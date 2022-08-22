@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Flex, Input, Button } from '@chakra-ui/react';
 import SelectGalaxySize from './SelectGalaxySize.jsx';
@@ -19,11 +20,10 @@ const CreateGalaxy = ({ setTitle }) => {
   };
 
   const [galaxyName, setGalaxyName] = useState('');
-  const [galaxySize, setGalaxySize] = useState(true);
   const [maxPlayerCount, setMaxPlayerCount] = useState(2);
   const [yearsPerTurn, setYearsPerTurn] = useState(1);
   const [alliance, setAlliance] = useState(false);
-  const [allGalaxies, setAllGalaxies] = useState();
+  const [smallGalaxy, setSmallGalaxy] = useState(true);
 
   const submitGalaxy = () => {
     let send = {
@@ -31,13 +31,12 @@ const CreateGalaxy = ({ setTitle }) => {
       yearsPerTurn,
       maxPlayerCount,
       alliance,
-      galaxySize,
+      smallGalaxy,
     };
-    // console.log(send);
     axios.post(localhost, send)
       .then(({ data }) => {
         const gx_id = data.creategalaxy.id;
-        // console.log(params.id, data);
+
         axios.put(`/api/user/${params.id}/${gx_id}`)
           .then(() => console.log('success'))
           .catch((err) => console.log('ERROR:', err));
@@ -111,8 +110,8 @@ const CreateGalaxy = ({ setTitle }) => {
           justify='space-evenly'
         >
           <SelectGalaxySize
-            galaxySize={galaxySize}
-            setGalaxySize={setGalaxySize}
+            smallGalaxy={smallGalaxy}
+            setSmallGalaxy={setSmallGalaxy}
             setMaxPlayerCount={setMaxPlayerCount}
           />
           <GalaxyOptions
@@ -120,7 +119,7 @@ const CreateGalaxy = ({ setTitle }) => {
             setYearsPerTurn={setYearsPerTurn}
             alliance={alliance}
             setAlliance={setAlliance}
-            galaxySize={galaxySize}
+            smallGalaxy={smallGalaxy}
             maxPlayerCount={maxPlayerCount}
             setMaxPlayerCount={setMaxPlayerCount}
           />
@@ -151,6 +150,8 @@ const CreateGalaxy = ({ setTitle }) => {
   );
 };
 
-
+CreateGalaxy.propTypes = {
+  setTitle: PropTypes.func.isRequired,
+};
 
 export default CreateGalaxy;

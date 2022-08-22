@@ -3,11 +3,9 @@ import {useParams} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Flex } from '@chakra-ui/react';
 import axios from 'axios';
-import {
-  Tag,
-} from '@chakra-ui/react';
+import { Tag } from '@chakra-ui/react';
 
-const CurrencyBar = ({ taskUpdated }) => {
+const CurrencyBar = () => {
   const [currency, setCurrency] = useState();
   const {id} = useParams();
   const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);

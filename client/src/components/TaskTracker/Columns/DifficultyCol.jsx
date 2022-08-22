@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Flex, Heading, Tooltip, IconButton } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons'
+import { AddIcon } from '@chakra-ui/icons';
 import TasksContainer from '../Tasks/TasksContainer.jsx';
 
 const DifficultyCol = ({ difficulty }) => {
@@ -34,6 +35,10 @@ const DifficultyCol = ({ difficulty }) => {
       <TasksContainer difficulty={difficulty} />
     </Flex>
   );
+};
+
+DifficultyCol.propTypes = {
+  difficulty: PropTypes.string.isRequired,
 };
 
 export default DifficultyCol;

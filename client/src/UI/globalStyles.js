@@ -14,11 +14,11 @@ const theme = {
       },
       'div': {
         fontFamily: 'Abril Fatface',
-        "fontSize": '36px',
+        fontSize: '36px',
         color: 'blue',
       },
     },
   },
-}
+};
 
 module.exports.theme = theme;

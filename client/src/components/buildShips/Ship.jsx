@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext} from 'react';
-import {Box, Image, Badge, WrapItem, Button, Flex, Tag} from '@chakra-ui/react';
+import { FiPlus, FiMinus } from 'react-icons/fi';
+import {Box, Image, Badge, Flex, Tag} from '@chakra-ui/react';
 import { BuildShipContext } from './BuildShip.jsx';
 
 
@@ -47,22 +48,26 @@ const Ship = ({ shipFromBackend }) => {
   };
 
   return (
-    <Flex>
+    <Flex
+      fontFamily='Abril Fatface'
+    >
       <Box
+        fontFamily='Abril Fatface'
         className='ship-boxes' overflow='hidden'
       >
         <Image src={shipFromBackend.imageUrl} alt={shipFromBackend.imageAlt} />
 
         <Box p='6'>
           <Box display='flex' alignItems='baseline'>
-            <Badge borderRadius='full' px='2' colorScheme='teal'>
+            <Badge borderRadius='full' px='2' backgroundColor='rgba(80,182,171)'>
               {shipFromBackend.name}
             </Badge>
             <Box
-              color='gray.500'
+              color='rgba(80,182,171)'
               fontWeight='semibold'
               letterSpacing='wide'
               fontSize='xs'
+              fontFamily='Abril Fatface'
               textTransform='uppercase'
               ml='2'
             >
@@ -74,15 +79,31 @@ const Ship = ({ shipFromBackend }) => {
             </Box>
           </Box>
         </Box>
-        <Flex gap='2' justify='center' alignItems='center'>
-          <Box>
-            <Button id='minus' onClick={(event) => handleShipAmountChange(event)}>-</Button>
+        <Flex gap='2' justify='center' alignItems='center' mb='.5rem'>
+          <Box alignItems='center'>
+            <FiMinus
+              id='minus'
+              color='rgba(80,182,171)'
+              className='minusShip'
+              onClick={(event) => handleShipAmountChange(event)}
+            />
           </Box>
           <Box>
-            <Tag size='lg' variant='solid' colorScheme='teal'>{shipCount}</Tag>
+            <Tag
+              size='lg' variant='solid'
+              backgroundColor='rgba(80,182,171)'
+              alignItems='center'
+            >
+              {shipCount}
+            </Tag>
           </Box>
-          <Box>
-            <Button id='plus' onClick={(event) => handleShipAmountChange(event)}>+</Button>
+          <Box alignItems='center'>
+            <FiPlus
+              id='plus'
+              color='rgba(80,182,171)'
+              className='plusShip'
+              onClick={(event) => handleShipAmountChange(event)}
+            />
           </Box>
         </Flex>
       </Box>

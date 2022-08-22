@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import axios from 'axios';
 import Task from './Task.jsx';
@@ -30,6 +31,10 @@ const TasksContainer = ( { difficulty } ) => {
       {tasks.map((task) => <Task key={task.id} task={task} /> )}
     </Flex>
   );
+};
+
+TasksContainer.propTypes = {
+  difficulty: PropTypes.string.isRequired,
 };
 
 export default TasksContainer;
