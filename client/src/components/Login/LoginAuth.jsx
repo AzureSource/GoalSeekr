@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import EnterUserName from './EnterUserName.jsx';
 import { Flex } from '@chakra-ui/react';
 
@@ -48,6 +49,6 @@ export default function LoginAuth({ setTitle }) {
 
 }
 
-
-
-
+LoginAuth.propTypes = {
+  setTitle: PropTypes.func.isRequired,
+};

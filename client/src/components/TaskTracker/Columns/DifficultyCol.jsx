@@ -1,21 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Flex, Heading, Tooltip, IconButton } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons'
+import { AddIcon } from '@chakra-ui/icons';
 import TasksContainer from '../Tasks/TasksContainer.jsx';
 
-const DifficultyCol = ({ difficulty, setTaskUpdated }) => {
+const DifficultyCol = ({ difficulty }) => {
 
   return (
     <Flex className="singleColumnContainer"
       flexDirection="column" justifyContent="flex-start" alignItems="center" flexGrow="1"
-      w="20%" border="2px solid" m="0.1rem" borderRadius="10px"
+      w="20%" border="2px solid rgb(80 182 171)" m="0.1rem" borderRadius="6px"
     >
-      <Flex className="titleContainer"
-        h="8%" minH="8%" w="92%" minW="92%" m="0.1rem" mb="1rem"
-        border="thick double" borderWidth="medium"
-        justifyContent="center" alignItems="center" background="#0080805e" borderRadius="10px"
+      <Flex id="titleContainer"
+        h="8%" minH="8%" w="92%" minW="92%" m="0.1rem" mb="1rem" mt='1rem'
+        p='1rem'
+        borderWidth="small"
+        justifyContent="center" alignItems="center" background="rgb(80 182 171)" borderRadius="5px"
       >
-        <Heading fontSize="2rem" color="rgb(80 182 171)">{difficulty}</Heading>
+        <Heading fontSize="2rem" fontFamily='Abril Fatface'>{difficulty}</Heading>
         {/* future feature ability to add tasks */}
         {/* <Flex className="taskStatus" onClick={() => null}>
           <Tooltip className="tooltip" label='Add a task'>
@@ -30,9 +32,13 @@ const DifficultyCol = ({ difficulty, setTaskUpdated }) => {
           </Tooltip>
         </Flex> */}
       </Flex>
-      <TasksContainer difficulty={difficulty} setTaskUpdated={setTaskUpdated}/>
+      <TasksContainer difficulty={difficulty} />
     </Flex>
   );
+};
+
+DifficultyCol.propTypes = {
+  difficulty: PropTypes.string.isRequired,
 };
 
 export default DifficultyCol;

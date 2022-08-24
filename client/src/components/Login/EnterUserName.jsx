@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Flex } from '@chakra-ui/react';
 
-// eslint-disable-next-line react/prop-types
 export default function EnterUserName ({authData}) {
   const [text,setText] = useState('');
   const [motto, setMotto] = useState('');
@@ -73,3 +73,7 @@ export default function EnterUserName ({authData}) {
   );
 
 }
+
+EnterUserName.propTypes = {
+  authData: PropTypes.string.isRequired,
+};

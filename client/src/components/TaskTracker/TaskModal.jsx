@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import {Button, Modal, ModalOverlay, ModalContent, Box,
-  Flex, ModalHeader,
-  ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import {Button, Modal, ModalOverlay,
+  ModalContent, ModalHeader,
+  ModalCloseButton, ModalBody, useDisclosure
+} from '@chakra-ui/react';
 import TaskTracker from './TaskTracker.jsx';
 
 const TaskModal = () => {
-  const [taskUpdated, setTaskUpdated] = useState(false);
+  const [taskUpdated] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -18,10 +19,11 @@ const TaskModal = () => {
         isOpen={isOpen} onClose={onClose} color="rgba(80,182,171)"
       >
         <ModalOverlay
-          bg='none'
-          backdropFilter='auto'
-          backdropInvert='10%'
-          backdropBlur='2px'
+          //bg='none'
+          //backdropFilter='auto'
+          //backdropInvert='10%'
+          //backdropBlur='2px'
+          backdropFilter='blur(.9px) hue-rotate(10deg)'
         />
         <ModalContent className="tasks-modal-content"
           h="70%" w="85%" maxWidth="85%" top="50px"
@@ -34,8 +36,8 @@ const TaskModal = () => {
             Task Tracker
           </ModalHeader>
           <ModalCloseButton color='rgba(80,182,171)'/>
-          <ModalBody>
-            <TaskTracker />
+          <ModalBody h="100%">
+            <TaskTracker taskUpdated={taskUpdated}/>
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Flex, Text} from '@chakra-ui/react';
 
 const MainDisplay = ({ chatAdded, galID, id }) => {
   const [chats, setChats] = useState([]);
   const [chatUpdater, setChatUpdater] = useState(0);
+  const mesEndRef = useRef(null);
+  const [chatScrollFlag, setChatScrollFlag] = useState(true);
+
+  const scrollToBottom = () => {
+    mesEndRef.current?.scrollIntoView({behavior: 'smooth'});
+  };
 
   useEffect(() => {
     setInterval(() => {
@@ -15,11 +21,22 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
   useEffect(() => {
     axios.get(`/api/chats/${galID}`)
       .then((result) => {
-        setChats(result.data);
-        // console.log('chats refreshed');
+        setChats((prev) => {
+          if (result.data.length > prev.length) {
+            setChatScrollFlag(true);
+          }
+          return result.data;
+        });
       })
       .catch((err) => console.log(err));
   }, [galID, chatAdded, chatUpdater]);
+
+  useEffect(() => {
+    if (chatScrollFlag) {
+      scrollToBottom();
+      setChatScrollFlag(false);
+    }
+  }, [chats]);
 
   return (
     <Flex className='chatsMainDisplay'h="75%" w="100%" flexDirection="column"
@@ -36,6 +53,7 @@ const MainDisplay = ({ chatAdded, galID, id }) => {
           background={chat.userID.toString() === id ? '#2e2f47' : 'rgb(80 182 171 / 82%)'}
         >
           <Text><b>{chat.Username}</b>:&nbsp;{chat.message}</Text>
+          <div ref={mesEndRef} />
         </Flex>
       ))}
     </Flex>
