@@ -131,7 +131,7 @@ export default function MissionModule() {
         Add To Queue
       </Button>
       <Button className="queue-mission-btn" onClick={QueueModalToggle}>
-        Check Queued Missions
+        Queued Missions
       </Button>
       {queueModal && (
         <QueueMissionList missionQueue={missionQueue} editMission={editMission}/>
