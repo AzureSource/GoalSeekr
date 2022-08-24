@@ -779,6 +779,10 @@ const overrides = {
       // =============================
       // Mission Module
       // =============================
+      '.ship-selection:hover': {
+        background: 'rgba(80,182,171)',
+        cursor: 'pointer',
+      },
       '.mission-module-container': {
         borderRadius: '4px',
         height: '50%',

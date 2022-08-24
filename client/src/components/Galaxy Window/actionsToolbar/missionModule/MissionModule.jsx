@@ -4,8 +4,9 @@ import ShipListEntry from './ShipListEntry.jsx';
 import { setPlanetSelection } from '../../denseGalaxySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionSequence from '../missionSequence/missionSequence.jsx';
+import QueueMissionList from './QueueMissionList.jsx';
 import { setMissionQueue } from './missionModuleSlice';
-import { Button, Select, List, ListItem, Flex } from '@chakra-ui/react';
+import { Button, Select, Flex } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function MissionModule() {
@@ -21,6 +22,7 @@ export default function MissionModule() {
   const [shipSelection, setShipSelection] = useState([]);
   const [missionType, setMissionType] = useState('');
   const [ships, setShips] = useState([]);
+  const [queueModal, setQueueModal] = useState(false);
   const dispatch = useDispatch();
 
   const checkForShips = () => {
@@ -46,14 +48,15 @@ export default function MissionModule() {
   }, [planets.homePlanet]);
 
   const handleShipSelection = (shipData) => {
-    // setShipSelection(prev => [...prev, shipData]);
-    setShipSelection(shipData);
+    let shipDataIndex = shipSelection.map(ship => ship.name).indexOf(shipData.name);
+    if (shipDataIndex !== -1) {
+      setShipSelection(shipSelection.filter(data => data.name !== shipData.name));
+    } else {
+      setShipSelection(shipSelection => [...shipSelection, shipData]);
+    }
   };
 
-  // console.log('shipSelection', shipSelection);
-
   const addToQueue = () => {
-    // check if planetId exists in list of user's owned planets
     if (userColonizedPlanets.includes(planets.planetIdSelected)) {
       dispatch(
         setMissionQueue({
@@ -70,6 +73,10 @@ export default function MissionModule() {
     } else {
       alert(`These aren't your ships, the ${planets.homePlanet} ruler is displeased.`);
     }
+  };
+
+  const QueueModalToggle = () => {
+    setQueueModal(!queueModal);
   };
 
   const editMission = (missionIndex) => {
@@ -115,33 +122,20 @@ export default function MissionModule() {
             </div>
           </Flex>
         </Flex>
-        {/* {ships === undefined ? ('There are no fleets at this planet.') : ( */}
         <ShipListEntry
           shipList={ships}
           handleShipSelection={handleShipSelection}
         />
-        {/* )} */}
       </div>
       <Button className="queue-mission-btn" onClick={addToQueue}>
-        Queue Mission
+        Add To Queue
       </Button>
-      <List spacing={3}>
-        <ListItem>
-          {missionQueue.map((mission, index) => {
-            // Need to calculate here, iterate the array of ships find the total count, names, and power.
-            let shipData = `Count : ${mission.ship.count} | Ship : ${mission.ship.name} | Power : ${mission.ship.power}`;
-            return (
-              <div key={index}>
-                Home Planet : {mission.start} | Type : {mission.type} | Ships :{' '}
-                {shipData} | Target Planet : {mission.target}
-                <div>
-                  <Button onClick={() => editMission(index)}>Remove</Button>
-                </div>
-              </div>
-            );
-          })}
-        </ListItem>
-      </List>
+      <Button className="queue-mission-btn" onClick={QueueModalToggle}>
+        Queued Missions
+      </Button>
+      {queueModal && (
+        <QueueMissionList missionQueue={missionQueue} editMission={editMission}/>
+      )}
       {endTurnActivation && (
         <div>
           <MissionSequence />
@@ -152,7 +146,7 @@ export default function MissionModule() {
 }
 
 // render a line between the planets
-// figure out turn count on mission module
 
+// Remove Mission Type ?
 
-// set mission selection so user can select more than one
+// clean up mission summary

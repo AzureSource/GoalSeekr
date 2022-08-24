@@ -9,7 +9,7 @@ export default function MissionSequence() {
   const dispatch = useDispatch();
   const { id } = useParams();
   let missionData = useSelector((state) => state.missionQueue.missions);
-  // console.log('missionData', missionData);
+  console.log('missionData', missionData);
   const showMissionResult = useSelector((state) => state.missionQueue.missionFinished);
   const missionResults = [];
 
@@ -65,26 +65,29 @@ export default function MissionSequence() {
   };
 
   const executeMission = async () => {
-    // console.log('start execute mission......');
     for (let i = 0; i < missionData.length; i++) {
+      let allShipIds = [];
+      for (let j = 0; j < missionData[i].ship.length; j++) {
+        const currentShip = missionData[i].ship[j];
+        allShipIds = allShipIds.concat(currentShip.ids);
+      }
+      console.log('shipIds', allShipIds);
       switch (missionData[i].type) {
       case 'scout':
         await scout(missionData[i].targetId, missionData[i].target);
         break;
       case 'attack':
-        await allMissions(missionData[i].targetId, missionData[i].ship.ids, missionData[i].target);
+        await allMissions(missionData[i].targetId, allShipIds, missionData[i].target);
         break;
       case 'colonize':
-        await allMissions(missionData[i].targetId, missionData[i].ship.ids, missionData[i].target);
+        await allMissions(missionData[i].targetId, allShipIds, missionData[i].target);
         break;
       case 'transport':
-        await allMissions(missionData[i].targetId, missionData[i].ship.ids, missionData[i].target);
+        await allMissions(missionData[i].targetId, allShipIds, missionData[i].target);
         break;
       default:
       }
     }
-    // console.log('mission finished, following are the results');
-    // console.log('-----------------');
     dispatch(
       updateMissionResults(missionResults)
     );
