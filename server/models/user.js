@@ -18,7 +18,6 @@ module.exports = {
     const galaxy_id = req.params.galaxy_id;
     const user_id = req.params.user_id;
 
-    console.log(galaxy_id, user_id);
     try {
       const query1 = `UPDATE galaxies SET currentplayers = currentplayers + 1 WHERE  id = ${galaxy_id};`;
       const result1 = await client(query1);
@@ -84,7 +83,6 @@ module.exports = {
         const query = 'SELECT * FROM attackandcolonizeplanet($1, $2, $3)';
         const viewResult = await client(query, [userId, targetId, shipIds]);
         results.push(viewResult.rows[0]);
-        console.log('results', results);
         res.json(results);
       }
     } catch (err) {
@@ -97,11 +95,9 @@ module.exports = {
       const query1 = `SELECT planet_id FROM public.planets_galaxy
       WHERE colonizedby = $1`;
       const colonizedPlanetsDB = await client(query1, [userId]);
-      console.log('colonizedPlanets is ', colonizedPlanetsDB.rows);
       const query2 = `SELECT planet_id FROM public.planets_galaxy
       WHERE $1 = ANY (discoveredby)`;
       const scoutedPlanetsDB = await client(query2, [userId]);
-      console.log('scoutedPlanets is ', scoutedPlanetsDB.rows);
       var results = {};
       results.colonizedPlanets = [];
       results.scoutedPlanets = [];

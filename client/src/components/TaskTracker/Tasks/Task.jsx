@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
 import { Flex, IconButton, Tooltip } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUpdateFlag } from '../currencyUpdateFlag';
 
-const Task = ({ task, setTaskUpdated }) => {
+const Task = ({ task }) => {
   const [taskComplete, setTaskComplete] = useState();
   const {id} = useParams();
+  const dispatch = useDispatch();
+  // const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);
 
   //sets status of task based on users_tasks table
   useEffect((() => {
@@ -16,7 +21,8 @@ const Task = ({ task, setTaskUpdated }) => {
   }), []);
 
   function completeTask () {
-    setTaskUpdated((prev) => !prev);
+    dispatch(setUpdateFlag());
+
     setTaskComplete(!taskComplete);
     axios.post(`/api/tasks/${id}/${task.id}`)
       .then((result) => console.log(result.data))
@@ -25,7 +31,7 @@ const Task = ({ task, setTaskUpdated }) => {
 
   return (
     <Flex className="singleTaskContainer"
-      border="1px solid" background="rgb(0 128 128 / 47%)" borderRadius="10px"
+      border="1px solid" borderRadius="6px"
       m=".3rem" h="5rem" minH="5rem"
       overflow="auto"
       justifyContent="space-around" alignItems="center"
@@ -37,7 +43,7 @@ const Task = ({ task, setTaskUpdated }) => {
         <Flex className="reward" color="white">
           ${task.reward}
         </Flex>
-        <Flex className="taskStatus" onClick={completeTask}>
+        <Flex className="taskStatus" onClick={completeTask} justifyContent='end'>
           <Tooltip className="tooltip" label={taskComplete? '' : 'Click to mark task complete!'}>
             <div className="iconContainer">
               <IconButton
@@ -52,6 +58,10 @@ const Task = ({ task, setTaskUpdated }) => {
       </Flex>
     </Flex>
   );
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
 };
 
 export default Task;

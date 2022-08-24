@@ -4,18 +4,21 @@ const theme = {
   styles: {
     global: {
       'html, body': {
+        fontFamily: 'Abril Fatface',
         color: 'blue',
         lineHeight: 'tall',
       },
-      a: {
+      'a': {
+        fontFamily: 'Abril Fatface',
         color: 'teal.500',
       },
       'div': {
-        "fontSize": '36px',
+        fontFamily: 'Abril Fatface',
+        fontSize: '36px',
         color: 'blue',
       },
     },
   },
-}
+};
 
 module.exports.theme = theme;

@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
-
 export const galaxyOptionsSlice = createSlice({
   name: 'galaxyOptions',
   initialState: {
@@ -24,4 +22,3 @@ export const galaxyOptionsSlice = createSlice({
 export const { increment, allianceToggle } = galaxyOptionsSlice.actions;
 
 export default galaxyOptionsSlice.reducer;
-

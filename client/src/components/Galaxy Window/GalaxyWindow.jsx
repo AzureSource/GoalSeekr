@@ -1,11 +1,9 @@
 import React, { useEffect, createContext, useState} from 'react';
-// import background from './images/sparse sky.png';
-// eslint-disable-next-line no-unused-vars
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import SparseGalaxy from './SparseGalaxy.jsx';
 import DenseGalaxy from './DenseGalaxy.jsx';
-// eslint-disable-next-line no-unused-vars
-import { Flex, Spacer } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import MenuSide from './MenuSide.jsx';
 import MenuBottom from './MenuBottom.jsx';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
@@ -17,36 +15,40 @@ import { setGalaxyID } from './galaxyWindowSlice';
 
 export const UserContext = createContext(null);
 
-export default function GalaxyWindow ({ setTitle }) {
+const GalaxyWindow = ({ setTitle }) => {
   const dispatch = useDispatch();
-
 
   const [hatModal, setHatModal] = useState(true);
   const {id} = useParams();
   const userShips = useSelector(state => state.userShips.ships);
   const [gID, setGID] = useState(null);
-
-  // console.log('userPlanets is ', userPlanets);
-
-  useEffect(() => {
-    getGalaxyID(id);
-    setTitle(false);
-  }, []);
-
+  const [user, setUser] = useState({});
+  const [smallGalaxy, setSmallGalaxy] = useState('wait');
 
   const getGalaxyID = (id) => {
-    axios.get(`/api/galaxy/${id}`)
+    return axios.get(`/api/galaxy/${id}`)
       .then(({ data }) => {
-        // console.log(data.rows[0].currentgalaxy);
         setGID(data.rows[0].currentgalaxy);
-        //THIS IS THAT GALAXY ID YOU BEEN LOOKIN FOR RIGHT HEREEEEE
         dispatch(setGalaxyID(data.rows[0]));
+        return data.rows[0].currentgalaxy;
       })
+      .then(getGalaxySize)
       .catch((err) => console.log(err));
   };
 
+  const getGalaxySize = (galaxyID) => {
+    return axios.get(`/api/galaxy/size/${galaxyID}`)
+      .then(({ data }) => {
+        setSmallGalaxy(data.smallGalaxy);
+      })
+      .catch(err => console.log('error gettting galaxy size', err));
+  };
 
 
+  useEffect(() => {
+    setTitle(false);
+    getGalaxyID(id);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +60,7 @@ export default function GalaxyWindow ({ setTitle }) {
     fetchData();
   }, []);
 
-  const [user, setUser] = useState({});
+  if (smallGalaxy === 'wait') return null;
 
   return (
     <UserContext.Provider value={id, user}>
@@ -70,8 +72,10 @@ export default function GalaxyWindow ({ setTitle }) {
           <TransformWrapper >
             <TransformComponent >
               <div className='planetsWindow'>
-                {/* <SparseGalaxy/> */}
-                <DenseGalaxy/>
+                {smallGalaxy ?
+                  <SparseGalaxy/> :
+                  <DenseGalaxy/>
+                }
               </div>
             </TransformComponent>
           </TransformWrapper>
@@ -79,13 +83,10 @@ export default function GalaxyWindow ({ setTitle }) {
       </div>
     </UserContext.Provider>
   );
-}
+};
 
-{/* <TransformWrapper className='planetsWindow'>
-<TransformComponent>
-  {/* <SparseGalaxy/>
-  <div>
-    <DenseGalaxy/>
-  </div>
-</TransformComponent>
-</TransformWrapper> */}
+GalaxyWindow.propTypes = {
+  setTitle: PropTypes.func.isRequired,
+};
+
+export default GalaxyWindow;

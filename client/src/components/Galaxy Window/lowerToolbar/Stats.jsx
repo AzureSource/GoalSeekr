@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Grid, GridItem, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import axios from 'axios';
-import { GiRingedPlanet, GiJetpack, GiCash, GiTrophy, GiBlackFlag} from 'react-icons/gi';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Stats = () => {
 
   const [playerInfo, setPlayerInfo] = useState({});
   const {id} = useParams();
+  const taskUpdatedFlag = useSelector((state) => state.currencyUpdateFlag.updateFlag);
+
   //fetch the data for the current User and galaxy
   useEffect(() => {
     axios.get(`/api/galaxy/${id}`)
@@ -22,7 +24,7 @@ const Stats = () => {
           .catch((err) => console.log('error getting players, PlayerList line 29:\n', err));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [taskUpdatedFlag]);
 
   // console.log(playerInfo);
 

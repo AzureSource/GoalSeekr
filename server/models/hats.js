@@ -42,7 +42,6 @@ module.exports = {
       const query2 = `UPDATE hats_user SET hat_id = $1, galaxy_id = $2 WHERE user_id = $3;`;
       const query3 = `INSERT INTO hats_user (galaxy_id, user_id, hat_id) VALUES ($1, $2, $3);`;
 
-      console.log(results.rows);
       const results2 = (results.rows.length ? await client(query2, [h_id, g_id, u_id]) : await client(query3, [g_id, u_id, h_id]));
 
       res.json(results2);

@@ -1,4 +1,4 @@
-const db = require('../../database');
+const pool = require('../../database');
 
 function getChatsByGalId(req, res) {
   const queryString = `
@@ -6,7 +6,7 @@ function getChatsByGalId(req, res) {
   `;
   const values = [req.params.gal_id];
 
-  db(queryString, values)
+  pool(queryString, values)
     .then((result) => res.send(result.rows[0].getchatmessagesbygalaxy.Messages))
     .catch((err) => {
       console.log('Error retrieving chats by galaxy line 11:\n', err);
@@ -20,9 +20,8 @@ function addChatByGalId(req, res) {
     VALUES ($1, $2, $3, false);
   `;
   const values = [req.body.message, req.body.userID, req.params.gal_id];
-  console.log(values, 'ibraheeeem values')
 
-  db(queryString, values)
+  pool(queryString, values)
     .then((result) => res.send(result))
     .catch((err) => {
       console.log('Error posting chat line 27:\n', err);

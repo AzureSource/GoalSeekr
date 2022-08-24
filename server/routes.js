@@ -12,8 +12,12 @@ const planets = require('./models/planets');
 
 const routes = Router();
 
+// galaxy controllers route
 routes.put('/api/galaxy/begin/:user_id/:galaxy_id', galaxy.beginGame);
 routes.put('/api/galaxy/turns/:user_id/:galaxy_id', galaxy.changeTurn);
+routes.get('/api/galaxy/:user_id', galaxy.getUsersGalaxyID);
+routes.get('/api/galaxy/size/:galaxy_id', galaxy.getGalaxySize);
+routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
 
 routes.get('/api/ships/', ship.getAll);
 routes.get('/api/ships/:galaxy_id/:planet_id', ship.getShipsByPlanet);
@@ -51,10 +55,6 @@ routes.get('/api/user/hat/:userId', hats.getHatIdForUser);
 routes.get('/api/hats/:galaxy_id', hats.getAll);
 routes.put('/api/hats/:hat_id/:user_id/:galaxy_id', hats.updateHat);
 
-// insert galaxy route
-routes.post('/api/galaxy/create_galaxy', galaxy.postGalaxy);
-
-
 //planets
 routes.get('/planets/:id', planets.getPlanetById);
 routes.get('/planets/users/:user_id', planets.getUserById);
@@ -64,7 +64,5 @@ routes.get('/planets/users/:user_id', planets.getUserById);
 routes.put('/api/user/setguid/:display_name/:g_uid', user.updateUserGUID);
 routes.put('/api/user/:user_id/:galaxy_id', user.addUserToGalaxy);
 routes.put('/api/user/:user_id/:galaxy_name', user.addUserToGalaxy);
-
-routes.get('/api/galaxy/:user_id', galaxy.getUsersGalaxyID);
 
 module.exports = routes;

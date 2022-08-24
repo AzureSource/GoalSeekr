@@ -1,19 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { Flex, Switch, FormControl } from '@chakra-ui/react';
 
 const GalaxyOptions = ({
-  galaxySize,setAlliance,
+  smallGalaxy,setAlliance,
   maxPlayerCount, setMaxPlayerCount,
   yearsPerTurn, setYearsPerTurn,
 }) => {
 
   const incrementPlayer = () => {
-    if (maxPlayerCount === 5 && galaxySize) {
+    if (maxPlayerCount === 5 && smallGalaxy) {
       alert ('Max Players');
       return;
     }
-    if (maxPlayerCount === 10 && !galaxySize) {
+    if (maxPlayerCount === 10 && !smallGalaxy) {
       alert ('Max Players');
       return;
     }
@@ -97,6 +98,15 @@ const GalaxyOptions = ({
       </FormControl>
     </Flex>
   );
+};
+
+GalaxyOptions.propTypes = {
+  setAlliance: PropTypes.func.isRequired,
+  setMaxPlayerCount: PropTypes.func.isRequired,
+  setYearsPerTurn: PropTypes.func.isRequired,
+  maxPlayerCount: PropTypes.number.isRequired,
+  yearsPerTurn: PropTypes.number.isRequired,
+  smallGalaxy: PropTypes.bool.isRequired
 };
 
 export default GalaxyOptions;
