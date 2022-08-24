@@ -122,12 +122,10 @@ export default function MissionModule() {
             </div>
           </Flex>
         </Flex>
-        {/* {ships === undefined ? ('There are no fleets at this planet.') : ( */}
         <ShipListEntry
           shipList={ships}
           handleShipSelection={handleShipSelection}
         />
-        {/* )} */}
       </div>
       <Button className="queue-mission-btn" onClick={addToQueue}>
         Add To Queue
@@ -149,10 +147,6 @@ export default function MissionModule() {
 
 // render a line between the planets
 
-// set mission selection so user can select more than one
-
 // Remove Mission Type ?
-
-// Change ship selection table to have hover over of each row.
 
 // clean up mission summary

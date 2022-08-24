@@ -16,7 +16,6 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
     switch (shipName) {
     case 'Fighter':
       count = currentShipList.length;
-      // var ids = [];
       for (let i = 0; i < currentShipList.length; i++) {
         ids.push(currentShipList[i].id);
         powerLevel += currentShipList[i].power;
@@ -63,7 +62,9 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
           {newShipList === undefined ? 'There are no fleets at this planet.' : (
             newShipList.map((ship, index) => {
               return (
-                <Tr key={index} onClick={() => { handleShipSelection(ship); }}>
+                <Tr key={index} onClick={() => { handleShipSelection(ship); }}
+                  className="ship-selection"
+                >
                   <Td>{ship.count}</Td>
                   <Td>{ship.name}</Td>
                   <Td>{ship.power}</Td>
