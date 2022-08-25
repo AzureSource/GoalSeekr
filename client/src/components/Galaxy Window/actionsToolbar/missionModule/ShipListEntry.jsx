@@ -48,7 +48,7 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
   });
 
   return (
-    <TableContainer>
+    <TableContainer className='sh'>
       <Table variant="simple">
         <TableCaption>Choose a ship to send on a mission.</TableCaption>
         <Thead>

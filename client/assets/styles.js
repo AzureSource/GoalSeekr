@@ -791,7 +791,6 @@ const overrides = {
         justifyContent: 'space-between',
       },
       '.mission-selector-container': {
-        height: '50%',
         justifyContent: 'space-between'
       },
       '.planet-selection-container, .planet-mission-container': {
@@ -817,12 +816,12 @@ const overrides = {
       },
       '.planet-selected-target': {
         justifyContent: 'center',
+        height: '50%',
         alignItems: 'center',
         marginTop: '5px',
       },
       '#reset-btn': {
         fontSize: '1em',
-        height: '50%',
         marginBottom: '5px',
         fontWeight: 500,
       },
@@ -830,7 +829,6 @@ const overrides = {
       '#reset-btn, .planet-selected-target, .planet-selected-home': {
         borderRadius: '4px',
         fontSize: '1em !important',
-        height: '50%',
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
       },

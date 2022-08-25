@@ -11,9 +11,15 @@ const QueueMissionList = ({ missionQueue, editMission }) => {
   return (
     <>
       <Modal onClose={onClose} size='xl' isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent backgroundColor='rgba(46,47,71,255)' >
-          <ModalHeader color='gray.500'>Missions List</ModalHeader>
+        <ModalOverlay backdropFilter='blur(.9px) hue-rotate(10deg)'/>
+        <ModalContent
+          h="70%" w="85%" maxWidth="85%" top="50px"
+          backgroundColor="#2e2f47"
+        >
+          <ModalHeader
+            color='rgba(80,182,171)' textAlign='center' paddingBottom="0rem"
+            fontSize="1.5rem"
+          >Missions List</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <List spacing={3} id="planet-mission-list">
