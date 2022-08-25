@@ -844,6 +844,13 @@ const overrides = {
         height: '30%',
         overflow: 'auto'
       },
+      '.th-ship-stats': {
+        width: '100%',
+        textAlign: 'center',
+        fontSize: '1rem !important',
+        fontFamily: 'Abril Fatface !important',
+        color: '#2e2f47 !important'
+      },
       // =============================
       // Mission Module
       // =============================

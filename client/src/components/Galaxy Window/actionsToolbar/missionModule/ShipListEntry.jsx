@@ -49,13 +49,19 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
 
   return (
     <TableContainer className='sh'>
-      <Table variant="simple">
+      <Table variant="simple" size='md'
+          mt='5px'
+
+      >
         <TableCaption>Choose a ship to send on a mission.</TableCaption>
         <Thead>
-          <Tr>
-            <Th>Count</Th>
-            <Th>Ship</Th>
-            <Th>Power Level</Th>
+          <Tr
+            textAlign='center'
+            w='100%' fontFamily='Abril Fatface'
+          >
+            <Th className='th-ship-stats'>Count</Th>
+            <Th className='th-ship-stats'>Ship</Th>
+            <Th className='th-ship-stats'>Power Level</Th>
           </Tr>
         </Thead>
         <Tbody>
