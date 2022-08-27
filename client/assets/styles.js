@@ -443,7 +443,7 @@ const overrides = {
         zIndex: 4
       },
       '.unavailable-hat': {
-        filter: 'blur(.5px) brightness(60%)',
+        filter: 'blur(.6px) brightness(60%)',
 
         border: '2px solid rgba(80,182,171)'
       },

@@ -66,7 +66,8 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
           backdropFilter='blur(.9px) hue-rotate(10deg)'
         />
         <ModalContent className="tasks-modal-content"
-          h="70%" w="60%" maxWidth="85%" top="50px"
+          h="fit-content" w="60%" maxWidth="85%" top="105px"
+          pb='5px' mb='5px'
           backgroundColor="#2e2f47"
         >
           <ModalHeader className="tasks-modal-header"
@@ -78,7 +79,6 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
           <ModalBody h="100%">
             <Flex flexWrap='wrap' justify='center'>
               {allHats.map((hat, ind) => {
-                console.log(hat.name);
                 return (
                   <Flex key={ind}>
 
@@ -102,40 +102,23 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
                     }
 
                   </Flex>
-                  // <div key={ind}>
-                  //   <img
-                  //     key={`img1-${ind}`}
-                  //     className={'hat-list-icon'}
-                  //     alt='hat-icon'
-                  //     src={hat.name}
-                  //   ></img>
-                  //   {(!chosenHats.includes(hat.id)) &&
-                  //         <input
-                  //           className='selectHatButtons1'
-                  //           key={`input1-${ind}`}
-                  //           type="radio"
-                  //           name='hatPicker'
-                  //           onClick={((e) => selectHat(hat))}
-                  //         ></input>
-                  //   }
-                  // </div>
                 );
               })}
 
             </Flex>
-            <Button
-              id='confirm-hat'
-              onClick={confirmHat}
-            >
+            <Flex justify='center' w='100%'>
+              <Button
+                id='confirm-hat'
+                onClick={confirmHat}
+              >
               Confirm
-            </Button>
+              </Button>
+            </Flex>
           </ModalBody>
         </ModalContent>
       </Modal>
     </>
-
   );
-
 };
 
 ChooseHat.propTypes = {
