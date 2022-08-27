@@ -440,16 +440,17 @@ const overrides = {
       '.hat-images': {
         borderRadius: '6px',
         size:'200px',
-        zIndex: 4
+        zIndex: 4,
+        border: '2px solid rgba(80,182,171)'
       },
       '.unavailable-hat': {
-        filter: 'blur(.6px) brightness(60%)',
-
-        border: '2px solid rgba(80,182,171)'
+        filter: 'blur(.5px) brightness(40%)',
       },
-      '.available-hat': {
-        border: '2px solid rgba(80,182,171)'
-
+      '.available-hat:hover': {
+        cursor: 'pointer'
+      },
+      '.selected-hat': {
+        filter: 'brightness(90%) hue-rotate(321deg)',
       },
 
       //-------------------------------SIDE MENU

@@ -15,6 +15,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
   const allHats = hatArr;
   //state for the hatlist and the selected hat
   var [chosenHats, setChosenHats] = useState(['x', 'x', 'x']);
+  const [currentHatKey, setCurrentHatKey] = useState(null);
   const [hatPick, selectHat] = useState(null);
 
   const {id} = useParams();
@@ -49,6 +50,11 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
     }
   };
 
+  const handleClickHat = (hat, index) => {
+    selectHat(hat);
+    setCurrentHatKey(index);
+  };
+
   //call fetching function after mount
   useEffect( () => {
     getChosenHats(gId), [gId];
@@ -79,30 +85,42 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
           <ModalBody h="100%">
             <Flex flexWrap='wrap' justify='center'>
               {allHats.map((hat, ind) => {
-                return (
-                  <Flex key={ind}>
+                if (currentHatKey === ind) {
+                  return <Flex key={ind}>
+                    <Image
+                      className='selected-hat hat-images'
+                      objectFit='contain'
+                      w='120px '
+                      m='10px'
+                      src={hat.name}
+                    ></Image>
+                  </Flex>;
+                } else {
+                  return (
+                    <Flex key={ind}>
 
-                    {(chosenHats.includes(hat.id)) ?
-                      <Image
-                        className='unavailable-hat hat-images'
-                        w='120px'
-                        m='10px'
-                        objectFit='contain'
-                        src={hat.name}
-                      >
-                      </Image> :
-                      <Image
-                        className='available-hat hat-images'
-                        objectFit='contain'
-                        w='120px '
-                        m='10px'
-                        src={hat.name}
-                        onClick={((e) => selectHat(hat))}
-                      ></Image>
-                    }
+                      {(chosenHats.includes(hat.id)) ?
+                        <Image
+                          className='unavailable-hat hat-images'
+                          w='120px'
+                          m='10px'
+                          objectFit='contain'
+                          src={hat.name}
+                        >
+                        </Image> :
+                        <Image
+                          className='available-hat hat-images'
+                          objectFit='contain'
+                          w='120px '
+                          m='10px'
+                          src={hat.name}
+                          onClick={(() => handleClickHat(hat, ind))}
+                        ></Image>
+                      }
 
-                  </Flex>
-                );
+                    </Flex>
+                  );
+                }
               })}
 
             </Flex>
