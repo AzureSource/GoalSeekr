@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import hatArr from './hatListObject.js';
-import {Button, Modal, ModalOverlay,
+import {Flex, Box, Image, Button, Modal, ModalOverlay,
   ModalContent, ModalHeader,
   ModalCloseButton, ModalBody, useDisclosure
 } from '@chakra-ui/react';
@@ -11,11 +11,12 @@ import {Button, Modal, ModalOverlay,
 //galaxyID passed in as prop
 const ChooseHat = ( {gId, setHatModal} ) =>  {
 
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const allHats = hatArr;
   //state for the hatlist and the selected hat
   var [chosenHats, setChosenHats] = useState(['x', 'x', 'x']);
-  console.log(chosenHats);
   const [hatPick, selectHat] = useState(null);
+
   const {id} = useParams();
 
   //fetch hats for the galaxy and assign the hats to state
@@ -55,41 +56,84 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
 
   return (
     //container for list of hats (still need to filter out the ones already selected unless the query does)
-    <div id='hat-div'>
-      <span id='hat-list-title'>Select Planet Hat</span>
-      <ul className='hat-list1'>
-        {allHats.map((hat, ind) => {
-          return (
-            <>
-              <img
-                key={`img1-${ind}`}
-                className={'hat-list-icon'}
-                alt='hat-icon'
-                src={hat.name}
-              ></img>
-              {(!chosenHats.includes(hat.id)) &&
-                <input
-                  className='selectHatButtons1'
-                  key={`input1-${ind}`}
-                  type="radio"
-                  name='hatPicker'
-                  onClick={((e) => selectHat(hat))}
-                ></input>
-              }
-            </>
-          );
-
-        })}
-      </ul>
-      <button
-        id='confirm-hat'
-        //confirms hatPick firing the post request to DB
-        onClick={confirmHat}
+    <>
+      <Modal
+        className='tasks-modal'
+        isOpen={isOpen}
+        color="rgba(80,182,171)"
       >
-        Confirm
-      </button>
+        <ModalOverlay
+          backdropFilter='blur(.9px) hue-rotate(10deg)'
+        />
+        <ModalContent className="tasks-modal-content"
+          h="70%" w="60%" maxWidth="85%" top="50px"
+          backgroundColor="#2e2f47"
+        >
+          <ModalHeader className="tasks-modal-header"
+            color='rgba(80,182,171)' textAlign='center' paddingBottom="0rem"
+            fontSize="1.5rem"
+          >
+            Select Hat
+          </ModalHeader>
+          <ModalBody h="100%">
+            <Flex flexWrap='wrap' justify='center'>
+              {allHats.map((hat, ind) => {
+                console.log(hat.name);
+                return (
+                  <Flex key={ind}>
 
-    </div>
+                    {(chosenHats.includes(hat.id)) ?
+                      <Image
+                        className='unavailable-hat hat-images'
+                        w='120px'
+                        m='10px'
+                        objectFit='contain'
+                        src={hat.name}
+                      >
+                      </Image> :
+                      <Image
+                        className='available-hat hat-images'
+                        objectFit='contain'
+                        w='120px '
+                        m='10px'
+                        src={hat.name}
+                        onClick={((e) => selectHat(hat))}
+                      ></Image>
+                    }
+
+                  </Flex>
+                  // <div key={ind}>
+                  //   <img
+                  //     key={`img1-${ind}`}
+                  //     className={'hat-list-icon'}
+                  //     alt='hat-icon'
+                  //     src={hat.name}
+                  //   ></img>
+                  //   {(!chosenHats.includes(hat.id)) &&
+                  //         <input
+                  //           className='selectHatButtons1'
+                  //           key={`input1-${ind}`}
+                  //           type="radio"
+                  //           name='hatPicker'
+                  //           onClick={((e) => selectHat(hat))}
+                  //         ></input>
+                  //   }
+                  // </div>
+                );
+              })}
+
+            </Flex>
+            <Button
+              id='confirm-hat'
+              onClick={confirmHat}
+            >
+              Confirm
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
+
   );
 
 };

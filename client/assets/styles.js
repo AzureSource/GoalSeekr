@@ -397,8 +397,6 @@ const overrides = {
       },
       //-------------------------------HAT MODAL
       '#hat-div': {
-        display: 'grid',
-        gridTemplateRows: '.5fr, 3fr, 1fr, 3fr, 1fr, 1fr',
         position: 'absolute',
         width: '50%',
         height: '60%',
@@ -433,21 +431,27 @@ const overrides = {
         fontSize: '2rem'
       },
       '#confirm-hat': {
-        height: '70%',
         width: '25%',
         textAlign: 'center',
-        backgroundColor: '#2e2f47',
-        borderRadius: '10px',
-        border: '1px solid white',
-        gridRow: 6,
+        backgroundColor: 'rgba(80,182,171)',
+        borderRadius: '6px',
         justifySelf: 'center'
       },
-      '.hat-list-icon': {
-        borderRadius: '10%',
-        height: '100px',
-        width: '100px',
+      '.hat-images': {
+        borderRadius: '6px',
+        size:'200px',
         zIndex: 4
       },
+      '.unavailable-hat': {
+        filter: 'blur(.5px) brightness(60%)',
+
+        border: '2px solid rgba(80,182,171)'
+      },
+      '.available-hat': {
+        border: '2px solid rgba(80,182,171)'
+
+      },
+
       //-------------------------------SIDE MENU
       '.menu-side-container': {
         width: '32%',
