@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Image } from '@chakra-ui/react';
 import axios from 'axios';
 import { UserContext } from './GalaxyWindow.jsx';
-import hatArray from '../hatList.js';
+import hatArray from '../hat/hatList.js';
 import planets from './densePlanets';
 
 export default function DenseGalaxy() {
