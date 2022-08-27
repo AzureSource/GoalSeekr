@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import hatArr from './hatListObject.js';
-import {Flex, Box, Image, Button, Modal, ModalOverlay,
+import {Flex, Image, Button, Modal, ModalOverlay,
   ModalContent, ModalHeader,
-  ModalCloseButton, ModalBody, useDisclosure
+  ModalBody, useDisclosure
 } from '@chakra-ui/react';
 
 //galaxyID passed in as prop
@@ -42,7 +42,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
       return alert('you must Select a hat, loser!');
     } else {
       axios.put(`/api/hats/${hatPick.id}/${id}/${gId}`)
-        .then((res) =>  {
+        .then(() =>  {
           setHatModal(false);
         // console.log(`Hat choice confirmed in DB`, res);
         })

@@ -87,6 +87,7 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
   );
 }
 
-// ShipListEntry.propTypes = {
-//   shipList: PropTypes.shape({ subProp: PropTypes.string }).isRequired,
-// };
+ShipListEntry.propTypes = {
+  shipList: PropTypes.object.isRequired,
+  handleShipSelection: PropTypes.func.isRequired,
+};

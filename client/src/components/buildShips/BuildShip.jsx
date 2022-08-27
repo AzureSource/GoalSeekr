@@ -7,7 +7,7 @@ import scoutPic from '../../../assets/ships/scoutPic.png';
 import tankPic from '../../../assets/ships/tankPic.png';
 import {Button, Modal, ModalOverlay, ModalContent, Box,
   Flex, ModalHeader,
-  ModalFooter, ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
+  ModalCloseButton, ModalBody, useDisclosure} from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

@@ -8,7 +8,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Lorem,
   useDisclosure
 } from '@chakra-ui/react';
 
