@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer,
@@ -7,6 +7,7 @@ import {
 
 export default function ShipListEntry({ shipList, handleShipSelection }) {
 
+  const [selectedShipKey, setSelectedShipKey] = useState();
   const newShipList = Object.keys(shipList).map((shipName) => {
     let count = 0;
     let ids = [];
@@ -47,12 +48,14 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
     });
   });
 
+  const selectShip = (ship, i) => {
+    handleShipSelection(ship);
+    setSelectedShipKey(i);
+  };
+
   return (
     <TableContainer className='sh'>
-      <Table variant="simple" size='md'
-          mt='5px'
-
-      >
+      <Table variant="simple" size='md'>
         <TableCaption>Choose a ship to send on a mission.</TableCaption>
         <Thead>
           <Tr
@@ -64,12 +67,12 @@ export default function ShipListEntry({ shipList, handleShipSelection }) {
             <Th className='th-ship-stats'>Power Level</Th>
           </Tr>
         </Thead>
-        <Tbody>
+        <Tbody w='100%'>
           {newShipList === undefined ? 'There are no fleets at this planet.' : (
             newShipList.map((ship, index) => {
               return (
-                <Tr key={index} onClick={() => { handleShipSelection(ship); }}
-                  className="ship-selection"
+                <Tr key={index} onClick={() => { selectShip(ship, index); }}
+                  className={index === selectedShipKey? 'ship-selection-selected ship-selection' :'ship-selection'}
                 >
                   <Td>{ship.count}</Td>
                   <Td>{ship.name}</Td>

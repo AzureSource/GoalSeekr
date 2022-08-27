@@ -783,6 +783,9 @@ const overrides = {
         background: 'rgba(80,182,171)',
         cursor: 'pointer',
       },
+      '.ship-selection-selected': {
+        background: '#2e2f47 !important',
+      },
       '.mission-module-container': {
         borderRadius: '4px',
         height: '50%',
@@ -845,9 +848,8 @@ const overrides = {
         overflow: 'auto'
       },
       '.th-ship-stats': {
-        width: '100%',
         textAlign: 'center',
-        fontSize: '1rem !important',
+        fontSize: '.8rem !important',
         fontFamily: 'Abril Fatface !important',
         color: '#2e2f47 !important'
       },

@@ -122,11 +122,11 @@ export default function MissionModule() {
             </div>
           </Flex>
         </Flex>
-        <ShipListEntry
-          shipList={ships}
-          handleShipSelection={handleShipSelection}
-        />
       </div>
+      <ShipListEntry
+        shipList={ships}
+        handleShipSelection={handleShipSelection}
+      />
       <Button className="queue-mission-btn" onClick={addToQueue}>
         Add To Queue
       </Button>
