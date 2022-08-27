@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import hatArr from './hatListObject.js';
+import {Button, Modal, ModalOverlay,
+  ModalContent, ModalHeader,
+  ModalCloseButton, ModalBody, useDisclosure
+} from '@chakra-ui/react';
 
 //galaxyID passed in as prop
 const ChooseHat = ( {gId, setHatModal} ) =>  {
@@ -10,6 +14,7 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
   const allHats = hatArr;
   //state for the hatlist and the selected hat
   var [chosenHats, setChosenHats] = useState(['x', 'x', 'x']);
+  console.log(chosenHats);
   const [hatPick, selectHat] = useState(null);
   const {id} = useParams();
 
@@ -29,13 +34,6 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
       });
   };
 
-  useEffect( () => {
-    getChosenHats(gId), [gId];
-  }, []);
-
-
-  //call fetching function after mount
-
   //confirm the choice, post to DB (need to adjust/fix the body object based on table setup)
   const confirmHat = () => {
     if (!hatPick){
@@ -44,20 +42,23 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
       axios.put(`/api/hats/${hatPick.id}/${id}/${gId}`)
         .then((res) =>  {
           setHatModal(false);
-          // console.log(`Hat choice confirmed in DB`, res);
+        // console.log(`Hat choice confirmed in DB`, res);
         })
         .catch((err) => console.log(err));
     }
   };
 
+  //call fetching function after mount
+  useEffect( () => {
+    getChosenHats(gId), [gId];
+  }, []);
 
   return (
     //container for list of hats (still need to filter out the ones already selected unless the query does)
     <div id='hat-div'>
-      <span id='hat-list-title'>Select a single hat and confirm your choice</span>
+      <span id='hat-list-title'>Select Planet Hat</span>
       <ul className='hat-list1'>
-        {allHats.slice(0,5).map((hat, ind) => {
-
+        {allHats.map((hat, ind) => {
           return (
             <>
               <img
@@ -70,31 +71,6 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
                 <input
                   className='selectHatButtons1'
                   key={`input1-${ind}`}
-                  type="radio"
-                  name='hatPicker'
-                  onClick={((e) => selectHat(hat))}
-                ></input>
-              }
-            </>
-          );
-
-        })}
-      </ul>
-      <ul className='hat-list2'>
-        {allHats.slice(5,11).map((hat, ind) => {
-
-          return (
-            <>
-              <img
-                key={`img2-${ind}`}
-                className={'hat-list-icon'}
-                alt='hat-icon'
-                src={hat.name}
-              ></img>
-              {(!chosenHats.includes(hat.id)) &&
-                <input
-                  className='selectHatButtons2'
-                  key={`input2-${ind}`}
                   type="radio"
                   name='hatPicker'
                   onClick={((e) => selectHat(hat))}
