@@ -10,10 +10,10 @@ import {
   Button,
   Lorem,
   useDisclosure
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 function CreateModal(title, body, footer) {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -36,7 +36,7 @@ function CreateModal(title, body, footer) {
         </ModalContent>
       </Modal>
     </div>
-  )
+  );
 }
 
 export default CreateModal;

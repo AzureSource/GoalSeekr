@@ -870,7 +870,7 @@ const overrides = {
       '.singleTaskContainer': {
         background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
       },
-      '.tasks-modal-content, .titleContainer, .taskContainer, .titleContainer': {
+      '.tasks-modal-content, .titleContainer, .taskContainer, .titleContainer, .hat-modal-content': {
         fontFamily: 'Abril Fatface !important',
         color: '#2e2f47 !important',
       },

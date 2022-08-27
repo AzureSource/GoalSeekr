@@ -11,7 +11,7 @@ import {Flex, Box, Image, Button, Modal, ModalOverlay,
 //galaxyID passed in as prop
 const ChooseHat = ( {gId, setHatModal} ) =>  {
 
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { isOpen } = useDisclosure({ defaultIsOpen: true });
   const allHats = hatArr;
   //state for the hatlist and the selected hat
   var [chosenHats, setChosenHats] = useState(['x', 'x', 'x']);
@@ -64,25 +64,26 @@ const ChooseHat = ( {gId, setHatModal} ) =>  {
     //container for list of hats (still need to filter out the ones already selected unless the query does)
     <>
       <Modal
-        className='tasks-modal'
+        className='hat-modal'
         isOpen={isOpen}
         color="rgba(80,182,171)"
       >
         <ModalOverlay
           backdropFilter='blur(.9px) hue-rotate(10deg)'
         />
-        <ModalContent className="tasks-modal-content"
+        <ModalContent className="hat-modal-content"
           h="fit-content" w="60%" maxWidth="85%" top="105px"
           pb='5px' mb='5px'
           backgroundColor="#2e2f47"
         >
-          <ModalHeader className="tasks-modal-header"
+          <ModalHeader className="hat-modal-header"
             color='rgba(80,182,171)' textAlign='center' paddingBottom="0rem"
             fontSize="1.5rem"
           >
             Select Hat
           </ModalHeader>
           <ModalBody h="100%">
+
             <Flex flexWrap='wrap' justify='center'>
               {allHats.map((hat, ind) => {
                 if (currentHatKey === ind) {

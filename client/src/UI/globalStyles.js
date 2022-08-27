@@ -1,5 +1,3 @@
-
-
 const theme = {
   styles: {
     global: {
