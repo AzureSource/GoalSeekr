@@ -4,7 +4,7 @@ import '../assets/login.css';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import CreateGalaxy from './components/CreateGalaxy/CreateGalaxy.jsx';
 import EnterGalaxy from './components/Login/EnterGalaxy.jsx';
-import GalaxyWindow from './components/Galaxy Window/GalaxyWindow.jsx';'react-zoom-pan-pinch';
+import GalaxyWindow from './components/GalaxyWindow/GalaxyWindow.jsx';'react-zoom-pan-pinch';
 import LoginAuth from './components/Login/LoginAuth.jsx';
 
 // const App = () => {

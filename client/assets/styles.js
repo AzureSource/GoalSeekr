@@ -397,8 +397,6 @@ const overrides = {
       },
       //-------------------------------HAT MODAL
       '#hat-div': {
-        display: 'grid',
-        gridTemplateRows: '.5fr, 3fr, 1fr, 3fr, 1fr, 1fr',
         position: 'absolute',
         width: '50%',
         height: '60%',
@@ -433,21 +431,28 @@ const overrides = {
         fontSize: '2rem'
       },
       '#confirm-hat': {
-        height: '70%',
         width: '25%',
         textAlign: 'center',
-        backgroundColor: '#2e2f47',
-        borderRadius: '10px',
-        border: '1px solid white',
-        gridRow: 6,
+        backgroundColor: 'rgba(80,182,171)',
+        borderRadius: '6px',
         justifySelf: 'center'
       },
-      '.hat-list-icon': {
-        borderRadius: '10%',
-        height: '100px',
-        width: '100px',
-        zIndex: 4
+      '.hat-images': {
+        borderRadius: '6px',
+        size:'200px',
+        zIndex: 4,
+        border: '2px solid rgba(80,182,171)'
       },
+      '.unavailable-hat': {
+        filter: 'blur(.5px) brightness(40%)',
+      },
+      '.available-hat:hover': {
+        cursor: 'pointer'
+      },
+      '.selected-hat': {
+        filter: 'brightness(90%) hue-rotate(321deg)',
+      },
+
       //-------------------------------SIDE MENU
       '.menu-side-container': {
         width: '32%',
@@ -783,6 +788,9 @@ const overrides = {
         background: 'rgba(80,182,171)',
         cursor: 'pointer',
       },
+      '.ship-selection-selected': {
+        background: '#2e2f47 !important',
+      },
       '.mission-module-container': {
         borderRadius: '4px',
         height: '50%',
@@ -791,7 +799,6 @@ const overrides = {
         justifyContent: 'space-between',
       },
       '.mission-selector-container': {
-        height: '50%',
         justifyContent: 'space-between'
       },
       '.planet-selection-container, .planet-mission-container': {
@@ -817,12 +824,12 @@ const overrides = {
       },
       '.planet-selected-target': {
         justifyContent: 'center',
+        height: '50%',
         alignItems: 'center',
         marginTop: '5px',
       },
       '#reset-btn': {
         fontSize: '1em',
-        height: '50%',
         marginBottom: '5px',
         fontWeight: 500,
       },
@@ -830,7 +837,6 @@ const overrides = {
       '#reset-btn, .planet-selected-target, .planet-selected-home': {
         borderRadius: '4px',
         fontSize: '1em !important',
-        height: '50%',
         border: '2px solid rgba(80,182,171)',
         backgroundColor: '#2e2f47',
       },
@@ -846,6 +852,12 @@ const overrides = {
         height: '30%',
         overflow: 'auto'
       },
+      '.th-ship-stats': {
+        textAlign: 'center',
+        fontSize: '.8rem !important',
+        fontFamily: 'Abril Fatface !important',
+        color: '#2e2f47 !important'
+      },
       // =============================
       // Mission Module
       // =============================
@@ -858,7 +870,7 @@ const overrides = {
       '.singleTaskContainer': {
         background: 'linear-gradient(0deg, rgba(45,48,71,0.96) 2%, rgba(80,182,171,0.6536057692307692) 85%)',
       },
-      '.tasks-modal-content, .titleContainer, .taskContainer, .titleContainer': {
+      '.tasks-modal-content, .titleContainer, .taskContainer, .titleContainer, .hat-modal-content': {
         fontFamily: 'Abril Fatface !important',
         color: '#2e2f47 !important',
       },
