@@ -790,6 +790,7 @@ const overrides = {
       },
       '.ship-selection-selected': {
         background: '#2e2f47 !important',
+        color:'rgba(80,182,171)'
       },
       '.mission-module-container': {
         borderRadius: '4px',
