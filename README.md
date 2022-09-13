@@ -25,10 +25,10 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 
 # Contributors
 
-### Jerome Rodriguez
+### Isabelle Smith
 [Product Overview & Details](#product-overview--details)
 
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeromemtrodriguez/) 
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/isabelle-smith-096988237/) 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JeromeMTR)
 
 ### Mark Miw
