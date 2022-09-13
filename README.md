@@ -1,8 +1,7 @@
 # GoalSeekr
 Motivates Healthy Lifestyle choices with competitive gameplay
 
-![giff](https://user-images.githubusercontent.com/103616900/189972153-bac757de-321f-4287-957b-5b8bd9eca00a.gif)
-![chrome-capture-2022-8-13](https://user-images.githubusercontent.com/20650665/189974262-0f3a95d5-8139-44a5-8d6d-324759e6c14d.gif)
+![chrome-capture-2022-8-13 (3)](https://user-images.githubusercontent.com/20650665/189979132-1dda8634-e04a-4612-935f-b4f4d64bf1ed.gif)
 
 
 ## Tech Stack
