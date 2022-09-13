@@ -1,14 +1,6 @@
 # GoalSeekr
 Motivates Healthy Lifestyle choices with competitive gameplay
 
-![chrome-capture-2022-8-13 (5)](https://user-images.githubusercontent.com/20650665/189980705-4b124a40-94ea-4ef0-9863-3eeddac30561.gif)
-![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
-![chrome-capture-2022-8-13 (11)](https://user-images.githubusercontent.com/20650665/189982425-e939c78b-a485-4875-b0d3-88a1735e79b0.gif)
-![chrome-capture-2022-8-13 (12) 2](https://user-images.githubusercontent.com/20650665/189983527-cb4767a5-5396-42b9-91d1-e13c50fab232.gif)
-![chrome-capture-2022-8-13 (13)](https://user-images.githubusercontent.com/20650665/189984817-3a5d44c1-a9a6-4277-9d3c-70ccec66a5d7.gif)
-![chrome-capture-2022-8-13 (15)](https://user-images.githubusercontent.com/20650665/189986225-60100bfe-19c7-4811-b431-0ba1ed248209.gif)
-![chrome-capture-2022-8-13 (14)](https://user-images.githubusercontent.com/20650665/189985932-2a8e77a4-98d6-482d-b542-0d5cea15d29f.gif)
-
 ## Tech Stack
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
 
@@ -29,6 +21,14 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white) 
 ![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
+
+![chrome-capture-2022-8-13 (5)](https://user-images.githubusercontent.com/20650665/189980705-4b124a40-94ea-4ef0-9863-3eeddac30561.gif)
+![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
+![chrome-capture-2022-8-13 (11)](https://user-images.githubusercontent.com/20650665/189982425-e939c78b-a485-4875-b0d3-88a1735e79b0.gif)
+![chrome-capture-2022-8-13 (12) 2](https://user-images.githubusercontent.com/20650665/189983527-cb4767a5-5396-42b9-91d1-e13c50fab232.gif)
+![chrome-capture-2022-8-13 (13)](https://user-images.githubusercontent.com/20650665/189984817-3a5d44c1-a9a6-4277-9d3c-70ccec66a5d7.gif)
+![chrome-capture-2022-8-13 (15)](https://user-images.githubusercontent.com/20650665/189986225-60100bfe-19c7-4811-b431-0ba1ed248209.gif)
+![chrome-capture-2022-8-13 (14)](https://user-images.githubusercontent.com/20650665/189985932-2a8e77a4-98d6-482d-b542-0d5cea15d29f.gif)
 
 
 ***
