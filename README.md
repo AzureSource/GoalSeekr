@@ -5,7 +5,7 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 ![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
 ![chrome-capture-2022-8-13 (11)](https://user-images.githubusercontent.com/20650665/189982425-e939c78b-a485-4875-b0d3-88a1735e79b0.gif)
 ![chrome-capture-2022-8-13 (12) 2](https://user-images.githubusercontent.com/20650665/189983527-cb4767a5-5396-42b9-91d1-e13c50fab232.gif)
-
+![chrome-capture-2022-8-13 (13)](https://user-images.githubusercontent.com/20650665/189984817-3a5d44c1-a9a6-4277-9d3c-70ccec66a5d7.gif)
 
 ## Tech Stack
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
