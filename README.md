@@ -3,6 +3,10 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 
 ## Tech Stack
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
+
+![](https://user-images.githubusercontent.com/103616900/189970325-2b1fe123-9ac4-4afd-a056-3b374d460b4a.mov)
+
+
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) 
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
@@ -25,10 +29,10 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 
 # Contributors
 
-### Isabelle Smith
+### Jerome Rodriguez
 [Product Overview & Details](#product-overview--details)
 
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/isabelle-smith-096988237/) 
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeromemtrodriguez/) 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JeromeMTR)
 
 ### Mark Miw
