@@ -3,6 +3,7 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 
 ![chrome-capture-2022-8-13 (5)](https://user-images.githubusercontent.com/20650665/189980705-4b124a40-94ea-4ef0-9863-3eeddac30561.gif)
 ![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
+![chrome-capture-2022-8-13 (11)](https://user-images.githubusercontent.com/20650665/189982425-e939c78b-a485-4875-b0d3-88a1735e79b0.gif)
 
 
 ## Tech Stack
@@ -50,4 +51,4 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/chuda/)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/crypto-bender)
 
-© Rhydon 2022  
+© GoalSeekr 2022  
