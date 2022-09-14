@@ -27,8 +27,8 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 
 ### Step 1
 ```
-$ git clone https://github.com/Team-Rhydon/Rhydon.git
-$ cd Rhydon
+$ git clone https://github.com/AzureSource/GoalSeekr.git
+$ cd GoalSeekr
 $ npm install
 $ npm run build
 $ npm run server-dev
@@ -36,11 +36,12 @@ $ npm run server-dev
 ### Step 2
 - Create a .env file based on example.env
 - Copy and Paste everything from example.env to .env
-- replace text in API_KEY="your github token goes here"
+- replace user details with your own
 ### Step 3
-- Open http://localhost:3000
+- Open http://localhost:7777
 
 
+## Product Overview & Details
 
 ![chrome-capture-2022-8-13 (5)](https://user-images.githubusercontent.com/20650665/189980705-4b124a40-94ea-4ef0-9863-3eeddac30561.gif)
 ![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
@@ -56,19 +57,16 @@ $ npm run server-dev
 # Contributors
 
 ### Ibraheem Azam
-[Product Overview & Details](#product-overview--details)
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ibraheemazam/) 
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JeromeMTR)
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ibraheemazam)
 
 ### Isabelle Smith
-[Product Overview & Details](#product-overview--details)
 
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeromemtrodriguez/) 
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JeromeMTR)
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/isabelle-smith-096988237/) 
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/izzigrace)
 
 ### Jerome Rodriguez
-[Product Overview & Details](#product-overview--details)
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeromemtrodriguez/) 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JeromeMTR)
