@@ -22,6 +22,26 @@ Motivates Healthy Lifestyle choices with competitive gameplay
 ![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
 
+
+## Installation & Setup
+
+### Step 1
+```
+$ git clone https://github.com/Team-Rhydon/Rhydon.git
+$ cd Rhydon
+$ npm install
+$ npm run build
+$ npm run server-dev
+```
+### Step 2
+- Create a .env file based on example.env
+- Copy and Paste everything from example.env to .env
+- replace text in API_KEY="your github token goes here"
+### Step 3
+- Open http://localhost:3000
+
+
+
 ![chrome-capture-2022-8-13 (5)](https://user-images.githubusercontent.com/20650665/189980705-4b124a40-94ea-4ef0-9863-3eeddac30561.gif)
 ![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
 ![chrome-capture-2022-8-13 (11)](https://user-images.githubusercontent.com/20650665/189982425-e939c78b-a485-4875-b0d3-88a1735e79b0.gif)
