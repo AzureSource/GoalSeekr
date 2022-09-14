@@ -41,7 +41,7 @@ $ npm run server-dev
 - Open http://localhost:7777
 
 
-## Product Overview & Details
+## Application Overview
 
 ![chrome-capture-2022-8-13 (5)](https://user-images.githubusercontent.com/20650665/189980705-4b124a40-94ea-4ef0-9863-3eeddac30561.gif)
 ![chrome-capture-2022-8-13 (9)](https://user-images.githubusercontent.com/20650665/189981793-c231f598-95f6-4319-b36f-3d3f57942cdc.gif)
